@@ -1,0 +1,73 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# A workflow that updates the gh-pages branch whenever a new release is made
+name: Update documentation
+
+on:
+  release:
+    types: [published]
+  repository_dispatch:
+    types: [gh-pages]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gh-page-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        token: ${{ secrets.SYNCED_GITHUB_TOKEN_REPO }}
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+
+    # Run dokka and create tar
+    - name: Generate documentation
+      run: |
+        ./gradlew docs:dokkaGenerate
+
+        echo "Creating tar for generated docs"
+        cd $GITHUB_WORKSPACE/docs/build/dokka/html && tar cvf ~/maps-robolectric-docs.tar .
+
+        echo "Unpacking tar into gh-pages branch"
+        git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+        cd $GITHUB_WORKSPACE && git checkout gh-pages && tar xvf ~/maps-robolectric-docs.tar
+
+    # Commit changes and create a PR
+    - name: PR Changes
+      uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+      with:
+        token: ${{ secrets.SYNCED_GITHUB_TOKEN_REPO }}
+        commit-message: 'docs: Update docs'
+        author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+        committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+        labels: |
+          docs
+          automerge
+        title: 'docs: Update docs'
+        body: |
+            Updated GitHub pages with latest from `./gradlew docs:dokkaGenerate`.
+        branch: googlemaps-bot/update_gh_pages

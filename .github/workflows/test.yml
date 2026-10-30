@@ -1,0 +1,98 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# A workflow that runs unit tests on every new pull request and merge to main
+name: Run unit tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+
+      - name: Inject Secrets
+        env:
+          MAPS_API_KEY: ${{ secrets.ACTIONS_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          [ -z "$MAPS_API_KEY" ] && MAPS_API_KEY="YOUR_API_KEY"
+          [ -z "$GEMINI_API_KEY" ] && GEMINI_API_KEY="YOUR_GEMINI_API_KEY"
+          echo "MAPS_API_KEY=$MAPS_API_KEY" > ./secrets.properties
+          echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> ./secrets.properties
+
+      - name: Run Tests and Coverage
+        run: ./gradlew test koverXmlReportDebug assembleRelease --stacktrace
+
+      # Post (or update) a sticky comment showing how this PR moves unit
+      # coverage relative to the last entry recorded on main. Pull requests
+      # from forks get a read-only token and cannot comment, so they are skipped.
+      - name: Comment coverage delta
+        continue-on-error: true
+        if: >-
+          github.event_name == 'pull_request' &&
+          github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+          MARKER: '<!-- coverage-history-comment -->'
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          python3 .github/scripts/coverage_history.py compare --suite unit \
+            --base "$BASE_REF" --out coverage-comment.md
+
+          ID=$(gh api "repos/$REPO/issues/$PR/comments" --paginate \
+            --jq "[.[] | select(.body | startswith(\"$MARKER\"))] | first | .id // empty")
+          if [ -n "$ID" ]; then
+            gh api --method PATCH "repos/$REPO/issues/comments/$ID" \
+              -F body=@coverage-comment.md
+          else
+            gh api --method POST "repos/$REPO/issues/$PR/comments" \
+              -F body=@coverage-comment.md
+          fi
+
+      - name: Upload build and test reports
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: unit-test-reports
+          path: |
+            */build/reports/tests/
+            */build/reports/kover/
