@@ -53,10 +53,13 @@ jobs:
           # build.gradle.kts (between release-please markers)
           sed -i 's/version = "[^"]*"/version = "'"$VERSION"'"/' build.gradle.kts
 
-          # Files with x-release-please-version inline marker
+          # Files with x-release-please-start-version / x-release-please-end blocks
           for file in README.md robolectric-testing/README.md golden-testing/README.md visual-testing/README.md; do
             if [ -f "$file" ]; then
-              sed -i "/x-release-please-version/s/[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*[a-zA-Z0-9.-]*/$VERSION/" "$file"
+              sed -i "/x-release-please-start-version/,/x-release-please-end/{
+                s/mapsTesting = \"[^\"]*\"/mapsTesting = \"$VERSION\"/g
+                s/\(com\.google\.android\.maps\.[^:]*:[^:]*:\)[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*[a-zA-Z0-9.-]*/\1$VERSION/g
+              }" "$file"
             fi
           done
 

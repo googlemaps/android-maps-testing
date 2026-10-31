@@ -21,7 +21,7 @@ metadata:
 You are an expert Google Maps Platform Android testing engineer, architect, and pair programmer. This skill provides procedural guidance, architectural standards, and verified recipes for testing Google Maps SDK applications across three primary tiers powered by [`googlemaps/android-maps-testing`](https://github.com/googlemaps/android-maps-testing):
 
 1. [**:robolectric-testing**](../../../robolectric-testing/README.md): **Fast, Headless JVM Unit Testing**  
-   High-fidelity Robolectric shadows for `MapView`, `GoogleMap`, `SupportMapFragment`, markers, shapes, and projection math. Features native graphics Mercator canvas drawing, user event simulation (`clickMarker`, `dragMarker`, `clickInfoWindow`), and geodesic Google Truth matchers (`LatLngSubject.assertThat(...).isWithin(20.meters)`). Runs completely on your local machine or CI in milliseconds without emulators or devices.
+   High-fidelity Robolectric shadows for `MapView`, `GoogleMap`, `SupportMapFragment`, markers, shapes, and projection math. Features native graphics Mercator canvas drawing, 1-liner KTX test harness (`withTestMap { ... }`), user event simulation (`clickMarker`, `dragTo`, `clickInfoWindow`), **Kotlin Power-Assert** domain helpers (`assertMap`, `assertMarker`, `assertGeo`, `(cameraTarget distanceTo boulder) <= 5.meters`), and **Google Truth** domain subjects (`MapsTruth.assertThat(map)`, `LatLngSubject`). Runs completely on your local machine or CI in milliseconds without emulators or devices.
 2. [**:golden-testing**](../../../golden-testing/README.md): **Deterministic Golden Image Testing**  
    100% offline, zero-quota visual regression and screenshot testing. Injects deterministic synthetic tile providers (`CoordinateGrid`, `SolidColorHash`, `Checkerboard`) at `z-index = -1000` over `MAP_TYPE_NONE`, eliminating base map cartography shifts, network latency, and API quota consumption.
 3. [**:visual-testing**](../../../visual-testing/README.md): **AI Visual Testing & Hybrid Golden Fallback**  
@@ -182,7 +182,7 @@ JVM execution without devices?                                    fidelity asser
 - Verify camera moves & bounds                 Deterministic Pixels                   AI Semantic / Resilient
 - Test marker clicks & dragging                        |                                               |
 - Validate polygon geometry                            v                                               v
-- Assert distances with Truth                  [:golden-testing]                               [:visual-testing]
+- Assert with Power-Assert or Truth            [:golden-testing]                               [:visual-testing]
                                            - 100% offline & zero quota                 - Natural language assertions
                                            - Deterministic synthetic tiles             - Dynamic Flash model caching
                                            - Strict pixel diff assertions              - Hybrid golden fallback
@@ -196,7 +196,7 @@ JVM execution without devices?                                    fidelity asser
 | **Maps SDK API Quota** | ❌ None | ❌ None | ❌ None (or standard for live map) |
 | **Camera & Lifecycle Testing** | ✅ Yes | ✅ Yes | ✅ Yes |
 | **User Interaction Events** | ✅ Yes (Clicks, Drags, Info Windows) | ⚠️ Indirect | ✅ Yes (UiAutomator AI Actions) |
-| **Google Truth Geodesic Matchers** | ✅ Yes (`isWithin(20.meters)`) | ❌ N/A | ❌ N/A |
+| **Geodesic & Domain Assertions** | ✅ Yes (Kotlin Power-Assert & Google Truth) | ❌ N/A | ❌ N/A |
 | **Deterministic Golden Snapshots** | ⚠️ Simplified Canvas | ✅ Yes (Mercator Grid / Solid / Pattern) | ✅ Yes (via `:golden-testing`) |
 | **Visual Diff Engine** | ❌ N/A | ✅ Yes (Pixel comparison & red diff) | ✅ Yes (Hybrid pixel diff + AI fallback) |
 | **Multimodal AI Evaluation** | ❌ N/A | ❌ N/A | ✅ Yes (Gemini Flash multimodal) |
@@ -209,28 +209,49 @@ JVM execution without devices?                                    fidelity asser
 
 ## Installation
 
-Add the required module(s) to your application or library `build.gradle.kts`:
+### Using Gradle Version Catalog (`gradle/libs.versions.toml`) — Recommended
+
+```toml
+[versions]
+mapsTesting = "1.0.0-rc01"
+robolectric = "4.17"
+truth = "1.4.5"
+
+[libraries]
+maps-robolectric-shadows = { module = "com.google.android.maps.robolectric:shadows", version.ref = "mapsTesting" }
+maps-testing-golden = { module = "com.google.android.maps.testing:golden", version.ref = "mapsTesting" }
+maps-testing-visual = { module = "com.google.android.maps.testing:visual", version.ref = "mapsTesting" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
+```
+
+Then add the required module(s) to your application or library `build.gradle.kts`:
 
 ### 1. Robolectric Shadows (`:robolectric-testing`)
+`:robolectric-testing` supports both **Kotlin Power-Assert** (zero extra library dependencies) and **Google Truth** domain subjects:
+
 ```kotlin
 dependencies {
-    testImplementation("com.google.android.maps.robolectric:shadows:1.0.0-rc01")
-    testImplementation("org.robolectric:robolectric:4.17")
-    testImplementation("com.google.truth:truth:1.4.5")
+    testImplementation(libs.maps.robolectric.shadows)
+    testImplementation(libs.robolectric)
+
+    // Optional: include Google Truth if using fluent Truth subjects (MapsTruth.assertThat / LatLngSubject)
+    // instead of Kotlin Power-Assert (assertMap / assertMarker / assertGeo)
+    testImplementation(libs.truth)
 }
 ```
 
 ### 2. Golden Image Testing (`:golden-testing`)
 ```kotlin
 dependencies {
-    testImplementation("com.google.android.maps.testing:golden:1.0.0-rc01")
+    testImplementation(libs.maps.testing.golden)
 }
 ```
 
 ### 3. AI Visual Testing (`:visual-testing`)
 ```kotlin
 dependencies {
-    androidTestImplementation("com.google.android.maps.testing:visual:1.0.0-rc01")
+    androidTestImplementation(libs.maps.testing.visual)
 }
 ```
 

@@ -99,7 +99,7 @@ afterEvaluate {
 
         pom {
           name.set("Android Maps Robolectric Shadows")
-          description.set("Robolectric shadows and Truth testing utilities for Google Maps SDK on Android.")
+          description.set("Robolectric shadows, Kotlin Power-Assert helpers, and Google Truth testing utilities for Google Maps SDK on Android.")
           url.set("https://github.com/googlemaps/android-maps-testing")
           licenses {
             license {

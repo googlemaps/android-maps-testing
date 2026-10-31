@@ -19,6 +19,10 @@ package com.google.android.maps.robolectric.truth
 import com.google.android.gms.maps.model.LatLng
 import java.util.Locale
 import kotlin.math.abs
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.sqrt
 
 // [START maps_robolectric_distance_dsl]
 /**
@@ -58,14 +62,32 @@ val Number.foot: Distance get() = Distance(this.toDouble() * 0.3048)
 val Number.feet: Distance get() = Distance(this.toDouble() * 0.3048)
 
 /**
+ * Computes the spherical Haversine distance in meters between two [LatLng] coordinates without
+ * loading any Google Truth classes, so Kotlin Power-Assert and KTX consumers do not require
+ * `com.google.truth:truth` on their test classpath.
+ */
+internal fun haversineDistanceMeters(p1: LatLng, p2: LatLng): Double {
+  val earthRadius = 6371000.0 // meters
+  val dLat = Math.toRadians(p2.latitude - p1.latitude)
+  val dLng = Math.toRadians(p2.longitude - p1.longitude)
+  val a = sin(dLat / 2) * sin(dLat / 2) +
+    cos(Math.toRadians(p1.latitude)) *
+    cos(Math.toRadians(p2.latitude)) *
+    sin(dLng / 2) *
+    sin(dLng / 2)
+  val c = 2 * atan2(sqrt(a), sqrt(1 - a))
+  return earthRadius * c
+}
+
+/**
  * Computes the spherical Haversine [Distance] between this [LatLng] and [other].
  *
- * Ideal for Kotlin Power-Assert expressions such as:
+ * Works seamlessly with **Kotlin Power-Assert** (without requiring Google Truth on the classpath):
  * `assertGeo(map.cameraTarget.distanceTo(boulder) <= 5.meters)`
  * or infix:
  * `assertGeo((map.cameraTarget distanceTo boulder) <= 5.meters)`
  */
-infix fun LatLng.distanceTo(other: LatLng): Distance = Distance(LatLngSubject.computeDistanceMeters(this, other))
+infix fun LatLng.distanceTo(other: LatLng): Distance = Distance(haversineDistanceMeters(this, other))
 
 /**
  * Returns `true` if this [LatLng] is within [tolerance] of [other].

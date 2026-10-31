@@ -55,13 +55,44 @@ This library solves these problems by switching Google Maps to `MAP_TYPE_NONE` a
 
 ## Installation
 
-Add `:golden-testing` to your `build.gradle.kts`:
+### Using Gradle Version Catalog (`gradle/libs.versions.toml`) — Recommended
+
+Add `:golden-testing` to your `gradle/libs.versions.toml`:
+
+<!-- x-release-please-start-version -->
+```toml
+[versions]
+mapsTesting = "1.0.0-rc01"
+
+[libraries]
+maps-testing-golden = { module = "com.google.android.maps.testing:golden", version.ref = "mapsTesting" }
+```
+<!-- x-release-please-end -->
+
+Then add the dependency in your module's `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    testImplementation("com.google.android.maps.testing:golden:1.0.0-rc01") // {x-release-please-version}
+    testImplementation(libs.maps.testing.golden)
+    // Or for on-device instrumented screenshot tests:
+    androidTestImplementation(libs.maps.testing.golden)
 }
 ```
+
+<details>
+<summary><b>Without Version Catalog (Direct Coordinates)</b></summary>
+
+<!-- x-release-please-start-version -->
+```kotlin
+dependencies {
+    testImplementation("com.google.android.maps.testing:golden:1.0.0-rc01")
+    // Or for on-device instrumented screenshot tests:
+    androidTestImplementation("com.google.android.maps.testing:golden:1.0.0-rc01")
+}
+```
+<!-- x-release-please-end -->
+
+</details>
 
 ---
 

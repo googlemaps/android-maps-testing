@@ -15,7 +15,7 @@ This repository provides modular testing libraries tailored for different testin
 
 | Module | Description | Guide & Documentation |
 | :--- | :--- | :--- |
-| [**:robolectric-testing**](robolectric-testing) | **Robolectric Shadows & JVM Utilities**<br>High-fidelity shadows for `MapView`, `GoogleMap`, `SupportMapFragment`, markers, and shapes. Features visual canvas drawing, lifecycle simulation, and Google Truth distance matchers. | [**Module README**](robolectric-testing/README.md) |
+| [**:robolectric-testing**](robolectric-testing) | **Robolectric Shadows & JVM Utilities**<br>High-fidelity shadows for `MapView`, `GoogleMap`, `SupportMapFragment`, markers, and shapes. Features visual canvas drawing, lifecycle simulation, 1-liner KTX test harness, **Kotlin Power-Assert** helpers, and **Google Truth** domain subjects. | [**Module README**](robolectric-testing/README.md) |
 | [**:golden-testing**](golden-testing) | **Deterministic Golden Image Testing**<br>Offline screenshot and visual regression testing using the real Maps SDK with synthetic, deterministic raster tiles (`MAP_TYPE_NONE`), LRU caching, and pixel diff assertions. | [**Module README**](golden-testing/README.md) |
 | [**:visual-testing**](visual-testing) | **AI Visual Testing & Golden Fallback**<br>Multimodal AI visual validation powered by Gemini, UiAutomator integration, dynamic Flash model resolution, and hybrid golden pixel diff with AI semantic fallback. | [**Module README**](visual-testing/README.md) |
 | [**:app**](app) | **Sample Application**<br>Interactive demonstration app showcasing real-world usage of Google Maps SDK and testing integration. | [**App Directory**](app) |
@@ -39,7 +39,7 @@ JVM execution without devices?                                    fidelity asser
 - Verify camera moves & bounds                 Deterministic Pixels                   AI Semantic / Resilient
 - Test marker clicks & dragging                        |                                               |
 - Validate polygon geometry                            v                                               v
-- Assert distances with Truth                  [:golden-testing]                               [:visual-testing]
+- Assert with Power-Assert or Truth            [:golden-testing]                               [:visual-testing]
                                            - 100% offline & zero quota                 - Natural language assertions
                                            - Deterministic synthetic tiles             - Dynamic Flash model caching
                                            - Strict pixel diff assertions              - Hybrid golden fallback
@@ -53,7 +53,7 @@ JVM execution without devices?                                    fidelity asser
 | **Maps SDK API Quota** | ❌ None | ❌ None | ❌ None (or standard for live map) |
 | **Camera & Lifecycle Testing** | ✅ Yes | ✅ Yes | ✅ Yes |
 | **User Interaction Events** | ✅ Yes (Clicks, Drags, Info Windows) | ⚠️ Indirect | ✅ Yes (UiAutomator AI Actions) |
-| **Google Truth Geodesic Matchers** | ✅ Yes (`isWithin(20.meters)`) | ❌ N/A | ❌ N/A |
+| **Geodesic & Domain Assertions** | ✅ Yes (Kotlin Power-Assert & Google Truth) | ❌ N/A | ❌ N/A |
 | **Deterministic Golden Snapshots** | ⚠️ Simplified Canvas | ✅ Yes (Mercator Grid / Solid / Pattern) | ✅ Yes (via `:golden-testing`) |
 | **Visual Diff Engine** | ❌ N/A | ✅ Yes (Pixel comparison & red diff) | ✅ Yes (Hybrid pixel diff + AI fallback) |
 | **Multimodal AI Evaluation** | ❌ N/A | ❌ N/A | ✅ Yes (Gemini Flash multimodal) |
@@ -64,39 +64,85 @@ JVM execution without devices?                                    fidelity asser
 
 ## Quick Installation
 
-Add the desired modules to your app or library `build.gradle.kts`:
+### Using Gradle Version Catalog (`gradle/libs.versions.toml`) — Recommended
 
-### 1. Robolectric Shadows
+Add the desired artifacts to your `gradle/libs.versions.toml`:
+
+<!-- x-release-please-start-version -->
+```toml
+[versions]
+mapsTesting = "1.0.0-rc01"
+robolectric = "4.17"
+truth = "1.4.5"
+
+[libraries]
+maps-robolectric-shadows = { module = "com.google.android.maps.robolectric:shadows", version.ref = "mapsTesting" }
+maps-testing-golden = { module = "com.google.android.maps.testing:golden", version.ref = "mapsTesting" }
+maps-testing-visual = { module = "com.google.android.maps.testing:visual", version.ref = "mapsTesting" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
+```
+<!-- x-release-please-end -->
+
+Then reference them in your module's `build.gradle.kts`:
+
+#### 1. Robolectric Shadows (`:robolectric-testing`)
+
+`:robolectric-testing` supports both **Kotlin Power-Assert** (zero extra library dependencies) and **Google Truth** domain subjects:
 
 ```kotlin
 dependencies {
-    testImplementation("com.google.android.maps.robolectric:shadows:1.0.0-rc01") // {x-release-please-version}
-    testImplementation("org.robolectric:robolectric:4.17")
-    testImplementation("com.google.truth:truth:1.4.2")
+    testImplementation(libs.maps.robolectric.shadows)
+    testImplementation(libs.robolectric)
+
+    // Optional: include Google Truth if using fluent Truth subjects (MapsTruth.assertThat / LatLngSubject)
+    // instead of Kotlin Power-Assert (assertMap / assertMarker / assertGeo)
+    testImplementation(libs.truth)
 }
 ```
 
-👉 See the [**`:robolectric-testing` README**](robolectric-testing/README.md) for quickstart guides, shadow reference tables, and testing recipes.
+👉 See the [**`:robolectric-testing` README**](robolectric-testing/README.md) for Kotlin Power-Assert compiler plugin configuration, Google Truth setup, shadow reference tables, and testing recipes.
 
-### 2. Golden Image Testing
+#### 2. Golden Image Testing (`:golden-testing`)
 
 ```kotlin
 dependencies {
-    testImplementation("com.google.android.maps.testing:golden:1.0.0-rc01") // {x-release-please-version}
+    testImplementation(libs.maps.testing.golden)
 }
 ```
 
 👉 See the [**`:golden-testing` README**](golden-testing/README.md) for synthetic tile strategies, visual galleries, and screenshot assertion recipes.
 
-### 3. AI Visual Testing
+#### 3. AI Visual Testing (`:visual-testing`)
 
 ```kotlin
 dependencies {
-    androidTestImplementation("com.google.android.maps.testing:visual:1.0.0-rc01") // {x-release-please-version}
+    androidTestImplementation(libs.maps.testing.visual)
 }
 ```
 
 👉 See the [**`:visual-testing` README**](visual-testing/README.md) for Gemini multimodal setup, hybrid golden fallback recipes, and UiAutomator AI actions.
+
+<details>
+<summary><b>Using Direct Dependency Coordinates (without Version Catalog)</b></summary>
+
+<!-- x-release-please-start-version -->
+```kotlin
+dependencies {
+    // 1. Robolectric Shadows
+    testImplementation("com.google.android.maps.robolectric:shadows:1.0.0-rc01")
+    testImplementation("org.robolectric:robolectric:4.17")
+
+    // 2. Golden Image Testing
+    testImplementation("com.google.android.maps.testing:golden:1.0.0-rc01")
+
+    // 3. AI Visual Testing
+    androidTestImplementation("com.google.android.maps.testing:visual:1.0.0-rc01")
+}
+```
+<!-- x-release-please-end -->
+
+</details>
 
 ---
 

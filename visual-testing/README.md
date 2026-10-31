@@ -59,15 +59,40 @@ Screenshot and visual testing of map applications has traditionally presented un
 
 ### 1. Add Dependencies
 
-Add `:visual-testing` to your `build.gradle.kts`:
+#### Using Gradle Version Catalog (`gradle/libs.versions.toml`) — Recommended
+
+Add `:visual-testing` to your `gradle/libs.versions.toml`:
+
+<!-- x-release-please-start-version -->
+```toml
+[versions]
+mapsTesting = "1.0.0-rc01"
+
+[libraries]
+maps-testing-visual = { module = "com.google.android.maps.testing:visual", version.ref = "mapsTesting" }
+```
+<!-- x-release-please-end -->
+
+Then add it to your module's `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    androidTestImplementation(project(":visual-testing"))
-    // Or from published artifacts:
-    androidTestImplementation("com.google.android.maps.testing:visual:1.0.0-rc01") // {x-release-please-version}
+    androidTestImplementation(libs.maps.testing.visual)
 }
 ```
+
+<details>
+<summary><b>Without Version Catalog (Direct Coordinates)</b></summary>
+
+<!-- x-release-please-start-version -->
+```kotlin
+dependencies {
+    androidTestImplementation("com.google.android.maps.testing:visual:1.0.0-rc01")
+}
+```
+<!-- x-release-please-end -->
+
+</details>
 
 ### 2. Supply Gemini API Key
 
@@ -78,66 +103,140 @@ Provide your Gemini API key via Gradle test options or environment variables:
 export GEMINI_API_KEY="your-gemini-api-key"
 
 # Or via connected Android test runner argument:
-./gradlew connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.gemini_api_key="your-gemini-api-key"
+./gradlew connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.GEMINI_API_KEY="your-gemini-api-key"
 ```
 
 ### 3. Extend `BaseVisualTest`
 
 ```kotlin
+// [START maps_visual_test_sample]
+/**
+ * Sample instrumented visual test demonstrating AI-powered visual verification
+ * and hybrid golden testing with Gemini.
+ */
 @RunWith(AndroidJUnit4::class)
-class MyMapVisualTest : BaseVisualTest() {
+class VisualMapSampleTest : BaseVisualTest() {
 
-    @get:Rule
-    val composeTestRule = createAndroidComposeRule<MainActivity>()
-
-    @Test
-    fun testMapVisualIntegrity() = runBlocking {
-        // Wait for map surface rendering to complete
-        waitForMapRendering(timeoutSeconds = 5)
-
-        // Capture current screen
-        val screenshot = captureScreenshot()
-
-        // Natural language visual assertion
-        val result = visualTestHelper.analyzeImage(
-            image = screenshot,
-            prompt = "Verify that the map displays a blue polyline connecting the two markers, " +
-                     "and no UI elements or error banners overlap the map."
-        )
-
-        assertTrue(
-            "Gemini visual verification failed: ${result.analysis}",
-            result.isSuccess
-        )
+  @Test
+  fun verifyStoreLocatorMapRendering() = runBlocking {
+    // 1. Launch MainActivity
+    val intent = Intent(context, MainActivity::class.java).apply {
+      addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
     }
+    context.startActivity(intent)
+
+    // 2. Wait for application window to settle
+    uiDevice.wait(Until.hasObject(By.pkg(context.packageName).depth(0)), 10000)
+    waitForMapRendering(timeoutSeconds = 5)
+
+    // 3. Capture screenshot of current map state
+    val screenshotBitmap = captureScreenshot("store_locator_screenshot.png")
+
+    // 4. Natural language prompt specifying expected visual elements
+    val prompt = """
+            Please act as a UI tester and analyze this screenshot of an Android application.
+            Verify the following criteria:
+            1. Confirm that the application displays a Google Map surface with the "Store Locator" header.
+            2. Confirm that store location pins or map tiles are visible on the screen.
+            3. Confirm that the application interface has rendered cleanly without error banners, blank crash dialogs, or ANRs.
+
+            If all criteria are met, reply with "PASSED".
+            If any criteria is not met, please detail the discrepancy.
+    """.trimIndent()
+
+    // 5. Hybrid verification: check local golden baseline first, fallback to Gemini Vision
+    verifyScreenshotWithGoldenFallback(
+      testName = "store_locator_initial_state",
+      screenshotBitmap = screenshotBitmap,
+      prompt = prompt,
+      passCondition = { it.contains("PASSED", ignoreCase = true) },
+    )
+  }
 }
+// [END maps_visual_test_sample]
 ```
 
 ---
 
-## Hybrid Golden Fallback Recipe
+## Hybrid Golden Fallback Implementation
 
-Use `verifyScreenshotWithGoldenFallback` to get fast, zero-quota CI execution for unchanged baselines, with AI-powered resilience against benign rendering variations:
+`verifyScreenshotWithGoldenFallback` in `BaseVisualTest` provides fast, zero-quota CI execution for unchanged baselines, with AI-powered resilience when visual changes occur:
 
 ```kotlin
-@Test
-fun testMarkerClusteringWithFallback() = runBlocking {
-    waitForMapRendering()
+  // [START maps_visual_golden_fallback]
+  suspend fun verifyScreenshotWithGoldenFallback(
+    testName: String,
+    screenshotBitmap: Bitmap,
+    prompt: String,
+    passCondition: (String) -> Boolean = { it.contains("PASSED", ignoreCase = true) },
+    goldensDirectory: File = File(context.getExternalFilesDir(null) ?: context.filesDir, "goldens"),
+    tolerancePercent: Double = 0.5,
+    updateGoldenOnPass: Boolean = true,
+  ) {
+    val goldenFile = File(goldensDirectory, "$testName.png")
 
-    val currentScreenshot = captureScreenshot()
-    val baselineFile = File(context.filesDir, "goldens/cluster_baseline.png")
+    if (goldenFile.exists()) {
+      val goldenBitmap = BitmapFactory.decodeFile(goldenFile.absolutePath)
+      if (goldenBitmap != null) {
+        val diffResult = GoldenImageDiff.compare(
+          expected = goldenBitmap,
+          actual = screenshotBitmap,
+          maxDiffPercentage = tolerancePercent / 100.0,
+        )
 
-    val result = verifyScreenshotWithGoldenFallback(
-        actualBitmap = currentScreenshot,
-        goldenFile = baselineFile,
-        maxDiffPercentage = 0.01, // 1% pixel diff threshold
-        semanticPrompt = "Verify that 5 markers are displayed and grouped into a cluster badge showing '5'.",
-        autoUpdateGolden = true   // Updates baseline if Gemini approves the change
+        if (diffResult.matches) {
+          val pct = diffResult.diffPercentage * 100.0
+          Log.i("BaseVisualTest", "Screenshot matched golden baseline perfectly for '$testName' (diff: $pct%). Fast pass!")
+          return
+        }
+
+        val pct = diffResult.diffPercentage * 100.0
+        Log.w("BaseVisualTest", "Screenshot diverged from golden for '$testName' (diff: $pct%). Falling back to Gemini Vision.")
+      }
+    } else {
+      Log.i("BaseVisualTest", "No existing golden baseline found for '$testName'. Consulting Gemini Vision.")
+    }
+
+    // Fallback to Gemini
+    val apiKey = geminiApiKey
+    if (apiKey.isNullOrBlank()) {
+      assumeTrue(
+        "Skipping Gemini visual verification for '$testName': GEMINI_API_KEY was not found. " +
+          "Provide GEMINI_API_KEY via secrets.properties, instrumentation arguments, or environment variable.",
+        false,
+      )
+      return
+    }
+
+    val geminiResponse = helper.analyzeImage(screenshotBitmap, prompt, apiKey)
+    Log.i("BaseVisualTest", "Gemini response for '$testName':\n$geminiResponse")
+
+    assertTrue("Gemini returned a null response for '$testName'", geminiResponse != null)
+    val passed = passCondition(geminiResponse!!)
+
+    assertTrue(
+      "Gemini visual verification failed for '$testName'.\nPrompt:\n$prompt\n\nGemini Response:\n$geminiResponse",
+      passed,
     )
 
-    assertTrue("Visual verification failed: ${result.explanation}", result.passed)
-    println("Resolved via: ${result.method}") // "GOLDEN_MATCH" or "GEMINI_FALLBACK"
-}
+    if (updateGoldenOnPass) {
+      try {
+        goldensDirectory.mkdirs()
+        FileOutputStream(goldenFile).use { out ->
+          screenshotBitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+        }
+        Log.w("BaseVisualTest", "Saved new golden baseline for '$testName' at: ${goldenFile.absolutePath}")
+        Log.i(
+          "BaseVisualTest",
+          "To pull this golden image to your host repository, run:\n" +
+            "adb pull ${goldenFile.absolutePath} <repo>/src/test/resources/goldens/",
+        )
+      } catch (e: Exception) {
+        Log.e("BaseVisualTest", "Failed to save updated golden image for '$testName'", e)
+      }
+    }
+  }
+  // [END maps_visual_golden_fallback]
 ```
 
 ---

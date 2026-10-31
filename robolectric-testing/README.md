@@ -18,23 +18,146 @@ High-fidelity Robolectric shadows and testing utilities for the Google Maps SDK 
 
 ## Installation
 
-Add the dependency to your app or library module's `build.gradle.kts`:
+### 1. Declare Dependencies in `gradle/libs.versions.toml` (Recommended)
+
+<!-- x-release-please-start-version -->
+```toml
+[versions]
+mapsTesting = "1.0.0-rc01"
+kotlin = "2.1.20"
+robolectric = "4.17"
+truth = "1.4.5"
+
+[libraries]
+maps-robolectric-shadows = { module = "com.google.android.maps.robolectric:shadows", version.ref = "mapsTesting" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
+
+[plugins]
+kotlin-power-assert = { id = "org.jetbrains.kotlin.plugin.power-assert", version.ref = "kotlin" }
+```
+<!-- x-release-please-end -->
+
+### 2. Configure Your Module's `build.gradle.kts`
+
+Choose either **Kotlin Power-Assert** (zero extra library dependencies) or **Google Truth** (or both):
+
+#### Option A: With Kotlin Power-Assert (No Google Truth Dependency Required)
+
+Configure the [Kotlin Power-Assert compiler plugin](https://kotlinlang.org/docs/power-assert.html) (`org.jetbrains.kotlin.plugin.power-assert`) to transform our built-in domain assertion functions (`assertGeo`, `assertMap`, `assertMarker`) into rich expression diagrams on failure:
+
+```kotlin
+plugins {
+    alias(libs.plugins.kotlin.power.assert)
+}
+
+@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
+powerAssert {
+    functions = listOf(
+        "kotlin.assert",
+        "kotlin.require",
+        "kotlin.check",
+        "com.google.android.maps.robolectric.powerassert.assertGeo",
+        "com.google.android.maps.robolectric.powerassert.assertMap",
+        "com.google.android.maps.robolectric.powerassert.assertMarker",
+    )
+}
+
+dependencies {
+    testImplementation(libs.maps.robolectric.shadows)
+    testImplementation(libs.robolectric)
+}
+```
+
+#### Option B: With Google Truth Domain Subjects
+
+If you prefer fluent `assertThat(...)` subjects (`GoogleMapSubject`, `MarkerSubject`, `LatLngSubject`, etc.), add `libs.truth`:
 
 ```kotlin
 dependencies {
-    testImplementation("com.google.android.maps.robolectric:shadows:1.0.0-rc01") // {x-release-please-version}
-    testImplementation("org.robolectric:robolectric:4.17")
-    testImplementation("com.google.truth:truth:1.4.2")
+    testImplementation(libs.maps.robolectric.shadows)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.truth)
 }
 ```
+
+<details>
+<summary><b>Without Version Catalog (Direct Coordinates)</b></summary>
+
+<!-- x-release-please-start-version -->
+```kotlin
+dependencies {
+    testImplementation("com.google.android.maps.robolectric:shadows:1.0.0-rc01")
+    testImplementation("org.robolectric:robolectric:4.17")
+
+    // Optional: include only if using Google Truth subjects instead of Kotlin Power-Assert
+    testImplementation("com.google.truth:truth:1.4.5")
+}
+```
+<!-- x-release-please-end -->
+
+</details>
 
 ---
 
 ## Quick Start
 
-### Basic Map & Marker Test (Kotlin)
+### Basic Map & Marker Test with Kotlin Power-Assert
 
 ```kotlin
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.maps.robolectric.annotation.EnableMapsShadows
+import com.google.android.maps.robolectric.ktx.cameraTarget
+import com.google.android.maps.robolectric.ktx.cameraZoom
+import com.google.android.maps.robolectric.ktx.withTestMap
+import com.google.android.maps.robolectric.powerassert.assertMap
+import com.google.android.maps.robolectric.powerassert.assertMarker
+import com.google.android.maps.robolectric.truth.distanceTo
+import com.google.android.maps.robolectric.truth.meters
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+
+@RunWith(RobolectricTestRunner::class)
+@EnableMapsShadows
+class MapScreenPowerAssertTest {
+
+    @Test
+    fun testAddMarkerAndCamera() = withTestMap {
+        val sanFrancisco = LatLng(37.7749, -122.4194)
+
+        // Move Camera
+        moveCamera(CameraUpdateFactory.newLatLngZoom(sanFrancisco, 12f))
+
+        // Add Marker
+        val marker = addMarker(
+            MarkerOptions()
+                .position(sanFrancisco)
+                .title("San Francisco")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+        )!!
+
+        // Assert geodesic camera position & zoom via Kotlin Power-Assert
+        assertMap(
+            (cameraTarget distanceTo sanFrancisco) <= 10.meters &&
+                cameraZoom == 12f
+        )
+
+        marker.assertMarker(
+            marker.title == "San Francisco" &&
+                (marker.position distanceTo sanFrancisco) <= 1.meters
+        )
+    }
+}
+```
+
+### Basic Map & Marker Test with Google Truth
+
+```kotlin
+import android.app.Activity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -60,7 +183,7 @@ class MapScreenTest {
 
     @Before
     fun setUp() {
-        val activity = Robolectric.buildActivity(android.app.Activity::class.java).create().get()
+        val activity = Robolectric.buildActivity(Activity::class.java).create().get()
         mapView = MapView(activity).apply {
             onCreate(null)
         }
@@ -101,17 +224,22 @@ class MapScreenTest {
 
 ## Testing Recipes
 
-### 1. Geodesic Distance Assertions with Google Truth
+### 1. Geodesic Distance Assertions (Kotlin Power-Assert or Google Truth)
 
-Assert that a coordinate is within a physical distance tolerance using the Kotlin DSL:
+Assert that a coordinate is within a physical distance tolerance using the `Distance` DSL (`5.meters`, `0.02.kilometers`, `distanceTo`):
 
 ```kotlin
+import com.google.android.maps.robolectric.powerassert.assertGeo
 import com.google.android.maps.robolectric.truth.*
 
 val point1 = LatLng(37.7749, -122.4194)
-val point2 = LatLng(37.7750, -122.4193) // ~14 meters away
+val point2 = LatLng(37.7750, -122.4193) // ~14.2 meters away
 
-// Verify distance in meters or kilometers
+// Option A: Kotlin Power-Assert (renders "14.2m" in the failure diagram)
+assertGeo((point1 distanceTo point2) <= 20.meters)
+assertGeo((point1 distanceTo point2) <= 0.02.kilometers)
+
+// Option B: Google Truth Subject
 LatLngSubject.assertThat(point1)
     .isWithin(20.meters)
     .of(point2)
@@ -211,6 +339,8 @@ Use `withTestMap { ... }` to eliminate `Activity`/`MapView`/`ShadowLooper` setup
 ```kotlin
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.maps.robolectric.annotation.EnableMapsShadows
+import com.google.android.maps.robolectric.ktx.getMapBlocking
+import com.google.android.maps.robolectric.powerassert.assertGeo
 
 @RunWith(RobolectricTestRunner::class)
 @EnableMapsShadows
@@ -219,18 +349,13 @@ class FragmentMapTest {
     @Test
     fun testSupportMapFragment() {
         val fragment = SupportMapFragment.newInstance()
-        var ready = false
-        fragment.getMapAsync { map ->
-            ready = true
-            assertThat(map).isNotNull()
-        }
-        ShadowLooper.idleMainLooper()
-        assertThat(ready).isTrue()
+        val map = fragment.getMapBlocking()
+        assertGeo(map.cameraPosition.zoom >= 0f)
     }
 }
 ```
 
-### 3. Screen Coordinate Projection & Visible Regions
+### 4. Screen Coordinate Projection & Visible Regions
 
 Convert between geographic `LatLng` and screen `Point` coordinates in both directions, and inspect viewport bounds:
 
@@ -243,32 +368,29 @@ val point = projection.toScreenLocation(LatLng(37.7749, -122.4194))
 // Screen Point to LatLng
 val latLng = projection.fromScreenLocation(point)
 
-// Visible Region bounds
+// Visible Region bounds (with Kotlin Power-Assert `in` operator or Google Truth)
 val visibleRegion = projection.visibleRegion
-assertThat(visibleRegion.latLngBounds.contains(latLng)).isTrue()
+assertGeo(latLng in visibleRegion.latLngBounds)
 ```
 
-### 4. Simulating User Interactions and Marker Dragging
+### 5. Simulating User Interactions and Marker Dragging
 
 ```kotlin
-import com.google.android.maps.robolectric.shadows.ShadowGoogleMap
-import org.robolectric.shadow.api.Shadow
-
-val shadowMap = Shadow.extract(googleMap) as ShadowGoogleMap
+import com.google.android.maps.robolectric.ktx.clickMap
+import com.google.android.maps.robolectric.ktx.clickInfoWindow
+import com.google.android.maps.robolectric.ktx.dragTo
 
 // Simulate map click
-shadowMap.clickMap(LatLng(37.7749, -122.4194))
+googleMap.clickMap(LatLng(37.7749, -122.4194))
 
 // Simulate info window click
-shadowMap.clickInfoWindow(marker)
+marker.clickInfoWindow()
 
-// Simulate marker drag
-shadowMap.dragMarkerStart(marker)
-shadowMap.dragMarker(marker, LatLng(37.7800, -122.4100))
-shadowMap.dragMarkerEnd(marker, LatLng(37.7800, -122.4100))
+// Simulate complete marker drag gesture (start -> drag -> end)
+marker.dragTo(LatLng(37.7800, -122.4100))
 ```
 
-### 5. Visual Canvas & Snapshot Assertions
+### 6. Visual Canvas & Snapshot Assertions
 
 `ShadowMapView` implements Mercator coordinate projection to draw vector shapes (`Circle`, `Polygon`, `Polyline`) and `Marker` icons directly onto an Android `Canvas`:
 
@@ -288,12 +410,12 @@ googleMap.addCircle(
         .fillColor(Color.RED)
 )
 
-// 3. Render and test pixel colors
+// 3. Render and test pixel colors (via Power-Assert or Google Truth)
 val bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)
 mapView.draw(Canvas(bitmap))
 
 // The center pixel should match the circle fill color
-assertThat(bitmap.getPixel(50, 50)).isEqualTo(Color.RED)
+assertGeo(bitmap.getPixel(50, 50) == Color.RED)
 ```
 
 ---

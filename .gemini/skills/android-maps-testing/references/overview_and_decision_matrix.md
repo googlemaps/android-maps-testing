@@ -21,7 +21,7 @@ Fast, Headless JVM Unit Tests                                   Screenshot & Vis
 - Camera moves & target bounds                            |                               |
 - Marker clicks, drag, info windows                       v                               v
 - Polygons, polylines, circles                    [:golden-testing]               [:visual-testing]
-- Truth distance assertions (meters)              - Synthetic tile provider       - Gemini Vision Multimodal
+- Power-Assert & Truth geodesic asserts           - Synthetic tile provider       - Gemini Vision Multimodal
 - Mercator canvas 2D pixel assertions             - MAP_TYPE_NONE                 - Dynamic Flash model
 - Zero emulator overhead (<1s execution)          - Deterministic pixels          - Hybrid fallback workflow
                                                   - 100% offline, 0 quota         - Natural language asserts
@@ -41,7 +41,7 @@ Fast, Headless JVM Unit Tests                                   Screenshot & Vis
 | **Lifecycle & Events** | ✅ Full simulation of `onCreate`, `onResume`, `getMapAsync`. | ✅ Full lifecycle handling. | ✅ Full Android runtime lifecycle via UiAutomator. |
 | **Camera & Bounds** | ✅ Real-time tracking of target, zoom, tilt, bearing. | ✅ Camera positioning validated visually in snapshot. | ✅ High-level visual inspection of viewport. |
 | **Overlays & Shapes** | ✅ Marker, Circle, Polygon, Polyline, GroundOverlay. | ✅ High-fidelity visual snapshot of all overlays. | ✅ Semantic detection of markers, callouts, and banners. |
-| **Distance Assertions**| ✅ Geodesic Truth assertions (`isWithin(10.meters)`). | ❌ N/A. | ❌ N/A. |
+| **Domain & Distance Assertions**| ✅ Kotlin Power-Assert (`assertMap`, `<= 10.meters`) & Google Truth (`MapsTruth.assertThat`). | ❌ N/A. | ❌ N/A. |
 | **Compose Support** | ✅ Compose State / ViewModel testing. | ✅ `rememberGoldenTileProvider()`. | ✅ Full Compose UI testing via `createAndroidComposeRule`. |
 | **Flakiness Risk** | **None**: 100% deterministic and isolated. | **Extremely Low**: Synthetic tiles eliminate server shifts. | **Very Low**: Semantic tolerance avoids 1-pixel GPU diff failures. |
 

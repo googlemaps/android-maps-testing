@@ -76,11 +76,25 @@ val googleMap = mapRef.get()
 
 ---
 
-## 3. Geodesic Truth Distance Matchers (`LatLngSubject`)
+## 3. Geodesic Distance & Domain Assertions (Kotlin Power-Assert or Google Truth)
 
-`LatLngSubject` provides fluent assertions for geographic points, calculating spherical distance on the globe:
+`:robolectric-testing` supports both **Kotlin Power-Assert** (zero extra library dependencies) and **Google Truth** domain subjects for geographic distance and map state assertions:
 
-### Kotlin DSL
+### Kotlin Power-Assert (No Google Truth Dependency Required)
+```kotlin
+import com.google.android.maps.robolectric.powerassert.assertGeo
+import com.google.android.maps.robolectric.truth.distanceTo
+import com.google.android.maps.robolectric.truth.kilometers
+import com.google.android.maps.robolectric.truth.meters
+
+val point1 = LatLng(37.7749, -122.4194)
+val point2 = LatLng(37.7750, -122.4193) // ~14.2 meters away
+
+assertGeo((point1 distanceTo point2) <= 20.meters)
+assertGeo((point1 distanceTo point2) <= 0.02.kilometers)
+```
+
+### Google Truth (`LatLngSubject`)
 ```kotlin
 import com.google.android.maps.robolectric.truth.LatLngSubject
 import com.google.android.maps.robolectric.truth.isWithin
