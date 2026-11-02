@@ -28,6 +28,8 @@ import com.google.android.maps.robolectric.ktx.clickMarker
 import com.google.android.maps.robolectric.ktx.createTestMap
 import com.google.android.maps.robolectric.ktx.markers
 import com.google.android.maps.robolectric.ktx.requireMarker
+import com.google.android.maps.robolectric.ktx.simulateUserCameraMove
+import com.google.android.maps.robolectric.ktx.visibleBounds
 import com.google.android.maps.robolectric.powerassert.assertMap
 import com.google.android.maps.robolectric.powerassert.contains
 import com.google.android.maps.robolectric.powerassert.hasMarker
@@ -202,6 +204,39 @@ class StoreLocatorLazyAssertComparisonTest {
         denverStore.location !in circle &&
         map.hasOverlayPixelAt(boulderStore.location),
     )
+  }
+
+  // ===========================================================================================
+  // SCENARIO 5: Fitting all stores in bounds & detecting user pan gestures (REASON_GESTURE)
+  // ===========================================================================================
+
+  @Test
+  fun fitAllStoresAndUserGesture_googleTruth() {
+    manager.displayStores(listOf(boulderStore, denverStore))
+
+    truthAssertThat(manager.fitAllStores(paddingPx = 16)).isTrue()
+    assertThat(map)
+      .showsOnScreen(boulderStore.location)
+      .showsOnScreen(denverStore.location)
+    truthAssertThat(manager.isSearchThisAreaVisible).isFalse()
+
+    map.simulateUserCameraMove(LatLng(39.90, -105.10))
+    truthAssertThat(manager.isSearchThisAreaVisible).isTrue()
+  }
+
+  @Test
+  fun fitAllStoresAndUserGesture_kotlinPowerAssert() {
+    manager.displayStores(listOf(boulderStore, denverStore))
+
+    truthAssertThat(manager.fitAllStores(paddingPx = 16)).isTrue()
+    map.assertMap(
+      boulderStore.location in map.visibleBounds &&
+        denverStore.location in map.visibleBounds &&
+        !manager.isSearchThisAreaVisible,
+    )
+
+    map.simulateUserCameraMove(LatLng(39.90, -105.10))
+    map.assertMap(manager.isSearchThisAreaVisible)
   }
 }
 // [END maps_robolectric_lazy_store_locator_comparison]

@@ -17,18 +17,25 @@
 package com.google.android.maps.testing.golden
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import org.junit.Assert.assertThrows
+import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.TemporaryFolder
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
+import java.io.File
 
 // [START maps_golden_image_diff_test]
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [34])
 public class GoldenImageDiffTest {
+
+  @get:Rule
+  public val tempFolder: TemporaryFolder = TemporaryFolder()
 
   @Test
   public fun compare_exactMatchReturnsTrueWithZeroDiffs() {
@@ -92,6 +99,54 @@ public class GoldenImageDiffTest {
       GoldenImageDiff.assertMatches(bmp1, bmp2, maxDiffPercentage = 0.0)
     }
     assertThat(error.message).contains("Golden image mismatch")
+  }
+
+  @Test
+  public fun assertMatches_recordsBaselineAndWritesFailureArtifacts() {
+    val outDir = tempFolder.newFolder("goldens")
+    val goldenFile = File(outDir, "route_overlay.png")
+
+    // [START golden_diff_artifacts_and_record]
+    val baseline = createSolidBitmap(16, 16, Color.BLUE)
+    val matchingActual = createSolidBitmap(16, 16, Color.BLUE)
+    val regressedActual = createSolidBitmap(16, 16, Color.BLUE).apply {
+      setPixel(8, 8, Color.YELLOW)
+    }
+
+    // 1. Record the baseline PNG (or run Gradle with -Dmaps.golden.record=true)
+    GoldenImageDiff.assertMatches(
+      goldenFile = goldenFile,
+      actual = baseline,
+      recordBaseline = true,
+    )
+    assertThat(goldenFile.exists()).isTrue()
+
+    // 2. Compare matching render against the recorded golden PNG
+    GoldenImageDiff.assertMatches(
+      goldenFile = goldenFile,
+      actual = matchingActual,
+      maxDiffPercentage = 0.0,
+    )
+
+    // 3. When a regression occurs, <name>_actual.png and <name>_diff.png are automatically written
+    val failure = assertThrows(AssertionError::class.java) {
+      GoldenImageDiff.assertMatches(
+        goldenFile = goldenFile,
+        actual = regressedActual,
+        maxDiffPercentage = 0.0,
+        outputDir = outDir,
+      )
+    }
+
+    val actualArtifact = File(outDir, "route_overlay_actual.png")
+    val diffArtifact = File(outDir, "route_overlay_diff.png")
+    assertThat(actualArtifact.exists()).isTrue()
+    assertThat(diffArtifact.exists()).isTrue()
+    assertThat(failure.message).contains(diffArtifact.path)
+    // [END golden_diff_artifacts_and_record]
+
+    val decodedDiff = BitmapFactory.decodeFile(diffArtifact.path)
+    assertThat(decodedDiff.getPixel(8, 8)).isEqualTo(Color.RED)
   }
 
   private fun createSolidBitmap(width: Int, height: Int, color: Int): Bitmap {

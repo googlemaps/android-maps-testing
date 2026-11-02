@@ -16,11 +16,15 @@
 
 package com.google.android.maps.testing.golden
 
+import android.graphics.Color
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import com.google.android.gms.maps.model.TileProvider
 import com.google.common.truth.Truth.assertThat
+import org.junit.Assert.assertThrows
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.io.File
 
 // [START maps_golden_instrumented_test]
 /**
@@ -46,12 +50,44 @@ public class GoldenMapInstrumentedTest {
   }
 
   @Test
-  public fun goldenImageDiff_evaluatesMatchingBitmapsOnDevice() {
+  public fun goldenImageDiff_evaluatesMatchingBitmapsAndRecordsArtifactsOnDevice() {
+    val context = InstrumentationRegistry.getInstrumentation().targetContext
+    val workDir = File(context.cacheDir, "golden_instrumented_test").apply {
+      deleteRecursively()
+      mkdirs()
+    }
+    val goldenFile = File(workDir, "device_tile.png")
+
     val strategy = GoldenTileStrategy.SolidColorHash()
     val tile1 = strategy.generateTile(1, 1, 1, 64)
     val tile2 = strategy.generateTile(1, 1, 1, 64)
 
-    GoldenImageDiff.assertMatches(tile1, tile2, maxDiffPercentage = 0.0)
+    GoldenImageDiff.assertMatches(
+      goldenFile = goldenFile,
+      actual = tile1,
+      recordBaseline = true,
+    )
+    assertThat(goldenFile.exists()).isTrue()
+
+    GoldenImageDiff.assertMatches(
+      goldenFile = goldenFile,
+      actual = tile2,
+      maxDiffPercentage = 0.0,
+    )
+
+    val modified = tile2.copy(tile2.config!!, true).apply {
+      setPixel(10, 10, Color.BLACK)
+    }
+    assertThrows(AssertionError::class.java) {
+      GoldenImageDiff.assertMatches(
+        goldenFile = goldenFile,
+        actual = modified,
+        maxDiffPercentage = 0.0,
+        outputDir = workDir,
+      )
+    }
+    assertThat(File(workDir, "device_tile_actual.png").exists()).isTrue()
+    assertThat(File(workDir, "device_tile_diff.png").exists()).isTrue()
   }
 }
 // [END maps_golden_instrumented_test]

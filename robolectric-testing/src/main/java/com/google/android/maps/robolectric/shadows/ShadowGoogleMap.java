@@ -22,6 +22,7 @@ import android.location.Location;
 import android.os.Handler;
 import android.os.Looper;
 import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.Projection;
@@ -32,6 +33,9 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MapColorScheme;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PointOfInterest;
@@ -41,6 +45,7 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -70,6 +75,10 @@ public class ShadowGoogleMap {
   private float minZoomLevel = 2.0f;
   private float maxZoomLevel = 21.0f;
   private int mapType = GoogleMap.MAP_TYPE_NORMAL;
+  private int mapColorScheme = MapColorScheme.LIGHT;
+  private MapStyleOptions mapStyleOptions;
+  private LatLngBounds cameraTargetBounds;
+  private String contentDescription;
   private boolean myLocationEnabled;
   private boolean trafficEnabled;
   private boolean indoorEnabled = true;
@@ -256,17 +265,17 @@ public class ShadowGoogleMap {
 
   @Implementation
   protected void moveCamera(CameraUpdate update) {
-    updateCamera(update);
+    updateCamera(update, GoogleMap.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION);
   }
 
   @Implementation
   protected void animateCamera(CameraUpdate update) {
-    updateCamera(update);
+    updateCamera(update, GoogleMap.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION);
   }
 
   @Implementation
   protected void animateCamera(CameraUpdate update, GoogleMap.CancelableCallback callback) {
-    updateCamera(update);
+    updateCamera(update, GoogleMap.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION);
     if (callback != null) {
       callback.onFinish();
     }
@@ -275,7 +284,7 @@ public class ShadowGoogleMap {
   @Implementation
   protected void animateCamera(
       CameraUpdate update, int durationMs, GoogleMap.CancelableCallback callback) {
-    updateCamera(update);
+    updateCamera(update, GoogleMap.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION);
     if (callback != null) {
       callback.onFinish();
     }
@@ -286,10 +295,29 @@ public class ShadowGoogleMap {
     // No-op for instantaneous headless updates
   }
 
-  private void updateCamera(CameraUpdate update) {
+  /**
+   * Simulates a user-initiated pan or zoom gesture (`REASON_GESTURE`) applying {@code update} and
+   * dispatching {@code onCameraMoveStarted(REASON_GESTURE)} -> {@code onCameraMove()} -> {@code
+   * onCameraIdle()}.
+   */
+  public void simulateGestureCameraMove(CameraUpdate update) {
+    updateCamera(update, GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE);
+  }
+
+  /**
+   * Simulates a user-initiated pan or zoom gesture (`REASON_GESTURE`) to {@code position} and
+   * dispatches {@code onCameraMoveStarted(REASON_GESTURE)} -> {@code onCameraMove()} -> {@code
+   * onCameraIdle()}.
+   */
+  public void simulateGestureCameraMove(CameraPosition position) {
+    updateCamera(
+        CameraUpdateFactory.newCameraPosition(position),
+        GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE);
+  }
+
+  private void updateCamera(CameraUpdate update, int reason) {
     if (onCameraMoveStartedListener != null) {
-      onCameraMoveStartedListener.onCameraMoveStarted(
-          GoogleMap.OnCameraMoveStartedListener.REASON_DEVELOPER_ANIMATION);
+      onCameraMoveStartedListener.onCameraMoveStarted(reason);
     }
 
     ShadowCameraUpdate shadow = (ShadowCameraUpdate) Shadow.extract(update);
@@ -299,8 +327,13 @@ public class ShadowGoogleMap {
       float zoom = shadow.getZoom() != null ? shadow.getZoom() : this.cameraPosition.zoom;
       this.cameraPosition = CameraPosition.fromLatLngZoom(shadow.getLatLng(), zoom);
     } else if (shadow.getLatLngBounds() != null) {
-      LatLng center = shadow.getLatLngBounds().getCenter();
-      float zoom = shadow.getZoom() != null ? shadow.getZoom() : this.cameraPosition.zoom;
+      LatLngBounds bounds = shadow.getLatLngBounds();
+      LatLng center = bounds.getCenter();
+      float zoom =
+          shadow.getZoom() != null
+              ? shadow.getZoom()
+              : calculateBoundsZoom(
+                  bounds, shadow.getBoundsWidth(), shadow.getBoundsHeight(), shadow.getPadding());
       this.cameraPosition = CameraPosition.fromLatLngZoom(center, zoom);
     } else if (shadow.getZoom() != null) {
       this.cameraPosition =
@@ -310,6 +343,31 @@ public class ShadowGoogleMap {
           Math.max(
               minZoomLevel, Math.min(maxZoomLevel, this.cameraPosition.zoom + shadow.getZoomBy()));
       this.cameraPosition = CameraPosition.fromLatLngZoom(this.cameraPosition.target, newZoom);
+    } else if (shadow.getScrollX() != null && shadow.getScrollY() != null) {
+      LatLng scrolledTarget =
+          scrollTargetByPixels(
+              this.cameraPosition.target,
+              this.cameraPosition.zoom,
+              shadow.getScrollX(),
+              shadow.getScrollY());
+      this.cameraPosition =
+          new CameraPosition(
+              scrolledTarget,
+              this.cameraPosition.zoom,
+              this.cameraPosition.tilt,
+              this.cameraPosition.bearing);
+    }
+
+    if (cameraTargetBounds != null && this.cameraPosition != null) {
+      LatLng clamped = clampToTargetBounds(this.cameraPosition.target);
+      if (!clamped.equals(this.cameraPosition.target)) {
+        this.cameraPosition =
+            new CameraPosition(
+                clamped,
+                this.cameraPosition.zoom,
+                this.cameraPosition.tilt,
+                this.cameraPosition.bearing);
+      }
     }
 
     if (onCameraMoveListener != null) {
@@ -320,9 +378,93 @@ public class ShadowGoogleMap {
     }
   }
 
+  private LatLng clampToTargetBounds(LatLng target) {
+    if (cameraTargetBounds == null || target == null) {
+      return target;
+    }
+    double clampedLat =
+        Math.max(
+            cameraTargetBounds.southwest.latitude,
+            Math.min(cameraTargetBounds.northeast.latitude, target.latitude));
+    double clampedLng =
+        Math.max(
+            cameraTargetBounds.southwest.longitude,
+            Math.min(cameraTargetBounds.northeast.longitude, target.longitude));
+    return new LatLng(clampedLat, clampedLng);
+  }
+
+  private float calculateBoundsZoom(
+      LatLngBounds bounds, Integer explicitWidth, Integer explicitHeight, int boundsPadding) {
+    int rawWidth =
+        explicitWidth != null
+            ? explicitWidth
+            : (mapView != null && mapView.getWidth() > 0 ? mapView.getWidth() : viewportWidth);
+    int rawHeight =
+        explicitHeight != null
+            ? explicitHeight
+            : (mapView != null && mapView.getHeight() > 0 ? mapView.getHeight() : viewportHeight);
+
+    double effectiveWidth =
+        Math.max(1.0, rawWidth - paddingLeft - paddingRight - 2.0 * boundsPadding);
+    double effectiveHeight =
+        Math.max(1.0, rawHeight - paddingTop - paddingBottom - 2.0 * boundsPadding);
+
+    double worldXSw = latLngToWorldX(bounds.southwest.longitude);
+    double worldXNe = latLngToWorldX(bounds.northeast.longitude);
+    double deltaX = worldXNe - worldXSw;
+    if (deltaX < 0) {
+      deltaX += 256.0;
+    }
+
+    double worldYNe = latLngToWorldY(bounds.northeast.latitude);
+    double worldYSw = latLngToWorldY(bounds.southwest.latitude);
+    double deltaY = Math.abs(worldYSw - worldYNe);
+
+    if (deltaX < 1e-9 && deltaY < 1e-9) {
+      return maxZoomLevel;
+    }
+
+    double zoomX = deltaX > 1e-9 ? Math.log(effectiveWidth / deltaX) / Math.log(2.0) : maxZoomLevel;
+    double zoomY =
+        deltaY > 1e-9 ? Math.log(effectiveHeight / deltaY) / Math.log(2.0) : maxZoomLevel;
+    float calculatedZoom = (float) Math.min(zoomX, zoomY);
+    return Math.max(minZoomLevel, Math.min(maxZoomLevel, calculatedZoom));
+  }
+
+  private LatLng scrollTargetByPixels(
+      LatLng currentTarget, float zoom, float scrollX, float scrollY) {
+    double scale = Math.pow(2.0, zoom);
+    double worldX = latLngToWorldX(currentTarget.longitude) + (scrollX / scale);
+    double worldY = latLngToWorldY(currentTarget.latitude) + (scrollY / scale);
+
+    double longitude = (worldX / 128.0 - 1.0) * 180.0;
+    while (longitude > 180.0) {
+      longitude -= 360.0;
+    }
+    while (longitude < -180.0) {
+      longitude += 360.0;
+    }
+
+    double mercN = Math.PI * (1.0 - worldY / 128.0);
+    double latRad = 2.0 * (Math.atan(Math.exp(mercN)) - (Math.PI / 4.0));
+    double latitude = Math.max(-85.05112878, Math.min(85.05112878, Math.toDegrees(latRad)));
+    return new LatLng(latitude, longitude);
+  }
+
+  private static double latLngToWorldX(double longitude) {
+    return 128.0 * (1.0 + longitude / 180.0);
+  }
+
+  private static double latLngToWorldY(double latitude) {
+    double clampedLat = Math.max(-85.05112878, Math.min(85.05112878, latitude));
+    double latRad = Math.toRadians(clampedLat);
+    double mercN = Math.log(Math.tan((Math.PI / 4.0) + (latRad / 2.0)));
+    return 128.0 * (1.0 - mercN / Math.PI);
+  }
+
   private static Class<?> getDelegateInterface(Class<?> targetClass) {
-    java.lang.reflect.Constructor<?>[] constructors = targetClass.getDeclaredConstructors();
-    for (java.lang.reflect.Constructor<?> ctor : constructors) {
+    Constructor<?>[] constructors = targetClass.getDeclaredConstructors();
+    for (Constructor<?> ctor : constructors) {
       Class<?>[] params = ctor.getParameterTypes();
       if (params.length == 1 && params[0].isInterface()) {
         return params[0];
@@ -507,6 +649,7 @@ public class ShadowGoogleMap {
             TileOverlay.class, ClassParameter.from(delegateClass, dummyDelegate));
 
     ShadowTileOverlay shadow = (ShadowTileOverlay) Shadow.extract(overlay);
+    shadow.setTileProvider(options.getTileProvider());
     shadow.setZIndex(options.getZIndex());
     shadow.setVisible(options.isVisible());
     shadow.setFadeIn(options.getFadeIn());
@@ -645,6 +788,15 @@ public class ShadowGoogleMap {
   @Implementation
   protected void setOnMapLoadedCallback(GoogleMap.OnMapLoadedCallback callback) {
     this.onMapLoadedCallback = callback;
+    if (callback != null) {
+      new Handler(Looper.getMainLooper())
+          .post(
+              () -> {
+                if (this.onMapLoadedCallback == callback) {
+                  callback.onMapLoaded();
+                }
+              });
+    }
   }
 
   @Implementation
@@ -675,10 +827,30 @@ public class ShadowGoogleMap {
     }
   }
 
-  public void clickMarker(Marker marker) {
-    if (onMarkerClickListener != null) {
-      onMarkerClickListener.onMarkerClick(marker);
+  public boolean clickMarker(Marker marker) {
+    boolean consumed = onMarkerClickListener != null && onMarkerClickListener.onMarkerClick(marker);
+    if (!consumed && marker != null) {
+      marker.showInfoWindow();
+      if (marker.getPosition() != null) {
+        if (onCameraMoveStartedListener != null) {
+          onCameraMoveStartedListener.onCameraMoveStarted(
+              GoogleMap.OnCameraMoveStartedListener.REASON_API_ANIMATION);
+        }
+        this.cameraPosition =
+            new CameraPosition(
+                marker.getPosition(),
+                this.cameraPosition.zoom,
+                this.cameraPosition.tilt,
+                this.cameraPosition.bearing);
+        if (onCameraMoveListener != null) {
+          onCameraMoveListener.onCameraMove();
+        }
+        if (onCameraIdleListener != null) {
+          onCameraIdleListener.onCameraIdle();
+        }
+      }
     }
+    return consumed;
   }
 
   public void dragMarkerStart(Marker marker) {
@@ -839,6 +1011,55 @@ public class ShadowGoogleMap {
   @Implementation
   protected void setBuildingsEnabled(boolean enabled) {
     this.buildingsEnabled = enabled;
+  }
+
+  @Implementation
+  protected boolean setMapStyle(MapStyleOptions style) {
+    this.mapStyleOptions = style;
+    return true;
+  }
+
+  public MapStyleOptions getMapStyle() {
+    return mapStyleOptions;
+  }
+
+  @Implementation
+  protected void setMapColorScheme(int mapColorScheme) {
+    this.mapColorScheme = mapColorScheme;
+  }
+
+  @Implementation
+  public int getMapColorScheme() {
+    return mapColorScheme;
+  }
+
+  @Implementation
+  protected void setLatLngBoundsForCameraTarget(LatLngBounds bounds) {
+    this.cameraTargetBounds = bounds;
+    if (bounds != null && this.cameraPosition != null) {
+      LatLng clamped = clampToTargetBounds(this.cameraPosition.target);
+      if (!clamped.equals(this.cameraPosition.target)) {
+        this.cameraPosition =
+            new CameraPosition(
+                clamped,
+                this.cameraPosition.zoom,
+                this.cameraPosition.tilt,
+                this.cameraPosition.bearing);
+      }
+    }
+  }
+
+  public LatLngBounds getLatLngBoundsForCameraTarget() {
+    return cameraTargetBounds;
+  }
+
+  @Implementation
+  protected void setContentDescription(String description) {
+    this.contentDescription = description;
+  }
+
+  public String getContentDescription() {
+    return contentDescription;
   }
 
   @Implementation

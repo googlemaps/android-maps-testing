@@ -29,6 +29,8 @@ public class ShadowCameraUpdate {
   private Float zoomBy;
   private CameraPosition cameraPosition;
   private LatLngBounds latLngBounds;
+  private Integer boundsWidth;
+  private Integer boundsHeight;
   private int padding;
   private Float scrollX;
   private Float scrollY;
@@ -66,12 +68,27 @@ public class ShadowCameraUpdate {
   }
 
   public void setLatLngBounds(LatLngBounds latLngBounds, int padding) {
+    setLatLngBounds(latLngBounds, null, null, padding);
+  }
+
+  public void setLatLngBounds(
+      LatLngBounds latLngBounds, Integer width, Integer height, int padding) {
     this.latLngBounds = latLngBounds;
+    this.boundsWidth = width;
+    this.boundsHeight = height;
     this.padding = padding;
   }
 
   public LatLngBounds getLatLngBounds() {
     return latLngBounds;
+  }
+
+  public Integer getBoundsWidth() {
+    return boundsWidth;
+  }
+
+  public Integer getBoundsHeight() {
+    return boundsHeight;
   }
 
   public int getPadding() {

@@ -17,10 +17,14 @@
 package com.google.android.maps.testing.golden
 
 import android.app.Activity
+import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.maps.robolectric.annotation.EnableMapsShadows
 import com.google.android.maps.robolectric.shadows.ShadowGoogleMap
 import com.google.common.truth.Truth.assertThat
@@ -96,6 +100,23 @@ public class GoogleMapExtensionsRobolectricTest {
   }
 
   @Test
+  public fun awaitMapLoaded_autoDispatchesOnMainLooperIdle() = runTest {
+    // [START golden_await_map_loaded]
+    val loadDeferred = async {
+      googleMap.awaitMapLoaded()
+    }
+    testScheduler.advanceUntilIdle()
+
+    // Idling the Android main looper automatically dispatches OnMapLoadedCallback
+    // without requiring manual ShadowGoogleMap extraction
+    ShadowLooper.idleMainLooper()
+    testScheduler.advanceUntilIdle()
+
+    assertThat(loadDeferred.isCompleted).isTrue()
+    // [END golden_await_map_loaded]
+  }
+
+  @Test
   public fun captureSnapshot_returnsBitmap() = runTest {
     val snapshotDeferred = async {
       googleMap.captureSnapshot()
@@ -109,6 +130,32 @@ public class GoogleMapExtensionsRobolectricTest {
     assertThat(bitmap).isNotNull()
     assertThat(bitmap.width).isEqualTo(100)
     assertThat(bitmap.height).isEqualTo(100)
+  }
+
+  @Test
+  public fun enableGoldenTesting_rendersDeterministicTileStrategyInRobolectricSnapshot() = runTest {
+    // [START golden_tile_rendering_jvm]
+    // Attach a deterministic custom solid-color tile strategy on Robolectric JVM
+    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(37.7749, -122.4194), 10f))
+    googleMap.enableGoldenTesting(
+      strategy = GoldenTileStrategy.Custom { _, _, _, tileSize ->
+        Bitmap.createBitmap(tileSize, tileSize, Bitmap.Config.ARGB_8888).apply {
+          eraseColor(Color.CYAN)
+        }
+      },
+    )
+
+    val snapshotDeferred = async {
+      googleMap.captureSnapshot()
+    }
+    testScheduler.advanceUntilIdle()
+    ShadowLooper.idleMainLooper()
+    testScheduler.advanceUntilIdle()
+
+    val snapshot = snapshotDeferred.await()
+    // Verify that ShadowMapView rendered the TileOverlay's tiles onto the snapshot canvas
+    assertThat(snapshot.getPixel(50, 50)).isEqualTo(Color.CYAN)
+    // [END golden_tile_rendering_jvm]
   }
 }
 // [END maps_golden_extensions_test]

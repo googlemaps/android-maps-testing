@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -38,6 +39,8 @@ class StoreLocatorMapManager(
   private var googleMap: GoogleMap? = null
   private val storeMarkers = mutableMapOf<String, Marker>()
   private var deliveryZoneCircle: Circle? = null
+  var isSearchThisAreaVisible: Boolean = false
+    private set
 
   /**
    * Attaches and configures the [GoogleMap] instance with UI controls and click listeners.
@@ -47,15 +50,20 @@ class StoreLocatorMapManager(
     map.uiSettings.isZoomControlsEnabled = true
     map.uiSettings.isCompassEnabled = true
 
+    map.setOnCameraMoveStartedListener { reason ->
+      if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) {
+        isSearchThisAreaVisible = true
+      }
+    }
+
     map.setOnMarkerClickListener { marker ->
       val store = marker.tag as? Store
       if (store != null) {
-        marker.showInfoWindow()
         onStoreSelected?.invoke(store)
-        true
-      } else {
-        false
       }
+      // Return false so the Maps SDK performs its default behavior:
+      // automatically opening the marker's InfoWindow and centering the camera.
+      false
     }
   }
 
@@ -118,6 +126,20 @@ class StoreLocatorMapManager(
         .strokeColor(Color.BLUE)
         .strokeWidth(2f),
     )
+  }
+
+  /**
+   * Fits all currently displayed store markers on screen using [CameraUpdateFactory.newLatLngBounds].
+   */
+  fun fitAllStores(paddingPx: Int = 64): Boolean {
+    val map = googleMap ?: return false
+    if (storeMarkers.isEmpty()) return false
+    val boundsBuilder = LatLngBounds.builder()
+    for (marker in storeMarkers.values) {
+      boundsBuilder.include(marker.position)
+    }
+    map.animateCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(), paddingPx))
+    return true
   }
 
   /**

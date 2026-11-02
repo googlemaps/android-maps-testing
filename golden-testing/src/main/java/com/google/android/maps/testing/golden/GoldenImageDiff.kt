@@ -17,8 +17,11 @@
 package com.google.android.maps.testing.golden
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
+import java.io.File
+import java.io.FileOutputStream
 import kotlin.math.abs
 
 // [START maps_golden_image_diff]
@@ -123,6 +126,10 @@ public object GoldenImageDiff {
   /**
    * Asserts that [actual] matches [expected] within the given tolerance.
    *
+   * When [outputDir] is provided and the comparison fails, `<artifactName>_actual.png` and
+   * `<artifactName>_diff.png` are automatically written to [outputDir] and their file paths are
+   * included in the thrown [AssertionError].
+   *
    * @throws AssertionError If dimensions differ or difference percentage exceeds [maxDiffPercentage].
    */
   public fun assertMatches(
@@ -131,23 +138,90 @@ public object GoldenImageDiff {
     maxDiffPercentage: Double = 0.001,
     pixelColorTolerance: Int = 0,
     message: String? = null,
+    artifactName: String = "golden",
+    outputDir: File? = null,
   ) {
     val result = compare(
       expected = expected,
       actual = actual,
       maxDiffPercentage = maxDiffPercentage,
       pixelColorTolerance = pixelColorTolerance,
-      generateDiffBitmap = false,
+      generateDiffBitmap = outputDir != null,
     )
 
     if (!result.matches) {
       val percentFormatted = String.format("%.3f%%", result.diffPercentage * 100)
       val thresholdFormatted = String.format("%.3f%%", maxDiffPercentage * 100)
       val prefix = if (message != null) "$message: " else ""
+      val artifactDiagnostic = if (outputDir != null) {
+        outputDir.mkdirs()
+        val actualFile = File(outputDir, "${artifactName}_actual.png")
+        val diffFile = File(outputDir, "${artifactName}_diff.png")
+        actual.writePngTo(actualFile)
+        result.diffBitmap?.writePngTo(diffFile)
+        " Failure artifacts written to: actual=${actualFile.path}, diff=${diffFile.path}"
+      } else {
+        ""
+      }
       throw AssertionError(
         "${prefix}Golden image mismatch: $percentFormatted differing pixels (${result.diffPixelCount}/${result.totalPixelCount}) " +
-          "exceeded maximum allowed threshold of $thresholdFormatted.",
+          "exceeded maximum allowed threshold of $thresholdFormatted.$artifactDiagnostic",
       )
+    }
+  }
+
+  /**
+   * Compares [actual] against a PNG baseline stored at [goldenFile], or records [actual] as the new
+   * baseline when [recordBaseline] is `true` (or `-Dmaps.golden.record=true` is set).
+   *
+   * On mismatch, `<name>_actual.png` and `<name>_diff.png` are written to [outputDir].
+   */
+  public fun assertMatches(
+    goldenFile: File,
+    actual: Bitmap,
+    maxDiffPercentage: Double = 0.001,
+    pixelColorTolerance: Int = 0,
+    message: String? = null,
+    outputDir: File? = goldenFile.parentFile,
+    recordBaseline: Boolean = System.getProperty("maps.golden.record").toBoolean(),
+  ) {
+    if (recordBaseline) {
+      goldenFile.parentFile?.mkdirs()
+      actual.writePngTo(goldenFile)
+      return
+    }
+
+    if (!goldenFile.exists()) {
+      throw AssertionError(
+        "Golden baseline file does not exist: ${goldenFile.path}. " +
+          "Run with -Dmaps.golden.record=true (or recordBaseline = true) to record the initial baseline.",
+      )
+    }
+
+    val expected = checkNotNull(BitmapFactory.decodeFile(goldenFile.path)) {
+      "Failed to decode golden baseline PNG at ${goldenFile.path}"
+    }
+    assertMatches(
+      expected = expected,
+      actual = actual,
+      maxDiffPercentage = maxDiffPercentage,
+      pixelColorTolerance = pixelColorTolerance,
+      message = message,
+      artifactName = goldenFile.nameWithoutExtension,
+      outputDir = outputDir,
+    )
+  }
+
+  private fun Bitmap.writePngTo(file: File) {
+    val (softwareBitmap, shouldRecycle) = toSoftwareBitmap()
+    try {
+      FileOutputStream(file).use { out ->
+        softwareBitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+      }
+    } finally {
+      if (shouldRecycle) {
+        softwareBitmap.recycle()
+      }
     }
   }
 

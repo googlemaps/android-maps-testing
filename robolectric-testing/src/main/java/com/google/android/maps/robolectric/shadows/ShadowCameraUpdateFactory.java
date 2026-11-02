@@ -120,7 +120,10 @@ public class ShadowCameraUpdateFactory {
   @Implementation
   protected static CameraUpdate newLatLngBounds(
       LatLngBounds bounds, int width, int height, int padding) {
-    return newLatLngBounds(bounds, padding);
+    CameraUpdate update = createCameraUpdate();
+    ShadowCameraUpdate shadow = (ShadowCameraUpdate) Shadow.extract(update);
+    shadow.setLatLngBounds(bounds, width, height, padding);
+    return update;
   }
 
   @Implementation

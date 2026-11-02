@@ -473,6 +473,49 @@ public fun rememberGoldenTileProvider(
 // [END maps_golden_compose_extensions]
 ```
 
+Reference: `// [START golden_diff_artifacts_and_record]` in [`GoldenImageDiffTest.kt`](../../../golden-testing/src/test/java/com/google/android/maps/testing/golden/GoldenImageDiffTest.kt)
+
+```kotlin
+// [START golden_diff_artifacts_and_record]
+val baseline = createSolidBitmap(16, 16, Color.BLUE)
+val matchingActual = createSolidBitmap(16, 16, Color.BLUE)
+val regressedActual = createSolidBitmap(16, 16, Color.BLUE).apply {
+  setPixel(8, 8, Color.YELLOW)
+}
+
+// 1. Record the baseline PNG (or run Gradle with -Dmaps.golden.record=true)
+GoldenImageDiff.assertMatches(
+  goldenFile = goldenFile,
+  actual = baseline,
+  recordBaseline = true,
+)
+assertThat(goldenFile.exists()).isTrue()
+
+// 2. Compare matching render against the recorded golden PNG
+GoldenImageDiff.assertMatches(
+  goldenFile = goldenFile,
+  actual = matchingActual,
+  maxDiffPercentage = 0.0,
+)
+
+// 3. When a regression occurs, <name>_actual.png and <name>_diff.png are automatically written
+val failure = assertThrows(AssertionError::class.java) {
+  GoldenImageDiff.assertMatches(
+    goldenFile = goldenFile,
+    actual = regressedActual,
+    maxDiffPercentage = 0.0,
+    outputDir = outDir,
+  )
+}
+
+val actualArtifact = File(outDir, "route_overlay_actual.png")
+val diffArtifact = File(outDir, "route_overlay_diff.png")
+assertThat(actualArtifact.exists()).isTrue()
+assertThat(diffArtifact.exists()).isTrue()
+assertThat(failure.message).contains(diffArtifact.path)
+// [END golden_diff_artifacts_and_record]
+```
+
 ---
 
 ### Recipe 4: AI Visual Verification & Hybrid Fallback

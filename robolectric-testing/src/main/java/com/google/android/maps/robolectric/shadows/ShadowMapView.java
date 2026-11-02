@@ -17,6 +17,7 @@
 package com.google.android.maps.robolectric.shadows;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -26,6 +27,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.ViewGroup;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -39,6 +41,9 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.Tile;
+import com.google.android.gms.maps.model.TileOverlay;
+import com.google.android.gms.maps.model.TileProvider;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -167,10 +172,7 @@ public class ShadowMapView extends ShadowViewGroup {
   protected void draw(Canvas canvas) {
     renderMap(canvas);
     Shadow.directlyOn(
-        realMapView,
-        android.view.ViewGroup.class,
-        "dispatchDraw",
-        ClassParameter.from(Canvas.class, canvas));
+        realMapView, ViewGroup.class, "dispatchDraw", ClassParameter.from(Canvas.class, canvas));
   }
 
   private void renderMap(Canvas canvas) {
@@ -182,6 +184,9 @@ public class ShadowMapView extends ShadowViewGroup {
 
     ShadowGoogleMap shadowMap = (ShadowGoogleMap) Shadow.extract(googleMap);
     Projection projection = googleMap.getProjection();
+
+    // 0. Draw Tile Overlays
+    renderTileOverlays(canvas, shadowMap);
 
     // 1. Draw Ground Overlays
     List<GroundOverlay> groundOverlays = new ArrayList<>(shadowMap.getGroundOverlays());
@@ -338,6 +343,91 @@ public class ShadowMapView extends ShadowViewGroup {
         innerPaint.setColor(Color.WHITE);
         innerPaint.setStyle(Paint.Style.FILL);
         canvas.drawCircle(p.x, p.y - 12, 4, innerPaint);
+      }
+    }
+  }
+
+  private void renderTileOverlays(Canvas canvas, ShadowGoogleMap shadowMap) {
+    List<TileOverlay> tileOverlays = new ArrayList<>(shadowMap.getTileOverlays());
+    if (tileOverlays.isEmpty()) {
+      return;
+    }
+    tileOverlays.sort(Comparator.comparingDouble(TileOverlay::getZIndex));
+
+    int width =
+        realMapView != null && realMapView.getWidth() > 0
+            ? realMapView.getWidth()
+            : canvas.getWidth();
+    int height =
+        realMapView != null && realMapView.getHeight() > 0
+            ? realMapView.getHeight()
+            : canvas.getHeight();
+    if (width <= 0 || height <= 0) {
+      return;
+    }
+
+    LatLng target = googleMap.getCameraPosition().target;
+    double zoom = googleMap.getCameraPosition().zoom;
+    int tileZoom = Math.max(0, Math.min(22, (int) Math.floor(zoom)));
+    int numTiles = 1 << tileZoom;
+    double tileWorldSizeAtZoom0 = 256.0 / numTiles;
+    double scale = Math.pow(2.0, zoom);
+
+    double targetWorldX0 = 128.0 * (1.0 + target.longitude / 180.0);
+    double clampedLat = Math.max(-85.05112878, Math.min(85.05112878, target.latitude));
+    double latRad = Math.toRadians(clampedLat);
+    double mercN = Math.log(Math.tan((Math.PI / 4.0) + (latRad / 2.0)));
+    double targetWorldY0 = 128.0 * (1.0 - mercN / Math.PI);
+
+    double minWx0 = targetWorldX0 - (width / 2.0) / scale;
+    double maxWx0 = targetWorldX0 + (width / 2.0) / scale;
+    double minWy0 = targetWorldY0 - (height / 2.0) / scale;
+    double maxWy0 = targetWorldY0 + (height / 2.0) / scale;
+
+    int minTileX = Math.max(0, (int) Math.floor(minWx0 / tileWorldSizeAtZoom0));
+    int maxTileX = Math.min(numTiles - 1, (int) Math.floor(maxWx0 / tileWorldSizeAtZoom0));
+    int minTileY = Math.max(0, (int) Math.floor(minWy0 / tileWorldSizeAtZoom0));
+    int maxTileY = Math.min(numTiles - 1, (int) Math.floor(maxWy0 / tileWorldSizeAtZoom0));
+
+    for (TileOverlay overlay : tileOverlays) {
+      if (!overlay.isVisible()) {
+        continue;
+      }
+      ShadowTileOverlay shadowTileOverlay = (ShadowTileOverlay) Shadow.extract(overlay);
+      TileProvider provider = shadowTileOverlay.getTileProvider();
+      if (provider == null) {
+        continue;
+      }
+
+      Paint tilePaint = new Paint();
+      tilePaint.setAlpha((int) ((1.0f - overlay.getTransparency()) * 255));
+
+      for (int tx = minTileX; tx <= maxTileX; tx++) {
+        for (int ty = minTileY; ty <= maxTileY; ty++) {
+          Tile tile = provider.getTile(tx, ty, tileZoom);
+          if (tile == null
+              || tile == TileProvider.NO_TILE
+              || tile.data == null
+              || tile.data.length == 0) {
+            continue;
+          }
+          Bitmap tileBitmap = BitmapFactory.decodeByteArray(tile.data, 0, tile.data.length);
+          if (tileBitmap == null) {
+            continue;
+          }
+          double tileLeftWorld0 = tx * tileWorldSizeAtZoom0;
+          double tileTopWorld0 = ty * tileWorldSizeAtZoom0;
+          double tileRightWorld0 = (tx + 1) * tileWorldSizeAtZoom0;
+          double tileBottomWorld0 = (ty + 1) * tileWorldSizeAtZoom0;
+
+          int left = (int) Math.round((tileLeftWorld0 - targetWorldX0) * scale + (width / 2.0));
+          int top = (int) Math.round((tileTopWorld0 - targetWorldY0) * scale + (height / 2.0));
+          int right = (int) Math.round((tileRightWorld0 - targetWorldX0) * scale + (width / 2.0));
+          int bottom =
+              (int) Math.round((tileBottomWorld0 - targetWorldY0) * scale + (height / 2.0));
+
+          canvas.drawBitmap(tileBitmap, null, new Rect(left, top, right, bottom), tilePaint);
+        }
       }
     }
   }

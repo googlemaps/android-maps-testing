@@ -19,11 +19,16 @@ package com.google.android.maps.robolectric.truth
 import android.graphics.Color
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.maps.robolectric.ktx.activeInfoWindowMarker
+import com.google.android.maps.robolectric.ktx.cameraTargetBounds
 import com.google.android.maps.robolectric.ktx.circles
+import com.google.android.maps.robolectric.ktx.contentDescription
 import com.google.android.maps.robolectric.ktx.findMarker
 import com.google.android.maps.robolectric.ktx.groundOverlays
 import com.google.android.maps.robolectric.ktx.hexColor
+import com.google.android.maps.robolectric.ktx.mapStyle
 import com.google.android.maps.robolectric.ktx.markers
 import com.google.android.maps.robolectric.ktx.pixelColorAt
 import com.google.android.maps.robolectric.ktx.polygons
@@ -234,6 +239,30 @@ class GoogleMapSubject private constructor(
   fun hasMapType(expectedMapType: Int): GoogleMapSubject = apply {
     isNotNull()
     check("mapType").that(actual!!.mapType).isEqualTo(expectedMapType)
+  }
+
+  /** Asserts that the map's color scheme equals [expectedScheme] (e.g. `MapColorScheme.DARK`). */
+  fun hasMapColorScheme(expectedScheme: Int): GoogleMapSubject = apply {
+    isNotNull()
+    check("mapColorScheme").that(actual!!.mapColorScheme).isEqualTo(expectedScheme)
+  }
+
+  /** Asserts that the map's style options equal [expectedStyle]. */
+  fun hasMapStyle(expectedStyle: MapStyleOptions?): GoogleMapSubject = apply {
+    isNotNull()
+    check("mapStyle").that(actual!!.mapStyle).isEqualTo(expectedStyle)
+  }
+
+  /** Asserts that the map's camera target clamping bounds equal [expectedBounds]. */
+  fun hasCameraTargetBounds(expectedBounds: LatLngBounds?): GoogleMapSubject = apply {
+    isNotNull()
+    check("cameraTargetBounds").that(actual!!.cameraTargetBounds).isEqualTo(expectedBounds)
+  }
+
+  /** Asserts that the map's accessibility content description equals [expectedDescription]. */
+  fun hasContentDescription(expectedDescription: String?): GoogleMapSubject = apply {
+    isNotNull()
+    check("contentDescription").that(actual!!.contentDescription).isEqualTo(expectedDescription)
   }
 
   /**

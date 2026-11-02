@@ -355,25 +355,75 @@ class FragmentMapTest {
 }
 ```
 
-### 4. Screen Coordinate Projection & Visible Regions
+### 4. Screen Coordinate Projection, `newLatLngBounds` Zoom & `scrollBy`
 
-Convert between geographic `LatLng` and screen `Point` coordinates in both directions, and inspect viewport bounds:
+Convert between geographic `LatLng` and screen `Point` coordinates in both directions, fit bounding boxes with real Web Mercator zoom calculation (`CameraUpdateFactory.newLatLngBounds`), and pan the camera by pixel offsets (`CameraUpdateFactory.scrollBy`):
 
 ```kotlin
-val projection = googleMap.projection
+// [START robolectric_camera_bounds_and_scroll]
+// 1. Fit a bounding box of markers on screen with 64px padding
+val sfBayBounds = LatLngBounds(
+  LatLng(37.70, -122.52), // Southwest (Daly City)
+  LatLng(37.83, -122.36), // Northeast (Treasure Island)
+)
+map.moveCamera(CameraUpdateFactory.newLatLngBounds(sfBayBounds, 64))
 
-// LatLng to Screen Point
-val point = projection.toScreenLocation(LatLng(37.7749, -122.4194))
+// Verify camera zoomed in to fit the bay and both corners are visible on screen
+assertThat(map.cameraPosition.zoom).isGreaterThan(10f)
+val visibleBounds = map.projection.visibleRegion.latLngBounds
+assertThat(visibleBounds.contains(sfBayBounds.southwest)).isTrue()
+assertThat(visibleBounds.contains(sfBayBounds.northeast)).isTrue()
 
-// Screen Point to LatLng
-val latLng = projection.fromScreenLocation(point)
+// 2. Scroll the camera 200px East (+X) and 150px South (+Y)
+val centerBeforeScroll = map.cameraPosition.target
+val zoomBeforeScroll = map.cameraPosition.zoom
+map.moveCamera(CameraUpdateFactory.scrollBy(200f, 150f))
 
-// Visible Region bounds (with Kotlin Power-Assert `in` operator or Google Truth)
-val visibleRegion = projection.visibleRegion
-assertGeo(latLng in visibleRegion.latLngBounds)
+assertThat(map.cameraPosition.zoom).isEqualTo(zoomBeforeScroll)
+assertThat(map.cameraPosition.target.longitude).isGreaterThan(centerBeforeScroll.longitude)
+assertThat(map.cameraPosition.target.latitude).isLessThan(centerBeforeScroll.latitude)
+// [END robolectric_camera_bounds_and_scroll]
 ```
 
-### 5. Simulating User Interactions and Marker Dragging
+### 5. Simulating User Interactions, Marker Clicks & Dragging
+
+When a marker is clicked via `clickMarker(...)` or `marker.click()`, `ShadowGoogleMap` honors the official Maps SDK contract: if `OnMarkerClickListener` is unset or returns `false`, the marker's info window is automatically shown (closing any previously open info window) and the camera centers on the marker; if the listener returns `true`, the event is consumed.
+
+```kotlin
+// [START robolectric_marker_click_behavior]
+val ferryBuilding = LatLng(37.7955, -122.3937)
+val coitTower = LatLng(37.8024, -122.4058)
+
+val markerA = requireNotNull(
+  map.addMarker(MarkerOptions().position(ferryBuilding).title("Ferry Building")),
+)
+val markerB = requireNotNull(
+  map.addMarker(MarkerOptions().position(coitTower).title("Coit Tower")),
+)
+
+// 1. Default SDK behavior (no listener or listener returns false):
+//    Clicking a marker opens its InfoWindow and centers the camera on the marker.
+shadowMap.clickMarker(markerA)
+assertThat(markerA.isInfoWindowShown).isTrue()
+assertThat(map.cameraPosition.target).isEqualTo(ferryBuilding)
+
+// 2. Clicking a second marker automatically closes the first marker's InfoWindow
+map.setOnMarkerClickListener { false }
+shadowMap.clickMarker(markerB)
+assertThat(markerA.isInfoWindowShown).isFalse()
+assertThat(markerB.isInfoWindowShown).isTrue()
+assertThat(map.cameraPosition.target).isEqualTo(coitTower)
+
+// 3. Consuming the click (returning true) suppresses default InfoWindow & camera move
+markerB.hideInfoWindow()
+map.setOnMarkerClickListener { true }
+shadowMap.clickMarker(markerA)
+assertThat(markerA.isInfoWindowShown).isFalse()
+assertThat(map.cameraPosition.target).isEqualTo(coitTower)
+// [END robolectric_marker_click_behavior]
+```
+
+You can also simulate map clicks, info window clicks, and complete marker drag gestures via KTX extensions:
 
 ```kotlin
 import com.google.android.maps.robolectric.ktx.clickMap
@@ -390,7 +440,59 @@ marker.clickInfoWindow()
 marker.dragTo(LatLng(37.7800, -122.4100))
 ```
 
-### 6. Visual Canvas & Snapshot Assertions
+### 6. User Pan Gesture Simulation (`REASON_GESTURE`), Camera Clamping & Map Styling
+
+Production Maps apps commonly inspect `OnCameraMoveStartedListener` to distinguish user pan/zoom gestures (`REASON_GESTURE`) from developer animations (`REASON_DEVELOPER_ANIMATION`), clamp camera targets to a geographic service area (`setLatLngBoundsForCameraTarget`), and configure dark mode (`MapColorScheme.DARK`) or custom JSON styling (`MapStyleOptions`):
+
+```kotlin
+// [START robolectric_user_gesture_and_styling]
+// 1. Distinguish user pan gestures (REASON_GESTURE) from programmatic animations
+var isFollowingUserLocation = true
+var showSearchThisAreaButton = false
+
+map.setOnCameraMoveStartedListener { reason ->
+  if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) {
+    isFollowingUserLocation = false
+  }
+}
+map.setOnCameraIdleListener {
+  if (!isFollowingUserLocation) {
+    showSearchThisAreaButton = true
+  }
+}
+
+// Programmatic move keeps "Follow my location" active
+map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(37.7749, -122.4194), 14f))
+assertThat(isFollowingUserLocation).isTrue()
+assertThat(showSearchThisAreaButton).isFalse()
+
+// Simulated user pan disengages follow mode and reveals "Search this area" on idle
+map.simulateUserCameraMove(LatLng(37.7850, -122.4050))
+assertThat(isFollowingUserLocation).isFalse()
+assertThat(showSearchThisAreaButton).isTrue()
+
+// 2. Clamp camera target to a service area & verify dark mode / styling / accessibility
+val sfServiceArea = LatLngBounds(LatLng(37.70, -122.52), LatLng(37.82, -122.36))
+val customStyle = MapStyleOptions("[{\"featureType\":\"poi\",\"stylers\":[{\"visibility\":\"off\"}]}]")
+
+map.setLatLngBoundsForCameraTarget(sfServiceArea)
+map.mapColorScheme = MapColorScheme.DARK
+map.setMapStyle(customStyle)
+map.setContentDescription("San Francisco Service Area Map")
+
+// Attempting to pan north of the service area clamps the camera target to the boundary
+map.simulateUserCameraMove(LatLng(38.50, -122.40))
+assertThat(map.cameraPosition.target.latitude).isEqualTo(37.82)
+
+GoogleMapSubject.assertThat(map)
+  .hasMapColorScheme(MapColorScheme.DARK)
+  .hasMapStyle(customStyle)
+  .hasCameraTargetBounds(sfServiceArea)
+  .hasContentDescription("San Francisco Service Area Map")
+// [END robolectric_user_gesture_and_styling]
+```
+
+### 7. Visual Canvas & Snapshot Assertions
 
 `ShadowMapView` implements Mercator coordinate projection to draw vector shapes (`Circle`, `Polygon`, `Polyline`) and `Marker` icons directly onto an Android `Canvas`:
 
@@ -424,17 +526,17 @@ assertGeo(bitmap.getPixel(50, 50) == Color.RED)
 
 | Google Maps SDK Class | Shadow Class | Key Capabilities |
 | :--- | :--- | :--- |
-| `MapView` | `ShadowMapView` | Full lifecycle events, async map dispatch, simulated canvas rendering for overlays and markers. |
+| `MapView` | `ShadowMapView` | Full lifecycle events, async map dispatch, simulated canvas rendering for `TileOverlay`s, shapes, ground overlays, and markers. |
 | `SupportMapFragment` | `ShadowSupportMapFragment` | Fragment inflation, `newInstance` factories, and async `getMapAsync` dispatch. |
-| `GoogleMap` | `ShadowGoogleMap` | Overlays, camera updates, click/drag dispatchers, info windows, padding, zoom limits, snapshots. |
-| `CameraUpdateFactory` | `ShadowCameraUpdateFactory` | `newLatLng`, `newLatLngZoom`, `newLatLngBounds`, `newCameraPosition`, `zoomIn`, `zoomOut`, `zoomTo`, `zoomBy`, `scrollBy`. |
-| `CameraUpdate` | `ShadowCameraUpdate` | Encapsulates targets, zoom levels, bounds, and scroll deltas. |
-| `Marker` | `ShadowMarker` | Position, title, snippet, alpha, rotation, zIndex, dragging, anchor offsets, custom icons, info window state, `remove()`. |
+| `GoogleMap` | `ShadowGoogleMap` | Overlays, camera updates (`newLatLngBounds` Mercator zoom, `scrollBy`), user gesture simulation (`REASON_GESTURE`), default SDK marker click behavior, camera target clamping (`setLatLngBoundsForCameraTarget`), `MapColorScheme`, `MapStyleOptions`, `contentDescription`, auto-dispatched `OnMapLoadedCallback`, and snapshots. |
+| `CameraUpdateFactory` | `ShadowCameraUpdateFactory` | `newLatLng`, `newLatLngZoom`, `newLatLngBounds` (with viewport & explicit dimensions), `newCameraPosition`, `zoomIn`, `zoomOut`, `zoomTo`, `zoomBy`, `scrollBy`. |
+| `CameraUpdate` | `ShadowCameraUpdate` | Encapsulates targets, zoom levels, bounds, explicit dimensions, and scroll deltas. |
+| `Marker` | `ShadowMarker` | Position, title, snippet, alpha, rotation, zIndex, dragging, anchor offsets, custom icons, single-active info window state, `remove()`. |
 | `Polygon` | `ShadowPolygon` | Points, holes, stroke/fill color, stroke width, joint types, patterns, zIndex, tags, click callbacks, `remove()`. |
 | `Polyline` | `ShadowPolyline` | Points, color, width, caps, joint types, patterns, spans, zIndex, tags, click callbacks, `remove()`. |
 | `Circle` | `ShadowCircle` | Center, radius, stroke/fill color, stroke width, patterns, zIndex, tags, click callbacks, `remove()`. |
 | `GroundOverlay` | `ShadowGroundOverlay` | Position, bounds, dimensions, bearing, transparency, zIndex, images, tags, click callbacks, `remove()`. |
-| `TileOverlay` | `ShadowTileOverlay` | Z-index, transparency, fade-in, tile cache invalidation, visibility, `remove()`. |
+| `TileOverlay` | `ShadowTileOverlay` | `TileProvider` retention and JVM canvas rendering, z-index, transparency, fade-in, tile cache invalidation, visibility, `remove()`. |
 | `Projection` | `ShadowProjection` | Bidirectional `LatLng` $\leftrightarrow$ Screen `Point` conversion via Mercator math, `visibleRegion`. |
 | `UiSettings` | `ShadowUiSettings` | Map controls (compass, zoom buttons, scroll/zoom gestures, tilt/rotate gestures, toolbar). |
 | `BitmapDescriptorFactory` | `ShadowBitmapDescriptorFactory` | Headless creation of default marker pins, colored pins, bitmap icons, and resource descriptors. |

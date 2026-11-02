@@ -16,6 +16,8 @@
 
 package com.google.android.maps.robolectric.ktx
 
+import com.google.android.gms.maps.CameraUpdate
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.UiSettings
@@ -24,6 +26,7 @@ import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.GroundOverlay
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.Polygon
 import com.google.android.gms.maps.model.Polyline
@@ -135,6 +138,33 @@ val GoogleMap.cameraTilt: Float
 /** Shorthand for `projection.visibleRegion.latLngBounds`. */
 val GoogleMap.visibleBounds: LatLngBounds
   get() = projection.visibleRegion.latLngBounds
+
+/** The last [MapStyleOptions] applied via `setMapStyle(...)`, or `null`. */
+val GoogleMap.mapStyle: MapStyleOptions?
+  get() = shadow.mapStyle
+
+/** The [LatLngBounds] camera target constraint applied via `setLatLngBoundsForCameraTarget(...)`, or `null`. */
+val GoogleMap.cameraTargetBounds: LatLngBounds?
+  get() = shadow.latLngBoundsForCameraTarget
+
+/** The accessibility content description set via `setContentDescription(...)`, or `null`. */
+val GoogleMap.contentDescription: String?
+  get() = shadow.contentDescription
+
+/**
+ * Simulates a user-initiated pan or zoom gesture (`OnCameraMoveStartedListener.REASON_GESTURE`)
+ * applying [update].
+ */
+fun GoogleMap.simulateUserCameraMove(update: CameraUpdate) = shadow.simulateGestureCameraMove(update)
+
+/**
+ * Simulates a user-initiated pan or zoom gesture (`OnCameraMoveStartedListener.REASON_GESTURE`)
+ * to [target] and [zoom].
+ */
+fun GoogleMap.simulateUserCameraMove(
+  target: LatLng,
+  zoom: Float = cameraPosition.zoom,
+) = shadow.simulateGestureCameraMove(CameraUpdateFactory.newLatLngZoom(target, zoom))
 
 /**
  * Finds the first [Marker] on this [GoogleMap] matching all non-null filter criteria.

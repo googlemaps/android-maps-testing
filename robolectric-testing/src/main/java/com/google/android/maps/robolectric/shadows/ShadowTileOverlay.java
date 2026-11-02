@@ -18,6 +18,7 @@ package com.google.android.maps.robolectric.shadows;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.TileOverlay;
+import com.google.android.gms.maps.model.TileProvider;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.RealObject;
@@ -33,6 +34,7 @@ public class ShadowTileOverlay {
 
   @RealObject private TileOverlay realTileOverlay;
   private GoogleMap googleMap;
+  private TileProvider tileProvider;
 
   private float zIndex;
   private float transparency;
@@ -47,6 +49,14 @@ public class ShadowTileOverlay {
 
   public GoogleMap getGoogleMap() {
     return googleMap;
+  }
+
+  public void setTileProvider(TileProvider tileProvider) {
+    this.tileProvider = tileProvider;
+  }
+
+  public TileProvider getTileProvider() {
+    return tileProvider;
   }
 
   @Implementation

@@ -31,10 +31,17 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MapColorScheme
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolygonOptions
 import com.google.android.maps.robolectric.annotation.EnableMapsShadows
+import com.google.android.maps.robolectric.ktx.cameraTargetBounds
+import com.google.android.maps.robolectric.ktx.contentDescription
+import com.google.android.maps.robolectric.ktx.mapStyle
+import com.google.android.maps.robolectric.ktx.simulateUserCameraMove
+import com.google.android.maps.robolectric.truth.GoogleMapSubject
 import com.google.android.maps.robolectric.truth.LatLngSubject
 import com.google.android.maps.robolectric.truth.isWithin
 import com.google.android.maps.robolectric.truth.kilometer
@@ -213,7 +220,7 @@ class ShadowMapViewKotlinTest {
     map.moveCamera(CameraUpdateFactory.zoomBy(2.5f))
     assertThat(map.cameraPosition.zoom).isEqualTo(17.5f)
 
-    // newLatLngBounds
+    // newLatLngBounds computes realistic Mercator zoom to fit the bounds inside the viewport
     val bounds = LatLngBounds(
       LatLng(37.0, -123.0),
       LatLng(38.0, -122.0),
@@ -221,6 +228,149 @@ class ShadowMapViewKotlinTest {
     map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50))
     assertThat(map.cameraPosition.target.latitude).isEqualTo(37.5)
     assertThat(map.cameraPosition.target.longitude).isEqualTo(-122.5)
+    assertThat(map.cameraPosition.zoom).isGreaterThan(8f)
+    assertThat(map.cameraPosition.zoom).isLessThan(12f)
+    assertThat(map.projection.visibleRegion.latLngBounds.contains(bounds.southwest)).isTrue()
+    assertThat(map.projection.visibleRegion.latLngBounds.contains(bounds.northeast)).isTrue()
+  }
+
+  @Test
+  fun testCameraBoundsAndScrollBy() {
+    mapView.onCreate(Bundle())
+    val mapRef = AtomicReference<GoogleMap>()
+    mapView.getMapAsync { mapRef.set(it) }
+    ShadowLooper.idleMainLooper()
+    val map = mapRef.get()
+
+    // [START robolectric_camera_bounds_and_scroll]
+    // 1. Fit a bounding box of markers on screen with 64px padding
+    val sfBayBounds = LatLngBounds(
+      LatLng(37.70, -122.52), // Southwest (Daly City)
+      LatLng(37.83, -122.36), // Northeast (Treasure Island)
+    )
+    map.moveCamera(CameraUpdateFactory.newLatLngBounds(sfBayBounds, 64))
+
+    // Verify camera zoomed in to fit the bay and both corners are visible on screen
+    assertThat(map.cameraPosition.zoom).isGreaterThan(10f)
+    val visibleBounds = map.projection.visibleRegion.latLngBounds
+    assertThat(visibleBounds.contains(sfBayBounds.southwest)).isTrue()
+    assertThat(visibleBounds.contains(sfBayBounds.northeast)).isTrue()
+
+    // 2. Scroll the camera 200px East (+X) and 150px South (+Y)
+    val centerBeforeScroll = map.cameraPosition.target
+    val zoomBeforeScroll = map.cameraPosition.zoom
+    map.moveCamera(CameraUpdateFactory.scrollBy(200f, 150f))
+
+    assertThat(map.cameraPosition.zoom).isEqualTo(zoomBeforeScroll)
+    assertThat(map.cameraPosition.target.longitude).isGreaterThan(centerBeforeScroll.longitude)
+    assertThat(map.cameraPosition.target.latitude).isLessThan(centerBeforeScroll.latitude)
+    // [END robolectric_camera_bounds_and_scroll]
+
+    // 3. Explicit viewport dimensions overload works even before MapView layout
+    val tighterZoomUpdate = CameraUpdateFactory.newLatLngBounds(sfBayBounds, 400, 400, 32)
+    map.moveCamera(tighterZoomUpdate)
+    assertThat(map.cameraPosition.zoom).isLessThan(zoomBeforeScroll)
+  }
+
+  @Test
+  fun testMarkerClickDefaultAndConsumedBehavior() {
+    mapView.onCreate(Bundle())
+    val mapRef = AtomicReference<GoogleMap>()
+    mapView.getMapAsync { mapRef.set(it) }
+    ShadowLooper.idleMainLooper()
+    val map = mapRef.get()
+    val shadowMap = Shadow.extract(map) as ShadowGoogleMap
+
+    // [START robolectric_marker_click_behavior]
+    val ferryBuilding = LatLng(37.7955, -122.3937)
+    val coitTower = LatLng(37.8024, -122.4058)
+
+    val markerA = requireNotNull(
+      map.addMarker(MarkerOptions().position(ferryBuilding).title("Ferry Building")),
+    )
+    val markerB = requireNotNull(
+      map.addMarker(MarkerOptions().position(coitTower).title("Coit Tower")),
+    )
+
+    // 1. Default SDK behavior (no listener or listener returns false):
+    //    Clicking a marker opens its InfoWindow and centers the camera on the marker.
+    shadowMap.clickMarker(markerA)
+    assertThat(markerA.isInfoWindowShown).isTrue()
+    assertThat(map.cameraPosition.target).isEqualTo(ferryBuilding)
+
+    // 2. Clicking a second marker automatically closes the first marker's InfoWindow
+    map.setOnMarkerClickListener { false }
+    shadowMap.clickMarker(markerB)
+    assertThat(markerA.isInfoWindowShown).isFalse()
+    assertThat(markerB.isInfoWindowShown).isTrue()
+    assertThat(map.cameraPosition.target).isEqualTo(coitTower)
+
+    // 3. Consuming the click (returning true) suppresses default InfoWindow & camera move
+    markerB.hideInfoWindow()
+    map.setOnMarkerClickListener { true }
+    shadowMap.clickMarker(markerA)
+    assertThat(markerA.isInfoWindowShown).isFalse()
+    assertThat(map.cameraPosition.target).isEqualTo(coitTower)
+    // [END robolectric_marker_click_behavior]
+  }
+
+  @Test
+  fun testUserGestureCameraSimulationAndMapStyling() {
+    mapView.onCreate(Bundle())
+    val mapRef = AtomicReference<GoogleMap>()
+    mapView.getMapAsync { mapRef.set(it) }
+    ShadowLooper.idleMainLooper()
+    val map = mapRef.get()
+
+    // [START robolectric_user_gesture_and_styling]
+    // 1. Distinguish user pan gestures (REASON_GESTURE) from programmatic animations
+    var isFollowingUserLocation = true
+    var showSearchThisAreaButton = false
+
+    map.setOnCameraMoveStartedListener { reason ->
+      if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) {
+        isFollowingUserLocation = false
+      }
+    }
+    map.setOnCameraIdleListener {
+      if (!isFollowingUserLocation) {
+        showSearchThisAreaButton = true
+      }
+    }
+
+    // Programmatic move keeps "Follow my location" active
+    map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(37.7749, -122.4194), 14f))
+    assertThat(isFollowingUserLocation).isTrue()
+    assertThat(showSearchThisAreaButton).isFalse()
+
+    // Simulated user pan disengages follow mode and reveals "Search this area" on idle
+    map.simulateUserCameraMove(LatLng(37.7850, -122.4050))
+    assertThat(isFollowingUserLocation).isFalse()
+    assertThat(showSearchThisAreaButton).isTrue()
+
+    // 2. Clamp camera target to a service area & verify dark mode / styling / accessibility
+    val sfServiceArea = LatLngBounds(LatLng(37.70, -122.52), LatLng(37.82, -122.36))
+    val customStyle = MapStyleOptions("[{\"featureType\":\"poi\",\"stylers\":[{\"visibility\":\"off\"}]}]")
+
+    map.setLatLngBoundsForCameraTarget(sfServiceArea)
+    map.mapColorScheme = MapColorScheme.DARK
+    map.setMapStyle(customStyle)
+    map.setContentDescription("San Francisco Service Area Map")
+
+    // Attempting to pan north of the service area clamps the camera target to the boundary
+    map.simulateUserCameraMove(LatLng(38.50, -122.40))
+    assertThat(map.cameraPosition.target.latitude).isEqualTo(37.82)
+
+    GoogleMapSubject.assertThat(map)
+      .hasMapColorScheme(MapColorScheme.DARK)
+      .hasMapStyle(customStyle)
+      .hasCameraTargetBounds(sfServiceArea)
+      .hasContentDescription("San Francisco Service Area Map")
+    // [END robolectric_user_gesture_and_styling]
+
+    assertThat(map.mapStyle).isEqualTo(customStyle)
+    assertThat(map.cameraTargetBounds).isEqualTo(sfServiceArea)
+    assertThat(map.contentDescription).isEqualTo("San Francisco Service Area Map")
   }
 
   @Test

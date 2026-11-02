@@ -112,22 +112,97 @@ googleMap.addMarker(MarkerOptions().position(LatLng(37.7749, -122.4194)).title("
 
 ### 2. Capture and Assert Snapshots
 
+In both on-device instrumented tests and local Robolectric JVM unit tests, `googleMap.awaitMapLoaded()` and `googleMap.captureSnapshot()` suspend until the main looper dispatches the map render callback:
+
 ```kotlin
-// Wait for render pass to settle
-googleMap.awaitMapLoaded()
+// [START golden_await_map_loaded]
+val loadDeferred = async {
+  googleMap.awaitMapLoaded()
+}
+testScheduler.advanceUntilIdle()
 
-// Capture map snapshot
-val actualSnapshot = googleMap.captureSnapshot()
+// Idling the Android main looper automatically dispatches OnMapLoadedCallback
+// without requiring manual ShadowGoogleMap extraction
+ShadowLooper.idleMainLooper()
+testScheduler.advanceUntilIdle()
 
-// Compare against expected baseline
-GoldenImageDiff.assertMatches(
-    expected = baselineBitmap,
-    actual = actualSnapshot,
-    maxDiffPercentage = 0.001 // 0.1% tolerance for anti-aliasing
-)
+assertThat(loadDeferred.isCompleted).isTrue()
+// [END golden_await_map_loaded]
 ```
 
-### 3. Jetpack Compose Integration
+When paired with `:robolectric-testing`, `ShadowMapView` automatically fetches and renders visible `(x, y, zoom)` tiles from `TileOverlay` providers onto the snapshot canvas on the local JVM:
+
+```kotlin
+// [START golden_tile_rendering_jvm]
+// Attach a deterministic custom solid-color tile strategy on Robolectric JVM
+googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(37.7749, -122.4194), 10f))
+googleMap.enableGoldenTesting(
+  strategy = GoldenTileStrategy.Custom { _, _, _, tileSize ->
+    Bitmap.createBitmap(tileSize, tileSize, Bitmap.Config.ARGB_8888).apply {
+      eraseColor(Color.CYAN)
+    }
+  },
+)
+
+val snapshotDeferred = async {
+  googleMap.captureSnapshot()
+}
+testScheduler.advanceUntilIdle()
+ShadowLooper.idleMainLooper()
+testScheduler.advanceUntilIdle()
+
+val snapshot = snapshotDeferred.await()
+// Verify that ShadowMapView rendered the TileOverlay's tiles onto the snapshot canvas
+assertThat(snapshot.getPixel(50, 50)).isEqualTo(Color.CYAN)
+// [END golden_tile_rendering_jvm]
+```
+
+### 3. Baseline Recording & Automatic Failure Diff Artifacts
+
+`GoldenImageDiff.assertMatches` supports comparing directly against a `goldenFile: File`, recording new baselines when `recordBaseline = true` (or `-Dmaps.golden.record=true` is passed to Gradle), and automatically saving `<name>_actual.png` and `<name>_diff.png` whenever a visual regression occurs:
+
+```kotlin
+// [START golden_diff_artifacts_and_record]
+val baseline = createSolidBitmap(16, 16, Color.BLUE)
+val matchingActual = createSolidBitmap(16, 16, Color.BLUE)
+val regressedActual = createSolidBitmap(16, 16, Color.BLUE).apply {
+  setPixel(8, 8, Color.YELLOW)
+}
+
+// 1. Record the baseline PNG (or run Gradle with -Dmaps.golden.record=true)
+GoldenImageDiff.assertMatches(
+  goldenFile = goldenFile,
+  actual = baseline,
+  recordBaseline = true,
+)
+assertThat(goldenFile.exists()).isTrue()
+
+// 2. Compare matching render against the recorded golden PNG
+GoldenImageDiff.assertMatches(
+  goldenFile = goldenFile,
+  actual = matchingActual,
+  maxDiffPercentage = 0.0,
+)
+
+// 3. When a regression occurs, <name>_actual.png and <name>_diff.png are automatically written
+val failure = assertThrows(AssertionError::class.java) {
+  GoldenImageDiff.assertMatches(
+    goldenFile = goldenFile,
+    actual = regressedActual,
+    maxDiffPercentage = 0.0,
+    outputDir = outDir,
+  )
+}
+
+val actualArtifact = File(outDir, "route_overlay_actual.png")
+val diffArtifact = File(outDir, "route_overlay_diff.png")
+assertThat(actualArtifact.exists()).isTrue()
+assertThat(diffArtifact.exists()).isTrue()
+assertThat(failure.message).contains(diffArtifact.path)
+// [END golden_diff_artifacts_and_record]
+```
+
+### 4. Jetpack Compose Integration
 
 ```kotlin
 GoogleMap(

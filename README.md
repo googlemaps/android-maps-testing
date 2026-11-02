@@ -52,10 +52,10 @@ JVM execution without devices?                                    fidelity asser
 | **Network Required** | ❌ No | ❌ No (Synthetic Tiles) | ⚠️ Only for Gemini API calls |
 | **Maps SDK API Quota** | ❌ None | ❌ None | ❌ None (or standard for live map) |
 | **Camera & Lifecycle Testing** | ✅ Yes | ✅ Yes | ✅ Yes |
-| **User Interaction Events** | ✅ Yes (Clicks, Drags, Info Windows) | ⚠️ Indirect | ✅ Yes (UiAutomator AI Actions) |
+| **User Interaction Events** | ✅ Yes (Clicks, Drags, Info Windows, User Gestures) | ⚠️ Indirect | ✅ Yes (UiAutomator AI Actions) |
 | **Geodesic & Domain Assertions** | ✅ Yes (Kotlin Power-Assert & Google Truth) | ❌ N/A | ❌ N/A |
-| **Deterministic Golden Snapshots** | ⚠️ Simplified Canvas | ✅ Yes (Mercator Grid / Solid / Pattern) | ✅ Yes (via `:golden-testing`) |
-| **Visual Diff Engine** | ❌ N/A | ✅ Yes (Pixel comparison & red diff) | ✅ Yes (Hybrid pixel diff + AI fallback) |
+| **Deterministic Golden Snapshots** | ✅ Yes (2D Canvas + `TileOverlay` Rendering) | ✅ Yes (Mercator Grid / Solid / Pattern) | ✅ Yes (via `:golden-testing`) |
+| **Visual Diff Engine** | ❌ N/A | ✅ Yes (Pixel comparison, baseline recording & `_diff.png` artifacts) | ✅ Yes (Hybrid pixel diff + AI fallback) |
 | **Multimodal AI Evaluation** | ❌ N/A | ❌ N/A | ✅ Yes (Gemini Flash multimodal) |
 | **Dynamic Model Discovery** | ❌ N/A | ❌ N/A | ✅ Yes (Latest stable Flash cached) |
 | **Jetpack Compose Integration** | ✅ Yes | ✅ Yes (`rememberGoldenTileProvider()`) | ✅ Yes |
