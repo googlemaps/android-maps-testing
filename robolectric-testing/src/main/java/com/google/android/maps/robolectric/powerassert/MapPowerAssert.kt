@@ -31,13 +31,33 @@ import com.google.android.maps.robolectric.ktx.findMarker
 import com.google.android.maps.robolectric.ktx.pixelColorAt
 import com.google.android.maps.robolectric.ktx.shadow
 import com.google.android.maps.robolectric.ktx.visibleBounds
-import com.google.android.maps.robolectric.truth.Distance
-import com.google.android.maps.robolectric.truth.distanceTo
-import com.google.android.maps.robolectric.truth.isNear
-import com.google.android.maps.robolectric.truth.meters
 import kotlin.math.abs
+import com.google.android.maps.robolectric.truth.Distance as TruthDistance
+import com.google.android.maps.robolectric.truth.distanceTo as truthDistanceTo
+import com.google.android.maps.robolectric.truth.isNear as truthIsNear
 
 // [START maps_robolectric_power_assert]
+/**
+ * Re-exports [TruthDistance] in the `powerassert` package so Kotlin Power-Assert tests do not need
+ * to import from `com.google.android.maps.robolectric.truth`.
+ */
+typealias Distance = TruthDistance
+
+val Number.meter: Distance get() = Distance(this.toDouble())
+val Number.meters: Distance get() = Distance(this.toDouble())
+val Number.kilometer: Distance get() = Distance(this.toDouble() * 1000.0)
+val Number.kilometers: Distance get() = Distance(this.toDouble() * 1000.0)
+val Number.mile: Distance get() = Distance(this.toDouble() * 1609.344)
+val Number.miles: Distance get() = Distance(this.toDouble() * 1609.344)
+val Number.foot: Distance get() = Distance(this.toDouble() * 0.3048)
+val Number.feet: Distance get() = Distance(this.toDouble() * 0.3048)
+
+/** Computes the spherical Haversine [Distance] between this [LatLng] and [other]. */
+infix fun LatLng.distanceTo(other: LatLng): Distance = this.truthDistanceTo(other)
+
+/** Returns `true` if this [LatLng] is within [tolerance] of [other]. */
+fun LatLng.isNear(other: LatLng, tolerance: Distance = 10.meters): Boolean = this.truthIsNear(other, tolerance)
+
 /**
  * Always-on domain assertion entrypoint instrumented by the **Kotlin Power-Assert** compiler plugin
  * (`org.jetbrains.kotlin.plugin.power-assert`).

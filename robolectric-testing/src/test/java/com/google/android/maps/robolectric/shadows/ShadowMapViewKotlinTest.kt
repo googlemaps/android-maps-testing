@@ -22,6 +22,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -39,7 +40,9 @@ import com.google.android.gms.maps.model.PolygonOptions
 import com.google.android.maps.robolectric.annotation.EnableMapsShadows
 import com.google.android.maps.robolectric.ktx.cameraTargetBounds
 import com.google.android.maps.robolectric.ktx.contentDescription
+import com.google.android.maps.robolectric.ktx.getMapBlocking
 import com.google.android.maps.robolectric.ktx.mapStyle
+import com.google.android.maps.robolectric.ktx.requireMapView
 import com.google.android.maps.robolectric.ktx.simulateUserCameraMove
 import com.google.android.maps.robolectric.truth.GoogleMapSubject
 import com.google.android.maps.robolectric.truth.LatLngSubject
@@ -491,5 +494,30 @@ class EnableMapsShadowsAnnotationTest {
 
     marker?.remove()
     assertThat(shadowMap.markers).doesNotContain(marker)
+  }
+
+  @Test
+  fun testFindMapViewInActivityOrComposeHierarchy() {
+    val activity = Robolectric.buildActivity(Activity::class.java).create().get()
+    val outerContainer = FrameLayout(activity)
+    val innerContainer = FrameLayout(activity)
+    val embeddedMapView = MapView(activity).apply {
+      onCreate(Bundle())
+    }
+    innerContainer.addView(embeddedMapView)
+    outerContainer.addView(innerContainer)
+    activity.setContentView(outerContainer)
+
+    // [START robolectric_view_hierarchy_lookup]
+    // Locate the hosted MapView inside an Activity or Jetpack Compose view hierarchy
+    val mapView = activity.window.decorView.requireMapView()
+    val map = mapView.getMapBlocking()
+
+    val seattle = LatLng(47.6062, -122.3321)
+    map.moveCamera(CameraUpdateFactory.newLatLngZoom(seattle, 13f))
+    GoogleMapSubject.assertThat(map)
+      .isCenteredOn(seattle, tolerance = 5.meters)
+      .hasZoom(13f)
+    // [END robolectric_view_hierarchy_lookup]
   }
 }

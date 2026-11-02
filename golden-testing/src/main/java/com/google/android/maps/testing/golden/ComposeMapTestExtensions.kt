@@ -17,19 +17,21 @@
 package com.google.android.maps.testing.golden
 
 import android.view.View
-import android.view.ViewGroup
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.google.android.maps.robolectric.ktx.markerWithTitle
 import com.google.android.maps.robolectric.shadows.ShadowGoogleMap
 import com.google.android.maps.robolectric.truth.Distance
 import com.google.android.maps.robolectric.truth.LatLngSubject
 import com.google.android.maps.robolectric.truth.isWithin
 import com.google.android.maps.robolectric.truth.meters
 import kotlinx.coroutines.suspendCancellableCoroutine
-import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowLooper
 import kotlin.coroutines.resume
+import com.google.android.maps.robolectric.ktx.findMapView as ktxFindMapView
+import com.google.android.maps.robolectric.ktx.shadow as shadowProperty
 
 // [START maps_compose_test_extensions]
 /**
@@ -41,16 +43,7 @@ import kotlin.coroutines.resume
  * @receiver The root or parent [View] to search.
  * @return The first found [MapView], or `null` if none exists.
  */
-public fun View.findMapView(): MapView? {
-  if (this is MapView) return this
-  if (this is ViewGroup) {
-    for (i in 0 until childCount) {
-      val found = getChildAt(i).findMapView()
-      if (found != null) return found
-    }
-  }
-  return null
-}
+public fun View.findMapView(): MapView? = ktxFindMapView()
 
 /**
  * Suspends until the [GoogleMap] instance hosted by this [MapView] is initialized and ready.
@@ -63,7 +56,7 @@ public suspend fun MapView.awaitMap(): GoogleMap = suspendCancellableCoroutine {
     continuation.resume(map)
   }
   try {
-    org.robolectric.shadows.ShadowLooper.idleMainLooper()
+    ShadowLooper.idleMainLooper()
   } catch (_: Throwable) {
   }
 }
@@ -75,7 +68,7 @@ public suspend fun MapView.awaitMap(): GoogleMap = suspendCancellableCoroutine {
  * @receiver The [GoogleMap] to extract shadow state from.
  * @return The backing [ShadowGoogleMap].
  */
-public fun GoogleMap.shadow(): ShadowGoogleMap = Shadow.extract(this) as ShadowGoogleMap
+public fun GoogleMap.shadow(): ShadowGoogleMap = shadowProperty
 
 /**
  * Locates an active [Marker] managed by this map whose [Marker.getTitle] matches [title].
@@ -84,7 +77,7 @@ public fun GoogleMap.shadow(): ShadowGoogleMap = Shadow.extract(this) as ShadowG
  * @param title The exact marker title to search for.
  * @return The matching [Marker], or `null` if not found.
  */
-public fun GoogleMap.findMarkerByTitle(title: String): Marker? = shadow().markers.firstOrNull { it.title == title }
+public fun GoogleMap.findMarkerByTitle(title: String): Marker? = markerWithTitle(title)
 
 /**
  * Simulates a user tapping on the marker matching [title].
@@ -98,7 +91,7 @@ public fun GoogleMap.findMarkerByTitle(title: String): Marker? = shadow().marker
  */
 public fun GoogleMap.clickMarker(title: String): Boolean {
   val marker = findMarkerByTitle(title) ?: return false
-  shadow().clickMarker(marker)
+  shadowProperty.clickMarker(marker)
   return true
 }
 

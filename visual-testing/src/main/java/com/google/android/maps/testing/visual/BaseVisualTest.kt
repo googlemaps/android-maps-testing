@@ -155,25 +155,23 @@ abstract class BaseVisualTest {
     updateGoldenOnPass: Boolean = true,
   ) {
     val goldenFile = File(goldensDirectory, "$testName.png")
+    val goldenBitmap = loadGoldenBaseline(testName, goldenFile)
 
-    if (goldenFile.exists()) {
-      val goldenBitmap = BitmapFactory.decodeFile(goldenFile.absolutePath)
-      if (goldenBitmap != null) {
-        val diffResult = GoldenImageDiff.compare(
-          expected = goldenBitmap,
-          actual = screenshotBitmap,
-          maxDiffPercentage = tolerancePercent / 100.0,
-        )
+    if (goldenBitmap != null) {
+      val diffResult = GoldenImageDiff.compare(
+        expected = goldenBitmap,
+        actual = screenshotBitmap,
+        maxDiffPercentage = tolerancePercent / 100.0,
+      )
 
-        if (diffResult.matches) {
-          val pct = diffResult.diffPercentage * 100.0
-          Log.i("BaseVisualTest", "Screenshot matched golden baseline perfectly for '$testName' (diff: $pct%). Fast pass!")
-          return
-        }
-
+      if (diffResult.matches) {
         val pct = diffResult.diffPercentage * 100.0
-        Log.w("BaseVisualTest", "Screenshot diverged from golden for '$testName' (diff: $pct%). Falling back to Gemini Vision.")
+        Log.i("BaseVisualTest", "Screenshot matched golden baseline perfectly for '$testName' (diff: $pct%). Fast pass!")
+        return
       }
+
+      val pct = diffResult.diffPercentage * 100.0
+      Log.w("BaseVisualTest", "Screenshot diverged from golden for '$testName' (diff: $pct%). Falling back to Gemini Vision.")
     } else {
       Log.i("BaseVisualTest", "No existing golden baseline found for '$testName'. Consulting Gemini Vision.")
     }
@@ -209,8 +207,8 @@ abstract class BaseVisualTest {
         Log.w("BaseVisualTest", "Saved new golden baseline for '$testName' at: ${goldenFile.absolutePath}")
         Log.i(
           "BaseVisualTest",
-          "To pull this golden image to your host repository, run:\n" +
-            "adb pull ${goldenFile.absolutePath} <repo>/src/test/resources/goldens/",
+          "To commit this golden image to your repository for fast zero-quota CI runs, run:\n" +
+            "adb pull ${goldenFile.absolutePath} app/src/androidTest/assets/goldens/$testName.png",
         )
       } catch (e: Exception) {
         Log.e("BaseVisualTest", "Failed to save updated golden image for '$testName'", e)
@@ -218,6 +216,37 @@ abstract class BaseVisualTest {
     }
   }
   // [END maps_visual_golden_fallback]
+
+  /**
+   * Resolves a golden baseline [Bitmap] for [testName] by checking:
+   * 1. Device storage override at [goldenFile] (`goldensDirectory/$testName.png`)
+   * 2. Bundled instrumentation test APK assets (`src/androidTest/assets/goldens/$testName.png`)
+   * 3. Bundled target application assets (`src/main/assets/goldens/$testName.png`)
+   * 4. JVM classpath resources (`src/test/resources/goldens/$testName.png`)
+   */
+  protected open fun loadGoldenBaseline(testName: String, goldenFile: File): Bitmap? {
+    if (goldenFile.exists()) {
+      BitmapFactory.decodeFile(goldenFile.absolutePath)?.let { return it }
+    }
+    val assetPath = "goldens/$testName.png"
+    for (assetContext in listOf(instrumentation.context, context)) {
+      try {
+        assetContext.assets.open(assetPath).use { stream ->
+          BitmapFactory.decodeStream(stream)?.let { return it }
+        }
+      } catch (_: Exception) {
+        // Asset not present in this context
+      }
+    }
+    try {
+      javaClass.classLoader?.getResourceAsStream(assetPath)?.use { stream ->
+        BitmapFactory.decodeStream(stream)?.let { return it }
+      }
+    } catch (_: Exception) {
+      // Resource not present on classpath
+    }
+    return null
+  }
 
   /**
    * Blocking version of [verifyScreenshotWithGoldenFallback] for Java test runners.

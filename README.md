@@ -149,7 +149,7 @@ dependencies {
 ## Cookbook & Recipes
 
 ### 1. Fast JVM Unit Testing with Robolectric Shadows
-Execute deterministic unit tests verifying map state, marker clicks, camera coordinates, and pixel drawing without an emulator:
+Execute deterministic unit tests verifying map state, marker clicks, camera coordinates, and pixel drawing without an emulator using the 1-liner `withTestMap { ... }` harness:
 
 ```kotlin
 // [START maps_robolectric_demo_test]
@@ -159,50 +159,23 @@ Execute deterministic unit tests verifying map state, marker clicks, camera coor
 @EnableMapsShadows
 class MapDemoTest {
 
-  private lateinit var mapView: MapView
-
-  @Before
-  fun setUp() {
-    val activity = Robolectric.buildActivity(Activity::class.java).create().get()
-    mapView = MapView(activity).apply {
-      measure(
-        View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY),
-        View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY),
-      )
-      layout(0, 0, 100, 100)
-      onCreate(Bundle())
-    }
-  }
-
   @Test
-  fun testMapOverlaysAndAssertions() {
-    // 1. Obtain the GoogleMap instance asynchronously
-    val mapRef = AtomicReference<GoogleMap>()
-    mapView.getMapAsync { mapRef.set(it) }
-    ShadowLooper.idleMainLooper()
-    val map = mapRef.get()
-    assertThat(map).isNotNull()
-
-    // 2. Center the camera on Boulder, Colorado
+  fun testMapOverlaysAndAssertions() = withTestMap(width = 200, height = 200) {
+    // 1. Center the camera on Boulder, Colorado
     val boulder = LatLng(40.0150, -105.2705)
-    map.moveCamera(CameraUpdateFactory.newLatLngZoom(boulder, 14f))
+    moveCamera(CameraUpdateFactory.newLatLngZoom(boulder, 14f))
 
-    // 3. Assert geodesic camera coordinates using the Truth LatLngSubject
-    LatLngSubject.assertThat(map.cameraPosition.target)
-      .isWithin(5.meters)
-      .of(boulder)
-
-    // 4. Add a Marker with a tinted icon
-    val marker = map.addMarker(
+    // 2. Add a Marker with a tinted icon
+    addMarker(
       MarkerOptions()
         .position(boulder)
         .title("Boulder, CO")
         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)),
     )
-    assertThat(marker?.title).isEqualTo("Boulder, CO")
 
-    // 5. Draw a Polygon around the area
-    map.addPolygon(
+    // 3. Draw a Polygon around the area
+    val northBoulderPark = LatLng(40.0185, -105.2705)
+    addPolygon(
       PolygonOptions()
         .add(
           LatLng(40.0100, -105.2800),
@@ -215,30 +188,38 @@ class MapDemoTest {
         .strokeWidth(2f),
     )
 
-    // 6. Render the MapView directly onto an Android Canvas without an emulator
-    val bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)
-    val canvas = Canvas(bitmap)
-    mapView.draw(canvas)
+    // 4. Simulate a user tapping the marker (opens InfoWindow by default)
+    clickMarker("Boulder, CO")
 
-    // 7. Verify pixel color: the center pixel (50, 50) corresponds to Boulder inside the polygon
-    assertThat(bitmap.getPixel(50, 50)).isEqualTo(Color.GREEN)
-
-    // 8. Simulate user marker interaction via the shadow
-    val shadowMap = Shadow.extract(map) as ShadowGoogleMap
-    var clickedMarkerTitle: String? = null
-    map.setOnMarkerClickListener {
-      clickedMarkerTitle = it.title
-      true
-    }
-    shadowMap.clickMarker(marker!!)
-    assertThat(clickedMarkerTitle).isEqualTo("Boulder, CO")
+    // 5. Assert geodesic camera position, active InfoWindow, and rendered canvas pixel
+    assertThat(this)
+      .isCenteredOn(boulder, tolerance = 5.meters)
+      .hasZoom(14f)
+      .hasActiveInfoWindowWithTitle("Boulder, CO")
+      .hasPixelColorAt(northBoulderPark, Color.GREEN)
   }
 }
 // [END maps_robolectric_demo_test]
 ```
 
-### 2. Jetpack Compose Map Testing
-Inject deterministic synthetic tile providers directly into Compose maps:
+### 2. Testing Activities, View Hierarchies & Jetpack Compose Maps
+Locate a hosted `MapView` inside any Activity or Jetpack Compose view hierarchy with `requireMapView()`:
+
+```kotlin
+// [START robolectric_view_hierarchy_lookup]
+// Locate the hosted MapView inside an Activity or Jetpack Compose view hierarchy
+val mapView = activity.window.decorView.requireMapView()
+val map = mapView.getMapBlocking()
+
+val seattle = LatLng(47.6062, -122.3321)
+map.moveCamera(CameraUpdateFactory.newLatLngZoom(seattle, 13f))
+GoogleMapSubject.assertThat(map)
+  .isCenteredOn(seattle, tolerance = 5.meters)
+  .hasZoom(13f)
+// [END robolectric_view_hierarchy_lookup]
+```
+
+And inject deterministic synthetic tile providers directly into Jetpack Compose `GoogleMap` composables:
 
 ```kotlin
 // [START maps_golden_compose_extensions]
@@ -274,7 +255,7 @@ public fun rememberGoldenTileProvider(
 ```
 
 ### 3. Deterministic Golden Screenshot Testing (100% Offline)
-Render maps with synthetic tiles and assert pixel-perfect fidelity across repeated captures:
+Render maps with synthetic tiles and assert pixel-perfect fidelity across repeated captures and visual regressions:
 
 ```kotlin
 // [START maps_sample_golden_map_test]
@@ -292,8 +273,73 @@ Render maps with synthetic tiles and assert pixel-perfect fidelity across repeat
 @Config(sdk = [34])
 @EnableMapsShadows
 public class SampleGoldenMapTest {
-  // Configures MAP_TYPE_NONE with GoldenTileStrategy.SolidColorHash() and verifies 0% diff
-}
+
+  private lateinit var googleMap: GoogleMap
+
+  @Before
+  public fun setUp() {
+    googleMap = createTestMap(width = 200, height = 200)
+
+    // Enable deterministic golden tiles
+    googleMap.enableGoldenTesting(strategy = GoldenTileStrategy.SolidColorHash())
+  }
+
+  @Test
+  public fun sample_mapRenderingIsDeterministicAcrossRepeatedCaptures() = runTest {
+    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(37.7749, -122.4194), 10f))
+    googleMap.addCircle(
+      CircleOptions()
+        .center(LatLng(37.7749, -122.4194))
+        .radius(5000.0)
+        .fillColor(Color.RED)
+        .strokeWidth(0f),
+    )
+
+    // First capture (acts as baseline)
+    val baselineSnapshot = googleMap.captureSnapshot()
+
+    // Second capture under identical state
+    val secondSnapshot = googleMap.captureSnapshot()
+
+    // Should match exactly (0% pixel diff)
+    GoldenImageDiff.assertMatches(
+      expected = baselineSnapshot,
+      actual = secondSnapshot,
+      maxDiffPercentage = 0.0,
+      message = "Repeated map captures must be 100% pixel identical",
+    )
+  }
+
+  @Test
+  public fun sample_visualRegressionIsDetectedWhenOverlayColorChanges() = runTest {
+    val center = LatLng(0.0, 0.0)
+    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 5f))
+
+    // Baseline render with BLUE polygon
+    val polygon = checkNotNull(
+      googleMap.addPolygon(
+        PolygonOptions()
+          .add(LatLng(-5.0, -5.0), LatLng(-5.0, 5.0), LatLng(5.0, 5.0), LatLng(5.0, -5.0))
+          .fillColor(Color.BLUE)
+          .strokeWidth(0f),
+      ),
+    )
+
+    val baselineSnapshot = googleMap.captureSnapshot()
+
+    // Introduce visual regression: change fill color to GREEN
+    polygon.fillColor = Color.GREEN
+    val modifiedSnapshot = googleMap.captureSnapshot()
+
+    // Verify that GoldenImageDiff flags the visual regression
+    val diff = GoldenImageDiff.compare(baselineSnapshot, modifiedSnapshot)
+    assertThat(diff.matches).isFalse()
+    assertThat(diff.diffPixelCount).isGreaterThan(0)
+
+    assertThrows(AssertionError::class.java) {
+      GoldenImageDiff.assertMatches(baselineSnapshot, modifiedSnapshot, maxDiffPercentage = 0.0)
+    }
+  }
 // [END maps_sample_golden_map_test]
 ```
 
@@ -328,8 +374,9 @@ class VisualMapSampleTest : BaseVisualTest() {
     val prompt = """
             Please act as a UI tester and analyze this screenshot of an Android application.
             Verify the following criteria:
-            1. Confirm that the text "Hello Android!" is clearly visible on the screen.
-            2. Confirm that the application interface has rendered cleanly without error banners or crashes.
+            1. Confirm that the application displays a Google Map surface with the "Store Locator" header.
+            2. Confirm that store location pins or map tiles are visible on the screen.
+            3. Confirm that the application interface has rendered cleanly without error banners, blank crash dialogs, or ANRs.
 
             If all criteria are met, reply with "PASSED".
             If any criteria is not met, please detail the discrepancy.

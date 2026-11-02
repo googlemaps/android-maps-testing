@@ -115,8 +115,8 @@ import com.google.android.maps.robolectric.ktx.cameraZoom
 import com.google.android.maps.robolectric.ktx.withTestMap
 import com.google.android.maps.robolectric.powerassert.assertMap
 import com.google.android.maps.robolectric.powerassert.assertMarker
-import com.google.android.maps.robolectric.truth.distanceTo
-import com.google.android.maps.robolectric.truth.meters
+import com.google.android.maps.robolectric.powerassert.distanceTo
+import com.google.android.maps.robolectric.powerassert.meters
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -157,65 +157,43 @@ class MapScreenPowerAssertTest {
 ### Basic Map & Marker Test with Google Truth
 
 ```kotlin
-import android.app.Activity
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.maps.robolectric.annotation.EnableMapsShadows
-import com.google.android.maps.robolectric.truth.*
-import com.google.common.truth.Truth.assertThat
-import org.junit.Before
+import com.google.android.maps.robolectric.ktx.withTestMap
+import com.google.android.maps.robolectric.truth.assertThat
+import com.google.android.maps.robolectric.truth.meters
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.shadows.ShadowLooper
-import java.util.concurrent.atomic.AtomicReference
 
 @RunWith(RobolectricTestRunner::class)
 @EnableMapsShadows
 class MapScreenTest {
 
-    private lateinit var mapView: MapView
-
-    @Before
-    fun setUp() {
-        val activity = Robolectric.buildActivity(Activity::class.java).create().get()
-        mapView = MapView(activity).apply {
-            onCreate(null)
-        }
-    }
-
     @Test
-    fun testAddMarkerAndCamera() {
-        val mapRef = AtomicReference<GoogleMap>()
-        mapView.getMapAsync { mapRef.set(it) }
-        ShadowLooper.idleMainLooper()
-
-        val googleMap = mapRef.get()
+    fun testAddMarkerAndCamera() = withTestMap {
         val sanFrancisco = LatLng(37.7749, -122.4194)
 
         // Move Camera
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sanFrancisco, 12f))
-        
-        // Assert geodesic position
-        LatLngSubject.assertThat(googleMap.cameraPosition.target)
-            .isWithin(10.meters)
-            .of(sanFrancisco)
+        moveCamera(CameraUpdateFactory.newLatLngZoom(sanFrancisco, 12f))
 
         // Add Marker
-        val marker = googleMap.addMarker(
+        addMarker(
             MarkerOptions()
                 .position(sanFrancisco)
                 .title("San Francisco")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
         )
 
-        assertThat(marker?.title).isEqualTo("San Francisco")
-        assertThat(marker?.position).isEqualTo(sanFrancisco)
+        // Assert geodesic camera position & marker state fluently
+        assertThat(this)
+            .isCenteredOn(sanFrancisco, tolerance = 10.meters)
+            .hasZoom(12f)
+            .hasMarkerWithTitle("San Francisco")
+            .isAt(sanFrancisco, tolerance = 1.meters)
     }
 }
 ```
@@ -334,25 +312,127 @@ Use `withTestMap { ... }` to eliminate `Activity`/`MapView`/`ShadowLooper` setup
   // [END maps_robolectric_power_assert]
 ```
 
-### 3. Testing Fragment-Based Layouts (`SupportMapFragment`)
+### 3. Testing Your Own Map Controller, `SupportMapFragment`, or Activity/Compose View Hierarchy
+
+Pass the test `GoogleMap` from `createTestMap()` into your own production controller or manager class, and assert both map state and application callbacks:
 
 ```kotlin
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.maps.robolectric.annotation.EnableMapsShadows
-import com.google.android.maps.robolectric.ktx.getMapBlocking
-import com.google.android.maps.robolectric.powerassert.assertGeo
-
+// [START maps_robolectric_manager_test]
 @RunWith(RobolectricTestRunner::class)
+@GraphicsMode(GraphicsMode.Mode.NATIVE)
+@Config(sdk = [34])
 @EnableMapsShadows
-class FragmentMapTest {
+class StoreLocatorMapManagerTest {
 
-    @Test
-    fun testSupportMapFragment() {
-        val fragment = SupportMapFragment.newInstance()
-        val map = fragment.getMapBlocking()
-        assertGeo(map.cameraPosition.zoom >= 0f)
-    }
+  private lateinit var googleMap: GoogleMap
+  private val selectedStores = mutableListOf<Store>()
+  private lateinit var manager: StoreLocatorMapManager
+
+  private val boulderStore = Store(
+    id = "store_boulder",
+    name = "Boulder Flagship Store",
+    location = LatLng(40.0150, -105.2705),
+    isOpenNow = true,
+  )
+
+  private val denverStore = Store(
+    id = "store_denver",
+    name = "Denver Downtown Store",
+    location = LatLng(39.7392, -104.9903),
+    isOpenNow = false,
+  )
+
+  @Before
+  fun setUp() {
+    googleMap = createTestMap(width = 200, height = 200)
+    manager = StoreLocatorMapManager(onStoreSelected = { selectedStores.add(it) })
+    manager.attachMap(googleMap)
+  }
+
+  @Test
+  fun testDisplayStores_createsMarkersWithCorrectMetadataAndTags() {
+    manager.displayStores(listOf(boulderStore, denverStore))
+
+    assertThat(googleMap).hasMarkerCount(2)
+    assertThat(googleMap)
+      .hasMarkerWithTitle("Boulder Flagship Store")
+      .isAt(boulderStore.location, tolerance = 1.meters)
+      .hasSnippet("Open now")
+      .hasTag(boulderStore)
+
+    assertThat(googleMap)
+      .hasMarkerWithTitle("Denver Downtown Store")
+      .hasSnippet("Closed")
+      .hasTag(denverStore)
+  }
+
+  @Test
+  fun testMarkerClick_selectsStoreAndShowsInfoWindow() {
+    manager.displayStores(listOf(boulderStore, denverStore))
+
+    // Simulate a user tapping the marker by title
+    googleMap.clickMarker("Boulder Flagship Store")
+
+    // Verify the manager notified the application listener and opened the InfoWindow
+    truthAssertThat(selectedStores).containsExactly(boulderStore)
+    assertThat(googleMap).hasActiveInfoWindowWithTitle("Boulder Flagship Store")
+  }
+
+  @Test
+  fun testSelectStore_centersCameraAndOpensInfoWindow() {
+    manager.displayStores(listOf(boulderStore, denverStore))
+
+    val success = manager.selectStore("store_boulder")
+    truthAssertThat(success).isTrue()
+
+    assertThat(googleMap)
+      .isCenteredOn(boulderStore.location, tolerance = 5.meters)
+      .hasZoom(15f)
+      .hasActiveInfoWindowWithTitle("Boulder Flagship Store")
+  }
+
+  @Test
+  fun testClearStores_removesAllMarkersFromMap() {
+    manager.displayStores(listOf(boulderStore, denverStore))
+    assertThat(googleMap).hasMarkerCount(2)
+
+    manager.clearStores()
+    truthAssertThat(googleMap.markers).isEmpty()
+    truthAssertThat(manager.getMarkerForStore("store_boulder")).isNull()
+  }
+
+  @Test
+  fun testDeliveryPerimeter_rendersVisuallyOnCanvas() {
+    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(boulderStore.location, 14f))
+    manager.setDeliveryPerimeter(boulderStore.location, 2000.0)
+
+    assertThat(googleMap).hasNonBackgroundPixelAt(boulderStore.location)
+  }
 }
+// [END maps_robolectric_manager_test]
+```
+
+When testing an entire `Activity` or Jetpack Compose screen that embeds a `MapView`, use `requireMapView()` (or `findMapView()`) to locate the `MapView` in the view hierarchy:
+
+```kotlin
+// [START robolectric_view_hierarchy_lookup]
+// Locate the hosted MapView inside an Activity or Jetpack Compose view hierarchy
+val mapView = activity.window.decorView.requireMapView()
+val map = mapView.getMapBlocking()
+
+val seattle = LatLng(47.6062, -122.3321)
+map.moveCamera(CameraUpdateFactory.newLatLngZoom(seattle, 13f))
+GoogleMapSubject.assertThat(map)
+  .isCenteredOn(seattle, tolerance = 5.meters)
+  .hasZoom(13f)
+// [END robolectric_view_hierarchy_lookup]
+```
+
+Or extract the map from a `SupportMapFragment` in 1 line:
+
+```kotlin
+val fragment = SupportMapFragment.newInstance()
+val map = fragment.getMapBlocking()
 ```
 
 ### 4. Screen Coordinate Projection, `newLatLngBounds` Zoom & `scrollBy`

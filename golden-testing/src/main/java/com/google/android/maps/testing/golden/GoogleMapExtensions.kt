@@ -20,7 +20,10 @@ import android.graphics.Bitmap
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.TileOverlay
 import com.google.android.gms.maps.model.TileOverlayOptions
+import com.google.android.maps.robolectric.ktx.renderToBitmap
 import kotlinx.coroutines.suspendCancellableCoroutine
+import org.robolectric.shadows.ShadowLooper
+import java.io.File
 import kotlin.coroutines.resume
 
 // [START maps_golden_map_extensions]
@@ -55,6 +58,9 @@ public fun GoogleMap.enableGoldenTesting(
 
 /**
  * Suspends until the [GoogleMap] has completely finished rendering its tiles, overlays, and animations.
+ *
+ * When running in a local Robolectric JVM unit test, the main looper is automatically idled so
+ * callers do not need to manually invoke `ShadowLooper.idleMainLooper()`.
  */
 public suspend fun GoogleMap.awaitMapLoaded(): Unit = suspendCancellableCoroutine { continuation ->
   setOnMapLoadedCallback {
@@ -65,10 +71,15 @@ public suspend fun GoogleMap.awaitMapLoaded(): Unit = suspendCancellableCoroutin
   continuation.invokeOnCancellation {
     setOnMapLoadedCallback(null)
   }
+  idleMainLooperIfRobolectric()
 }
 
 /**
  * Captures a snapshot [Bitmap] of the [GoogleMap] asynchronously.
+ *
+ * When running in a local Robolectric JVM unit test, the main looper is automatically idled so
+ * callers can write `val bitmap = googleMap.captureSnapshot()` directly inside `runTest` without
+ * launching an `async` block or manually idling `ShadowLooper`.
  *
  * @param preallocatedBitmap Optional pre-allocated bitmap to draw into. If null, a new bitmap matching map dimensions is allocated.
  * @return The captured [Bitmap].
@@ -87,6 +98,65 @@ public suspend fun GoogleMap.captureSnapshot(preallocatedBitmap: Bitmap? = null)
     snapshot(callback, preallocatedBitmap)
   } else {
     snapshot(callback)
+  }
+  idleMainLooperIfRobolectric()
+}
+
+/**
+ * Awaits map load, captures a snapshot of this [GoogleMap], and asserts that it matches the PNG
+ * baseline at [goldenFile] (or records the baseline when [recordBaseline] or `-Dmaps.golden.record=true` is enabled).
+ */
+public suspend fun GoogleMap.assertMatchesGolden(
+  goldenFile: File,
+  maxDiffPercentage: Double = 0.001,
+  pixelColorTolerance: Int = 0,
+  message: String? = null,
+  outputDir: File? = goldenFile.parentFile,
+  recordBaseline: Boolean = System.getProperty("maps.golden.record").toBoolean(),
+) {
+  awaitMapLoaded()
+  val actual = captureSnapshot()
+  GoldenImageDiff.assertMatches(
+    goldenFile = goldenFile,
+    actual = actual,
+    maxDiffPercentage = maxDiffPercentage,
+    pixelColorTolerance = pixelColorTolerance,
+    message = message,
+    outputDir = outputDir,
+    recordBaseline = recordBaseline,
+  )
+}
+
+/**
+ * Synchronously renders this [GoogleMap] to a [Bitmap] in Robolectric JVM tests and asserts that it
+ * matches the PNG baseline at [goldenFile] (or records the baseline when [recordBaseline] or
+ * `-Dmaps.golden.record=true` is enabled).
+ */
+public fun GoogleMap.assertMatchesGoldenBlocking(
+  goldenFile: File,
+  maxDiffPercentage: Double = 0.001,
+  pixelColorTolerance: Int = 0,
+  message: String? = null,
+  outputDir: File? = goldenFile.parentFile,
+  recordBaseline: Boolean = System.getProperty("maps.golden.record").toBoolean(),
+) {
+  val actual = renderToBitmap()
+  GoldenImageDiff.assertMatches(
+    goldenFile = goldenFile,
+    actual = actual,
+    maxDiffPercentage = maxDiffPercentage,
+    pixelColorTolerance = pixelColorTolerance,
+    message = message,
+    outputDir = outputDir,
+    recordBaseline = recordBaseline,
+  )
+}
+
+private fun idleMainLooperIfRobolectric() {
+  try {
+    ShadowLooper.idleMainLooper()
+  } catch (_: Throwable) {
+    // Running on an Android device/emulator where Robolectric is not on the runtime classpath.
   }
 }
 // [END maps_golden_map_extensions]

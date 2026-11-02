@@ -16,40 +16,32 @@
 
 package com.google.android.maps.testing.golden.sample
 
-import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
-import android.os.Bundle
-import android.view.View
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.PolygonOptions
 import com.google.android.maps.robolectric.annotation.EnableMapsShadows
+import com.google.android.maps.robolectric.ktx.createTestMap
 import com.google.android.maps.testing.golden.GoldenImageDiff
 import com.google.android.maps.testing.golden.GoldenTileStrategy
 import com.google.android.maps.testing.golden.captureSnapshot
 import com.google.android.maps.testing.golden.enableGoldenTesting
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.async
-import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
-import org.robolectric.shadows.ShadowLooper
-import java.util.concurrent.atomic.AtomicReference
 
 // [START maps_sample_golden_map_test]
 /**
@@ -67,25 +59,11 @@ import java.util.concurrent.atomic.AtomicReference
 @EnableMapsShadows
 public class SampleGoldenMapTest {
 
-  private lateinit var activity: Activity
-  private lateinit var mapView: MapView
   private lateinit var googleMap: GoogleMap
 
   @Before
   public fun setUp() {
-    activity = Robolectric.buildActivity(Activity::class.java).create().get()
-    mapView = MapView(activity)
-    mapView.measure(
-      View.MeasureSpec.makeMeasureSpec(200, View.MeasureSpec.EXACTLY),
-      View.MeasureSpec.makeMeasureSpec(200, View.MeasureSpec.EXACTLY),
-    )
-    mapView.layout(0, 0, 200, 200)
-    mapView.onCreate(Bundle())
-
-    val mapRef = AtomicReference<GoogleMap>()
-    mapView.getMapAsync { mapRef.set(it) }
-    ShadowLooper.idleMainLooper()
-    googleMap = checkNotNull(mapRef.get())
+    googleMap = createTestMap(width = 200, height = 200)
 
     // Enable deterministic golden tiles
     googleMap.enableGoldenTesting(strategy = GoldenTileStrategy.SolidColorHash())
@@ -103,10 +81,10 @@ public class SampleGoldenMapTest {
     )
 
     // First capture (acts as baseline)
-    val baselineSnapshot = captureSnapshotWithShadowLooper()
+    val baselineSnapshot = googleMap.captureSnapshot()
 
     // Second capture under identical state
-    val secondSnapshot = captureSnapshotWithShadowLooper()
+    val secondSnapshot = googleMap.captureSnapshot()
 
     // Should match exactly (0% pixel diff)
     GoldenImageDiff.assertMatches(
@@ -132,11 +110,11 @@ public class SampleGoldenMapTest {
       ),
     )
 
-    val baselineSnapshot = captureSnapshotWithShadowLooper()
+    val baselineSnapshot = googleMap.captureSnapshot()
 
     // Introduce visual regression: change fill color to GREEN
     polygon.fillColor = Color.GREEN
-    val modifiedSnapshot = captureSnapshotWithShadowLooper()
+    val modifiedSnapshot = googleMap.captureSnapshot()
 
     // Verify that GoldenImageDiff flags the visual regression
     val diff = GoldenImageDiff.compare(baselineSnapshot, modifiedSnapshot)
@@ -147,6 +125,7 @@ public class SampleGoldenMapTest {
       GoldenImageDiff.assertMatches(baselineSnapshot, modifiedSnapshot, maxDiffPercentage = 0.0)
     }
   }
+// [END maps_sample_golden_map_test]
 
   @Test
   public fun sample_verifiesAgainstCommittedGoldenBaseline() {
@@ -228,14 +207,4 @@ public class SampleGoldenMapTest {
 
     return bitmap
   }
-
-  @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
-  private fun TestScope.captureSnapshotWithShadowLooper(): Bitmap {
-    val deferred = async { googleMap.captureSnapshot() }
-    testScheduler.advanceUntilIdle()
-    ShadowLooper.idleMainLooper()
-    testScheduler.advanceUntilIdle()
-    return deferred.getCompleted()
-  }
 }
-// [END maps_sample_golden_map_test]

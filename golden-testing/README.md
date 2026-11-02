@@ -112,21 +112,15 @@ googleMap.addMarker(MarkerOptions().position(LatLng(37.7749, -122.4194)).title("
 
 ### 2. Capture and Assert Snapshots
 
-In both on-device instrumented tests and local Robolectric JVM unit tests, `googleMap.awaitMapLoaded()` and `googleMap.captureSnapshot()` suspend until the main looper dispatches the map render callback:
+In both on-device instrumented tests and local Robolectric JVM unit tests, `googleMap.awaitMapLoaded()`, `googleMap.captureSnapshot()`, and the 1-liner `googleMap.assertMatchesGolden(goldenFile)` work identically without requiring manual `ShadowLooper` or `async` boilerplate:
 
 ```kotlin
 // [START golden_await_map_loaded]
-val loadDeferred = async {
-  googleMap.awaitMapLoaded()
-}
-testScheduler.advanceUntilIdle()
-
-// Idling the Android main looper automatically dispatches OnMapLoadedCallback
-// without requiring manual ShadowGoogleMap extraction
-ShadowLooper.idleMainLooper()
-testScheduler.advanceUntilIdle()
-
-assertThat(loadDeferred.isCompleted).isTrue()
+// awaitMapLoaded() and captureSnapshot() work identically on Android devices and
+// Robolectric JVM without requiring manual ShadowLooper or async boilerplate:
+googleMap.awaitMapLoaded()
+val snapshot = googleMap.captureSnapshot()
+assertThat(snapshot.width).isEqualTo(100)
 // [END golden_await_map_loaded]
 ```
 
@@ -144,14 +138,7 @@ googleMap.enableGoldenTesting(
   },
 )
 
-val snapshotDeferred = async {
-  googleMap.captureSnapshot()
-}
-testScheduler.advanceUntilIdle()
-ShadowLooper.idleMainLooper()
-testScheduler.advanceUntilIdle()
-
-val snapshot = snapshotDeferred.await()
+val snapshot = googleMap.captureSnapshot()
 // Verify that ShadowMapView rendered the TileOverlay's tiles onto the snapshot canvas
 assertThat(snapshot.getPixel(50, 50)).isEqualTo(Color.CYAN)
 // [END golden_tile_rendering_jvm]

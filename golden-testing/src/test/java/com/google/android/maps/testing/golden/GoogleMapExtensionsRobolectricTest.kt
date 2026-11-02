@@ -16,30 +16,28 @@
 
 package com.google.android.maps.testing.golden
 
-import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.os.Bundle
-import android.view.View
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.maps.robolectric.annotation.EnableMapsShadows
+import com.google.android.maps.robolectric.ktx.createTestMap
+import com.google.android.maps.robolectric.ktx.shadow
+import com.google.android.maps.robolectric.ktx.withTestMap
 import com.google.android.maps.robolectric.shadows.ShadowGoogleMap
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.async
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.TemporaryFolder
 import org.junit.runner.RunWith
-import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
-import org.robolectric.shadow.api.Shadow
-import org.robolectric.shadows.ShadowLooper
-import java.util.concurrent.atomic.AtomicReference
+import java.io.File
 
 // [START maps_golden_extensions_test]
 @RunWith(RobolectricTestRunner::class)
@@ -48,28 +46,16 @@ import java.util.concurrent.atomic.AtomicReference
 @EnableMapsShadows
 public class GoogleMapExtensionsRobolectricTest {
 
-  private lateinit var activity: Activity
-  private lateinit var mapView: MapView
+  @get:Rule
+  public val tempFolder: TemporaryFolder = TemporaryFolder()
+
   private lateinit var googleMap: GoogleMap
   private lateinit var shadowGoogleMap: ShadowGoogleMap
 
   @Before
   public fun setUp() {
-    activity = Robolectric.buildActivity(Activity::class.java).create().get()
-    mapView = MapView(activity)
-    mapView.measure(
-      View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY),
-      View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.EXACTLY),
-    )
-    mapView.layout(0, 0, 100, 100)
-    mapView.onCreate(Bundle())
-
-    val mapRef = AtomicReference<GoogleMap>()
-    mapView.getMapAsync { mapRef.set(it) }
-    ShadowLooper.idleMainLooper()
-
-    googleMap = checkNotNull(mapRef.get())
-    shadowGoogleMap = Shadow.extract(googleMap) as ShadowGoogleMap
+    googleMap = createTestMap(width = 100, height = 100)
+    shadowGoogleMap = googleMap.shadow
   }
 
   @Test
@@ -85,48 +71,19 @@ public class GoogleMapExtensionsRobolectricTest {
   }
 
   @Test
-  public fun awaitMapLoaded_suspendsUntilNotified() = runTest {
-    val loadDeferred = async {
-      googleMap.awaitMapLoaded()
-    }
-
-    testScheduler.advanceUntilIdle()
-    assertThat(loadDeferred.isCompleted).isFalse()
-
-    shadowGoogleMap.notifyMapLoaded()
-    testScheduler.advanceUntilIdle()
-
-    assertThat(loadDeferred.isCompleted).isTrue()
-  }
-
-  @Test
-  public fun awaitMapLoaded_autoDispatchesOnMainLooperIdle() = runTest {
+  public fun awaitMapLoaded_completesDirectlyInRobolectric() = runTest {
     // [START golden_await_map_loaded]
-    val loadDeferred = async {
-      googleMap.awaitMapLoaded()
-    }
-    testScheduler.advanceUntilIdle()
-
-    // Idling the Android main looper automatically dispatches OnMapLoadedCallback
-    // without requiring manual ShadowGoogleMap extraction
-    ShadowLooper.idleMainLooper()
-    testScheduler.advanceUntilIdle()
-
-    assertThat(loadDeferred.isCompleted).isTrue()
+    // awaitMapLoaded() and captureSnapshot() work identically on Android devices and
+    // Robolectric JVM without requiring manual ShadowLooper or async boilerplate:
+    googleMap.awaitMapLoaded()
+    val snapshot = googleMap.captureSnapshot()
+    assertThat(snapshot.width).isEqualTo(100)
     // [END golden_await_map_loaded]
   }
 
   @Test
   public fun captureSnapshot_returnsBitmap() = runTest {
-    val snapshotDeferred = async {
-      googleMap.captureSnapshot()
-    }
-
-    testScheduler.advanceUntilIdle()
-    ShadowLooper.idleMainLooper()
-    testScheduler.advanceUntilIdle()
-
-    val bitmap = snapshotDeferred.await()
+    val bitmap = googleMap.captureSnapshot()
     assertThat(bitmap).isNotNull()
     assertThat(bitmap.width).isEqualTo(100)
     assertThat(bitmap.height).isEqualTo(100)
@@ -145,17 +102,41 @@ public class GoogleMapExtensionsRobolectricTest {
       },
     )
 
-    val snapshotDeferred = async {
-      googleMap.captureSnapshot()
-    }
-    testScheduler.advanceUntilIdle()
-    ShadowLooper.idleMainLooper()
-    testScheduler.advanceUntilIdle()
-
-    val snapshot = snapshotDeferred.await()
+    val snapshot = googleMap.captureSnapshot()
     // Verify that ShadowMapView rendered the TileOverlay's tiles onto the snapshot canvas
     assertThat(snapshot.getPixel(50, 50)).isEqualTo(Color.CYAN)
     // [END golden_tile_rendering_jvm]
+  }
+
+  @Test
+  public fun assertMatchesGolden_recordsAndVerifiesInOneLine() = runTest {
+    val goldenFile = File(tempFolder.newFolder("goldens"), "sf_circle.png")
+
+    withTestMap(width = 100, height = 100) {
+      enableGoldenTesting(strategy = GoldenTileStrategy.SolidColorHash())
+      moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(37.7749, -122.4194), 12f))
+      addCircle(
+        CircleOptions()
+          .center(LatLng(37.7749, -122.4194))
+          .radius(500.0)
+          .fillColor(Color.RED),
+      )
+
+      // 1-liner synchronous golden record & verification inside withTestMap:
+      assertMatchesGoldenBlocking(goldenFile, recordBaseline = true)
+      assertMatchesGoldenBlocking(goldenFile, maxDiffPercentage = 0.0)
+    }
+
+    // Also works as a suspending 1-liner in coroutine tests:
+    googleMap.enableGoldenTesting(strategy = GoldenTileStrategy.SolidColorHash())
+    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(37.7749, -122.4194), 12f))
+    googleMap.addCircle(
+      CircleOptions()
+        .center(LatLng(37.7749, -122.4194))
+        .radius(500.0)
+        .fillColor(Color.RED),
+    )
+    googleMap.assertMatchesGolden(goldenFile, maxDiffPercentage = 0.0)
   }
 }
 // [END maps_golden_extensions_test]

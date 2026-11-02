@@ -72,4 +72,28 @@ class GoldenFallbackLogicTest {
     // Golden file still exists and matches
     assertThat(goldenFile.exists()).isTrue()
   }
+
+  @Test
+  fun fastPassWhenBundledAssetGoldenMatchesOnFreshEmulator() = runBlocking {
+    val emptyDeviceGoldensDir = tempFolder.newFolder("empty_device_goldens")
+    val bundledBaseline = Bitmap.createBitmap(64, 64, Bitmap.Config.ARGB_8888).apply {
+      eraseColor(Color.GREEN)
+    }
+    val matchingScreenshot = Bitmap.createBitmap(64, 64, Bitmap.Config.ARGB_8888).apply {
+      eraseColor(Color.GREEN)
+    }
+
+    val testHarness = object : BaseVisualTest() {
+      override fun loadGoldenBaseline(testName: String, goldenFile: File): Bitmap? = super.loadGoldenBaseline(testName, goldenFile) ?: bundledBaseline
+    }
+
+    // Even though emptyDeviceGoldensDir has no file on disk, the bundled asset baseline fast-passes
+    // without requiring a GEMINI_API_KEY or making a network request.
+    testHarness.verifyScreenshotWithGoldenFallback(
+      testName = "committed_asset_golden",
+      screenshotBitmap = matchingScreenshot,
+      prompt = "Verify map is green",
+      goldensDirectory = emptyDeviceGoldensDir,
+    )
+  }
 }

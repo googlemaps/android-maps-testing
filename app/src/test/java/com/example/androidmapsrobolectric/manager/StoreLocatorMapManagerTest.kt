@@ -16,33 +16,23 @@
 
 package com.example.androidmapsrobolectric.manager
 
-import android.app.Activity
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.os.Bundle
-import android.view.View
 import com.example.androidmapsrobolectric.model.Store
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.maps.robolectric.annotation.EnableMapsShadows
-import com.google.android.maps.robolectric.shadows.ShadowGoogleMap
-import com.google.android.maps.robolectric.truth.LatLngSubject
-import com.google.android.maps.robolectric.truth.isWithin
+import com.google.android.maps.robolectric.ktx.clickMarker
+import com.google.android.maps.robolectric.ktx.createTestMap
+import com.google.android.maps.robolectric.ktx.markers
+import com.google.android.maps.robolectric.truth.assertThat
 import com.google.android.maps.robolectric.truth.meters
-import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
-import org.robolectric.shadow.api.Shadow
-import org.robolectric.shadows.ShadowLooper
-import java.util.concurrent.atomic.AtomicReference
+import com.google.common.truth.Truth.assertThat as truthAssertThat
 
 // [START maps_robolectric_manager_test]
 @RunWith(RobolectricTestRunner::class)
@@ -51,7 +41,6 @@ import java.util.concurrent.atomic.AtomicReference
 @EnableMapsShadows
 class StoreLocatorMapManagerTest {
 
-  private lateinit var mapView: MapView
   private lateinit var googleMap: GoogleMap
   private val selectedStores = mutableListOf<Store>()
   private lateinit var manager: StoreLocatorMapManager
@@ -72,21 +61,7 @@ class StoreLocatorMapManagerTest {
 
   @Before
   fun setUp() {
-    val activity = Robolectric.buildActivity(Activity::class.java).create().get()
-    mapView = MapView(activity).apply {
-      measure(
-        View.MeasureSpec.makeMeasureSpec(200, View.MeasureSpec.EXACTLY),
-        View.MeasureSpec.makeMeasureSpec(200, View.MeasureSpec.EXACTLY),
-      )
-      layout(0, 0, 200, 200)
-      onCreate(Bundle())
-    }
-
-    val mapRef = AtomicReference<GoogleMap>()
-    mapView.getMapAsync { mapRef.set(it) }
-    ShadowLooper.idleMainLooper()
-    googleMap = mapRef.get()
-
+    googleMap = createTestMap(width = 200, height = 200)
     manager = StoreLocatorMapManager(onStoreSelected = { selectedStores.add(it) })
     manager.attachMap(googleMap)
   }
@@ -95,36 +70,29 @@ class StoreLocatorMapManagerTest {
   fun testDisplayStores_createsMarkersWithCorrectMetadataAndTags() {
     manager.displayStores(listOf(boulderStore, denverStore))
 
-    val shadowMap = Shadow.extract(googleMap) as ShadowGoogleMap
-    assertThat(shadowMap.markers).hasSize(2)
+    assertThat(googleMap).hasMarkerCount(2)
+    assertThat(googleMap)
+      .hasMarkerWithTitle("Boulder Flagship Store")
+      .isAt(boulderStore.location, tolerance = 1.meters)
+      .hasSnippet("Open now")
+      .hasTag(boulderStore)
 
-    val boulderMarker = manager.getMarkerForStore("store_boulder")
-    assertThat(boulderMarker).isNotNull()
-    assertThat(boulderMarker?.title).isEqualTo("Boulder Flagship Store")
-    assertThat(boulderMarker?.snippet).isEqualTo("Open now")
-    assertThat(boulderMarker?.tag).isEqualTo(boulderStore)
-    LatLngSubject.assertThat(boulderMarker!!.position)
-      .isWithin(1.meters)
-      .of(boulderStore.location)
-
-    val denverMarker = manager.getMarkerForStore("store_denver")
-    assertThat(denverMarker?.snippet).isEqualTo("Closed")
-    assertThat(denverMarker?.tag).isEqualTo(denverStore)
+    assertThat(googleMap)
+      .hasMarkerWithTitle("Denver Downtown Store")
+      .hasSnippet("Closed")
+      .hasTag(denverStore)
   }
 
   @Test
   fun testMarkerClick_selectsStoreAndShowsInfoWindow() {
     manager.displayStores(listOf(boulderStore, denverStore))
-    val boulderMarker = manager.getMarkerForStore("store_boulder")!!
 
-    // Simulate user clicking on the marker via the shadow
-    val shadowMap = Shadow.extract(googleMap) as ShadowGoogleMap
-    shadowMap.clickMarker(boulderMarker)
+    // Simulate a user tapping the marker by title
+    googleMap.clickMarker("Boulder Flagship Store")
 
-    // Verify the manager notified the application listener
-    assertThat(selectedStores).containsExactly(boulderStore)
-    // Verify info window is displayed
-    assertThat(boulderMarker.isInfoWindowShown).isTrue()
+    // Verify the manager notified the application listener and opened the InfoWindow
+    truthAssertThat(selectedStores).containsExactly(boulderStore)
+    assertThat(googleMap).hasActiveInfoWindowWithTitle("Boulder Flagship Store")
   }
 
   @Test
@@ -132,47 +100,30 @@ class StoreLocatorMapManagerTest {
     manager.displayStores(listOf(boulderStore, denverStore))
 
     val success = manager.selectStore("store_boulder")
-    assertThat(success).isTrue()
+    truthAssertThat(success).isTrue()
 
-    // Verify camera moved to Boulder
-    LatLngSubject.assertThat(googleMap.cameraPosition.target)
-      .isWithin(5.meters)
-      .of(boulderStore.location)
-    assertThat(googleMap.cameraPosition.zoom).isEqualTo(15f)
-
-    // Verify info window state
-    val marker = manager.getMarkerForStore("store_boulder")
-    assertThat(marker?.isInfoWindowShown).isTrue()
+    assertThat(googleMap)
+      .isCenteredOn(boulderStore.location, tolerance = 5.meters)
+      .hasZoom(15f)
+      .hasActiveInfoWindowWithTitle("Boulder Flagship Store")
   }
 
   @Test
   fun testClearStores_removesAllMarkersFromMap() {
     manager.displayStores(listOf(boulderStore, denverStore))
-    val shadowMap = Shadow.extract(googleMap) as ShadowGoogleMap
-    assertThat(shadowMap.markers).hasSize(2)
+    assertThat(googleMap).hasMarkerCount(2)
 
     manager.clearStores()
-    assertThat(shadowMap.markers).isEmpty()
-    assertThat(manager.getMarkerForStore("store_boulder")).isNull()
+    truthAssertThat(googleMap.markers).isEmpty()
+    truthAssertThat(manager.getMarkerForStore("store_boulder")).isNull()
   }
 
   @Test
   fun testDeliveryPerimeter_rendersVisuallyOnCanvas() {
-    // Center the camera on Boulder
     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(boulderStore.location, 14f))
-
-    // Set a delivery perimeter circle
     manager.setDeliveryPerimeter(boulderStore.location, 2000.0)
 
-    // Render MapView to a bitmap canvas
-    val bitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888)
-    val canvas = Canvas(bitmap)
-    mapView.draw(canvas)
-
-    // Center pixel (100, 100) corresponds to Boulder inside the perimeter circle
-    val centerPixel = bitmap.getPixel(100, 100)
-    assertThat(centerPixel).isNotEqualTo(Color.LTGRAY)
-    assertThat(Color.alpha(centerPixel)).isGreaterThan(0)
+    assertThat(googleMap).hasNonBackgroundPixelAt(boulderStore.location)
   }
 }
 // [END maps_robolectric_manager_test]

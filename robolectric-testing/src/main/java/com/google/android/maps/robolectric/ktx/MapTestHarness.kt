@@ -21,6 +21,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.SupportMapFragment
@@ -31,6 +32,30 @@ import java.util.Locale
 import java.util.concurrent.atomic.AtomicReference
 
 // [START maps_robolectric_lazy_harness]
+/**
+ * Traverses an Android [View] hierarchy recursively to locate the first hosted [MapView].
+ *
+ * Useful in Activity, Fragment, and Jetpack Compose UI tests when extracting the underlying
+ * [MapView] from a layout or `AndroidView` container hosting Google Maps.
+ */
+fun View.findMapView(): MapView? {
+  if (this is MapView) return this
+  if (this is ViewGroup) {
+    for (i in 0 until childCount) {
+      val found = getChildAt(i).findMapView()
+      if (found != null) return found
+    }
+  }
+  return null
+}
+
+/**
+ * Traverses an Android [View] hierarchy recursively and returns the first hosted [MapView],
+ * or throws an [AssertionError] if no [MapView] is present.
+ */
+fun View.requireMapView(): MapView = findMapView()
+  ?: throw AssertionError("Expected to find a MapView inside view hierarchy rooted at $this, but none was found.")
+
 /**
  * Creates, measures, lays out, and initializes a [MapView] for headless Robolectric unit tests.
  *

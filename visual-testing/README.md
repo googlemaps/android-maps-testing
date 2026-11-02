@@ -158,9 +158,16 @@ class VisualMapSampleTest : BaseVisualTest() {
 
 ---
 
-## Hybrid Golden Fallback Implementation
+## Hybrid Golden Fallback & Committed Baselines Workflow
 
 `verifyScreenshotWithGoldenFallback` in `BaseVisualTest` provides fast, zero-quota CI execution for unchanged baselines, with AI-powered resilience when visual changes occur:
+
+1. **First Run (Local Recording)**: On your first run, no golden PNG exists yet. Gemini Vision evaluates the screenshot against your natural-language `prompt`, and if it passes, saves `<testName>.png` on the device and prints the exact `adb pull` command in Logcat.
+2. **Commit Baseline to Git**: Pull the verified golden PNG into your test assets directory:
+   ```bash
+   adb pull /sdcard/Android/data/<your.package>/files/goldens/<testName>.png app/src/androidTest/assets/goldens/<testName>.png
+   ```
+3. **Zero-Quota CI Runs**: On every subsequent emulator or CI run, `BaseVisualTest` automatically loads `assets/goldens/<testName>.png` from the test APK and compares pixels locally via `GoldenImageDiff`. As long as the screen matches within `tolerancePercent`, the test passes in milliseconds with **zero network calls and zero Gemini API quota**!
 
 ```kotlin
   // [START maps_visual_golden_fallback]
@@ -174,25 +181,23 @@ class VisualMapSampleTest : BaseVisualTest() {
     updateGoldenOnPass: Boolean = true,
   ) {
     val goldenFile = File(goldensDirectory, "$testName.png")
+    val goldenBitmap = loadGoldenBaseline(testName, goldenFile)
 
-    if (goldenFile.exists()) {
-      val goldenBitmap = BitmapFactory.decodeFile(goldenFile.absolutePath)
-      if (goldenBitmap != null) {
-        val diffResult = GoldenImageDiff.compare(
-          expected = goldenBitmap,
-          actual = screenshotBitmap,
-          maxDiffPercentage = tolerancePercent / 100.0,
-        )
+    if (goldenBitmap != null) {
+      val diffResult = GoldenImageDiff.compare(
+        expected = goldenBitmap,
+        actual = screenshotBitmap,
+        maxDiffPercentage = tolerancePercent / 100.0,
+      )
 
-        if (diffResult.matches) {
-          val pct = diffResult.diffPercentage * 100.0
-          Log.i("BaseVisualTest", "Screenshot matched golden baseline perfectly for '$testName' (diff: $pct%). Fast pass!")
-          return
-        }
-
+      if (diffResult.matches) {
         val pct = diffResult.diffPercentage * 100.0
-        Log.w("BaseVisualTest", "Screenshot diverged from golden for '$testName' (diff: $pct%). Falling back to Gemini Vision.")
+        Log.i("BaseVisualTest", "Screenshot matched golden baseline perfectly for '$testName' (diff: $pct%). Fast pass!")
+        return
       }
+
+      val pct = diffResult.diffPercentage * 100.0
+      Log.w("BaseVisualTest", "Screenshot diverged from golden for '$testName' (diff: $pct%). Falling back to Gemini Vision.")
     } else {
       Log.i("BaseVisualTest", "No existing golden baseline found for '$testName'. Consulting Gemini Vision.")
     }
@@ -228,8 +233,8 @@ class VisualMapSampleTest : BaseVisualTest() {
         Log.w("BaseVisualTest", "Saved new golden baseline for '$testName' at: ${goldenFile.absolutePath}")
         Log.i(
           "BaseVisualTest",
-          "To pull this golden image to your host repository, run:\n" +
-            "adb pull ${goldenFile.absolutePath} <repo>/src/test/resources/goldens/",
+          "To commit this golden image to your repository for fast zero-quota CI runs, run:\n" +
+            "adb pull ${goldenFile.absolutePath} app/src/androidTest/assets/goldens/$testName.png",
         )
       } catch (e: Exception) {
         Log.e("BaseVisualTest", "Failed to save updated golden image for '$testName'", e)

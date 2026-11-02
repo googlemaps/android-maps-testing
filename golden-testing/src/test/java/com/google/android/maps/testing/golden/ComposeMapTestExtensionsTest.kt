@@ -134,10 +134,6 @@ class ComposeMapTestExtensionsTest {
       googleMap.awaitMapLoaded()
     }
     testScheduler.advanceUntilIdle()
-    assertThat(loadDeferred.isCompleted).isFalse()
-
-    googleMap.shadow().notifyMapLoaded()
-    testScheduler.advanceUntilIdle()
     assertThat(loadDeferred.isCompleted).isTrue()
   }
 }
