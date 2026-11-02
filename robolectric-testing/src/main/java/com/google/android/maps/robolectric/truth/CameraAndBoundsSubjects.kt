@@ -133,7 +133,7 @@ class LatLngBoundsSubject private constructor(
     return check("center").about(LatLngSubject.latLngs()).that(actual!!.center)
   }
 
-  /** Asserts that the center of this bounding box is within [tolerance] of [expectedCenter]. */
+  /** Asserts that the center of this bounding box is within [tolerance] of an expected [LatLng]. */
   fun hasCenterWithin(tolerance: Distance): LatLngSubject.LatLngTolerance = center().isWithin(tolerance)
 
   /** Returns a [LatLngSubject] for the southwest corner of the bounds. */

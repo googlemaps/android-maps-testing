@@ -60,7 +60,7 @@ jobs:
           echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> ./secrets.properties
 
       - name: Run Tests and Coverage
-        run: ./gradlew test koverXmlReportDebug assembleRelease --stacktrace
+        run: ./gradlew test apiCheck koverXmlReportDebug assembleRelease --stacktrace
 
       # Post (or update) a sticky comment showing how this PR moves unit
       # coverage relative to the last entry recorded on main. Pull requests

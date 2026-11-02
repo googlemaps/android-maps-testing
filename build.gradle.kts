@@ -15,6 +15,14 @@
  */
 
 import com.diffplug.gradle.spotless.SpotlessExtension
+import kotlinx.validation.KotlinApiBuildTask
+import kotlinx.validation.KotlinApiCompareTask
+
+private val R_TYPES = listOf(
+  "anim", "animator", "array", "attr", "bool", "color", "dimen", "drawable", "font", "fraction", "id",
+  "integer", "interpolator", "layout", "menu", "mipmap", "plurals", "raw", "string", "style", "styleable",
+  "transition", "xml",
+)
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
@@ -26,6 +34,22 @@ plugins {
   alias(libs.plugins.kover) apply false
   alias(libs.plugins.spotless)
   alias(libs.plugins.dokka) apply false
+  alias(libs.plugins.binary.compatibility.validator)
+}
+
+// The public API of the library modules is checked against the committed api/<module>.api files.
+apiValidation {
+  ignoredProjects += listOf("app", "docs")
+}
+
+val apiDump = tasks.register("apiDump") {
+  group = "verification"
+  description = "Dumps public API declarations for all library modules."
+}
+
+val apiCheck = tasks.register("apiCheck") {
+  group = "verification"
+  description = "Checks that public API declarations match the committed .api files."
 }
 
 allprojects {
@@ -60,6 +84,62 @@ subprojects {
       googleJavaFormat("1.30.0")
       trimTrailingWhitespace()
       endWithNewline()
+    }
+  }
+
+  if (name in listOf("robolectric-testing", "golden-testing", "visual-testing")) {
+    val projectName = name
+    val apiFile = layout.projectDirectory.file("api/$projectName.api")
+    val buildApiFile = layout.buildDirectory.file("api/$projectName.api")
+
+    plugins.withId("com.android.library") {
+      afterEvaluate {
+        val bundleTask = tasks.findByName("bundleLibCompileToJarRelease") ?: return@afterEvaluate
+        val classesJar = layout.buildDirectory.file(
+          "intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar",
+        )
+
+        val apiBuild = tasks.register<KotlinApiBuildTask>("apiBuild") {
+          group = "verification"
+          description = "Builds public API declaration for $projectName."
+          inputJar.set(classesJar)
+          outputApiFile.set(buildApiFile)
+          val rClasses = listOf(
+            "com.google.android.maps.robolectric.R",
+            "com.google.android.maps.testing.golden.R",
+            "com.google.android.maps.testing.visual.R",
+          )
+          ignoredClasses.addAll(rClasses)
+          ignoredClasses.addAll(rClasses.flatMap { r -> R_TYPES.map { type -> "$r$$type" } })
+          dependsOn(bundleTask)
+        }
+
+        val moduleApiDump = tasks.register<Copy>("apiDump") {
+          group = "verification"
+          description = "Syncs public API declarations of $projectName to the project api/ directory."
+          from(apiBuild.flatMap { it.outputApiFile })
+          into(apiFile.asFile.parentFile)
+          dependsOn(apiBuild)
+        }
+
+        val moduleApiCheck = tasks.register<KotlinApiCompareTask>("apiCheck") {
+          group = "verification"
+          description = "Checks public API declarations of $projectName against the committed api/$projectName.api."
+          projectApiFile.set(apiFile)
+          generatedApiFile.set(apiBuild.flatMap { it.outputApiFile })
+          dependsOn(apiBuild)
+          mustRunAfter(moduleApiDump)
+        }
+
+        tasks.findByName("check")?.dependsOn(moduleApiCheck)
+
+        rootProject.tasks.matching { it.name == "apiDump" }.configureEach {
+          dependsOn(moduleApiDump)
+        }
+        rootProject.tasks.matching { it.name == "apiCheck" }.configureEach {
+          dependsOn(moduleApiCheck)
+        }
+      }
     }
   }
 }

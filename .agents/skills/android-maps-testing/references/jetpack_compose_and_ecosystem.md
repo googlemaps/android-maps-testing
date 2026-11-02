@@ -4,11 +4,27 @@ This guide covers testing Google Maps within **Jetpack Compose** applications an
 
 ---
 
-## 1. Jetpack Compose Map Testing Helpers
+## 1. Jetpack Compose & Activity View Hierarchy Lookup (`findMapView` / `requireMapView`)
 
-The `golden-testing` library includes coroutine and view hierarchy helpers designed specifically for Jetpack Compose testing:
+Both `:robolectric-testing` (`com.google.android.maps.robolectric.ktx`) and `:golden-testing` (`com.google.android.maps.testing.golden`) provide view hierarchy traversal helpers to extract the hosted `MapView` from an `Activity` or Jetpack Compose `AndroidView` container:
 
-Reference: `// [START maps_compose_test_extensions]` in [`ComposeMapTestExtensions.kt`](../../../../golden-testing/src/main/java/com/google/android/maps/testing/golden/ComposeMapTestExtensions.kt#L34-L116)
+Reference: `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../../robolectric-testing/src/test/java/com/google/android/maps/robolectric/shadows/ShadowMapViewKotlinTest.kt#L511-L521)
+
+```kotlin
+    // [START robolectric_view_hierarchy_lookup]
+    // Locate the hosted MapView inside an Activity or Jetpack Compose view hierarchy
+    val mapView = activity.window.decorView.requireMapView()
+    val map = mapView.getMapBlocking()
+
+    val seattle = LatLng(47.6062, -122.3321)
+    map.moveCamera(CameraUpdateFactory.newLatLngZoom(seattle, 13f))
+    GoogleMapSubject.assertThat(map)
+      .isCenteredOn(seattle, tolerance = 5.meters)
+      .hasZoom(13f)
+    // [END robolectric_view_hierarchy_lookup]
+```
+
+Reference: `// [START maps_compose_test_extensions]` in [`ComposeMapTestExtensions.kt`](../../../../golden-testing/src/main/java/com/google/android/maps/testing/golden/ComposeMapTestExtensions.kt#L36-L110)
 
 ```kotlin
 // [START maps_compose_test_extensions]
@@ -21,16 +37,7 @@ Reference: `// [START maps_compose_test_extensions]` in [`ComposeMapTestExtensio
  * @receiver The root or parent [View] to search.
  * @return The first found [MapView], or `null` if none exists.
  */
-public fun View.findMapView(): MapView? {
-  if (this is MapView) return this
-  if (this is ViewGroup) {
-    for (i in 0 until childCount) {
-      val found = getChildAt(i).findMapView()
-      if (found != null) return found
-    }
-  }
-  return null
-}
+public fun View.findMapView(): MapView? = ktxFindMapView()
 
 /**
  * Suspends until the [GoogleMap] instance hosted by this [MapView] is initialized and ready.
@@ -43,7 +50,7 @@ public suspend fun MapView.awaitMap(): GoogleMap = suspendCancellableCoroutine {
     continuation.resume(map)
   }
   try {
-    org.robolectric.shadows.ShadowLooper.idleMainLooper()
+    ShadowLooper.idleMainLooper()
   } catch (_: Throwable) {
   }
 }
@@ -55,7 +62,7 @@ public suspend fun MapView.awaitMap(): GoogleMap = suspendCancellableCoroutine {
  * @receiver The [GoogleMap] to extract shadow state from.
  * @return The backing [ShadowGoogleMap].
  */
-public fun GoogleMap.shadow(): ShadowGoogleMap = Shadow.extract(this) as ShadowGoogleMap
+public fun GoogleMap.shadow(): ShadowGoogleMap = shadowProperty
 
 /**
  * Locates an active [Marker] managed by this map whose [Marker.getTitle] matches [title].
@@ -64,7 +71,7 @@ public fun GoogleMap.shadow(): ShadowGoogleMap = Shadow.extract(this) as ShadowG
  * @param title The exact marker title to search for.
  * @return The matching [Marker], or `null` if not found.
  */
-public fun GoogleMap.findMarkerByTitle(title: String): Marker? = shadow().markers.firstOrNull { it.title == title }
+public fun GoogleMap.findMarkerByTitle(title: String): Marker? = markerWithTitle(title)
 
 /**
  * Simulates a user tapping on the marker matching [title].
@@ -78,14 +85,28 @@ public fun GoogleMap.findMarkerByTitle(title: String): Marker? = shadow().marker
  */
 public fun GoogleMap.clickMarker(title: String): Boolean {
   val marker = findMarkerByTitle(title) ?: return false
-  return shadow().clickMarker(marker)
+  shadowProperty.clickMarker(marker)
+  return true
+}
+
+/**
+ * Asserts that the camera target position is within [tolerance] of [expected].
+ *
+ * Uses the geodesic Truth [LatLngSubject] matcher.
+ *
+ * @receiver The [GoogleMap] whose camera position is being asserted.
+ * @param expected The expected geographic coordinates.
+ * @param tolerance Geodesic tolerance distance. Defaults to 10 meters.
+ */
+public fun GoogleMap.assertCameraTarget(expected: LatLng, tolerance: Distance = 10.meters) {
+  LatLngSubject.assertThat(cameraPosition.target).isWithin(tolerance).of(expected)
 }
 // [END maps_compose_test_extensions]
 ```
 
 ---
 
-## 2. Declarative Compose Golden Testing
+## 2. Declarative Compose Golden Testing (`rememberGoldenTileProvider`)
 
 Inject deterministic synthetic tiles directly into Maps Compose with `rememberGoldenTileProvider()`:
 
@@ -256,76 +277,4 @@ class MapsUtilsClusteringIntegrationTest {
   }
 }
 // [END maps_robolectric_clustering_test]
-```
-
----
-
-## 4. Modular Map Controller Pattern
-
-To prevent god classes and bloated ViewModels, isolate `GoogleMap` operations into a focused map delegate (`StoreLocatorMapManager`):
-
-Reference: `// [START maps_robolectric_manager]` in [`StoreLocatorMapManager.kt`](../../../../app/src/main/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManager.kt#L30-L134)
-
-```kotlin
-// [START maps_robolectric_manager]
-/**
- * Production map manager that coordinates store locator map overlays, camera positioning,
- * and user tap interactions on a GoogleMap instance.
- */
-class StoreLocatorMapManager(
-  private val onStoreSelected: ((Store) -> Unit)? = null,
-) {
-  private var googleMap: GoogleMap? = null
-  private val storeMarkers = mutableMapOf<String, Marker>()
-  private var deliveryZoneCircle: Circle? = null
-
-  /**
-   * Attaches and configures the [GoogleMap] instance with UI controls and click listeners.
-   */
-  fun attachMap(map: GoogleMap) {
-    this.googleMap = map
-    map.uiSettings.isZoomControlsEnabled = true
-    map.uiSettings.isCompassEnabled = true
-
-    map.setOnMarkerClickListener { marker ->
-      val store = marker.tag as? Store
-      if (store != null) {
-        marker.showInfoWindow()
-        onStoreSelected?.invoke(store)
-        true
-      } else {
-        false
-      }
-    }
-  }
-
-  /**
-   * Renders a collection of [Store] locations as markers on the map, color-coded by open status.
-   */
-  fun displayStores(stores: List<Store>) {
-    val map = googleMap ?: return
-    clearStores()
-
-    for (store in stores) {
-      val hue = if (store.isOpenNow) {
-        BitmapDescriptorFactory.HUE_AZURE
-      } else {
-        BitmapDescriptorFactory.HUE_RED
-      }
-
-      val markerOptions = MarkerOptions()
-        .position(store.location)
-        .title(store.name)
-        .snippet(if (store.isOpenNow) "Open now" else "Closed")
-        .icon(BitmapDescriptorFactory.defaultMarker(hue))
-
-      val marker = map.addMarker(markerOptions)
-      if (marker != null) {
-        marker.tag = store
-        storeMarkers[store.id] = marker
-      }
-    }
-  }
-}
-// [END maps_robolectric_manager]
 ```

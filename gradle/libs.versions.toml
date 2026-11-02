@@ -22,6 +22,7 @@ uiautomator = "2.4.0"
 kover = "0.9.11"
 spotless = "8.10.4"
 dokka = "2.2.0"
+binaryCompatibilityValidator = "0.18.2"
 
 
 [libraries]
@@ -68,3 +69,4 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binaryCompatibilityValidator" }

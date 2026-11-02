@@ -7,8 +7,8 @@ This guide establishes the architectural invariants and structural constraints f
 ## 1. The Anti-Bloat Mandate: No Monolithic "God Classes"
 
 > [!CAUTION]
-> **Strict Prohibition Against Monolithic "God Classes"**:  
-> A frequent failure mode of AI coding agents is dumping map initialization, marker management, cluster logic, network API fetching, Room database caching, business rules, and UI event listeners into a single massive Activity, Fragment, or Screen spanning 500–1000+ lines. **DO NOT DO THIS.**  
+> **Strict Prohibition Against Monolithic "God Classes"**:
+> A frequent failure mode of AI coding agents is dumping map initialization, marker management, cluster logic, network API fetching, Room database caching, business rules, and UI event listeners into a single massive Activity, Fragment, or Screen spanning 500–1000+ lines. **DO NOT DO THIS.**
 > Monolithic classes violate the Single Responsibility Principle (SRP), make unit testing impossible on host JVMs, and create brittle, untestable codebases.
 
 ### Structural Guidelines
@@ -89,13 +89,13 @@ flowchart TD
   - Manages marker collections, polylines, polygons, and info window adapters.
   - Exposes clean callbacks (e.g. `onStoreSelected: (Store) -> Unit`).
 - **Testing Benefit**:
-  - Can be tested completely on the local host JVM in milliseconds using `:robolectric-testing` shadows without launching an activity or emulator!
+  - Can be tested completely on the local host JVM in milliseconds using `:robolectric-testing` shadows (`createTestMap()` / `withTestMap { ... }`) without launching an activity or emulator!
 
 ---
 
 ## 4. Production Map Controller Implementation
 
-Reference: `// [START maps_robolectric_manager]` in [`StoreLocatorMapManager.kt`](../../../../app/src/main/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManager.kt#L30-L134)
+Reference: `// [START maps_robolectric_manager]` in [`StoreLocatorMapManager.kt`](../../../../app/src/main/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManager.kt#L31-L157)
 
 ```kotlin
 // [START maps_robolectric_manager]
@@ -109,6 +109,8 @@ class StoreLocatorMapManager(
   private var googleMap: GoogleMap? = null
   private val storeMarkers = mutableMapOf<String, Marker>()
   private var deliveryZoneCircle: Circle? = null
+  var isSearchThisAreaVisible: Boolean = false
+    private set
 
   /**
    * Attaches and configures the [GoogleMap] instance with UI controls and click listeners.
@@ -118,15 +120,20 @@ class StoreLocatorMapManager(
     map.uiSettings.isZoomControlsEnabled = true
     map.uiSettings.isCompassEnabled = true
 
+    map.setOnCameraMoveStartedListener { reason ->
+      if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) {
+        isSearchThisAreaVisible = true
+      }
+    }
+
     map.setOnMarkerClickListener { marker ->
       val store = marker.tag as? Store
       if (store != null) {
-        marker.showInfoWindow()
         onStoreSelected?.invoke(store)
-        true
-      } else {
-        false
       }
+      // Return false so the Maps SDK performs its default behavior:
+      // automatically opening the marker's InfoWindow and centering the camera.
+      false
     }
   }
 
@@ -157,15 +164,74 @@ class StoreLocatorMapManager(
       }
     }
   }
+
+  /**
+   * Selects a store by ID, centering the map camera on its location and displaying its info window.
+   */
+  fun selectStore(storeId: String): Boolean {
+    val marker = storeMarkers[storeId] ?: return false
+    val map = googleMap ?: return false
+
+    map.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 15f))
+    marker.showInfoWindow()
+    val store = marker.tag as? Store
+    if (store != null) {
+      onStoreSelected?.invoke(store)
+    }
+    return true
+  }
+
+  /**
+   * Draws a delivery service perimeter circle around a store coordinate.
+   */
+  fun setDeliveryPerimeter(center: LatLng, radiusMeters: Double) {
+    val map = googleMap ?: return
+    deliveryZoneCircle?.remove()
+
+    deliveryZoneCircle = map.addCircle(
+      CircleOptions()
+        .center(center)
+        .radius(radiusMeters)
+        .fillColor(Color.argb(70, 0, 150, 255))
+        .strokeColor(Color.BLUE)
+        .strokeWidth(2f),
+    )
+  }
+
+  /**
+   * Fits all currently displayed store markers on screen using [CameraUpdateFactory.newLatLngBounds].
+   */
+  fun fitAllStores(paddingPx: Int = 64): Boolean {
+    val map = googleMap ?: return false
+    if (storeMarkers.isEmpty()) return false
+    val boundsBuilder = LatLngBounds.builder()
+    for (marker in storeMarkers.values) {
+      boundsBuilder.include(marker.position)
+    }
+    map.animateCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(), paddingPx))
+    return true
+  }
+
+  /**
+   * Clears all store markers from the map.
+   */
+  fun clearStores() {
+    for (marker in storeMarkers.values) {
+      marker.remove()
+    }
+    storeMarkers.clear()
+  }
+
+  fun getMarkerForStore(storeId: String): Marker? = storeMarkers[storeId]
 }
 // [END maps_robolectric_manager]
 ```
 
 ---
 
-## 5. Testing the Controller on JVM with Shadows
+## 5. Testing the Controller on JVM with `createTestMap` & Domain Assertions
 
-Reference: `// [START maps_robolectric_manager_test]` in [`StoreLocatorMapManagerTest.kt`](../../../../app/src/test/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManagerTest.kt#L47-L177)
+Reference: `// [START maps_robolectric_manager_test]` in [`StoreLocatorMapManagerTest.kt`](../../../../app/src/test/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManagerTest.kt#L37-L129)
 
 ```kotlin
 // [START maps_robolectric_manager_test]
@@ -175,7 +241,6 @@ Reference: `// [START maps_robolectric_manager_test]` in [`StoreLocatorMapManage
 @EnableMapsShadows
 class StoreLocatorMapManagerTest {
 
-  private lateinit var mapView: MapView
   private lateinit var googleMap: GoogleMap
   private val selectedStores = mutableListOf<Store>()
   private lateinit var manager: StoreLocatorMapManager
@@ -196,21 +261,7 @@ class StoreLocatorMapManagerTest {
 
   @Before
   fun setUp() {
-    val activity = Robolectric.buildActivity(Activity::class.java).create().get()
-    mapView = MapView(activity).apply {
-      measure(
-        View.MeasureSpec.makeMeasureSpec(200, View.MeasureSpec.EXACTLY),
-        View.MeasureSpec.makeMeasureSpec(200, View.MeasureSpec.EXACTLY),
-      )
-      layout(0, 0, 200, 200)
-      onCreate(Bundle())
-    }
-
-    val mapRef = AtomicReference<GoogleMap>()
-    mapView.getMapAsync { mapRef.set(it) }
-    ShadowLooper.idleMainLooper()
-    googleMap = mapRef.get()
-
+    googleMap = createTestMap(width = 200, height = 200)
     manager = StoreLocatorMapManager(onStoreSelected = { selectedStores.add(it) })
     manager.attachMap(googleMap)
   }
@@ -219,8 +270,60 @@ class StoreLocatorMapManagerTest {
   fun testDisplayStores_createsMarkersWithCorrectMetadataAndTags() {
     manager.displayStores(listOf(boulderStore, denverStore))
 
-    val shadowMap = Shadow.extract(googleMap) as ShadowGoogleMap
-    assertThat(shadowMap.markers).hasSize(2)
+    assertThat(googleMap).hasMarkerCount(2)
+    assertThat(googleMap)
+      .hasMarkerWithTitle("Boulder Flagship Store")
+      .isAt(boulderStore.location, tolerance = 1.meters)
+      .hasSnippet("Open now")
+      .hasTag(boulderStore)
+
+    assertThat(googleMap)
+      .hasMarkerWithTitle("Denver Downtown Store")
+      .hasSnippet("Closed")
+      .hasTag(denverStore)
+  }
+
+  @Test
+  fun testMarkerClick_selectsStoreAndShowsInfoWindow() {
+    manager.displayStores(listOf(boulderStore, denverStore))
+
+    // Simulate a user tapping the marker by title
+    googleMap.clickMarker("Boulder Flagship Store")
+
+    // Verify the manager notified the application listener and opened the InfoWindow
+    truthAssertThat(selectedStores).containsExactly(boulderStore)
+    assertThat(googleMap).hasActiveInfoWindowWithTitle("Boulder Flagship Store")
+  }
+
+  @Test
+  fun testSelectStore_centersCameraAndOpensInfoWindow() {
+    manager.displayStores(listOf(boulderStore, denverStore))
+
+    val success = manager.selectStore("store_boulder")
+    truthAssertThat(success).isTrue()
+
+    assertThat(googleMap)
+      .isCenteredOn(boulderStore.location, tolerance = 5.meters)
+      .hasZoom(15f)
+      .hasActiveInfoWindowWithTitle("Boulder Flagship Store")
+  }
+
+  @Test
+  fun testClearStores_removesAllMarkersFromMap() {
+    manager.displayStores(listOf(boulderStore, denverStore))
+    assertThat(googleMap).hasMarkerCount(2)
+
+    manager.clearStores()
+    truthAssertThat(googleMap.markers).isEmpty()
+    truthAssertThat(manager.getMarkerForStore("store_boulder")).isNull()
+  }
+
+  @Test
+  fun testDeliveryPerimeter_rendersVisuallyOnCanvas() {
+    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(boulderStore.location, 14f))
+    manager.setDeliveryPerimeter(boulderStore.location, 2000.0)
+
+    assertThat(googleMap).hasNonBackgroundPixelAt(boulderStore.location)
   }
 }
 // [END maps_robolectric_manager_test]

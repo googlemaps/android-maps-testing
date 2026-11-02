@@ -1,0 +1,149 @@
+public final class com/google/android/maps/testing/golden/ComposeMapTestExtensionsKt {
+	public static final fun assertCameraTarget (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)V
+	public static synthetic fun assertCameraTarget$default (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)V
+	public static final fun awaitMap (Lcom/google/android/gms/maps/MapView;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun clickMarker (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;)Z
+	public static final fun findMapView (Landroid/view/View;)Lcom/google/android/gms/maps/MapView;
+	public static final fun findMarkerByTitle (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;)Lcom/google/android/gms/maps/model/Marker;
+	public static final fun shadow (Lcom/google/android/gms/maps/GoogleMap;)Lcom/google/android/maps/robolectric/shadows/ShadowGoogleMap;
+}
+
+public final class com/google/android/maps/testing/golden/DiffResult {
+	public static final field $stable I
+	public fun <init> (ZIIDLandroid/graphics/Bitmap;)V
+	public final fun component1 ()Z
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun component4 ()D
+	public final fun component5 ()Landroid/graphics/Bitmap;
+	public final fun copy (ZIIDLandroid/graphics/Bitmap;)Lcom/google/android/maps/testing/golden/DiffResult;
+	public static synthetic fun copy$default (Lcom/google/android/maps/testing/golden/DiffResult;ZIIDLandroid/graphics/Bitmap;ILjava/lang/Object;)Lcom/google/android/maps/testing/golden/DiffResult;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDiffBitmap ()Landroid/graphics/Bitmap;
+	public final fun getDiffPercentage ()D
+	public final fun getDiffPixelCount ()I
+	public final fun getMatches ()Z
+	public final fun getTotalPixelCount ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/google/android/maps/testing/golden/GoldenComposeExtensionsKt {
+	public static final fun rememberGoldenTileProvider (Lcom/google/android/maps/testing/golden/GoldenTileStrategy;ILandroidx/compose/runtime/Composer;II)Lcom/google/android/maps/testing/golden/GoldenTileProvider;
+}
+
+public final class com/google/android/maps/testing/golden/GoldenImageDiff {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/google/android/maps/testing/golden/GoldenImageDiff;
+	public final fun assertMatches (Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;DILjava/lang/String;Ljava/lang/String;Ljava/io/File;)V
+	public final fun assertMatches (Ljava/io/File;Landroid/graphics/Bitmap;DILjava/lang/String;Ljava/io/File;Z)V
+	public static synthetic fun assertMatches$default (Lcom/google/android/maps/testing/golden/GoldenImageDiff;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;DILjava/lang/String;Ljava/lang/String;Ljava/io/File;ILjava/lang/Object;)V
+	public static synthetic fun assertMatches$default (Lcom/google/android/maps/testing/golden/GoldenImageDiff;Ljava/io/File;Landroid/graphics/Bitmap;DILjava/lang/String;Ljava/io/File;ZILjava/lang/Object;)V
+	public final fun compare (Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;DIZ)Lcom/google/android/maps/testing/golden/DiffResult;
+	public static synthetic fun compare$default (Lcom/google/android/maps/testing/golden/GoldenImageDiff;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;DIZILjava/lang/Object;)Lcom/google/android/maps/testing/golden/DiffResult;
+}
+
+public final class com/google/android/maps/testing/golden/GoldenTileProvider : com/google/android/gms/maps/model/TileProvider {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Lcom/google/android/maps/testing/golden/GoldenTileStrategy;II)V
+	public synthetic fun <init> (Lcom/google/android/maps/testing/golden/GoldenTileStrategy;IIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun cachedTileCount ()I
+	public final fun clearCache ()V
+	public final fun getStrategy ()Lcom/google/android/maps/testing/golden/GoldenTileStrategy;
+	public fun getTile (III)Lcom/google/android/gms/maps/model/Tile;
+	public final fun getTileSize ()I
+}
+
+public abstract interface class com/google/android/maps/testing/golden/GoldenTileStrategy {
+	public static final field Companion Lcom/google/android/maps/testing/golden/GoldenTileStrategy$Companion;
+	public abstract fun generateTile (IIII)Landroid/graphics/Bitmap;
+	public static synthetic fun generateTile$default (Lcom/google/android/maps/testing/golden/GoldenTileStrategy;IIIIILjava/lang/Object;)Landroid/graphics/Bitmap;
+}
+
+public final class com/google/android/maps/testing/golden/GoldenTileStrategy$Checkerboard : com/google/android/maps/testing/golden/GoldenTileStrategy {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (II)V
+	public synthetic fun <init> (IIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun copy (II)Lcom/google/android/maps/testing/golden/GoldenTileStrategy$Checkerboard;
+	public static synthetic fun copy$default (Lcom/google/android/maps/testing/golden/GoldenTileStrategy$Checkerboard;IIILjava/lang/Object;)Lcom/google/android/maps/testing/golden/GoldenTileStrategy$Checkerboard;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun generateTile (IIII)Landroid/graphics/Bitmap;
+	public final fun getColorEven ()I
+	public final fun getColorOdd ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/google/android/maps/testing/golden/GoldenTileStrategy$Companion {
+	public final fun calculateDeterministicColor (IIIFF)I
+	public static synthetic fun calculateDeterministicColor$default (Lcom/google/android/maps/testing/golden/GoldenTileStrategy$Companion;IIIFFILjava/lang/Object;)I
+}
+
+public final class com/google/android/maps/testing/golden/GoldenTileStrategy$CoordinateGrid : com/google/android/maps/testing/golden/GoldenTileStrategy {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (FFIIFF)V
+	public synthetic fun <init> (FFIIFFILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()F
+	public final fun component2 ()F
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun component5 ()F
+	public final fun component6 ()F
+	public final fun copy (FFIIFF)Lcom/google/android/maps/testing/golden/GoldenTileStrategy$CoordinateGrid;
+	public static synthetic fun copy$default (Lcom/google/android/maps/testing/golden/GoldenTileStrategy$CoordinateGrid;FFIIFFILjava/lang/Object;)Lcom/google/android/maps/testing/golden/GoldenTileStrategy$CoordinateGrid;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun generateTile (IIII)Landroid/graphics/Bitmap;
+	public final fun getBorderColor ()I
+	public final fun getBorderWidth ()F
+	public final fun getLightness ()F
+	public final fun getSaturation ()F
+	public final fun getTextColor ()I
+	public final fun getTextSizeSp ()F
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/google/android/maps/testing/golden/GoldenTileStrategy$Custom : com/google/android/maps/testing/golden/GoldenTileStrategy {
+	public static final field $stable I
+	public fun <init> (Lkotlin/jvm/functions/Function4;)V
+	public fun generateTile (IIII)Landroid/graphics/Bitmap;
+}
+
+public final class com/google/android/maps/testing/golden/GoldenTileStrategy$DefaultImpls {
+	public static synthetic fun generateTile$default (Lcom/google/android/maps/testing/golden/GoldenTileStrategy;IIIIILjava/lang/Object;)Landroid/graphics/Bitmap;
+}
+
+public final class com/google/android/maps/testing/golden/GoldenTileStrategy$SolidColorHash : com/google/android/maps/testing/golden/GoldenTileStrategy {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (FF)V
+	public synthetic fun <init> (FFILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()F
+	public final fun component2 ()F
+	public final fun copy (FF)Lcom/google/android/maps/testing/golden/GoldenTileStrategy$SolidColorHash;
+	public static synthetic fun copy$default (Lcom/google/android/maps/testing/golden/GoldenTileStrategy$SolidColorHash;FFILjava/lang/Object;)Lcom/google/android/maps/testing/golden/GoldenTileStrategy$SolidColorHash;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun generateTile (IIII)Landroid/graphics/Bitmap;
+	public final fun getLightness ()F
+	public final fun getSaturation ()F
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/google/android/maps/testing/golden/GoogleMapExtensionsKt {
+	public static final fun assertMatchesGolden (Lcom/google/android/gms/maps/GoogleMap;Ljava/io/File;DILjava/lang/String;Ljava/io/File;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun assertMatchesGolden$default (Lcom/google/android/gms/maps/GoogleMap;Ljava/io/File;DILjava/lang/String;Ljava/io/File;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun assertMatchesGoldenBlocking (Lcom/google/android/gms/maps/GoogleMap;Ljava/io/File;DILjava/lang/String;Ljava/io/File;Z)V
+	public static synthetic fun assertMatchesGoldenBlocking$default (Lcom/google/android/gms/maps/GoogleMap;Ljava/io/File;DILjava/lang/String;Ljava/io/File;ZILjava/lang/Object;)V
+	public static final fun awaitMapLoaded (Lcom/google/android/gms/maps/GoogleMap;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun captureSnapshot (Lcom/google/android/gms/maps/GoogleMap;Landroid/graphics/Bitmap;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun captureSnapshot$default (Lcom/google/android/gms/maps/GoogleMap;Landroid/graphics/Bitmap;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun enableGoldenTesting (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/maps/testing/golden/GoldenTileStrategy;IZF)Lcom/google/android/gms/maps/model/TileOverlay;
+	public static synthetic fun enableGoldenTesting$default (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/maps/testing/golden/GoldenTileStrategy;IZFILjava/lang/Object;)Lcom/google/android/gms/maps/model/TileOverlay;
+}
+

@@ -39,7 +39,7 @@ flowchart LR
 | **Null & Empty State** | Empty store/marker list passed to manager. | Clears all existing markers from `GoogleMap`; does not crash or leave stale pins. |
 | **Boundary Coordinates** | Coordinates at antimeridian (180°/-180°) or poles (90°/-90°). | Validates camera bounds clamping; ensures projection does not produce `NaN` or crash. |
 | **Camera Viewport Clamping**| User pans outside authorized operational zone. | Camera movement is restricted within `LatLngBounds` via `setLatLngBoundsForCameraTarget`. |
-| **Permission Denials** | Location permission (`ACCESS_FINE_LOCATION`) denied by user. | Map gracefully centers on default market fallback; disables my-location blue dot without crashing. |
+| **User Gesture vs. Animation** | User drags map (`REASON_GESTURE`) vs. code calls `animateCamera`. | `simulateUserCameraMove` reveals "Search this area" button; programmatic move keeps follow mode active. |
 | **Offline & Network Loss** | Network connection drops during search/tile fetch. | In golden tests, synthetic tiles continue rendering uninterrupted; in app, displays cached Room data. |
 | **Lifecycle Interruption** | MapView paused/stopped mid-animation; activity recreated. | Cancels pending coroutine scopes; restores camera position and selected marker state cleanly. |
 
@@ -56,49 +56,23 @@ flowchart TD
     Tests --> Code["Stage 4: Modular Production Code\n(Passes All Tests with Zero Monolithic Classes)"]
 ```
 
-### Stage 1: Proactively Solicit Requirements
-Clarify the following from the developer:
-1. **Entities & Overlays**: What geographic data is rendered (single markers, clustered markers, polylines, geofence polygons)?
-2. **Camera Behavior**: How does the viewport initialize? Does selecting an item zoom or animate? Are there minimum/maximum zoom limits?
-3. **User Interactions**: What happens when a pin is tapped? Is dragging allowed? Should an info window or bottom sheet display?
-4. **Failure Boundaries**: What happens if the dataset is empty, permission is denied, or the user is offline?
-
-### Stage 2: Formalize Critical User Journeys (CUJs)
-Translate requirements into falsifiable, numbered CUJs:
-
-- **CUJ-1 (Initial Viewport Initialization)**:  
-  *When* the user opens the store locator,  
-  *Then* the camera initializes centered on Boulder, CO (`40.0150, -105.2705`) at zoom level 12 with zoom controls enabled.
-- **CUJ-2 (Marker Population & Status Styling)**:  
-  *When* stores are retrieved from the repository,  
-  *Then* an Azure marker is placed for each open store, a Red marker is placed for each closed store, and marker tags contain the underlying domain entity.
-- **CUJ-3 (Marker Selection & Camera Transition)**:  
-  *When* the user taps a store pin,  
-  *Then* the camera animates to center on the store at zoom 16, its info window opens, and the selection callback fires.
-- **CUJ-4 (Geofence & Visual Integrity)**:  
-  *When* a delivery area polygon is active,  
-  *Then* the polygon renders with green fill and dark gray stroke, verified by pixel assertion or deterministic golden capture.
-
 ### Stage 3: Map CUJs Across the 3 Testing Tiers
 
 | Critical User Journey (CUJ) | Optimal Testing Tier | Implementation Mechanism |
 | :--- | :--- | :--- |
-| **CUJ-1 (Camera Initialization)** | **Behavioral (`:robolectric-testing`)** | Local JVM test using `LatLngSubject.assertThat(camera.target).isWithin(5.meters).of(boulder)`. |
-| **CUJ-2 (Marker Population & Filtering)** | **Behavioral (`:robolectric-testing`)** | JVM test asserting `shadowMap.markers.size == 2` and icon hue descriptor. |
-| **CUJ-3 (Marker Tap & Info Window)** | **Behavioral (`:robolectric-testing`)** | JVM test invoking `shadowMap.clickMarker(pin)` and verifying callback. |
-| **CUJ-4 (Polygon Geometry & Visual Regressions)** | **Deterministic Pixels (`:golden-testing`)** | Golden test using `enableGoldenTesting(CoordinateGrid())` and `GoldenImageDiff.assertMatches()`. |
-| **CUJ-5 (End-to-End Screen Visual Presentation)** | **Semantic / AI (`:visual-testing`)** | Connected test using `verifyScreenshotWithGoldenFallback()` with Gemini Vision prompt. |
-
-### Stage 4: Implement Modular Code to Pass All Tests
-Implement the production code satisfying the tests, following the strict anti-bloat layering (UI &rarr; ViewModel &rarr; UseCase &rarr; MapManager).
+| **CUJ-1 (Camera Initialization & Bounds Fitting)** | **Behavioral (`:robolectric-testing`)** | Local JVM test using `withTestMap` and `assertThat(map).isCenteredOn(boulder, 5.meters)`. |
+| **CUJ-2 (Marker Population & Filtering)** | **Behavioral (`:robolectric-testing`)** | JVM test asserting `assertThat(map).hasMarkerCount(2).hasMarkerWithTitle(...)`. |
+| **CUJ-3 (Marker Tap & Single Info Window)** | **Behavioral (`:robolectric-testing`)** | JVM test invoking `map.clickMarker("Boulder Flagship Store")` and verifying `hasActiveInfoWindowWithTitle(...)`. |
+| **CUJ-4 (Polygon Geometry & Visual Regressions)** | **Deterministic Pixels (`:golden-testing`)** | Golden test using `enableGoldenTesting(CoordinateGrid())` and `assertMatchesGolden(goldenFile)`. |
+| **CUJ-5 (End-to-End Screen Visual Presentation)** | **Semantic / AI (`:visual-testing`)** | Connected test using `verifyScreenshotWithGoldenFallback()` with committed `src/androidTest/assets/goldens/` baseline. |
 
 ---
 
 ## 4. The Zero-Mock Reality Gap Mandate (Production UI Integration Gate)
 
 > [!CAUTION]
-> **Prohibition Against Isolated-Only Testing**:  
-> A critical failure mode is creating tests that instantiate synthetic, standalone `MapView` instances in isolated test fixtures while leaving production activities and screens (`MainActivity`, `MainScreen`) completely unverified or disconnected from the map.  
+> **Prohibition Against Isolated-Only Testing**:
+> A critical failure mode is creating tests that instantiate synthetic, standalone `MapView` instances in isolated test fixtures while leaving production activities and screens (`MainActivity`, `MainScreen`) completely unverified or disconnected from the map.
 > **A green test suite on synthetic test fixtures is NOT proof that the application works.**
 
 ### Rules for Production UI Verification:
@@ -108,28 +82,12 @@ Implement the production code satisfying the tests, following the strict anti-bl
      ```kotlin
      // In Compose UI tests
      composeTestRule.onNodeWithTag("google_map").assertExists().assertIsDisplayed()
-     
+
      // In View hierarchy tests
-     val mapView = activity.window.decorView.findMapView()
-     assertThat(mapView).isNotNull()
+     val mapView = activity.window.decorView.requireMapView()
+     val map = mapView.getMapBlocking()
      ```
 2. **Wire the Production Controller**:
    - Ensure the production map controller (`StoreLocatorMapManager`) is attached to the actual `MapView` hosted by the activity or composable.
 3. **Verify Manifest & Permissions**:
    - Production manifests must declare `com.google.android.geo.API_KEY`, `android.permission.INTERNET`, and `android.permission.ACCESS_NETWORK_STATE`.
-
----
-
-## 5. Mandatory Autonomous Verification Loop (The "Trust but Verify" Gate)
-
-Before any pull request is opened, marked ready, or claimed complete, the agent must autonomously execute this three-step verification loop:
-
-```mermaid
-flowchart LR
-    Build["1. Assemble APK\n./gradlew assembleDebug\n(Verifies Compilation & Manifest)"] --> Unit["2. JVM Unit Tests\n./gradlew testDebugUnitTest\n(Verifies Shadows & Logic)"]
-    Unit --> Visual["3. UI & Visual Verification\n(Inspect Layout & Screen on Device/Emulator\nw/ User Confirmation)"]
-```
-
-1. **Clean Compilation**: Run `./gradlew assembleDebug` to confirm all Kotlin, Java, and Gradle manifest bindings build cleanly with zero compiler or lint errors.
-2. **JVM Suite Verification**: Run `./gradlew testDebugUnitTest` to guarantee all Robolectric shadow tests, golden diff tests, and view model tests pass 100% green.
-3. **UI Smoke Verification**: Verify that the production layout actually renders the map surface, markers, and controls without blank tiles or crashes. (When physical devices are busy, ask user confirmation before deploying).

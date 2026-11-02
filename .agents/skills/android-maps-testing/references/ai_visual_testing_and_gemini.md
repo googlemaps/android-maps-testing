@@ -11,7 +11,7 @@ Traditional screenshot testing fails on complex map apps for multiple reasons:
 - **GPU Vector Antialiasing Differences**: Different emulator architectures (e.g. x86_64 host GPU vs ARM64) render polyline edges and fonts with slight 1-pixel anti-aliasing variations, tripping rigid pixel comparators.
 - **Semantic Assertions**: Traditional testing cannot assert intent-based criteria like *"Verify that the delivery car pin is rendered on the bridge and that the directions bubble does not obscure the compass."*
 
-`:visual-testing` addresses these challenges with **Hybrid Golden Fallback**:
+`:visual-testing` addresses these challenges with **Hybrid Golden Fallback** and **Committed Test APK Asset Goldens**:
 
 ```
                        Map Verification Flow
@@ -19,6 +19,8 @@ Traditional screenshot testing fails on complex map apps for multiple reasons:
                  +---------------+---------------+
                  |                               |
        Local Fast-Path Pixel Diff      Gemini Multimodal Fallback
+       (Checks device storage override           |
+        then src/androidTest/assets/goldens/)    |
                  |                               |
           Diff <= 0.5%?                          |
            /         \                           |
@@ -39,11 +41,11 @@ Traditional screenshot testing fails on complex map apps for multiple reasons:
 
 ## 2. Dynamic Gemini Flash Model Discovery
 
-Instead of hardcoding a model string that becomes deprecated or obsolete over time, `GeminiVisualTestHelper` dynamically queries `https://generativelanguage.googleapis.com/v1beta/models` on first run to resolve the newest stable `flash` model (e.g. `gemini-3.8-flash`, `gemini-2.5-flash`).
+Instead of hardcoding a model string that becomes deprecated or obsolete over time, `GeminiVisualTestHelper` dynamically queries `https://generativelanguage.googleapis.com/v1beta/models` on first run to resolve the newest stable `flash` model (e.g. `gemini-2.5-flash`).
 
 Once resolved, the model name is cached in-memory across the entire test session. You can also override the model:
-- Explicit parameter: `GeminiVisualTestHelper(preferredModel = "gemini-3.8-flash")`
-- System property: `-Dgemini.model="gemini-3.8-flash"`
+- Explicit parameter: `GeminiVisualTestHelper(preferredModel = "gemini-2.5-flash")`
+- System property: `-Dgemini.model="gemini-2.5-flash"`
 
 ---
 
@@ -59,13 +61,21 @@ Once resolved, the model name is cached in-memory across the entire test session
 4. **App BuildConfig via reflection**:
    `BuildConfig.GEMINI_API_KEY`
 
-If no key is configured, tests using Gemini gracefully skip with `Assume.assumeTrue(...)`, avoiding test crashes in environments where API keys are unavailable.
+If no key is configured and no matching golden baseline is found, tests using Gemini gracefully skip with `Assume.assumeTrue(...)`, avoiding false CI crashes in environments without secrets.
 
 ---
 
-## 4. Hybrid Golden Fallback Recipe
+## 4. The 3-Step Golden Lifecycle (Record Locally &rarr; Commit to `src/androidTest/assets/goldens/` &rarr; Fast Zero-Quota CI)
 
-Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../../../../visual-testing/src/main/java/com/google/android/maps/testing/visual/BaseVisualTest.kt#L147-L219)
+1. **First Local Run (with `GEMINI_API_KEY`)**: No baseline exists yet. `verifyScreenshotWithGoldenFallback` evaluates the screenshot with Gemini Vision and, when it passes, saves `<testName>.png` on device storage and prints the exact `adb pull` command in Logcat.
+2. **Commit Baseline to Git**: Pull the approved golden image into your module's `src/androidTest/assets/goldens/` directory:
+   ```bash
+   adb pull /sdcard/Android/data/<pkg>/files/goldens/store_locator_initial_state.png \
+     app/src/androidTest/assets/goldens/store_locator_initial_state.png
+   ```
+3. **Fast Zero-Quota CI & Fresh Emulator Runs**: On clean CI emulators, `BaseVisualTest` automatically loads `src/androidTest/assets/goldens/<testName>.png` from the test APK assets. When the screenshot matches within `tolerancePercent`, the test passes in milliseconds with **zero Gemini API calls** (and doesn't even require `GEMINI_API_KEY` to be set).
+
+Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../../../../visual-testing/src/main/java/com/google/android/maps/testing/visual/BaseVisualTest.kt#L147-L218)
 
 ```kotlin
   // [START maps_visual_golden_fallback]
@@ -79,25 +89,23 @@ Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../
     updateGoldenOnPass: Boolean = true,
   ) {
     val goldenFile = File(goldensDirectory, "$testName.png")
+    val goldenBitmap = loadGoldenBaseline(testName, goldenFile)
 
-    if (goldenFile.exists()) {
-      val goldenBitmap = BitmapFactory.decodeFile(goldenFile.absolutePath)
-      if (goldenBitmap != null) {
-        val diffResult = GoldenImageDiff.compare(
-          expected = goldenBitmap,
-          actual = screenshotBitmap,
-          maxDiffPercentage = tolerancePercent / 100.0,
-        )
+    if (goldenBitmap != null) {
+      val diffResult = GoldenImageDiff.compare(
+        expected = goldenBitmap,
+        actual = screenshotBitmap,
+        maxDiffPercentage = tolerancePercent / 100.0,
+      )
 
-        if (diffResult.matches) {
-          val pct = diffResult.diffPercentage * 100.0
-          Log.i("BaseVisualTest", "Screenshot matched golden baseline perfectly for '$testName' (diff: $pct%). Fast pass!")
-          return
-        }
-
+      if (diffResult.matches) {
         val pct = diffResult.diffPercentage * 100.0
-        Log.w("BaseVisualTest", "Screenshot diverged from golden for '$testName' (diff: $pct%). Falling back to Gemini Vision.")
+        Log.i("BaseVisualTest", "Screenshot matched golden baseline perfectly for '$testName' (diff: $pct%). Fast pass!")
+        return
       }
+
+      val pct = diffResult.diffPercentage * 100.0
+      Log.w("BaseVisualTest", "Screenshot diverged from golden for '$testName' (diff: $pct%). Falling back to Gemini Vision.")
     } else {
       Log.i("BaseVisualTest", "No existing golden baseline found for '$testName'. Consulting Gemini Vision.")
     }
@@ -133,8 +141,8 @@ Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../
         Log.w("BaseVisualTest", "Saved new golden baseline for '$testName' at: ${goldenFile.absolutePath}")
         Log.i(
           "BaseVisualTest",
-          "To pull this golden image to your host repository, run:\n" +
-            "adb pull ${goldenFile.absolutePath} <repo>/src/test/resources/goldens/",
+          "To commit this golden image to your repository for fast zero-quota CI runs, run:\n" +
+            "adb pull ${goldenFile.absolutePath} app/src/androidTest/assets/goldens/$testName.png",
         )
       } catch (e: Exception) {
         Log.e("BaseVisualTest", "Failed to save updated golden image for '$testName'", e)
@@ -148,7 +156,7 @@ Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../
 
 ## 5. End-to-End Instrumented Test
 
-Reference: `// [START maps_visual_test_sample]` in [`VisualMapSampleTest.kt`](../../../../app/src/androidTest/java/com/example/androidmapsrobolectric/VisualMapSampleTest.kt#L28-L71)
+Reference: `// [START maps_visual_test_sample]` in [`VisualMapSampleTest.kt`](../../../../app/src/androidTest/java/com/example/androidmapsrobolectric/VisualMapSampleTest.kt#L28-L72)
 
 ```kotlin
 // [START maps_visual_test_sample]

@@ -27,6 +27,11 @@ import org.junit.runner.RunWith
 
 /**
  * Standard template for multimodal AI visual testing with Gemini Vision and hybrid golden fallback.
+ *
+ * Workflow:
+ * 1. Run locally once with GEMINI_API_KEY configured to validate and record the initial baseline.
+ * 2. Pull the golden image into `src/androidTest/assets/goldens/<testName>.png` using the logged `adb pull` command.
+ * 3. Subsequent runs on fresh emulators or CI fast-pass in milliseconds with zero Gemini API quota.
  */
 @RunWith(AndroidJUnit4::class)
 class VisualMapTestTemplate : BaseVisualTest() {
@@ -58,7 +63,8 @@ class VisualMapTestTemplate : BaseVisualTest() {
       If any criteria fail, describe the visual discrepancy in detail.
     """.trimIndent()
 
-    // 5. Execute hybrid verification: local pixel diff first, fallback to Gemini Vision
+    // 5. Execute hybrid verification: checks device storage override -> bundled
+    //    src/androidTest/assets/goldens/map_visual_integrity_baseline.png -> Gemini Vision fallback
     verifyScreenshotWithGoldenFallback(
       testName = "map_visual_integrity_baseline",
       screenshotBitmap = screenshot,
