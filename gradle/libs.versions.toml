@@ -23,6 +23,7 @@ kover = "0.9.11"
 spotless = "8.10.4"
 dokka = "2.2.0"
 binaryCompatibilityValidator = "0.18.2"
+gradleMavenPublishPlugin = "0.37.0"
 
 
 [libraries]
@@ -70,3 +71,4 @@ kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binaryCompatibilityValidator" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "gradleMavenPublishPlugin" }

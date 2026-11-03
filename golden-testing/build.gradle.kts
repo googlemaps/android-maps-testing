@@ -21,7 +21,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kover)
     alias(libs.plugins.dokka)
-    `maven-publish`
+    alias(libs.plugins.maven.publish)
 }
 
 kotlin {
@@ -51,13 +51,6 @@ android {
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
-        }
-    }
-
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-            withJavadocJar()
         }
     }
 }
@@ -97,41 +90,6 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.espresso.core)
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-                groupId = "com.google.android.maps.testing"
-                artifactId = "golden"
-                version = rootProject.version.toString()
-
-                pom {
-                    name.set("Android Maps Golden Testing")
-                    description.set("Deterministic golden image and screenshot testing library for Google Maps SDK on Android.")
-                    url.set("https://github.com/googlemaps/android-maps-testing")
-                    licenses {
-                        license {
-                            name.set("The Apache Software License, Version 2.0")
-                            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                        }
-                    }
-                    developers {
-                        developer {
-                            name.set("Google Maps Platform Developer Relations")
-                        }
-                    }
-                    scm {
-                        connection.set("scm:git:github.com/googlemaps/android-maps-testing.git")
-                        developerConnection.set("scm:git:ssh://github.com/googlemaps/android-maps-testing.git")
-                        url.set("https://github.com/googlemaps/android-maps-testing/tree/main")
-                    }
-                }
-            }
-        }
-    }
 }
 
 tasks.withType<Test>().configureEach {

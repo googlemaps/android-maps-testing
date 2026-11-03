@@ -54,7 +54,15 @@ jobs:
           sed -i 's/version = "[^"]*"/version = "'"$VERSION"'"/' build.gradle.kts
 
           # Files with x-release-please-start-version / x-release-please-end blocks
-          for file in README.md robolectric-testing/README.md golden-testing/README.md visual-testing/README.md; do
+          for file in \
+            README.md \
+            robolectric-testing/README.md \
+            golden-testing/README.md \
+            visual-testing/README.md \
+            .agents/skills/android-maps-testing/SKILL.md \
+            .agents/skills/maps-robolectric-testing/SKILL.md \
+            .agents/skills/maps-golden-testing/SKILL.md \
+            .agents/skills/maps-visual-testing/SKILL.md; do
             if [ -f "$file" ]; then
               sed -i "/x-release-please-start-version/,/x-release-please-end/{
                 s/mapsTesting = \"[^\"]*\"/mapsTesting = \"$VERSION\"/g
@@ -74,7 +82,11 @@ jobs:
             README.md \
             robolectric-testing/README.md \
             golden-testing/README.md \
-            visual-testing/README.md
+            visual-testing/README.md \
+            .agents/skills/android-maps-testing/SKILL.md \
+            .agents/skills/maps-robolectric-testing/SKILL.md \
+            .agents/skills/maps-golden-testing/SKILL.md \
+            .agents/skills/maps-visual-testing/SKILL.md
           if ! git diff --staged --quiet; then
             git commit -m "chore: release v${VERSION}"
             git push origin "$BRANCH"

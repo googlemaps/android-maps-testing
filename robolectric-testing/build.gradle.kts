@@ -23,7 +23,7 @@ plugins {
   alias(libs.plugins.kotlin.power.assert)
   alias(libs.plugins.kover)
   alias(libs.plugins.dokka)
-  `maven-publish`
+  alias(libs.plugins.maven.publish)
 }
 
 @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -57,13 +57,6 @@ android {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
   }
-
-  publishing {
-    singleVariant("release") {
-      withSourcesJar()
-      withJavadocJar()
-    }
-  }
 }
 
 kover {
@@ -86,41 +79,6 @@ dependencies {
   testImplementation(libs.robolectric)
   testImplementation(libs.junit)
   testImplementation(libs.truth)
-}
-
-afterEvaluate {
-  publishing {
-    publications {
-      create<MavenPublication>("release") {
-        from(components["release"])
-        groupId = "com.google.android.maps.robolectric"
-        artifactId = "shadows"
-        version = rootProject.version.toString()
-
-        pom {
-          name.set("Android Maps Robolectric Shadows")
-          description.set("Robolectric shadows, Kotlin Power-Assert helpers, and Google Truth testing utilities for Google Maps SDK on Android.")
-          url.set("https://github.com/googlemaps/android-maps-testing")
-          licenses {
-            license {
-              name.set("The Apache Software License, Version 2.0")
-              url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-            }
-          }
-          developers {
-            developer {
-              name.set("Google Maps Platform Developer Relations")
-            }
-          }
-          scm {
-            connection.set("scm:git:github.com/googlemaps/android-maps-testing.git")
-            developerConnection.set("scm:git:ssh://github.com/googlemaps/android-maps-testing.git")
-            url.set("https://github.com/googlemaps/android-maps-testing/tree/main")
-          }
-        }
-      }
-    }
-  }
 }
 
 tasks.withType<Test> {

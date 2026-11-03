@@ -15,6 +15,10 @@
  */
 
 import com.diffplug.gradle.spotless.SpotlessExtension
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.MavenPublishBaseExtension
+import com.vanniktech.maven.publish.SourcesJar
 import kotlinx.validation.KotlinApiBuildTask
 import kotlinx.validation.KotlinApiCompareTask
 
@@ -35,6 +39,7 @@ plugins {
   alias(libs.plugins.spotless)
   alias(libs.plugins.dokka) apply false
   alias(libs.plugins.binary.compatibility.validator)
+  alias(libs.plugins.maven.publish) apply false
 }
 
 // The public API of the library modules is checked against the committed api/<module>.api files.
@@ -91,6 +96,82 @@ subprojects {
     val projectName = name
     val apiFile = layout.projectDirectory.file("api/$projectName.api")
     val buildApiFile = layout.buildDirectory.file("api/$projectName.api")
+
+    plugins.withId("com.vanniktech.maven.publish") {
+      extensions.configure<MavenPublishBaseExtension> {
+        configure(
+          AndroidSingleVariantLibrary(
+            variant = "release",
+            sourcesJar = SourcesJar.Sources(),
+            javadocJar = JavadocJar.Javadoc(),
+          ),
+        )
+
+        publishToMavenCentral()
+        if (
+          findProperty("signing.keyId")?.toString()?.isNotBlank() == true ||
+          findProperty("signing.secretKeyRingFile")?.toString()?.isNotBlank() == true ||
+          findProperty("signingInMemoryKey")?.toString()?.isNotBlank() == true
+        ) {
+          signAllPublications()
+        }
+
+        val (moduleGroupId, moduleArtifactId, modulePomName, moduleDescription) = when (projectName) {
+          "robolectric-testing" -> listOf(
+            "com.google.android.maps.robolectric",
+            "shadows",
+            "Android Maps Robolectric Shadows",
+            "Robolectric shadows, Kotlin Power-Assert helpers, and Google Truth testing utilities for Google Maps SDK on Android.",
+          )
+          "golden-testing" -> listOf(
+            "com.google.android.maps.testing",
+            "golden",
+            "Android Maps Golden Testing",
+            "Deterministic golden image and screenshot testing library for Google Maps SDK on Android.",
+          )
+          else -> listOf(
+            "com.google.android.maps.testing",
+            "visual",
+            "Android Maps Visual Testing",
+            "AI-powered visual verification and screenshot testing library for Google Maps SDK on Android.",
+          )
+        }
+
+        coordinates(
+          groupId = moduleGroupId,
+          artifactId = moduleArtifactId,
+          version = rootProject.version.toString(),
+        )
+
+        pom {
+          name.set(modulePomName)
+          description.set(moduleDescription)
+          url.set("https://github.com/googlemaps/android-maps-testing")
+          licenses {
+            license {
+              name.set("The Apache Software License, Version 2.0")
+              url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+              distribution.set("repo")
+            }
+          }
+          scm {
+            connection.set("scm:git@github.com:googlemaps/android-maps-testing.git")
+            developerConnection.set("scm:git@github.com:googlemaps/android-maps-testing.git")
+            url.set("https://github.com/googlemaps/android-maps-testing")
+          }
+          developers {
+            developer {
+              id.set("google")
+              name.set("Google LLC")
+            }
+          }
+          organization {
+            name.set("Google Inc")
+            url.set("http://developers.google.com/maps")
+          }
+        }
+      }
+    }
 
     plugins.withId("com.android.library") {
       afterEvaluate {

@@ -17,6 +17,7 @@ name: Publish
 on:
   release:
     types: [published]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -28,8 +29,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          persist-credentials: false
-          token: ${{ secrets.SYNCED_GITHUB_TOKEN_REPO }}
+          token: ${{ secrets.SYNCED_GITHUB_TOKEN_REPO || secrets.GITHUB_TOKEN }}
 
       - name: Set up JDK 21
         uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
@@ -40,5 +40,24 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
 
-      - name: Build and Publish
-        run: ./gradlew :robolectric-testing:publish :golden-testing:publish :visual-testing:publish --warn --stacktrace
+      - name: Create .gpg key
+        run: |
+          echo $GPG_KEY_ARMOR | base64 --decode > ./release.asc
+          gpg --quiet --output $GITHUB_WORKSPACE/release.gpg --dearmor ./release.asc
+
+          echo "Build and publish"
+          sed -i -e "s,mavenCentralUsername=,mavenCentralUsername=$SONATYPE_TOKEN_USERNAME,g" gradle.properties
+          SONATYPE_TOKEN_PASSWORD_ESCAPED=$(printf '%s\n' "$SONATYPE_TOKEN_PASSWORD" | sed -e 's/[\/&]/\\&/g')
+          sed -i -e "s,mavenCentralPassword=,mavenCentralPassword=$SONATYPE_TOKEN_PASSWORD_ESCAPED,g" gradle.properties
+          sed -i -e "s,signing.keyId=,signing.keyId=$GPG_KEY_ID,g" gradle.properties
+          sed -i -e "s,signing.password=,signing.password=$GPG_PASSWORD,g" gradle.properties
+          sed -i -e "s,signing.secretKeyRingFile=,signing.secretKeyRingFile=$GITHUB_WORKSPACE/release.gpg,g" gradle.properties
+        env:
+          GPG_KEY_ARMOR: ${{ secrets.SYNCED_GPG_KEY_ARMOR }}
+          GPG_KEY_ID: ${{ secrets.SYNCED_GPG_KEY_ID }}
+          GPG_PASSWORD: ${{ secrets.SYNCED_GPG_KEY_PASSWORD }}
+          SONATYPE_TOKEN_PASSWORD: ${{ secrets.SONATYPE_TOKEN_PASSWORD }}
+          SONATYPE_TOKEN_USERNAME: ${{ secrets.SONATYPE_TOKEN }}
+
+      - name: Publish to MavenCentral
+        run: ./gradlew publishToMavenCentral --warn --stacktrace
