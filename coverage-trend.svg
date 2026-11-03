@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="100%" height="280">
+  <style>
+    .title { font: bold 14px system-ui, -apple-system, sans-serif; fill: #24292f; }
+    .grid { stroke: #d0d7de; stroke-dasharray: 3,3; stroke-width: 1; }
+    .axis-label { font: 11px system-ui, -apple-system, sans-serif; fill: #57606a; }
+    .commit-label { font: 10px monospace; fill: #57606a; text-anchor: middle; }
+    .legend { font: 12px system-ui, -apple-system, sans-serif; fill: #24292f; }
+    @media (prefers-color-scheme: dark) {
+      .title { fill: #f0f6fc; }
+      .grid { stroke: #30363d; }
+      .axis-label, .commit-label { fill: #8b949e; }
+      .legend { fill: #f0f6fc; }
+    }
+  </style>
+  <text x="55" y="25" class="title">Total Line Coverage Trend</text>
+  <circle cx="560" cy="22" r="5" fill="#4285F4" />
+  <text x="570" y="26" class="legend">Unit</text>
+  <circle cx="660" cy="22" r="5" fill="#34A853" />
+  <text x="670" y="26" class="legend">Instrumentation</text>
+  <line x1="55" y1="235.0" x2="765" y2="235.0" class="grid" />
+  <text x="47" y="239.0" text-anchor="end" class="axis-label">0%</text>
+  <line x1="55" y1="187.5" x2="765" y2="187.5" class="grid" />
+  <text x="47" y="191.5" text-anchor="end" class="axis-label">25%</text>
+  <line x1="55" y1="140.0" x2="765" y2="140.0" class="grid" />
+  <text x="47" y="144.0" text-anchor="end" class="axis-label">50%</text>
+  <line x1="55" y1="92.5" x2="765" y2="92.5" class="grid" />
+  <text x="47" y="96.5" text-anchor="end" class="axis-label">75%</text>
+  <line x1="55" y1="45.0" x2="765" y2="45.0" class="grid" />
+  <text x="47" y="49.0" text-anchor="end" class="axis-label">100%</text>
+  <path d="M 55.0,84.3 L 291.7,84.3 L 528.3,85.1 L 765.0,85.1 L 765.0,235.0 L 55.0,235.0 Z" fill="#4285F4" fill-opacity="0.12" />
+  <path d="M 55.0,84.3 L 291.7,84.3 L 528.3,85.1 L 765.0,85.1" fill="none" stroke="#4285F4" stroke-width="2.5" stroke-linejoin="round" />
+  <circle cx="55.0" cy="84.3" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+    <title>47be0ab: 79.34% (unit)</title>
+  </circle>
+  <circle cx="291.7" cy="84.3" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+    <title>e3bd2d2: 79.34% (unit)</title>
+  </circle>
+  <circle cx="528.3" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+    <title>c2bd264: 78.88% (unit)</title>
+  </circle>
+  <circle cx="765.0" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+    <title>3067825: 78.88% (unit)</title>
+  </circle>
+  <text x="55.0" y="265" class="commit-label">47be0ab</text>
+  <text x="291.7" y="265" class="commit-label">e3bd2d2</text>
+  <text x="528.3" y="265" class="commit-label">c2bd264</text>
+  <text x="765.0" y="265" class="commit-label">3067825</text>
+</svg>

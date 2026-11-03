@@ -1,0 +1,17 @@
+timestamp,commit,pr,subject,suite,module,lines_covered,lines_total,line_pct,branches_covered,branches_total,branch_pct,instructions_covered,instructions_total,instruction_pct
+2026-11-01T21:58:26Z,47be0ab,,feat: initial release of Android Maps Testing Toolkit (1.0.0-rc01),unit,golden-testing,179,198,90.4,53,90,58.89,1066,1317,80.94
+2026-11-01T21:58:26Z,47be0ab,,feat: initial release of Android Maps Testing Toolkit (1.0.0-rc01),unit,robolectric-testing,1436,1675,85.73,287,536,53.54,7630,8818,86.53
+2026-11-01T21:58:26Z,47be0ab,,feat: initial release of Android Maps Testing Toolkit (1.0.0-rc01),unit,visual-testing,102,291,35.05,78,323,24.15,1143,3118,36.66
+2026-11-01T21:58:26Z,47be0ab,,feat: initial release of Android Maps Testing Toolkit (1.0.0-rc01),unit,TOTAL,1717,2164,79.34,418,949,44.05,9839,13253,74.24
+2026-11-01T21:58:26Z,e3bd2d2,,"chore: support Kotlin Power-Assert alternative, Version Catalog docs, and bump deps",unit,golden-testing,179,198,90.4,53,90,58.89,1066,1317,80.94
+2026-11-01T21:58:26Z,e3bd2d2,,"chore: support Kotlin Power-Assert alternative, Version Catalog docs, and bump deps",unit,robolectric-testing,1436,1675,85.73,287,536,53.54,7630,8818,86.53
+2026-11-01T21:58:26Z,e3bd2d2,,"chore: support Kotlin Power-Assert alternative, Version Catalog docs, and bump deps",unit,visual-testing,102,291,35.05,78,323,24.15,1143,3118,36.66
+2026-11-01T21:58:26Z,e3bd2d2,,"chore: support Kotlin Power-Assert alternative, Version Catalog docs, and bump deps",unit,TOTAL,1717,2164,79.34,418,949,44.05,9839,13253,74.24
+2026-11-03T17:03:14Z,c2bd264,,"feat: improve developer onboarding, KTX ergonomics, and cookbook docs",unit,golden-testing,236,261,90.42,58,100,58.0,1293,1569,82.41
+2026-11-03T17:03:14Z,c2bd264,,"feat: improve developer onboarding, KTX ergonomics, and cookbook docs",unit,robolectric-testing,1577,1876,84.06,333,642,51.87,8358,9968,83.85
+2026-11-03T17:03:14Z,c2bd264,,"feat: improve developer onboarding, KTX ergonomics, and cookbook docs",unit,visual-testing,110,301,36.54,84,335,25.07,1262,3256,38.76
+2026-11-03T17:03:14Z,c2bd264,,"feat: improve developer onboarding, KTX ergonomics, and cookbook docs",unit,TOTAL,1923,2438,78.88,475,1077,44.1,10913,14793,73.77
+2026-11-03T20:52:12Z,3067825,,docs(skills): add testing paradigm skills and region-tagged references in .agents/skills,unit,golden-testing,236,261,90.42,58,100,58.0,1293,1569,82.41
+2026-11-03T20:52:12Z,3067825,,docs(skills): add testing paradigm skills and region-tagged references in .agents/skills,unit,robolectric-testing,1577,1876,84.06,333,642,51.87,8358,9968,83.85
+2026-11-03T20:52:12Z,3067825,,docs(skills): add testing paradigm skills and region-tagged references in .agents/skills,unit,visual-testing,110,301,36.54,84,335,25.07,1262,3256,38.76
+2026-11-03T20:52:12Z,3067825,,docs(skills): add testing paradigm skills and region-tagged references in .agents/skills,unit,TOTAL,1923,2438,78.88,475,1077,44.1,10913,14793,73.77
