@@ -1,7 +1,7 @@
-public abstract interface annotation class com/google/android/maps/robolectric/annotation/EnableMapsShadows : java/lang/annotation/Annotation {
+public abstract interface annotation class com/google/maps/android/robolectric/annotation/EnableMapsShadows : java/lang/annotation/Annotation {
 }
 
-public final class com/google/android/maps/robolectric/ktx/GoogleMapShadowExtKt {
+public final class com/google/maps/android/robolectric/ktx/GoogleMapShadowExtKt {
 	public static final fun click (Lcom/google/android/gms/maps/model/Circle;)Lcom/google/android/gms/maps/model/Circle;
 	public static final fun click (Lcom/google/android/gms/maps/model/GroundOverlay;)Lcom/google/android/gms/maps/model/GroundOverlay;
 	public static final fun click (Lcom/google/android/gms/maps/model/Marker;)Lcom/google/android/gms/maps/model/Marker;
@@ -12,8 +12,8 @@ public final class com/google/android/maps/robolectric/ktx/GoogleMapShadowExtKt 
 	public static final fun clickMarker (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/model/Marker;)Lcom/google/android/gms/maps/model/Marker;
 	public static final fun clickMarker (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;)Lcom/google/android/gms/maps/model/Marker;
 	public static final fun dragTo (Lcom/google/android/gms/maps/model/Marker;Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/gms/maps/model/Marker;
-	public static final fun findMarker (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/gms/maps/model/Marker;
-	public static synthetic fun findMarker$default (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/android/gms/maps/model/Marker;
+	public static final fun findMarker (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/android/gms/maps/model/Marker;
+	public static synthetic fun findMarker$default (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/android/gms/maps/model/Marker;
 	public static final fun getActiveInfoWindowMarker (Lcom/google/android/gms/maps/GoogleMap;)Lcom/google/android/gms/maps/model/Marker;
 	public static final fun getCameraBearing (Lcom/google/android/gms/maps/GoogleMap;)F
 	public static final fun getCameraTarget (Lcom/google/android/gms/maps/GoogleMap;)Lcom/google/android/gms/maps/model/LatLng;
@@ -28,30 +28,30 @@ public final class com/google/android/maps/robolectric/ktx/GoogleMapShadowExtKt 
 	public static final fun getMarkers (Lcom/google/android/gms/maps/GoogleMap;)Ljava/util/List;
 	public static final fun getPolygons (Lcom/google/android/gms/maps/GoogleMap;)Ljava/util/List;
 	public static final fun getPolylines (Lcom/google/android/gms/maps/GoogleMap;)Ljava/util/List;
-	public static final fun getShadow (Lcom/google/android/gms/maps/GoogleMap;)Lcom/google/android/maps/robolectric/shadows/ShadowGoogleMap;
-	public static final fun getShadow (Lcom/google/android/gms/maps/MapView;)Lcom/google/android/maps/robolectric/shadows/ShadowMapView;
-	public static final fun getShadow (Lcom/google/android/gms/maps/UiSettings;)Lcom/google/android/maps/robolectric/shadows/ShadowUiSettings;
-	public static final fun getShadow (Lcom/google/android/gms/maps/model/BitmapDescriptor;)Lcom/google/android/maps/robolectric/shadows/ShadowBitmapDescriptor;
-	public static final fun getShadow (Lcom/google/android/gms/maps/model/Circle;)Lcom/google/android/maps/robolectric/shadows/ShadowCircle;
-	public static final fun getShadow (Lcom/google/android/gms/maps/model/GroundOverlay;)Lcom/google/android/maps/robolectric/shadows/ShadowGroundOverlay;
-	public static final fun getShadow (Lcom/google/android/gms/maps/model/Marker;)Lcom/google/android/maps/robolectric/shadows/ShadowMarker;
-	public static final fun getShadow (Lcom/google/android/gms/maps/model/Polygon;)Lcom/google/android/maps/robolectric/shadows/ShadowPolygon;
-	public static final fun getShadow (Lcom/google/android/gms/maps/model/Polyline;)Lcom/google/android/maps/robolectric/shadows/ShadowPolyline;
-	public static final fun getShadow (Lcom/google/android/gms/maps/model/TileOverlay;)Lcom/google/android/maps/robolectric/shadows/ShadowTileOverlay;
+	public static final fun getShadow (Lcom/google/android/gms/maps/GoogleMap;)Lcom/google/maps/android/robolectric/shadows/ShadowGoogleMap;
+	public static final fun getShadow (Lcom/google/android/gms/maps/MapView;)Lcom/google/maps/android/robolectric/shadows/ShadowMapView;
+	public static final fun getShadow (Lcom/google/android/gms/maps/UiSettings;)Lcom/google/maps/android/robolectric/shadows/ShadowUiSettings;
+	public static final fun getShadow (Lcom/google/android/gms/maps/model/BitmapDescriptor;)Lcom/google/maps/android/robolectric/shadows/ShadowBitmapDescriptor;
+	public static final fun getShadow (Lcom/google/android/gms/maps/model/Circle;)Lcom/google/maps/android/robolectric/shadows/ShadowCircle;
+	public static final fun getShadow (Lcom/google/android/gms/maps/model/GroundOverlay;)Lcom/google/maps/android/robolectric/shadows/ShadowGroundOverlay;
+	public static final fun getShadow (Lcom/google/android/gms/maps/model/Marker;)Lcom/google/maps/android/robolectric/shadows/ShadowMarker;
+	public static final fun getShadow (Lcom/google/android/gms/maps/model/Polygon;)Lcom/google/maps/android/robolectric/shadows/ShadowPolygon;
+	public static final fun getShadow (Lcom/google/android/gms/maps/model/Polyline;)Lcom/google/maps/android/robolectric/shadows/ShadowPolyline;
+	public static final fun getShadow (Lcom/google/android/gms/maps/model/TileOverlay;)Lcom/google/maps/android/robolectric/shadows/ShadowTileOverlay;
 	public static final fun getTileOverlays (Lcom/google/android/gms/maps/GoogleMap;)Ljava/util/List;
 	public static final fun getVisibleBounds (Lcom/google/android/gms/maps/GoogleMap;)Lcom/google/android/gms/maps/model/LatLngBounds;
 	public static final fun longClickInfoWindow (Lcom/google/android/gms/maps/model/Marker;)Lcom/google/android/gms/maps/model/Marker;
 	public static final fun longClickMap (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/model/LatLng;)V
 	public static final fun markerWithTag (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/Object;)Lcom/google/android/gms/maps/model/Marker;
 	public static final fun markerWithTitle (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;)Lcom/google/android/gms/maps/model/Marker;
-	public static final fun requireMarker (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/gms/maps/model/Marker;
-	public static synthetic fun requireMarker$default (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/android/gms/maps/model/Marker;
+	public static final fun requireMarker (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/android/gms/maps/model/Marker;
+	public static synthetic fun requireMarker$default (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/android/gms/maps/model/Marker;
 	public static final fun simulateUserCameraMove (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/CameraUpdate;)V
 	public static final fun simulateUserCameraMove (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/model/LatLng;F)V
 	public static synthetic fun simulateUserCameraMove$default (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/model/LatLng;FILjava/lang/Object;)V
 }
 
-public final class com/google/android/maps/robolectric/ktx/MapTestHarnessKt {
+public final class com/google/maps/android/robolectric/ktx/MapTestHarnessKt {
 	public static final fun createTestMap (II)Lcom/google/android/gms/maps/GoogleMap;
 	public static synthetic fun createTestMap$default (IIILjava/lang/Object;)Lcom/google/android/gms/maps/GoogleMap;
 	public static final fun createTestMapView (IILandroid/app/Activity;)Lcom/google/android/gms/maps/MapView;
@@ -72,46 +72,43 @@ public final class com/google/android/maps/robolectric/ktx/MapTestHarnessKt {
 	public static synthetic fun withTestMap$default (IILkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
 }
 
-public final class com/google/android/maps/robolectric/powerassert/MapPowerAssertKt {
+public final class com/google/maps/android/robolectric/powerassert/MapPowerAssertKt {
 	public static final fun assertGeo (Z)V
 	public static final fun assertGeo (ZLkotlin/jvm/functions/Function0;)V
 	public static final fun assertMap (Lcom/google/android/gms/maps/GoogleMap;Z)V
 	public static final fun assertMap (Lcom/google/android/gms/maps/GoogleMap;ZLkotlin/jvm/functions/Function0;)V
 	public static final fun assertMarker (Lcom/google/android/gms/maps/model/Marker;Z)V
 	public static final fun assertMarker (Lcom/google/android/gms/maps/model/Marker;ZLkotlin/jvm/functions/Function0;)V
-	public static final fun connects (Lcom/google/android/gms/maps/model/Polyline;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)Z
-	public static synthetic fun connects$default (Lcom/google/android/gms/maps/model/Polyline;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Z
+	public static final fun connects (Lcom/google/android/gms/maps/model/Polyline;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;)Z
+	public static synthetic fun connects$default (Lcom/google/android/gms/maps/model/Polyline;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Z
 	public static final fun contains (Lcom/google/android/gms/maps/model/Circle;Lcom/google/android/gms/maps/model/LatLng;)Z
 	public static final fun contains (Lcom/google/android/gms/maps/model/LatLngBounds;Lcom/google/android/gms/maps/model/LatLng;)Z
-	public static final fun distanceTo (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getFeet (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getFoot (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getKilometer (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getKilometers (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getMeter (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getMeters (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getMile (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getMiles (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun hasMarker (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;Ljava/lang/Boolean;)Z
-	public static synthetic fun hasMarker$default (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;Ljava/lang/Boolean;ILjava/lang/Object;)Z
+	public static final fun distanceTo (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getFeet (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getFoot (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getKilometer (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getKilometers (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getMeter (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getMeters (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getMile (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getMiles (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun hasMarker (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;Ljava/lang/Boolean;)Z
+	public static synthetic fun hasMarker$default (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;Ljava/lang/Boolean;ILjava/lang/Object;)Z
 	public static final fun hasOverlayPixelAt (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/model/LatLng;I)Z
 	public static synthetic fun hasOverlayPixelAt$default (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/model/LatLng;IILjava/lang/Object;)Z
-	public static final fun hasVertexNear (Lcom/google/android/gms/maps/model/Polygon;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)Z
-	public static synthetic fun hasVertexNear$default (Lcom/google/android/gms/maps/model/Polygon;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Z
-	public static final fun isCenteredOn (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/model/LatLng;Ljava/lang/Float;Lcom/google/android/maps/robolectric/truth/Distance;F)Z
-	public static synthetic fun isCenteredOn$default (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/model/LatLng;Ljava/lang/Float;Lcom/google/android/maps/robolectric/truth/Distance;FILjava/lang/Object;)Z
+	public static final fun hasVertexNear (Lcom/google/android/gms/maps/model/Polygon;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;)Z
+	public static synthetic fun hasVertexNear$default (Lcom/google/android/gms/maps/model/Polygon;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Z
+	public static final fun isCenteredOn (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/model/LatLng;Ljava/lang/Float;Lcom/google/maps/android/robolectric/truth/Distance;F)Z
+	public static synthetic fun isCenteredOn$default (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/model/LatLng;Ljava/lang/Float;Lcom/google/maps/android/robolectric/truth/Distance;FILjava/lang/Object;)Z
 	public static final fun isInfoWindowShownFor (Lcom/google/android/gms/maps/GoogleMap;Ljava/lang/String;)Z
-	public static final fun isNear (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)Z
-	public static synthetic fun isNear$default (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Z
+	public static final fun isNear (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;)Z
+	public static synthetic fun isNear$default (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Z
 	public static final fun isShowing (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/model/LatLng;)Z
-	public static final fun matches (Lcom/google/android/gms/maps/model/Marker;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;Ljava/lang/Boolean;Ljava/lang/Boolean;)Z
-	public static synthetic fun matches$default (Lcom/google/android/gms/maps/model/Marker;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;Ljava/lang/Boolean;Ljava/lang/Boolean;ILjava/lang/Object;)Z
+	public static final fun matches (Lcom/google/android/gms/maps/model/Marker;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;Ljava/lang/Boolean;Ljava/lang/Boolean;)Z
+	public static synthetic fun matches$default (Lcom/google/android/gms/maps/model/Marker;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;Ljava/lang/Boolean;Ljava/lang/Boolean;ILjava/lang/Object;)Z
 }
 
-public final class com/google/android/maps/robolectric/shadows/R {
-}
-
-public class com/google/android/maps/robolectric/shadows/ShadowBitmapDescriptor {
+public class com/google/maps/android/robolectric/shadows/ShadowBitmapDescriptor {
 	public fun <init> ()V
 	public fun equals (Ljava/lang/Object;)Z
 	public fun getBitmap ()Landroid/graphics/Bitmap;
@@ -122,7 +119,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowBitmapDescriptor 
 	public fun toString ()Ljava/lang/String;
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowBitmapDescriptorFactory {
+public class com/google/maps/android/robolectric/shadows/ShadowBitmapDescriptorFactory {
 	public static final field HUE_AZURE F
 	public static final field HUE_BLUE F
 	public static final field HUE_CYAN F
@@ -143,7 +140,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowBitmapDescriptorF
 	protected static fun fromResource (I)Lcom/google/android/gms/maps/model/BitmapDescriptor;
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowCameraUpdate {
+public class com/google/maps/android/robolectric/shadows/ShadowCameraUpdate {
 	public fun <init> ()V
 	public fun getBoundsHeight ()Ljava/lang/Integer;
 	public fun getBoundsWidth ()Ljava/lang/Integer;
@@ -164,7 +161,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowCameraUpdate {
 	public fun setZoomBy (Ljava/lang/Float;)V
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowCameraUpdateFactory {
+public class com/google/maps/android/robolectric/shadows/ShadowCameraUpdateFactory {
 	public fun <init> ()V
 	protected static fun newCameraPosition (Lcom/google/android/gms/maps/model/CameraPosition;)Lcom/google/android/gms/maps/CameraUpdate;
 	protected static fun newLatLng (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/gms/maps/CameraUpdate;
@@ -179,7 +176,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowCameraUpdateFacto
 	protected static fun zoomTo (F)Lcom/google/android/gms/maps/CameraUpdate;
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowCircle {
+public class com/google/maps/android/robolectric/shadows/ShadowCircle {
 	public fun <init> ()V
 	public fun equals (Ljava/lang/Object;)Z
 	protected fun getCenter ()Lcom/google/android/gms/maps/model/LatLng;
@@ -211,7 +208,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowCircle {
 	public fun toString ()Ljava/lang/String;
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowGoogleMap {
+public class com/google/maps/android/robolectric/shadows/ShadowGoogleMap {
 	public fun <init> ()V
 	protected fun addCircle (Lcom/google/android/gms/maps/model/CircleOptions;)Lcom/google/android/gms/maps/model/Circle;
 	protected fun addGroundOverlay (Lcom/google/android/gms/maps/model/GroundOverlayOptions;)Lcom/google/android/gms/maps/model/GroundOverlay;
@@ -320,7 +317,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowGoogleMap {
 	public fun toString ()Ljava/lang/String;
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowGroundOverlay {
+public class com/google/maps/android/robolectric/shadows/ShadowGroundOverlay {
 	public fun <init> ()V
 	public fun equals (Ljava/lang/Object;)Z
 	protected fun getBearing ()F
@@ -354,7 +351,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowGroundOverlay {
 	public fun toString ()Ljava/lang/String;
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowMapView : org/robolectric/shadows/ShadowViewGroup {
+public class com/google/maps/android/robolectric/shadows/ShadowMapView : org/robolectric/shadows/ShadowViewGroup {
 	public fun <init> ()V
 	public static fun createFakeGoogleMap ()Lcom/google/android/gms/maps/GoogleMap;
 	protected fun draw (Landroid/graphics/Canvas;)V
@@ -377,7 +374,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowMapView : org/rob
 	protected fun onStop ()V
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowMapsInitializer {
+public class com/google/maps/android/robolectric/shadows/ShadowMapsInitializer {
 	public fun <init> ()V
 	public static fun getActiveRenderer ()Lcom/google/android/gms/maps/MapsInitializer$Renderer;
 	protected static fun initialize (Landroid/content/Context;)I
@@ -386,7 +383,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowMapsInitializer {
 	public static fun reset ()V
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowMarker {
+public class com/google/maps/android/robolectric/shadows/ShadowMarker {
 	public fun <init> ()V
 	public fun equals (Ljava/lang/Object;)Z
 	protected fun getAlpha ()F
@@ -430,7 +427,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowMarker {
 	public fun toString ()Ljava/lang/String;
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowPolygon {
+public class com/google/maps/android/robolectric/shadows/ShadowPolygon {
 	public fun <init> ()V
 	public fun equals (Ljava/lang/Object;)Z
 	protected fun getFillColor ()I
@@ -466,7 +463,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowPolygon {
 	public fun toString ()Ljava/lang/String;
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowPolyline {
+public class com/google/maps/android/robolectric/shadows/ShadowPolyline {
 	public fun <init> ()V
 	public fun equals (Ljava/lang/Object;)Z
 	protected fun getColor ()I
@@ -504,7 +501,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowPolyline {
 	public fun toString ()Ljava/lang/String;
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowProjection {
+public class com/google/maps/android/robolectric/shadows/ShadowProjection {
 	public fun <init> ()V
 	protected fun fromScreenLocation (Landroid/graphics/Point;)Lcom/google/android/gms/maps/model/LatLng;
 	protected fun getVisibleRegion ()Lcom/google/android/gms/maps/model/VisibleRegion;
@@ -512,7 +509,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowProjection {
 	protected fun toScreenLocation (Lcom/google/android/gms/maps/model/LatLng;)Landroid/graphics/Point;
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowSupportMapFragment {
+public class com/google/maps/android/robolectric/shadows/ShadowSupportMapFragment {
 	public fun <init> ()V
 	protected fun getMapAsync (Lcom/google/android/gms/maps/OnMapReadyCallback;)V
 	public fun getMapView ()Lcom/google/android/gms/maps/MapView;
@@ -521,7 +518,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowSupportMapFragmen
 	protected fun onCreateView (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowTileOverlay {
+public class com/google/maps/android/robolectric/shadows/ShadowTileOverlay {
 	public fun <init> ()V
 	protected fun clearTileCache ()V
 	public fun equals (Ljava/lang/Object;)Z
@@ -545,7 +542,7 @@ public class com/google/android/maps/robolectric/shadows/ShadowTileOverlay {
 	public fun toString ()Ljava/lang/String;
 }
 
-public class com/google/android/maps/robolectric/shadows/ShadowUiSettings {
+public class com/google/maps/android/robolectric/shadows/ShadowUiSettings {
 	public fun <init> ()V
 	protected fun isCompassEnabled ()Z
 	protected fun isMapToolbarEnabled ()Z
@@ -565,276 +562,276 @@ public class com/google/android/maps/robolectric/shadows/ShadowUiSettings {
 	protected fun setZoomGesturesEnabled (Z)V
 }
 
-public final class com/google/android/maps/robolectric/truth/CameraPositionSubject : com/google/common/truth/Subject {
-	public static final field Companion Lcom/google/android/maps/robolectric/truth/CameraPositionSubject$Companion;
+public final class com/google/maps/android/robolectric/truth/CameraPositionSubject : com/google/common/truth/Subject {
+	public static final field Companion Lcom/google/maps/android/robolectric/truth/CameraPositionSubject$Companion;
 	public synthetic fun <init> (Lcom/google/common/truth/FailureMetadata;Lcom/google/android/gms/maps/model/CameraPosition;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public static final fun assertThat (Lcom/google/android/gms/maps/model/CameraPosition;)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
+	public static final fun assertThat (Lcom/google/android/gms/maps/model/CameraPosition;)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
 	public static final fun cameraPositions ()Lcom/google/common/truth/Subject$Factory;
-	public final fun hasBearing (F)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public final fun hasBearing (FF)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public static synthetic fun hasBearing$default (Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;FFILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public final fun hasTargetWithin (Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/LatLngSubject$LatLngTolerance;
-	public final fun hasTilt (F)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public final fun hasTilt (FF)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public static synthetic fun hasTilt$default (Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;FFILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public final fun hasZoom (F)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public final fun hasZoom (FF)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public static synthetic fun hasZoom$default (Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;FFILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public final fun isAt (Lcom/google/android/gms/maps/model/LatLng;F)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public final fun isAt (Lcom/google/android/gms/maps/model/LatLng;FLcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public static synthetic fun isAt$default (Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;Lcom/google/android/gms/maps/model/LatLng;FLcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public final fun isCenteredOn (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public static synthetic fun isCenteredOn$default (Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public final fun target ()Lcom/google/android/maps/robolectric/truth/LatLngSubject;
+	public final fun hasBearing (F)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public final fun hasBearing (FF)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public static synthetic fun hasBearing$default (Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;FFILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public final fun hasTargetWithin (Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/LatLngSubject$LatLngTolerance;
+	public final fun hasTilt (F)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public final fun hasTilt (FF)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public static synthetic fun hasTilt$default (Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;FFILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public final fun hasZoom (F)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public final fun hasZoom (FF)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public static synthetic fun hasZoom$default (Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;FFILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public final fun isAt (Lcom/google/android/gms/maps/model/LatLng;F)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public final fun isAt (Lcom/google/android/gms/maps/model/LatLng;FLcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public static synthetic fun isAt$default (Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;Lcom/google/android/gms/maps/model/LatLng;FLcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public final fun isCenteredOn (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public static synthetic fun isCenteredOn$default (Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public final fun target ()Lcom/google/maps/android/robolectric/truth/LatLngSubject;
 }
 
-public final class com/google/android/maps/robolectric/truth/CameraPositionSubject$Companion {
-	public final fun assertThat (Lcom/google/android/gms/maps/model/CameraPosition;)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
+public final class com/google/maps/android/robolectric/truth/CameraPositionSubject$Companion {
+	public final fun assertThat (Lcom/google/android/gms/maps/model/CameraPosition;)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
 	public final fun cameraPositions ()Lcom/google/common/truth/Subject$Factory;
 }
 
-public final class com/google/android/maps/robolectric/truth/CircleSubject : com/google/common/truth/Subject {
-	public static final field Companion Lcom/google/android/maps/robolectric/truth/CircleSubject$Companion;
+public final class com/google/maps/android/robolectric/truth/CircleSubject : com/google/common/truth/Subject {
+	public static final field Companion Lcom/google/maps/android/robolectric/truth/CircleSubject$Companion;
 	public synthetic fun <init> (Lcom/google/common/truth/FailureMetadata;Lcom/google/android/gms/maps/model/Circle;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public static final fun assertThat (Lcom/google/android/gms/maps/model/Circle;)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun center ()Lcom/google/android/maps/robolectric/truth/LatLngSubject;
+	public static final fun assertThat (Lcom/google/android/gms/maps/model/Circle;)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun center ()Lcom/google/maps/android/robolectric/truth/LatLngSubject;
 	public static final fun circles ()Lcom/google/common/truth/Subject$Factory;
-	public final fun contains (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun doesNotContain (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun hasFillColor (I)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun hasRadius (D)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun hasRadius (DD)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun hasRadius (Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun hasRadius (Lcom/google/android/maps/robolectric/truth/Distance;Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public static synthetic fun hasRadius$default (Lcom/google/android/maps/robolectric/truth/CircleSubject;DDILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public static synthetic fun hasRadius$default (Lcom/google/android/maps/robolectric/truth/CircleSubject;Lcom/google/android/maps/robolectric/truth/Distance;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun hasStrokeColor (I)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun hasStrokeWidth (F)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun hasStrokeWidth (FF)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public static synthetic fun hasStrokeWidth$default (Lcom/google/android/maps/robolectric/truth/CircleSubject;FFILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun hasTag (Ljava/lang/Object;)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun isCenteredOn (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun isCenteredOn (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public static synthetic fun isCenteredOn$default (Lcom/google/android/maps/robolectric/truth/CircleSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun isVisible ()Lcom/google/android/maps/robolectric/truth/CircleSubject;
+	public final fun contains (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun doesNotContain (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun hasFillColor (I)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun hasRadius (D)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun hasRadius (DD)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun hasRadius (Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun hasRadius (Lcom/google/maps/android/robolectric/truth/Distance;Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public static synthetic fun hasRadius$default (Lcom/google/maps/android/robolectric/truth/CircleSubject;DDILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public static synthetic fun hasRadius$default (Lcom/google/maps/android/robolectric/truth/CircleSubject;Lcom/google/maps/android/robolectric/truth/Distance;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun hasStrokeColor (I)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun hasStrokeWidth (F)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun hasStrokeWidth (FF)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public static synthetic fun hasStrokeWidth$default (Lcom/google/maps/android/robolectric/truth/CircleSubject;FFILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun hasTag (Ljava/lang/Object;)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun isCenteredOn (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun isCenteredOn (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public static synthetic fun isCenteredOn$default (Lcom/google/maps/android/robolectric/truth/CircleSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun isVisible ()Lcom/google/maps/android/robolectric/truth/CircleSubject;
 }
 
-public final class com/google/android/maps/robolectric/truth/CircleSubject$Companion {
-	public final fun assertThat (Lcom/google/android/gms/maps/model/Circle;)Lcom/google/android/maps/robolectric/truth/CircleSubject;
+public final class com/google/maps/android/robolectric/truth/CircleSubject$Companion {
+	public final fun assertThat (Lcom/google/android/gms/maps/model/Circle;)Lcom/google/maps/android/robolectric/truth/CircleSubject;
 	public final fun circles ()Lcom/google/common/truth/Subject$Factory;
 }
 
-public final class com/google/android/maps/robolectric/truth/Distance : java/lang/Comparable {
+public final class com/google/maps/android/robolectric/truth/Distance : java/lang/Comparable {
 	public fun <init> (D)V
-	public fun compareTo (Lcom/google/android/maps/robolectric/truth/Distance;)I
+	public fun compareTo (Lcom/google/maps/android/robolectric/truth/Distance;)I
 	public synthetic fun compareTo (Ljava/lang/Object;)I
 	public final fun component1 ()D
-	public final fun copy (D)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static synthetic fun copy$default (Lcom/google/android/maps/robolectric/truth/Distance;DILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public final fun div (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
+	public final fun copy (D)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static synthetic fun copy$default (Lcom/google/maps/android/robolectric/truth/Distance;DILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public final fun div (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getFeet ()D
 	public final fun getKilometers ()D
 	public final fun getMeters ()D
 	public final fun getMiles ()D
 	public fun hashCode ()I
-	public final fun minus (Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public final fun plus (Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public final fun times (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
+	public final fun minus (Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public final fun plus (Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public final fun times (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class com/google/android/maps/robolectric/truth/GoogleMapSubject : com/google/common/truth/Subject {
-	public static final field Companion Lcom/google/android/maps/robolectric/truth/GoogleMapSubject$Companion;
+public final class com/google/maps/android/robolectric/truth/GoogleMapSubject : com/google/common/truth/Subject {
+	public static final field Companion Lcom/google/maps/android/robolectric/truth/GoogleMapSubject$Companion;
 	public synthetic fun <init> (Lcom/google/common/truth/FailureMetadata;Lcom/google/android/gms/maps/GoogleMap;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public static final fun assertThat (Lcom/google/android/gms/maps/GoogleMap;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun cameraPosition ()Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public final fun cameraTarget ()Lcom/google/android/maps/robolectric/truth/LatLngSubject;
-	public final fun doesNotShowOnScreen (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun firstCircle ()Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public final fun firstPolygon ()Lcom/google/android/maps/robolectric/truth/PolygonSubject;
-	public final fun firstPolyline ()Lcom/google/android/maps/robolectric/truth/PolylineSubject;
+	public static final fun assertThat (Lcom/google/android/gms/maps/GoogleMap;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun cameraPosition ()Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public final fun cameraTarget ()Lcom/google/maps/android/robolectric/truth/LatLngSubject;
+	public final fun doesNotShowOnScreen (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun firstCircle ()Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public final fun firstPolygon ()Lcom/google/maps/android/robolectric/truth/PolygonSubject;
+	public final fun firstPolyline ()Lcom/google/maps/android/robolectric/truth/PolylineSubject;
 	public static final fun googleMaps ()Lcom/google/common/truth/Subject$Factory;
-	public final fun hasActiveInfoWindowWithTitle (Ljava/lang/String;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasCameraTargetBounds (Lcom/google/android/gms/maps/model/LatLngBounds;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasCameraTargetWithin (Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/LatLngSubject$LatLngTolerance;
-	public final fun hasCircleCount (I)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasContentDescription (Ljava/lang/String;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasGroundOverlayCount (I)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasMapColorScheme (I)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasMapStyle (Lcom/google/android/gms/maps/model/MapStyleOptions;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasMapType (I)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasMarkerCount (I)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasMarkerNear (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun hasMarkerNear (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public static synthetic fun hasMarkerNear$default (Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun hasMarkerWithTag (Ljava/lang/Object;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun hasMarkerWithTitle (Ljava/lang/String;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun hasNoActiveInfoWindow ()Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasNoMarkers ()Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasNonBackgroundPixelAt (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasNonBackgroundPixelAt (Lcom/google/android/gms/maps/model/LatLng;I)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public static synthetic fun hasNonBackgroundPixelAt$default (Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;Lcom/google/android/gms/maps/model/LatLng;IILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasPixelColorAt (III)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasPixelColorAt (Lcom/google/android/gms/maps/model/LatLng;I)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasPolygonCount (I)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasPolylineCount (I)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasTileOverlayCount (I)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasZoom (F)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun hasZoom (FF)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public static synthetic fun hasZoom$default (Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;FFILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun isCenteredOn (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun isCenteredOn (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public static synthetic fun isCenteredOn$default (Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun showsOnScreen (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public final fun visibleBounds ()Lcom/google/android/maps/robolectric/truth/LatLngBoundsSubject;
+	public final fun hasActiveInfoWindowWithTitle (Ljava/lang/String;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasCameraTargetBounds (Lcom/google/android/gms/maps/model/LatLngBounds;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasCameraTargetWithin (Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/LatLngSubject$LatLngTolerance;
+	public final fun hasCircleCount (I)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasContentDescription (Ljava/lang/String;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasGroundOverlayCount (I)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasMapColorScheme (I)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasMapStyle (Lcom/google/android/gms/maps/model/MapStyleOptions;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasMapType (I)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasMarkerCount (I)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasMarkerNear (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun hasMarkerNear (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public static synthetic fun hasMarkerNear$default (Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun hasMarkerWithTag (Ljava/lang/Object;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun hasMarkerWithTitle (Ljava/lang/String;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun hasNoActiveInfoWindow ()Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasNoMarkers ()Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasNonBackgroundPixelAt (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasNonBackgroundPixelAt (Lcom/google/android/gms/maps/model/LatLng;I)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public static synthetic fun hasNonBackgroundPixelAt$default (Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;Lcom/google/android/gms/maps/model/LatLng;IILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasPixelColorAt (III)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasPixelColorAt (Lcom/google/android/gms/maps/model/LatLng;I)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasPolygonCount (I)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasPolylineCount (I)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasTileOverlayCount (I)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasZoom (F)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun hasZoom (FF)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public static synthetic fun hasZoom$default (Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;FFILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun isCenteredOn (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun isCenteredOn (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public static synthetic fun isCenteredOn$default (Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun showsOnScreen (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public final fun visibleBounds ()Lcom/google/maps/android/robolectric/truth/LatLngBoundsSubject;
 }
 
-public final class com/google/android/maps/robolectric/truth/GoogleMapSubject$Companion {
-	public final fun assertThat (Lcom/google/android/gms/maps/GoogleMap;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
+public final class com/google/maps/android/robolectric/truth/GoogleMapSubject$Companion {
+	public final fun assertThat (Lcom/google/android/gms/maps/GoogleMap;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
 	public final fun googleMaps ()Lcom/google/common/truth/Subject$Factory;
 }
 
-public final class com/google/android/maps/robolectric/truth/LatLngBoundsSubject : com/google/common/truth/Subject {
-	public static final field Companion Lcom/google/android/maps/robolectric/truth/LatLngBoundsSubject$Companion;
+public final class com/google/maps/android/robolectric/truth/LatLngBoundsSubject : com/google/common/truth/Subject {
+	public static final field Companion Lcom/google/maps/android/robolectric/truth/LatLngBoundsSubject$Companion;
 	public synthetic fun <init> (Lcom/google/common/truth/FailureMetadata;Lcom/google/android/gms/maps/model/LatLngBounds;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public static final fun assertThat (Lcom/google/android/gms/maps/model/LatLngBounds;)Lcom/google/android/maps/robolectric/truth/LatLngBoundsSubject;
-	public final fun center ()Lcom/google/android/maps/robolectric/truth/LatLngSubject;
-	public final fun contains (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/LatLngBoundsSubject;
-	public final fun doesNotContain (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/LatLngBoundsSubject;
-	public final fun hasCenterWithin (Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/LatLngSubject$LatLngTolerance;
+	public static final fun assertThat (Lcom/google/android/gms/maps/model/LatLngBounds;)Lcom/google/maps/android/robolectric/truth/LatLngBoundsSubject;
+	public final fun center ()Lcom/google/maps/android/robolectric/truth/LatLngSubject;
+	public final fun contains (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/LatLngBoundsSubject;
+	public final fun doesNotContain (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/LatLngBoundsSubject;
+	public final fun hasCenterWithin (Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/LatLngSubject$LatLngTolerance;
 	public static final fun latLngBounds ()Lcom/google/common/truth/Subject$Factory;
-	public final fun northeast ()Lcom/google/android/maps/robolectric/truth/LatLngSubject;
-	public final fun southwest ()Lcom/google/android/maps/robolectric/truth/LatLngSubject;
+	public final fun northeast ()Lcom/google/maps/android/robolectric/truth/LatLngSubject;
+	public final fun southwest ()Lcom/google/maps/android/robolectric/truth/LatLngSubject;
 }
 
-public final class com/google/android/maps/robolectric/truth/LatLngBoundsSubject$Companion {
-	public final fun assertThat (Lcom/google/android/gms/maps/model/LatLngBounds;)Lcom/google/android/maps/robolectric/truth/LatLngBoundsSubject;
+public final class com/google/maps/android/robolectric/truth/LatLngBoundsSubject$Companion {
+	public final fun assertThat (Lcom/google/android/gms/maps/model/LatLngBounds;)Lcom/google/maps/android/robolectric/truth/LatLngBoundsSubject;
 	public final fun latLngBounds ()Lcom/google/common/truth/Subject$Factory;
 }
 
-public class com/google/android/maps/robolectric/truth/LatLngSubject : com/google/common/truth/Subject {
+public class com/google/maps/android/robolectric/truth/LatLngSubject : com/google/common/truth/Subject {
 	protected fun <init> (Lcom/google/common/truth/FailureMetadata;Lcom/google/android/gms/maps/model/LatLng;)V
-	public static fun assertThat (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/LatLngSubject;
+	public static fun assertThat (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/LatLngSubject;
 	public static fun computeDistanceMeters (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;)D
-	public fun isNotWithin (D)Lcom/google/android/maps/robolectric/truth/LatLngSubject$LatLngTolerance;
-	public fun isWithin (D)Lcom/google/android/maps/robolectric/truth/LatLngSubject$LatLngTolerance;
+	public fun isNotWithin (D)Lcom/google/maps/android/robolectric/truth/LatLngSubject$LatLngTolerance;
+	public fun isWithin (D)Lcom/google/maps/android/robolectric/truth/LatLngSubject$LatLngTolerance;
 	public fun isWithinBounds (Lcom/google/android/gms/maps/model/LatLngBounds;)V
 	public static fun latLngs ()Lcom/google/common/truth/Subject$Factory;
 }
 
-public class com/google/android/maps/robolectric/truth/LatLngSubject$LatLngTolerance {
+public class com/google/maps/android/robolectric/truth/LatLngSubject$LatLngTolerance {
 	public fun of (Lcom/google/android/gms/maps/model/LatLng;)V
 }
 
-public final class com/google/android/maps/robolectric/truth/LatLngSubjectExtKt {
-	public static final fun distanceTo (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getFeet (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getFoot (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getKilometer (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getKilometers (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getMeter (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getMeters (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getMile (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun getMiles (Ljava/lang/Number;)Lcom/google/android/maps/robolectric/truth/Distance;
-	public static final fun isNear (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)Z
-	public static synthetic fun isNear$default (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Z
-	public static final fun isNotWithin (Lcom/google/android/maps/robolectric/truth/LatLngSubject;Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/LatLngSubject$LatLngTolerance;
-	public static final fun isWithin (Lcom/google/android/maps/robolectric/truth/LatLngSubject;Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/LatLngSubject$LatLngTolerance;
+public final class com/google/maps/android/robolectric/truth/LatLngSubjectExtKt {
+	public static final fun distanceTo (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getFeet (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getFoot (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getKilometer (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getKilometers (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getMeter (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getMeters (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getMile (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun getMiles (Ljava/lang/Number;)Lcom/google/maps/android/robolectric/truth/Distance;
+	public static final fun isNear (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;)Z
+	public static synthetic fun isNear$default (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Z
+	public static final fun isNotWithin (Lcom/google/maps/android/robolectric/truth/LatLngSubject;Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/LatLngSubject$LatLngTolerance;
+	public static final fun isWithin (Lcom/google/maps/android/robolectric/truth/LatLngSubject;Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/LatLngSubject$LatLngTolerance;
 }
 
-public final class com/google/android/maps/robolectric/truth/MapsTruth {
-	public static final fun assertThat (Lcom/google/android/gms/maps/GoogleMap;)Lcom/google/android/maps/robolectric/truth/GoogleMapSubject;
-	public static final fun assertThat (Lcom/google/android/gms/maps/model/CameraPosition;)Lcom/google/android/maps/robolectric/truth/CameraPositionSubject;
-	public static final fun assertThat (Lcom/google/android/gms/maps/model/Circle;)Lcom/google/android/maps/robolectric/truth/CircleSubject;
-	public static final fun assertThat (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/LatLngSubject;
-	public static final fun assertThat (Lcom/google/android/gms/maps/model/LatLngBounds;)Lcom/google/android/maps/robolectric/truth/LatLngBoundsSubject;
-	public static final fun assertThat (Lcom/google/android/gms/maps/model/Marker;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public static final fun assertThat (Lcom/google/android/gms/maps/model/Polygon;)Lcom/google/android/maps/robolectric/truth/PolygonSubject;
-	public static final fun assertThat (Lcom/google/android/gms/maps/model/Polyline;)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
+public final class com/google/maps/android/robolectric/truth/MapsTruth {
+	public static final fun assertThat (Lcom/google/android/gms/maps/GoogleMap;)Lcom/google/maps/android/robolectric/truth/GoogleMapSubject;
+	public static final fun assertThat (Lcom/google/android/gms/maps/model/CameraPosition;)Lcom/google/maps/android/robolectric/truth/CameraPositionSubject;
+	public static final fun assertThat (Lcom/google/android/gms/maps/model/Circle;)Lcom/google/maps/android/robolectric/truth/CircleSubject;
+	public static final fun assertThat (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/LatLngSubject;
+	public static final fun assertThat (Lcom/google/android/gms/maps/model/LatLngBounds;)Lcom/google/maps/android/robolectric/truth/LatLngBoundsSubject;
+	public static final fun assertThat (Lcom/google/android/gms/maps/model/Marker;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public static final fun assertThat (Lcom/google/android/gms/maps/model/Polygon;)Lcom/google/maps/android/robolectric/truth/PolygonSubject;
+	public static final fun assertThat (Lcom/google/android/gms/maps/model/Polyline;)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
 }
 
-public final class com/google/android/maps/robolectric/truth/MarkerSubject : com/google/common/truth/Subject {
-	public static final field Companion Lcom/google/android/maps/robolectric/truth/MarkerSubject$Companion;
+public final class com/google/maps/android/robolectric/truth/MarkerSubject : com/google/common/truth/Subject {
+	public static final field Companion Lcom/google/maps/android/robolectric/truth/MarkerSubject$Companion;
 	public synthetic fun <init> (Lcom/google/common/truth/FailureMetadata;Lcom/google/android/gms/maps/model/Marker;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public static final fun assertThat (Lcom/google/android/gms/maps/model/Marker;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun hasAlpha (F)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun hasAlpha (FF)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public static synthetic fun hasAlpha$default (Lcom/google/android/maps/robolectric/truth/MarkerSubject;FFILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun hasRotation (F)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun hasRotation (FF)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public static synthetic fun hasRotation$default (Lcom/google/android/maps/robolectric/truth/MarkerSubject;FFILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun hasSnippet (Ljava/lang/String;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun hasTag (Ljava/lang/Object;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun hasTitle (Ljava/lang/String;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun hasZIndex (F)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun hasZIndex (FF)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public static synthetic fun hasZIndex$default (Lcom/google/android/maps/robolectric/truth/MarkerSubject;FFILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun isAt (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun isAt (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public static synthetic fun isAt$default (Lcom/google/android/maps/robolectric/truth/MarkerSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun isDraggable ()Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun isFlat ()Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun isInfoWindowHidden ()Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun isInfoWindowShown ()Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun isNotDraggable ()Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun isNotVisible ()Lcom/google/android/maps/robolectric/truth/MarkerSubject;
-	public final fun isVisible ()Lcom/google/android/maps/robolectric/truth/MarkerSubject;
+	public static final fun assertThat (Lcom/google/android/gms/maps/model/Marker;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun hasAlpha (F)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun hasAlpha (FF)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public static synthetic fun hasAlpha$default (Lcom/google/maps/android/robolectric/truth/MarkerSubject;FFILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun hasRotation (F)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun hasRotation (FF)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public static synthetic fun hasRotation$default (Lcom/google/maps/android/robolectric/truth/MarkerSubject;FFILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun hasSnippet (Ljava/lang/String;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun hasTag (Ljava/lang/Object;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun hasTitle (Ljava/lang/String;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun hasZIndex (F)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun hasZIndex (FF)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public static synthetic fun hasZIndex$default (Lcom/google/maps/android/robolectric/truth/MarkerSubject;FFILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun isAt (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun isAt (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public static synthetic fun isAt$default (Lcom/google/maps/android/robolectric/truth/MarkerSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun isDraggable ()Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun isFlat ()Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun isInfoWindowHidden ()Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun isInfoWindowShown ()Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun isNotDraggable ()Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun isNotVisible ()Lcom/google/maps/android/robolectric/truth/MarkerSubject;
+	public final fun isVisible ()Lcom/google/maps/android/robolectric/truth/MarkerSubject;
 	public static final fun markers ()Lcom/google/common/truth/Subject$Factory;
-	public final fun position ()Lcom/google/android/maps/robolectric/truth/LatLngSubject;
+	public final fun position ()Lcom/google/maps/android/robolectric/truth/LatLngSubject;
 }
 
-public final class com/google/android/maps/robolectric/truth/MarkerSubject$Companion {
-	public final fun assertThat (Lcom/google/android/gms/maps/model/Marker;)Lcom/google/android/maps/robolectric/truth/MarkerSubject;
+public final class com/google/maps/android/robolectric/truth/MarkerSubject$Companion {
+	public final fun assertThat (Lcom/google/android/gms/maps/model/Marker;)Lcom/google/maps/android/robolectric/truth/MarkerSubject;
 	public final fun markers ()Lcom/google/common/truth/Subject$Factory;
 }
 
-public final class com/google/android/maps/robolectric/truth/PolygonSubject : com/google/common/truth/Subject {
-	public static final field Companion Lcom/google/android/maps/robolectric/truth/PolygonSubject$Companion;
+public final class com/google/maps/android/robolectric/truth/PolygonSubject : com/google/common/truth/Subject {
+	public static final field Companion Lcom/google/maps/android/robolectric/truth/PolygonSubject$Companion;
 	public synthetic fun <init> (Lcom/google/common/truth/FailureMetadata;Lcom/google/android/gms/maps/model/Polygon;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public static final fun assertThat (Lcom/google/android/gms/maps/model/Polygon;)Lcom/google/android/maps/robolectric/truth/PolygonSubject;
-	public final fun hasFillColor (I)Lcom/google/android/maps/robolectric/truth/PolygonSubject;
-	public final fun hasHoleCount (I)Lcom/google/android/maps/robolectric/truth/PolygonSubject;
-	public final fun hasPointCount (I)Lcom/google/android/maps/robolectric/truth/PolygonSubject;
-	public final fun hasStrokeColor (I)Lcom/google/android/maps/robolectric/truth/PolygonSubject;
-	public final fun hasStrokeWidth (F)Lcom/google/android/maps/robolectric/truth/PolygonSubject;
-	public final fun hasStrokeWidth (FF)Lcom/google/android/maps/robolectric/truth/PolygonSubject;
-	public static synthetic fun hasStrokeWidth$default (Lcom/google/android/maps/robolectric/truth/PolygonSubject;FFILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/PolygonSubject;
-	public final fun hasTag (Ljava/lang/Object;)Lcom/google/android/maps/robolectric/truth/PolygonSubject;
-	public final fun hasVertexNear (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/PolygonSubject;
-	public final fun hasVertexNear (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/PolygonSubject;
-	public static synthetic fun hasVertexNear$default (Lcom/google/android/maps/robolectric/truth/PolygonSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/PolygonSubject;
-	public final fun isVisible ()Lcom/google/android/maps/robolectric/truth/PolygonSubject;
+	public static final fun assertThat (Lcom/google/android/gms/maps/model/Polygon;)Lcom/google/maps/android/robolectric/truth/PolygonSubject;
+	public final fun hasFillColor (I)Lcom/google/maps/android/robolectric/truth/PolygonSubject;
+	public final fun hasHoleCount (I)Lcom/google/maps/android/robolectric/truth/PolygonSubject;
+	public final fun hasPointCount (I)Lcom/google/maps/android/robolectric/truth/PolygonSubject;
+	public final fun hasStrokeColor (I)Lcom/google/maps/android/robolectric/truth/PolygonSubject;
+	public final fun hasStrokeWidth (F)Lcom/google/maps/android/robolectric/truth/PolygonSubject;
+	public final fun hasStrokeWidth (FF)Lcom/google/maps/android/robolectric/truth/PolygonSubject;
+	public static synthetic fun hasStrokeWidth$default (Lcom/google/maps/android/robolectric/truth/PolygonSubject;FFILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/PolygonSubject;
+	public final fun hasTag (Ljava/lang/Object;)Lcom/google/maps/android/robolectric/truth/PolygonSubject;
+	public final fun hasVertexNear (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/PolygonSubject;
+	public final fun hasVertexNear (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/PolygonSubject;
+	public static synthetic fun hasVertexNear$default (Lcom/google/maps/android/robolectric/truth/PolygonSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/PolygonSubject;
+	public final fun isVisible ()Lcom/google/maps/android/robolectric/truth/PolygonSubject;
 	public static final fun polygons ()Lcom/google/common/truth/Subject$Factory;
 }
 
-public final class com/google/android/maps/robolectric/truth/PolygonSubject$Companion {
-	public final fun assertThat (Lcom/google/android/gms/maps/model/Polygon;)Lcom/google/android/maps/robolectric/truth/PolygonSubject;
+public final class com/google/maps/android/robolectric/truth/PolygonSubject$Companion {
+	public final fun assertThat (Lcom/google/android/gms/maps/model/Polygon;)Lcom/google/maps/android/robolectric/truth/PolygonSubject;
 	public final fun polygons ()Lcom/google/common/truth/Subject$Factory;
 }
 
-public final class com/google/android/maps/robolectric/truth/PolylineSubject : com/google/common/truth/Subject {
-	public static final field Companion Lcom/google/android/maps/robolectric/truth/PolylineSubject$Companion;
+public final class com/google/maps/android/robolectric/truth/PolylineSubject : com/google/common/truth/Subject {
+	public static final field Companion Lcom/google/maps/android/robolectric/truth/PolylineSubject$Companion;
 	public synthetic fun <init> (Lcom/google/common/truth/FailureMetadata;Lcom/google/android/gms/maps/model/Polyline;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public static final fun assertThat (Lcom/google/android/gms/maps/model/Polyline;)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
-	public final fun endsAt (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
-	public final fun endsAt (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
-	public static synthetic fun endsAt$default (Lcom/google/android/maps/robolectric/truth/PolylineSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
-	public final fun hasColor (I)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
-	public final fun hasPointCount (I)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
-	public final fun hasTag (Ljava/lang/Object;)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
-	public final fun hasWidth (F)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
-	public final fun hasWidth (FF)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
-	public static synthetic fun hasWidth$default (Lcom/google/android/maps/robolectric/truth/PolylineSubject;FFILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
-	public final fun isVisible ()Lcom/google/android/maps/robolectric/truth/PolylineSubject;
+	public static final fun assertThat (Lcom/google/android/gms/maps/model/Polyline;)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
+	public final fun endsAt (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
+	public final fun endsAt (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
+	public static synthetic fun endsAt$default (Lcom/google/maps/android/robolectric/truth/PolylineSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
+	public final fun hasColor (I)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
+	public final fun hasPointCount (I)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
+	public final fun hasTag (Ljava/lang/Object;)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
+	public final fun hasWidth (F)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
+	public final fun hasWidth (FF)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
+	public static synthetic fun hasWidth$default (Lcom/google/maps/android/robolectric/truth/PolylineSubject;FFILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
+	public final fun isVisible ()Lcom/google/maps/android/robolectric/truth/PolylineSubject;
 	public static final fun polylines ()Lcom/google/common/truth/Subject$Factory;
-	public final fun startsAt (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
-	public final fun startsAt (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
-	public static synthetic fun startsAt$default (Lcom/google/android/maps/robolectric/truth/PolylineSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/android/maps/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
+	public final fun startsAt (Lcom/google/android/gms/maps/model/LatLng;)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
+	public final fun startsAt (Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
+	public static synthetic fun startsAt$default (Lcom/google/maps/android/robolectric/truth/PolylineSubject;Lcom/google/android/gms/maps/model/LatLng;Lcom/google/maps/android/robolectric/truth/Distance;ILjava/lang/Object;)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
 }
 
-public final class com/google/android/maps/robolectric/truth/PolylineSubject$Companion {
-	public final fun assertThat (Lcom/google/android/gms/maps/model/Polyline;)Lcom/google/android/maps/robolectric/truth/PolylineSubject;
+public final class com/google/maps/android/robolectric/truth/PolylineSubject$Companion {
+	public final fun assertThat (Lcom/google/android/gms/maps/model/Polyline;)Lcom/google/maps/android/robolectric/truth/PolylineSubject;
 	public final fun polylines ()Lcom/google/common/truth/Subject$Factory;
 }
 

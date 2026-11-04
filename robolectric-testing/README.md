@@ -29,7 +29,7 @@ robolectric = "4.17"
 truth = "1.4.5"
 
 [libraries]
-maps-robolectric-shadows = { module = "com.google.android.maps.robolectric:shadows", version.ref = "mapsTesting" }
+maps-testing-robolectric = { module = "com.google.maps.android:maps-testing-robolectric", version.ref = "mapsTesting" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 
@@ -57,14 +57,14 @@ powerAssert {
         "kotlin.assert",
         "kotlin.require",
         "kotlin.check",
-        "com.google.android.maps.robolectric.powerassert.assertGeo",
-        "com.google.android.maps.robolectric.powerassert.assertMap",
-        "com.google.android.maps.robolectric.powerassert.assertMarker",
+        "com.google.maps.android.robolectric.powerassert.assertGeo",
+        "com.google.maps.android.robolectric.powerassert.assertMap",
+        "com.google.maps.android.robolectric.powerassert.assertMarker",
     )
 }
 
 dependencies {
-    testImplementation(libs.maps.robolectric.shadows)
+    testImplementation(libs.maps.testing.robolectric)
     testImplementation(libs.robolectric)
 }
 ```
@@ -75,7 +75,7 @@ If you prefer fluent `assertThat(...)` subjects (`GoogleMapSubject`, `MarkerSubj
 
 ```kotlin
 dependencies {
-    testImplementation(libs.maps.robolectric.shadows)
+    testImplementation(libs.maps.testing.robolectric)
     testImplementation(libs.robolectric)
     testImplementation(libs.truth)
 }
@@ -87,7 +87,7 @@ dependencies {
 <!-- x-release-please-start-version -->
 ```kotlin
 dependencies {
-    testImplementation("com.google.android.maps.robolectric:shadows:1.0.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-robolectric:1.0.0-rc01")
     testImplementation("org.robolectric:robolectric:4.17")
 
     // Optional: include only if using Google Truth subjects instead of Kotlin Power-Assert
@@ -109,14 +109,14 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.maps.robolectric.annotation.EnableMapsShadows
-import com.google.android.maps.robolectric.ktx.cameraTarget
-import com.google.android.maps.robolectric.ktx.cameraZoom
-import com.google.android.maps.robolectric.ktx.withTestMap
-import com.google.android.maps.robolectric.powerassert.assertMap
-import com.google.android.maps.robolectric.powerassert.assertMarker
-import com.google.android.maps.robolectric.powerassert.distanceTo
-import com.google.android.maps.robolectric.powerassert.meters
+import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.ktx.cameraTarget
+import com.google.maps.android.robolectric.ktx.cameraZoom
+import com.google.maps.android.robolectric.ktx.withTestMap
+import com.google.maps.android.robolectric.powerassert.assertMap
+import com.google.maps.android.robolectric.powerassert.assertMarker
+import com.google.maps.android.robolectric.powerassert.distanceTo
+import com.google.maps.android.robolectric.powerassert.meters
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -161,10 +161,10 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.maps.robolectric.annotation.EnableMapsShadows
-import com.google.android.maps.robolectric.ktx.withTestMap
-import com.google.android.maps.robolectric.truth.assertThat
-import com.google.android.maps.robolectric.truth.meters
+import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.ktx.withTestMap
+import com.google.maps.android.robolectric.truth.assertThat
+import com.google.maps.android.robolectric.truth.meters
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -207,8 +207,8 @@ class MapScreenTest {
 Assert that a coordinate is within a physical distance tolerance using the `Distance` DSL (`5.meters`, `0.02.kilometers`, `distanceTo`):
 
 ```kotlin
-import com.google.android.maps.robolectric.powerassert.assertGeo
-import com.google.android.maps.robolectric.truth.*
+import com.google.maps.android.robolectric.powerassert.assertGeo
+import com.google.maps.android.robolectric.truth.*
 
 val point1 = LatLng(37.7749, -122.4194)
 val point2 = LatLng(37.7750, -122.4193) // ~14.2 meters away
@@ -506,9 +506,9 @@ assertThat(map.cameraPosition.target).isEqualTo(coitTower)
 You can also simulate map clicks, info window clicks, and complete marker drag gestures via KTX extensions:
 
 ```kotlin
-import com.google.android.maps.robolectric.ktx.clickMap
-import com.google.android.maps.robolectric.ktx.clickInfoWindow
-import com.google.android.maps.robolectric.ktx.dragTo
+import com.google.maps.android.robolectric.ktx.clickMap
+import com.google.maps.android.robolectric.ktx.clickInfoWindow
+import com.google.maps.android.robolectric.ktx.dragTo
 
 // Simulate map click
 googleMap.clickMap(LatLng(37.7749, -122.4194))

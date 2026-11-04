@@ -69,7 +69,7 @@ Add `:visual-testing` to your `gradle/libs.versions.toml`:
 mapsTesting = "1.0.0-rc01"
 
 [libraries]
-maps-testing-visual = { module = "com.google.android.maps.testing:visual", version.ref = "mapsTesting" }
+maps-testing-visual = { module = "com.google.maps.android:maps-testing-visual", version.ref = "mapsTesting" }
 ```
 <!-- x-release-please-end -->
 
@@ -87,7 +87,7 @@ dependencies {
 <!-- x-release-please-start-version -->
 ```kotlin
 dependencies {
-    androidTestImplementation("com.google.android.maps.testing:visual:1.0.0-rc01")
+    androidTestImplementation("com.google.maps.android:maps-testing-visual:1.0.0-rc01")
 }
 ```
 <!-- x-release-please-end -->

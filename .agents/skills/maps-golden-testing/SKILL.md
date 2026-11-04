@@ -2,14 +2,14 @@
 name: maps-golden-testing
 description: >-
   Deterministic offline golden screenshot regression testing skill for Google Maps SDK on Android
-  using :golden-testing (com.google.android.maps.testing:golden). Use when writing or updating
+  using :golden-testing (com.google.maps.android:maps-testing-golden). Use when writing or updating
   pixel-deterministic screenshot tests on Robolectric JVM or Android devices/emulators using
   synthetic tile providers (CoordinateGrid, SolidColorHash, Checkerboard, Custom), Maps Compose
   rememberGoldenTileProvider(), auto-idled awaitMapLoaded() and captureSnapshot(), 1-liner
   assertMatchesGolden() / assertMatchesGoldenBlocking(), baseline recording (-Dmaps.golden.record=true),
   and automatic _actual.png and _diff.png failure diagnostic artifacts.
 license: Apache-2.0
-compatibility: Requires compileSdk 34+, Java 11+ bytecode target, and com.google.android.maps.testing:golden:1.0.0-rc01+.
+compatibility: Requires compileSdk 34+, Java 11+ bytecode target, and com.google.maps.android:maps-testing-golden:1.0.0-rc01+.
 metadata:
   version: "1.3"
   author: Google Maps Platform DevRel
@@ -28,9 +28,9 @@ For the full multi-tier toolkit overview, see [`../android-maps-testing/SKILL.md
 <!-- x-release-please-start-version -->
 ```kotlin
 dependencies {
-    testImplementation("com.google.android.maps.testing:golden:1.0.0-rc01")
-    testImplementation("com.google.android.maps.robolectric:shadows:1.0.0-rc01")
-    androidTestImplementation("com.google.android.maps.testing:golden:1.0.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-golden:1.0.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-robolectric:1.0.0-rc01")
+    androidTestImplementation("com.google.maps.android:maps-testing-golden:1.0.0-rc01")
 }
 ```
 <!-- x-release-please-end -->
@@ -43,7 +43,7 @@ dependencies {
 
 `googleMap.awaitMapLoaded()` and `googleMap.captureSnapshot()` automatically idle `ShadowLooper.idleMainLooper()` when running under Robolectric, so you can call them directly inside `runTest` with zero `async` or `testScheduler` boilerplate:
 
-Reference: `// [START maps_sample_golden_map_test]` in [`SampleGoldenMapTest.kt`](../../../golden-testing/src/test/java/com/google/android/maps/testing/golden/sample/SampleGoldenMapTest.kt#L46-L128)
+Reference: `// [START maps_sample_golden_map_test]` in [`SampleGoldenMapTest.kt`](../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/sample/SampleGoldenMapTest.kt#L46-L128)
 
 ```kotlin
 // [START maps_sample_golden_map_test]
@@ -137,7 +137,7 @@ public class SampleGoldenMapTest {
 
 Use `googleMap.assertMatchesGolden(goldenFile)` (or `GoldenImageDiff.assertMatches(goldenFile, actual)`). Pass `-Dmaps.golden.record=true` (or `recordBaseline = true`) to record/update baseline PNGs; when a regression occurs, `<name>_actual.png` and `<name>_diff.png` (highlighting changed pixels in `Color.RED`) are written automatically:
 
-Reference: `// [START golden_diff_artifacts_and_record]` in [`GoldenImageDiffTest.kt`](../../../golden-testing/src/test/java/com/google/android/maps/testing/golden/GoldenImageDiffTest.kt#L109-L146)
+Reference: `// [START golden_diff_artifacts_and_record]` in [`GoldenImageDiffTest.kt`](../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/GoldenImageDiffTest.kt#L109-L146)
 
 ```kotlin
     // [START golden_diff_artifacts_and_record]
@@ -184,7 +184,7 @@ Reference: `// [START golden_diff_artifacts_and_record]` in [`GoldenImageDiffTes
 
 ### C. Jetpack Compose Integration (`rememberGoldenTileProvider`)
 
-Reference: `// [START maps_golden_compose_extensions]` in [`GoldenComposeExtensions.kt`](../../../golden-testing/src/main/java/com/google/android/maps/testing/golden/GoldenComposeExtensions.kt#L22-L51)
+Reference: `// [START maps_golden_compose_extensions]` in [`GoldenComposeExtensions.kt`](../../../golden-testing/src/main/java/com/google/maps/android/testing/golden/GoldenComposeExtensions.kt#L22-L51)
 
 ```kotlin
 // [START maps_golden_compose_extensions]

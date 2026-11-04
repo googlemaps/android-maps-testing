@@ -32,9 +32,9 @@ powerAssert {
     "kotlin.assert",
     "kotlin.require",
     "kotlin.check",
-    "com.google.android.maps.robolectric.powerassert.assertGeo",
-    "com.google.android.maps.robolectric.powerassert.assertMap",
-    "com.google.android.maps.robolectric.powerassert.assertMarker",
+    "com.google.maps.android.robolectric.powerassert.assertGeo",
+    "com.google.maps.android.robolectric.powerassert.assertMap",
+    "com.google.maps.android.robolectric.powerassert.assertMarker",
   )
   compilationFilter = PowerAssertCompilationFilter.ALL
 }
@@ -46,7 +46,7 @@ kotlin {
 }
 
 android {
-  namespace = "com.google.android.maps.robolectric.shadows"
+  namespace = "com.google.maps.android.robolectric.shadows"
   compileSdk = 37
 
   defaultConfig {

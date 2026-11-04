@@ -22,11 +22,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolygonOptions
-import com.google.android.maps.robolectric.annotation.EnableMapsShadows
-import com.google.android.maps.robolectric.ktx.clickMarker
-import com.google.android.maps.robolectric.ktx.withTestMap
-import com.google.android.maps.robolectric.truth.assertThat
-import com.google.android.maps.robolectric.truth.meters
+import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.ktx.clickMarker
+import com.google.maps.android.robolectric.ktx.withTestMap
+import com.google.maps.android.robolectric.truth.assertThat
+import com.google.maps.android.robolectric.truth.meters
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner

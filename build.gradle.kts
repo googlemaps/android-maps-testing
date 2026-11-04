@@ -58,6 +58,7 @@ val apiCheck = tasks.register("apiCheck") {
 }
 
 allprojects {
+  group = "com.google.maps.android"
   // {x-release-please-start-version}
   version = "1.0.0-rc01"
   // {x-release-please-end}
@@ -116,29 +117,26 @@ subprojects {
           signAllPublications()
         }
 
-        val (moduleGroupId, moduleArtifactId, modulePomName, moduleDescription) = when (projectName) {
+        val (moduleArtifactId, modulePomName, moduleDescription) = when (projectName) {
           "robolectric-testing" -> listOf(
-            "com.google.android.maps.robolectric",
-            "shadows",
+            "maps-testing-robolectric",
             "Android Maps Robolectric Shadows",
             "Robolectric shadows, Kotlin Power-Assert helpers, and Google Truth testing utilities for Google Maps SDK on Android.",
           )
           "golden-testing" -> listOf(
-            "com.google.android.maps.testing",
-            "golden",
+            "maps-testing-golden",
             "Android Maps Golden Testing",
             "Deterministic golden image and screenshot testing library for Google Maps SDK on Android.",
           )
           else -> listOf(
-            "com.google.android.maps.testing",
-            "visual",
+            "maps-testing-visual",
             "Android Maps Visual Testing",
             "AI-powered visual verification and screenshot testing library for Google Maps SDK on Android.",
           )
         }
 
         coordinates(
-          groupId = moduleGroupId,
+          groupId = "com.google.maps.android",
           artifactId = moduleArtifactId,
           version = rootProject.version.toString(),
         )
@@ -186,9 +184,10 @@ subprojects {
           inputJar.set(classesJar)
           outputApiFile.set(buildApiFile)
           val rClasses = listOf(
-            "com.google.android.maps.robolectric.R",
-            "com.google.android.maps.testing.golden.R",
-            "com.google.android.maps.testing.visual.R",
+            "com.google.maps.android.robolectric.R",
+            "com.google.maps.android.robolectric.shadows.R",
+            "com.google.maps.android.testing.golden.R",
+            "com.google.maps.android.testing.visual.R",
           )
           ignoredClasses.addAll(rClasses)
           ignoredClasses.addAll(rClasses.flatMap { r -> R_TYPES.map { type -> "$r$$type" } })

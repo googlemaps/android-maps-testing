@@ -65,7 +65,7 @@ Add `:golden-testing` to your `gradle/libs.versions.toml`:
 mapsTesting = "1.0.0-rc01"
 
 [libraries]
-maps-testing-golden = { module = "com.google.android.maps.testing:golden", version.ref = "mapsTesting" }
+maps-testing-golden = { module = "com.google.maps.android:maps-testing-golden", version.ref = "mapsTesting" }
 ```
 <!-- x-release-please-end -->
 
@@ -85,9 +85,9 @@ dependencies {
 <!-- x-release-please-start-version -->
 ```kotlin
 dependencies {
-    testImplementation("com.google.android.maps.testing:golden:1.0.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-golden:1.0.0-rc01")
     // Or for on-device instrumented screenshot tests:
-    androidTestImplementation("com.google.android.maps.testing:golden:1.0.0-rc01")
+    androidTestImplementation("com.google.maps.android:maps-testing-golden:1.0.0-rc01")
 }
 ```
 <!-- x-release-please-end -->

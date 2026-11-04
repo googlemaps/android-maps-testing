@@ -13,7 +13,7 @@ description: >-
   Critical User Journeys (CUJs), Modern Android Development (MAD) modularity (< 200-300 lines per file,
   never storing GoogleMap in ViewModels), and the Zero-Mock Reality Gap gate.
 license: Apache-2.0
-compatibility: Requires an Android project with compileSdk 34+ and Java 11+ bytecode target. Uses shadows 1.0.0-rc01+, golden 1.0.0-rc01+, and visual 1.0.0-rc01+.
+compatibility: Requires an Android project with compileSdk 34+ and Java 11+ bytecode target. Uses maps-testing-robolectric 1.0.0-rc01+, maps-testing-golden 1.0.0-rc01+, and maps-testing-visual 1.0.0-rc01+.
 metadata:
   version: "1.3"
   author: Google Maps Platform DevRel
@@ -149,9 +149,9 @@ robolectric = "4.17"
 truth = "1.4.5"
 
 [libraries]
-maps-robolectric-shadows = { module = "com.google.android.maps.robolectric:shadows", version.ref = "mapsTesting" }
-maps-testing-golden = { module = "com.google.android.maps.testing:golden", version.ref = "mapsTesting" }
-maps-testing-visual = { module = "com.google.android.maps.testing:visual", version.ref = "mapsTesting" }
+maps-testing-robolectric = { module = "com.google.maps.android:maps-testing-robolectric", version.ref = "mapsTesting" }
+maps-testing-golden = { module = "com.google.maps.android:maps-testing-golden", version.ref = "mapsTesting" }
+maps-testing-visual = { module = "com.google.maps.android:maps-testing-visual", version.ref = "mapsTesting" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 ```
@@ -160,7 +160,7 @@ truth = { module = "com.google.truth:truth", version.ref = "truth" }
 ```kotlin
 dependencies {
     // Paradigm 1: Headless JVM unit testing with Robolectric shadows
-    testImplementation(libs.maps.robolectric.shadows)
+    testImplementation(libs.maps.testing.robolectric)
     testImplementation(libs.robolectric)
     testImplementation(libs.truth) // Optional if using Kotlin Power-Assert
 
@@ -179,7 +179,7 @@ dependencies {
 
 ### Paradigm 1A: Headless JVM Map Testing with `withTestMap` & Google Truth (`:robolectric-testing`)
 
-Use `withTestMap { ... }` to spin up a measured, laid-out, initialized `GoogleMap` in one line and assert state with `com.google.android.maps.robolectric.truth.assertThat`:
+Use `withTestMap { ... }` to spin up a measured, laid-out, initialized `GoogleMap` in one line and assert state with `com.google.maps.android.robolectric.truth.assertThat`:
 
 Reference: `// [START maps_robolectric_demo_test]` in [`MapDemoTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/MapDemoTest.kt#L36-L83)
 
@@ -238,9 +238,9 @@ class MapDemoTest {
 
 ### Paradigm 1B: Headless JVM Map Testing with Kotlin Power-Assert (`:robolectric-testing`)
 
-If you prefer plain boolean expressions with zero Google Truth dependency, import `assertMap`, `assertMarker`, `distanceTo`, and `meters` directly from `com.google.android.maps.robolectric.powerassert`:
+If you prefer plain boolean expressions with zero Google Truth dependency, import `assertMap`, `assertMarker`, `distanceTo`, and `meters` directly from `com.google.maps.android.robolectric.powerassert`:
 
-Reference: `// [START maps_robolectric_power_assert]` in [`LazyAssertionsComparisonTest.kt`](../../../robolectric-testing/src/test/java/com/google/android/maps/robolectric/shadows/LazyAssertionsComparisonTest.kt#L151-L187)
+Reference: `// [START maps_robolectric_power_assert]` in [`LazyAssertionsComparisonTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/LazyAssertionsComparisonTest.kt#L151-L187)
 
 ```kotlin
   // [START maps_robolectric_power_assert]
@@ -386,7 +386,7 @@ class StoreLocatorMapManagerTest {
 // [END maps_robolectric_manager_test]
 ```
 
-Reference: `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/android/maps/robolectric/shadows/ShadowMapViewKotlinTest.kt#L511-L521)
+Reference: `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L511-L521)
 
 ```kotlin
     // [START robolectric_view_hierarchy_lookup]
@@ -483,7 +483,7 @@ Reference: `// [START maps_robolectric_java_demo_test]` in [`MapViewDemoTest.jav
 
 Use `enableGoldenTesting(...)` to replace live Google tiles with deterministic synthetic tiles (`CoordinateGrid`, `SolidColorHash`, `Checkerboard`, or `Custom`) and verify renders with `captureSnapshot()`, `assertMatchesGolden(goldenFile)`, or `GoldenImageDiff.assertMatches(...)`:
 
-Reference: `// [START maps_sample_golden_map_test]` in [`SampleGoldenMapTest.kt`](../../../golden-testing/src/test/java/com/google/android/maps/testing/golden/sample/SampleGoldenMapTest.kt#L46-L128)
+Reference: `// [START maps_sample_golden_map_test]` in [`SampleGoldenMapTest.kt`](../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/sample/SampleGoldenMapTest.kt#L46-L128)
 
 ```kotlin
 // [START maps_sample_golden_map_test]
@@ -571,7 +571,7 @@ public class SampleGoldenMapTest {
 // [END maps_sample_golden_map_test]
 ```
 
-Reference: `// [START golden_diff_artifacts_and_record]` in [`GoldenImageDiffTest.kt`](../../../golden-testing/src/test/java/com/google/android/maps/testing/golden/GoldenImageDiffTest.kt#L109-L146)
+Reference: `// [START golden_diff_artifacts_and_record]` in [`GoldenImageDiffTest.kt`](../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/GoldenImageDiffTest.kt#L109-L146)
 
 ```kotlin
     // [START golden_diff_artifacts_and_record]

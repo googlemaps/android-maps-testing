@@ -2,7 +2,7 @@
 name: maps-robolectric-testing
 description: >-
   Headless JVM unit testing skill for Google Maps SDK on Android using :robolectric-testing
-  (com.google.android.maps.robolectric:shadows). Use when writing or updating fast host-side
+  (com.google.maps.android:maps-testing-robolectric). Use when writing or updating fast host-side
   JVM unit tests for GoogleMap, MapView, SupportMapFragment, camera movements (newLatLngZoom,
   newLatLngBounds, scrollBy), marker clicks and single-active InfoWindow semantics, user pan
   gesture simulation (simulateUserCameraMove / REASON_GESTURE), camera target clamping,
@@ -10,7 +10,7 @@ description: >-
   (findMapView / requireMapView), android-maps-utils marker clustering, or domain assertions
   using either Google Truth (assertThat(map)) or Kotlin Power-Assert (assertMap / assertMarker / assertGeo).
 license: Apache-2.0
-compatibility: Requires compileSdk 34+, Java 11+ bytecode target, Robolectric 4.14+, and com.google.android.maps.robolectric:shadows:1.0.0-rc01+.
+compatibility: Requires compileSdk 34+, Java 11+ bytecode target, Robolectric 4.14+, and com.google.maps.android:maps-testing-robolectric:1.0.0-rc01+.
 metadata:
   version: "1.3"
   author: Google Maps Platform DevRel
@@ -29,7 +29,7 @@ For the full multi-tier toolkit overview, see [`../android-maps-testing/SKILL.md
 <!-- x-release-please-start-version -->
 ```kotlin
 dependencies {
-    testImplementation("com.google.android.maps.robolectric:shadows:1.0.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-robolectric:1.0.0-rc01")
     testImplementation("org.robolectric:robolectric:4.17")
     // Optional if using Google Truth subjects instead of Kotlin Power-Assert:
     testImplementation("com.google.truth:truth:1.4.5")
@@ -108,9 +108,9 @@ class MapDemoTest {
 
 ### B. Kotlin Power-Assert Style (Zero Google Truth Dependency)
 
-Import `assertMap`, `assertMarker`, `assertGeo`, `distanceTo`, and `meters` directly from `com.google.android.maps.robolectric.powerassert`:
+Import `assertMap`, `assertMarker`, `assertGeo`, `distanceTo`, and `meters` directly from `com.google.maps.android.robolectric.powerassert`:
 
-Reference: `// [START maps_robolectric_power_assert]` in [`LazyAssertionsComparisonTest.kt`](../../../robolectric-testing/src/test/java/com/google/android/maps/robolectric/shadows/LazyAssertionsComparisonTest.kt#L151-L187)
+Reference: `// [START maps_robolectric_power_assert]` in [`LazyAssertionsComparisonTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/LazyAssertionsComparisonTest.kt#L151-L187)
 
 ```kotlin
   // [START maps_robolectric_power_assert]
@@ -258,7 +258,7 @@ class StoreLocatorMapManagerTest {
 
 ### D. Camera Bounds (`newLatLngBounds`), `scrollBy`, Marker Clicks, and User Gestures (`REASON_GESTURE`)
 
-- **Bounds & Scroll**: See `// [START robolectric_camera_bounds_and_scroll]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/android/maps/robolectric/shadows/ShadowMapViewKotlinTest.kt#L248-L270).
-- **Marker Click & InfoWindow Semantics**: See `// [START robolectric_marker_click_behavior]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/android/maps/robolectric/shadows/ShadowMapViewKotlinTest.kt#L287-L317).
-- **User Gesture (`REASON_GESTURE`) & Map Styling/Clamping**: See `// [START robolectric_user_gesture_and_styling]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/android/maps/robolectric/shadows/ShadowMapViewKotlinTest.kt#L328-L372).
-- **Activity & Compose View Hierarchy Lookup**: See `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/android/maps/robolectric/shadows/ShadowMapViewKotlinTest.kt#L511-L521).
+- **Bounds & Scroll**: See `// [START robolectric_camera_bounds_and_scroll]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L248-L270).
+- **Marker Click & InfoWindow Semantics**: See `// [START robolectric_marker_click_behavior]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L287-L317).
+- **User Gesture (`REASON_GESTURE`) & Map Styling/Clamping**: See `// [START robolectric_user_gesture_and_styling]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L328-L372).
+- **Activity & Compose View Hierarchy Lookup**: See `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L511-L521).

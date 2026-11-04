@@ -2,14 +2,14 @@
 name: maps-visual-testing
 description: >-
   Multimodal AI visual testing and hybrid golden fallback skill for Google Maps SDK on Android
-  using :visual-testing (com.google.android.maps.testing:visual). Use when writing or updating
+  using :visual-testing (com.google.maps.android:maps-testing-visual). Use when writing or updating
   connected-device instrumentation tests that verify map rendering semantically with Google Gemini
   Vision (BaseVisualTest, GeminiVisualTestHelper), use committed test APK asset goldens
   (src/androidTest/assets/goldens/<testName>.png) for fast zero-quota CI runs via
   verifyScreenshotWithGoldenFallback, or drive UI interactions via natural-language prompts
   (executeNaturalLanguageAction).
 license: Apache-2.0
-compatibility: Requires compileSdk 34+, Java 11+ bytecode target, an Android emulator or device, and com.google.android.maps.testing:visual:1.0.0-rc01+.
+compatibility: Requires compileSdk 34+, Java 11+ bytecode target, an Android emulator or device, and com.google.maps.android:maps-testing-visual:1.0.0-rc01+.
 metadata:
   version: "1.3"
   author: Google Maps Platform DevRel
@@ -28,7 +28,7 @@ For the full multi-tier toolkit overview, see [`../android-maps-testing/SKILL.md
 <!-- x-release-please-start-version -->
 ```kotlin
 dependencies {
-    androidTestImplementation("com.google.android.maps.testing:visual:1.0.0-rc01")
+    androidTestImplementation("com.google.maps.android:maps-testing-visual:1.0.0-rc01")
 }
 ```
 <!-- x-release-please-end -->
@@ -103,7 +103,7 @@ class VisualMapSampleTest : BaseVisualTest() {
 
 ## 4. Hybrid Golden Fallback Implementation Reference
 
-Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../../../visual-testing/src/main/java/com/google/android/maps/testing/visual/BaseVisualTest.kt#L147-L218)
+Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../../../visual-testing/src/main/java/com/google/maps/android/testing/visual/BaseVisualTest.kt#L147-L218)
 
 ```kotlin
   // [START maps_visual_golden_fallback]

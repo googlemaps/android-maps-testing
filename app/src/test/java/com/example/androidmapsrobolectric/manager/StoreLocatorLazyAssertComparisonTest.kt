@@ -20,26 +20,26 @@ import com.example.androidmapsrobolectric.model.Store
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.maps.robolectric.annotation.EnableMapsShadows
-import com.google.android.maps.robolectric.ktx.cameraTarget
-import com.google.android.maps.robolectric.ktx.cameraZoom
-import com.google.android.maps.robolectric.ktx.circles
-import com.google.android.maps.robolectric.ktx.clickMarker
-import com.google.android.maps.robolectric.ktx.createTestMap
-import com.google.android.maps.robolectric.ktx.markers
-import com.google.android.maps.robolectric.ktx.requireMarker
-import com.google.android.maps.robolectric.ktx.simulateUserCameraMove
-import com.google.android.maps.robolectric.ktx.visibleBounds
-import com.google.android.maps.robolectric.powerassert.assertMap
-import com.google.android.maps.robolectric.powerassert.contains
-import com.google.android.maps.robolectric.powerassert.hasMarker
-import com.google.android.maps.robolectric.powerassert.hasOverlayPixelAt
-import com.google.android.maps.robolectric.powerassert.isCenteredOn
-import com.google.android.maps.robolectric.powerassert.isInfoWindowShownFor
-import com.google.android.maps.robolectric.truth.assertThat
-import com.google.android.maps.robolectric.truth.distanceTo
-import com.google.android.maps.robolectric.truth.kilometers
-import com.google.android.maps.robolectric.truth.meters
+import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.ktx.cameraTarget
+import com.google.maps.android.robolectric.ktx.cameraZoom
+import com.google.maps.android.robolectric.ktx.circles
+import com.google.maps.android.robolectric.ktx.clickMarker
+import com.google.maps.android.robolectric.ktx.createTestMap
+import com.google.maps.android.robolectric.ktx.markers
+import com.google.maps.android.robolectric.ktx.requireMarker
+import com.google.maps.android.robolectric.ktx.simulateUserCameraMove
+import com.google.maps.android.robolectric.ktx.visibleBounds
+import com.google.maps.android.robolectric.powerassert.assertMap
+import com.google.maps.android.robolectric.powerassert.contains
+import com.google.maps.android.robolectric.powerassert.hasMarker
+import com.google.maps.android.robolectric.powerassert.hasOverlayPixelAt
+import com.google.maps.android.robolectric.powerassert.isCenteredOn
+import com.google.maps.android.robolectric.powerassert.isInfoWindowShownFor
+import com.google.maps.android.robolectric.truth.assertThat
+import com.google.maps.android.robolectric.truth.distanceTo
+import com.google.maps.android.robolectric.truth.kilometers
+import com.google.maps.android.robolectric.truth.meters
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -51,8 +51,8 @@ import com.google.common.truth.Truth.assertThat as truthAssertThat
 /**
  * Side-by-side "Lazy Programmer" comparison demonstrating how [StoreLocatorMapManager] can be
  * tested with minimal ceremony using either:
- * 1. **Google Truth** domain subjects (`com.google.android.maps.robolectric.truth.assertThat`)
- * 2. **Kotlin Power-Assert** (`com.google.android.maps.robolectric.powerassert.assertMap`)
+ * 1. **Google Truth** domain subjects (`com.google.maps.android.robolectric.truth.assertThat`)
+ * 2. **Kotlin Power-Assert** (`com.google.maps.android.robolectric.powerassert.assertMap`)
  *
  * Compare this file with [StoreLocatorMapManagerTest] to see how the lazy KTX harness and domain
  * assertions eliminate boilerplate.

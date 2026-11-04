@@ -75,7 +75,7 @@ If no key is configured and no matching golden baseline is found, tests using Ge
    ```
 3. **Fast Zero-Quota CI & Fresh Emulator Runs**: On clean CI emulators, `BaseVisualTest` automatically loads `src/androidTest/assets/goldens/<testName>.png` from the test APK assets. When the screenshot matches within `tolerancePercent`, the test passes in milliseconds with **zero Gemini API calls** (and doesn't even require `GEMINI_API_KEY` to be set).
 
-Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../../../../visual-testing/src/main/java/com/google/android/maps/testing/visual/BaseVisualTest.kt#L147-L218)
+Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../../../../visual-testing/src/main/java/com/google/maps/android/testing/visual/BaseVisualTest.kt#L147-L218)
 
 ```kotlin
   // [START maps_visual_golden_fallback]

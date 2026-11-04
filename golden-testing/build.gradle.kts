@@ -31,7 +31,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.google.android.maps.testing.golden"
+    namespace = "com.google.maps.android.testing.golden"
     compileSdk = 37
 
     defaultConfig {

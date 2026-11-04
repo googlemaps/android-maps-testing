@@ -20,7 +20,7 @@ import android.content.Intent
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Until
-import com.google.android.maps.testing.visual.BaseVisualTest
+import com.google.maps.android.testing.visual.BaseVisualTest
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -76,9 +76,9 @@ robolectric = "4.17"
 truth = "1.4.5"
 
 [libraries]
-maps-robolectric-shadows = { module = "com.google.android.maps.robolectric:shadows", version.ref = "mapsTesting" }
-maps-testing-golden = { module = "com.google.android.maps.testing:golden", version.ref = "mapsTesting" }
-maps-testing-visual = { module = "com.google.android.maps.testing:visual", version.ref = "mapsTesting" }
+maps-testing-robolectric = { module = "com.google.maps.android:maps-testing-robolectric", version.ref = "mapsTesting" }
+maps-testing-golden = { module = "com.google.maps.android:maps-testing-golden", version.ref = "mapsTesting" }
+maps-testing-visual = { module = "com.google.maps.android:maps-testing-visual", version.ref = "mapsTesting" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 ```
@@ -92,7 +92,7 @@ Then reference them in your module's `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    testImplementation(libs.maps.robolectric.shadows)
+    testImplementation(libs.maps.testing.robolectric)
     testImplementation(libs.robolectric)
 
     // Optional: include Google Truth if using fluent Truth subjects (MapsTruth.assertThat / LatLngSubject)
@@ -130,14 +130,14 @@ dependencies {
 ```kotlin
 dependencies {
     // 1. Robolectric Shadows
-    testImplementation("com.google.android.maps.robolectric:shadows:1.0.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-robolectric:1.0.0-rc01")
     testImplementation("org.robolectric:robolectric:4.17")
 
     // 2. Golden Image Testing
-    testImplementation("com.google.android.maps.testing:golden:1.0.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-golden:1.0.0-rc01")
 
     // 3. AI Visual Testing
-    androidTestImplementation("com.google.android.maps.testing:visual:1.0.0-rc01")
+    androidTestImplementation("com.google.maps.android:maps-testing-visual:1.0.0-rc01")
 }
 ```
 <!-- x-release-please-end -->
