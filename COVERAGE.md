@@ -25,7 +25,7 @@ require combining the raw execution data rather than the XML reports.
 
 JVM tests run by `./gradlew koverXmlReportDebug`, covering the three published library modules (`robolectric-testing`, `golden-testing`, `visual-testing`).
 
-Measured at `3067825`, recorded 2026-11-03T20:52:12Z.
+Measured at `b936651`, recorded 2026-11-04T22:17:56Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
@@ -45,15 +45,16 @@ _No data recorded yet._
 ```mermaid
 xychart-beta
     title "Line Coverage Trend (%)"
-    x-axis ["47be0ab", "e3bd2d2", "c2bd264", "3067825"]
+    x-axis ["47be0ab", "e3bd2d2", "c2bd264", "3067825", "b936651"]
     y-axis "Coverage %" 0 --> 100
-    line [79.34, 79.34, 78.88, 78.88]
+    line [79.34, 79.34, 78.88, 78.88, 78.88]
 ```
 
 Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| 2026-11-04 | `b936651` | n/a | 78.88% | 0.00 | n/a | n/a | chore: align Maven coordinates and package namespaces to com.google.maps.android |
 | 2026-11-03 | `3067825` | n/a | 78.88% | 0.00 | n/a | n/a | docs(skills): add testing paradigm skills and region-tagged references in .agents/skills |
 | 2026-11-03 | `c2bd264` | n/a | 78.88% | -0.46 | n/a | n/a | feat: improve developer onboarding, KTX ergonomics, and cookbook docs |
 | 2026-11-01 | `e3bd2d2` | n/a | 79.34% | 0.00 | n/a | n/a | chore: support Kotlin Power-Assert alternative, Version Catalog docs, and bump deps |

@@ -15,3 +15,7 @@ timestamp,commit,pr,subject,suite,module,lines_covered,lines_total,line_pct,bran
 2026-11-03T20:52:12Z,3067825,,docs(skills): add testing paradigm skills and region-tagged references in .agents/skills,unit,robolectric-testing,1577,1876,84.06,333,642,51.87,8358,9968,83.85
 2026-11-03T20:52:12Z,3067825,,docs(skills): add testing paradigm skills and region-tagged references in .agents/skills,unit,visual-testing,110,301,36.54,84,335,25.07,1262,3256,38.76
 2026-11-03T20:52:12Z,3067825,,docs(skills): add testing paradigm skills and region-tagged references in .agents/skills,unit,TOTAL,1923,2438,78.88,475,1077,44.1,10913,14793,73.77
+2026-11-04T22:17:56Z,b936651,,chore: align Maven coordinates and package namespaces to com.google.maps.android,unit,golden-testing,236,261,90.42,58,100,58.0,1293,1569,82.41
+2026-11-04T22:17:56Z,b936651,,chore: align Maven coordinates and package namespaces to com.google.maps.android,unit,robolectric-testing,1577,1876,84.06,333,642,51.87,8358,9968,83.85
+2026-11-04T22:17:56Z,b936651,,chore: align Maven coordinates and package namespaces to com.google.maps.android,unit,visual-testing,110,301,36.54,84,335,25.07,1262,3256,38.76
+2026-11-04T22:17:56Z,b936651,,chore: align Maven coordinates and package namespaces to com.google.maps.android,unit,TOTAL,1923,2438,78.88,475,1077,44.1,10913,14793,73.77
