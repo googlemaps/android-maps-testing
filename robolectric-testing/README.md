@@ -23,10 +23,10 @@ High-fidelity Robolectric shadows and testing utilities for the Google Maps SDK 
 <!-- x-release-please-start-version -->
 ```toml
 [versions]
-mapsTesting = "1.0.0-rc01"
-kotlin = "2.1.20"
+mapsTesting = "1.1.0-rc01"
+kotlin = "1.1.0-rc01"
 robolectric = "4.17"
-truth = "1.4.5"
+truth = "1.1.0-rc01"
 
 [libraries]
 maps-testing-robolectric = { module = "com.google.maps.android:maps-testing-robolectric", version.ref = "mapsTesting" }
@@ -87,11 +87,11 @@ dependencies {
 <!-- x-release-please-start-version -->
 ```kotlin
 dependencies {
-    testImplementation("com.google.maps.android:maps-testing-robolectric:1.0.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-robolectric:1.1.0-rc01")
     testImplementation("org.robolectric:robolectric:4.17")
 
     // Optional: include only if using Google Truth subjects instead of Kotlin Power-Assert
-    testImplementation("com.google.truth:truth:1.4.5")
+    testImplementation("com.google.truth:truth:1.1.0-rc01")
 }
 ```
 <!-- x-release-please-end -->

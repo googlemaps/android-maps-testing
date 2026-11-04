@@ -28,9 +28,9 @@ For the full multi-tier toolkit overview, see [`../android-maps-testing/SKILL.md
 <!-- x-release-please-start-version -->
 ```kotlin
 dependencies {
-    testImplementation("com.google.maps.android:maps-testing-golden:1.0.0-rc01")
-    testImplementation("com.google.maps.android:maps-testing-robolectric:1.0.0-rc01")
-    androidTestImplementation("com.google.maps.android:maps-testing-golden:1.0.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-golden:1.1.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-robolectric:1.1.0-rc01")
+    androidTestImplementation("com.google.maps.android:maps-testing-golden:1.1.0-rc01")
 }
 ```
 <!-- x-release-please-end -->

@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.0-rc01](https://github.com/googlemaps/android-maps-testing/compare/v1.0.0-rc01...v1.1.0-rc01) (2026-11-04)
+
+
+### Features
+
+* enhance Robolectric shadows and golden testing for real-world Maps CUJs ([b61b8c5](https://github.com/googlemaps/android-maps-testing/commit/b61b8c5ee620739397864c3a41f5a64945a70de1))
+* improve developer onboarding, KTX ergonomics, and cookbook docs ([c2bd264](https://github.com/googlemaps/android-maps-testing/commit/c2bd264dd91bd58680d31ded03c0421a7029ca0e))
+* initial release of Android Maps Testing Toolkit (1.0.0-rc01) ([47be0ab](https://github.com/googlemaps/android-maps-testing/commit/47be0ab841c3e8be9ecc708a6fde7a70745e4371))
+
 ## 1.0.0-rc01 (2026-10-30)
 
 ### Features

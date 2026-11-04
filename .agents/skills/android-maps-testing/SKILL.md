@@ -144,9 +144,9 @@ JVM execution without devices?                                    fidelity asser
 <!-- x-release-please-start-version -->
 ```toml
 [versions]
-mapsTesting = "1.0.0-rc01"
+mapsTesting = "1.1.0-rc01"
 robolectric = "4.17"
-truth = "1.4.5"
+truth = "1.1.0-rc01"
 
 [libraries]
 maps-testing-robolectric = { module = "com.google.maps.android:maps-testing-robolectric", version.ref = "mapsTesting" }
