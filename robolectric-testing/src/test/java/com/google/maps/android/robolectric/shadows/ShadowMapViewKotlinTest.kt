@@ -38,7 +38,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolygonOptions
 import com.google.common.truth.Truth.assertThat
-import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.MapsRobolectricTestRunner
 import com.google.maps.android.robolectric.ktx.cameraTargetBounds
 import com.google.maps.android.robolectric.ktx.contentDescription
 import com.google.maps.android.robolectric.ktx.getMapBlocking
@@ -55,17 +55,15 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowLooper
 import java.util.concurrent.atomic.AtomicReference
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 class ShadowMapViewKotlinTest {
 
   private lateinit var activity: Activity
@@ -412,10 +410,9 @@ class ShadowMapViewKotlinTest {
   }
 }
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @Config(sdk = [34])
-@EnableMapsShadows
-class EnableMapsShadowsAnnotationTest {
+class MapsRobolectricTestRunnerShadowsTest {
 
   @Test
   fun testMapsShadowsAutoConfigured() {

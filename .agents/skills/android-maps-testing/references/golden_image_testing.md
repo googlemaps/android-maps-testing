@@ -273,7 +273,7 @@ Reference: `// [START golden_diff_artifacts_and_record]` in [`GoldenImageDiffTes
 
 ## 6. End-to-End Sample Test
 
-Reference: `// [START maps_sample_golden_map_test]` in [`SampleGoldenMapTest.kt`](../../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/sample/SampleGoldenMapTest.kt#L46-L128)
+Reference: `// [START maps_sample_golden_map_test]` in [`SampleGoldenMapTest.kt`](../../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/sample/SampleGoldenMapTest.kt#L45-L126)
 
 ```kotlin
 // [START maps_sample_golden_map_test]
@@ -286,10 +286,9 @@ Reference: `// [START maps_sample_golden_map_test]` in [`SampleGoldenMapTest.kt`
  * 3. The map snapshot is captured via [GoogleMap.captureSnapshot].
  * 4. The rendered snapshot is verified against a baseline using [GoldenImageDiff.assertMatches].
  */
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 public class SampleGoldenMapTest {
 
   private lateinit var googleMap: GoogleMap
