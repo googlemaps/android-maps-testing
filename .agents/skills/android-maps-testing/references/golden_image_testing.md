@@ -44,7 +44,7 @@ Screenshot and golden image testing for interactive maps has historically suffer
 
 `GoogleMap.awaitMapLoaded()` and `GoogleMap.captureSnapshot()` automatically idle `ShadowLooper.idleMainLooper()` when running under Robolectric (while suspending for real callbacks on Android devices), and `GoogleMap.assertMatchesGolden(goldenFile)` / `GoogleMap.assertMatchesGoldenBlocking(goldenFile)` capture and verify snapshots in a single line:
 
-Reference: `// [START maps_golden_map_extensions]` in [`GoogleMapExtensions.kt`](../../../../golden-testing/src/main/java/com/google/maps/android/testing/golden/GoogleMapExtensions.kt#L29-L162)
+Reference: region `maps_golden_map_extensions` in [`GoogleMapExtensions.kt`](../../../../golden-testing/src/main/java/com/google/maps/android/testing/golden/GoogleMapExtensions.kt#L29-L162)
 
 ```kotlin
 // [START maps_golden_map_extensions]
@@ -187,7 +187,7 @@ private fun idleMainLooperIfRobolectric() {
 
 ## 4. Jetpack Compose Integration (`rememberGoldenTileProvider`)
 
-Reference: `// [START maps_golden_compose_extensions]` in [`GoldenComposeExtensions.kt`](../../../../golden-testing/src/main/java/com/google/maps/android/testing/golden/GoldenComposeExtensions.kt#L22-L51)
+Reference: region `maps_golden_compose_extensions` in [`GoldenComposeExtensions.kt`](../../../../golden-testing/src/main/java/com/google/maps/android/testing/golden/GoldenComposeExtensions.kt#L22-L51)
 
 ```kotlin
 // [START maps_golden_compose_extensions]
@@ -226,7 +226,7 @@ public fun rememberGoldenTileProvider(
 
 ## 5. Recording Baselines (`-Dmaps.golden.record=true`) & Failure Artifacts (`_actual.png` / `_diff.png`)
 
-Reference: `// [START golden_diff_artifacts_and_record]` in [`GoldenImageDiffTest.kt`](../../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/GoldenImageDiffTest.kt#L109-L146)
+Reference: region `golden_diff_artifacts_and_record` in [`GoldenImageDiffTest.kt`](../../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/GoldenImageDiffTest.kt#L109-L146)
 
 ```kotlin
     // [START golden_diff_artifacts_and_record]
@@ -273,7 +273,7 @@ Reference: `// [START golden_diff_artifacts_and_record]` in [`GoldenImageDiffTes
 
 ## 6. End-to-End Sample Test
 
-Reference: `// [START maps_sample_golden_map_test]` in [`SampleGoldenMapTest.kt`](../../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/sample/SampleGoldenMapTest.kt#L46-L128)
+Reference: region `maps_sample_golden_map_test` in [`SampleGoldenMapTest.kt`](../../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/sample/SampleGoldenMapTest.kt#L46-L128)
 
 ```kotlin
 // [START maps_sample_golden_map_test]

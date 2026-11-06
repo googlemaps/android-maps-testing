@@ -181,7 +181,7 @@ dependencies {
 
 Use `withTestMap { ... }` to spin up a measured, laid-out, initialized `GoogleMap` in one line and assert state with `com.google.maps.android.robolectric.truth.assertThat`:
 
-Reference: `// [START maps_robolectric_demo_test]` in [`MapDemoTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/MapDemoTest.kt#L36-L83)
+Reference: region `maps_robolectric_demo_test` in [`MapDemoTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/MapDemoTest.kt#L36-L83)
 
 ```kotlin
 // [START maps_robolectric_demo_test]
@@ -240,7 +240,7 @@ class MapDemoTest {
 
 If you prefer plain boolean expressions with zero Google Truth dependency, import `assertMap`, `assertMarker`, `distanceTo`, and `meters` directly from `com.google.maps.android.robolectric.powerassert`:
 
-Reference: `// [START maps_robolectric_power_assert]` in [`LazyAssertionsComparisonTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/LazyAssertionsComparisonTest.kt#L151-L187)
+Reference: region `maps_robolectric_power_assert` in [`LazyAssertionsComparisonTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/LazyAssertionsComparisonTest.kt#L151-L187)
 
 ```kotlin
   // [START maps_robolectric_power_assert]
@@ -288,7 +288,7 @@ Reference: `// [START maps_robolectric_power_assert]` in [`LazyAssertionsCompari
 
 Pass the test `GoogleMap` from `createTestMap()` directly into your production controller (`StoreLocatorMapManager`), or locate an embedded `MapView` inside an `Activity` or Jetpack Compose screen via `requireMapView()`:
 
-Reference: `// [START maps_robolectric_manager_test]` in [`StoreLocatorMapManagerTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManagerTest.kt#L37-L129)
+Reference: region `maps_robolectric_manager_test` in [`StoreLocatorMapManagerTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManagerTest.kt#L37-L129)
 
 ```kotlin
 // [START maps_robolectric_manager_test]
@@ -386,7 +386,7 @@ class StoreLocatorMapManagerTest {
 // [END maps_robolectric_manager_test]
 ```
 
-Reference: `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L511-L521)
+Reference: region `robolectric_view_hierarchy_lookup` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L511-L521)
 
 ```kotlin
     // [START robolectric_view_hierarchy_lookup]
@@ -406,7 +406,7 @@ Reference: `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotl
 
 ### Paradigm 1D: Comprehensive Java Headless JVM Testing (`:robolectric-testing`)
 
-Reference: `// [START maps_robolectric_java_demo_test]` in [`MapViewDemoTest.java`](../../../app/src/test/java/com/example/androidmapsrobolectric/MapViewDemoTest.java#L86-L152)
+Reference: region `maps_robolectric_java_demo_test` in [`MapViewDemoTest.java`](../../../app/src/test/java/com/example/androidmapsrobolectric/MapViewDemoTest.java#L86-L152)
 
 ```java
   // [START maps_robolectric_java_demo_test]
@@ -483,7 +483,7 @@ Reference: `// [START maps_robolectric_java_demo_test]` in [`MapViewDemoTest.jav
 
 Use `enableGoldenTesting(...)` to replace live Google tiles with deterministic synthetic tiles (`CoordinateGrid`, `SolidColorHash`, `Checkerboard`, or `Custom`) and verify renders with `captureSnapshot()`, `assertMatchesGolden(goldenFile)`, or `GoldenImageDiff.assertMatches(...)`:
 
-Reference: `// [START maps_sample_golden_map_test]` in [`SampleGoldenMapTest.kt`](../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/sample/SampleGoldenMapTest.kt#L46-L128)
+Reference: region `maps_sample_golden_map_test` in [`SampleGoldenMapTest.kt`](../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/sample/SampleGoldenMapTest.kt#L46-L128)
 
 ```kotlin
 // [START maps_sample_golden_map_test]
@@ -571,7 +571,7 @@ public class SampleGoldenMapTest {
 // [END maps_sample_golden_map_test]
 ```
 
-Reference: `// [START golden_diff_artifacts_and_record]` in [`GoldenImageDiffTest.kt`](../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/GoldenImageDiffTest.kt#L109-L146)
+Reference: region `golden_diff_artifacts_and_record` in [`GoldenImageDiffTest.kt`](../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/GoldenImageDiffTest.kt#L109-L146)
 
 ```kotlin
     // [START golden_diff_artifacts_and_record]
@@ -620,7 +620,7 @@ Reference: `// [START golden_diff_artifacts_and_record]` in [`GoldenImageDiffTes
 
 Extend `BaseVisualTest` and call `verifyScreenshotWithGoldenFallback(...)`. On clean emulators or CI, `BaseVisualTest` checks bundled test APK assets (`src/androidTest/assets/goldens/<testName>.png`) first for an instant zero-quota fast pass, and only consults Gemini Vision when no baseline exists yet or pixel diff exceeds `tolerancePercent`:
 
-Reference: `// [START maps_visual_test_sample]` in [`VisualMapSampleTest.kt`](../../../app/src/androidTest/java/com/example/androidmapsrobolectric/VisualMapSampleTest.kt#L28-L72)
+Reference: region `maps_visual_test_sample` in [`VisualMapSampleTest.kt`](../../../app/src/androidTest/java/com/example/androidmapsrobolectric/VisualMapSampleTest.kt#L28-L71)
 
 ```kotlin
 // [START maps_visual_test_sample]
@@ -663,7 +663,6 @@ class VisualMapSampleTest : BaseVisualTest() {
       testName = "store_locator_initial_state",
       screenshotBitmap = screenshotBitmap,
       prompt = prompt,
-      passCondition = { it.contains("PASSED", ignoreCase = true) },
     )
   }
 }

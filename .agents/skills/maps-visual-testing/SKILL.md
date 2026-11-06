@@ -49,7 +49,7 @@ dependencies {
 
 ## 3. End-to-End Sample Test
 
-Reference: `// [START maps_visual_test_sample]` in [`VisualMapSampleTest.kt`](../../../app/src/androidTest/java/com/example/androidmapsrobolectric/VisualMapSampleTest.kt#L28-L72)
+Reference: region `maps_visual_test_sample` in [`VisualMapSampleTest.kt`](../../../app/src/androidTest/java/com/example/androidmapsrobolectric/VisualMapSampleTest.kt#L28-L71)
 
 ```kotlin
 // [START maps_visual_test_sample]
@@ -92,7 +92,6 @@ class VisualMapSampleTest : BaseVisualTest() {
       testName = "store_locator_initial_state",
       screenshotBitmap = screenshotBitmap,
       prompt = prompt,
-      passCondition = { it.contains("PASSED", ignoreCase = true) },
     )
   }
 }
@@ -103,7 +102,7 @@ class VisualMapSampleTest : BaseVisualTest() {
 
 ## 4. Hybrid Golden Fallback Implementation Reference
 
-Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../../../visual-testing/src/main/java/com/google/maps/android/testing/visual/BaseVisualTest.kt#L147-L218)
+Reference: region `maps_visual_golden_fallback` in [`BaseVisualTest.kt`](../../../visual-testing/src/main/java/com/google/maps/android/testing/visual/BaseVisualTest.kt#L160-L237)
 
 ```kotlin
   // [START maps_visual_golden_fallback]
@@ -111,7 +110,7 @@ Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../
     testName: String,
     screenshotBitmap: Bitmap,
     prompt: String,
-    passCondition: (String) -> Boolean = { it.contains("PASSED", ignoreCase = true) },
+    passCondition: (String) -> Boolean = { isPassedVerdict(it) },
     goldensDirectory: File = File(context.getExternalFilesDir(null) ?: context.filesDir, "goldens"),
     tolerancePercent: Double = 0.5,
     updateGoldenOnPass: Boolean = true,
@@ -160,7 +159,13 @@ Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../
       passed,
     )
 
-    if (updateGoldenOnPass) {
+    if (goldenBitmap != null) {
+      Log.w(
+        "BaseVisualTest",
+        "Gemini approved '$testName', but the screenshot differs from its golden baseline. The golden was " +
+          "not updated. If the change is intended, replace the golden with the new screenshot.",
+      )
+    } else if (updateGoldenOnPass) {
       try {
         goldensDirectory.mkdirs()
         FileOutputStream(goldenFile).use { out ->
