@@ -95,7 +95,7 @@ flowchart TD
 
 ## 4. Production Map Controller Implementation
 
-Reference: region `maps_robolectric_manager` in [`StoreLocatorMapManager.kt`](../../../../app/src/main/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManager.kt#L31-L157)
+Reference: region `maps_robolectric_manager` in [`StoreLocatorMapManager.kt`](../../../../app/src/main/java/com/google/maps/android/testing/sample/manager/StoreLocatorMapManager.kt#L31-L157)
 
 ```kotlin
 // [START maps_robolectric_manager]
@@ -231,7 +231,7 @@ class StoreLocatorMapManager(
 
 ## 5. Testing the Controller on JVM with `createTestMap` & Domain Assertions
 
-Reference: region `maps_robolectric_manager_test` in [`StoreLocatorMapManagerTest.kt`](../../../../app/src/test/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManagerTest.kt#L37-L129)
+Reference: region `maps_robolectric_manager_test` in [`StoreLocatorMapManagerTest.kt`](../../../../app/src/test/java/com/google/maps/android/testing/sample/manager/StoreLocatorMapManagerTest.kt#L37-L129)
 
 ```kotlin
 // [START maps_robolectric_manager_test]
