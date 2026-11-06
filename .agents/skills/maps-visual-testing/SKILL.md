@@ -49,7 +49,7 @@ dependencies {
 
 ## 3. End-to-End Sample Test
 
-Reference: `// [START maps_visual_test_sample]` in [`VisualMapSampleTest.kt`](../../../app/src/androidTest/java/com/example/androidmapsrobolectric/VisualMapSampleTest.kt#L28-L71)
+Reference: region `maps_visual_test_sample` in [`VisualMapSampleTest.kt`](../../../app/src/androidTest/java/com/example/androidmapsrobolectric/VisualMapSampleTest.kt#L28-L71)
 
 ```kotlin
 // [START maps_visual_test_sample]
@@ -102,7 +102,7 @@ class VisualMapSampleTest : BaseVisualTest() {
 
 ## 4. Hybrid Golden Fallback Implementation Reference
 
-Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../../../visual-testing/src/main/java/com/google/maps/android/testing/visual/BaseVisualTest.kt#L160-L237)
+Reference: region `maps_visual_golden_fallback` in [`BaseVisualTest.kt`](../../../visual-testing/src/main/java/com/google/maps/android/testing/visual/BaseVisualTest.kt#L160-L237)
 
 ```kotlin
   // [START maps_visual_golden_fallback]

@@ -8,7 +8,7 @@ This guide covers testing Google Maps within **Jetpack Compose** applications an
 
 Both `:robolectric-testing` (`com.google.maps.android.robolectric.ktx`) and `:golden-testing` (`com.google.maps.android.testing.golden`) provide view hierarchy traversal helpers to extract the hosted `MapView` from an `Activity` or Jetpack Compose `AndroidView` container:
 
-Reference: `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L511-L521)
+Reference: region `robolectric_view_hierarchy_lookup` in [`ShadowMapViewKotlinTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L511-L521)
 
 ```kotlin
     // [START robolectric_view_hierarchy_lookup]
@@ -24,7 +24,7 @@ Reference: `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotl
     // [END robolectric_view_hierarchy_lookup]
 ```
 
-Reference: `// [START maps_compose_test_extensions]` in [`ComposeMapTestExtensions.kt`](../../../../golden-testing/src/main/java/com/google/maps/android/testing/golden/ComposeMapTestExtensions.kt#L36-L110)
+Reference: region `maps_compose_test_extensions` in [`ComposeMapTestExtensions.kt`](../../../../golden-testing/src/main/java/com/google/maps/android/testing/golden/ComposeMapTestExtensions.kt#L36-L110)
 
 ```kotlin
 // [START maps_compose_test_extensions]
@@ -110,7 +110,7 @@ public fun GoogleMap.assertCameraTarget(expected: LatLng, tolerance: Distance = 
 
 Inject deterministic synthetic tiles directly into Maps Compose with `rememberGoldenTileProvider()`:
 
-Reference: `// [START maps_golden_compose_extensions]` in [`GoldenComposeExtensions.kt`](../../../../golden-testing/src/main/java/com/google/maps/android/testing/golden/GoldenComposeExtensions.kt#L22-L51)
+Reference: region `maps_golden_compose_extensions` in [`GoldenComposeExtensions.kt`](../../../../golden-testing/src/main/java/com/google/maps/android/testing/golden/GoldenComposeExtensions.kt#L22-L51)
 
 ```kotlin
 // [START maps_golden_compose_extensions]
@@ -151,7 +151,7 @@ public fun rememberGoldenTileProvider(
 
 `android-maps-testing` faithfully models `ShadowProjection` and `ShadowGoogleMap` so that distance-based marker clustering algorithms (like `DistanceBasedAlgorithm` and `NonHierarchicalDistanceBasedAlgorithm`) operate identically on the local JVM:
 
-Reference: `// [START maps_robolectric_clustering_test]` in [`MapsUtilsClusteringIntegrationTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/MapsUtilsClusteringIntegrationTest.kt#L45-L167)
+Reference: region `maps_robolectric_clustering_test` in [`MapsUtilsClusteringIntegrationTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/MapsUtilsClusteringIntegrationTest.kt#L45-L167)
 
 ```kotlin
 // [START maps_robolectric_clustering_test]
