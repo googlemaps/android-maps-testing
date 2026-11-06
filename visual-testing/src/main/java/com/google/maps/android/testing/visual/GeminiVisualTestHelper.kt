@@ -91,7 +91,17 @@ class GeminiVisualTestHelper(
       sessionResolvedModel = null
     }
 
-    private fun createDefaultHttpClient(): HttpClient = HttpClient(CIO)
+    /**
+     * Request timeout for the default client. CIO's own default is 15 seconds, which a Gemini vision
+     * request from an emulator can exceed.
+     */
+    internal const val DEFAULT_REQUEST_TIMEOUT_MILLIS = 60_000L
+
+    internal fun createDefaultHttpClient(): HttpClient = HttpClient(CIO) {
+      engine {
+        requestTimeout = DEFAULT_REQUEST_TIMEOUT_MILLIS
+      }
+    }
 
     private val VERSION_REGEX = Regex("""gemini-(\d+(?:\.\d+)*)""", RegexOption.IGNORE_CASE)
 

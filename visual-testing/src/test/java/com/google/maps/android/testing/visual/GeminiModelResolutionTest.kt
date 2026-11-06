@@ -18,6 +18,7 @@ package com.google.maps.android.testing.visual
 
 import android.graphics.Bitmap
 import com.google.common.truth.Truth.assertThat
+import io.ktor.client.engine.cio.CIOEngineConfig
 import io.ktor.client.request.HttpRequestData
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
@@ -104,6 +105,14 @@ class GeminiModelResolutionTest {
     GeminiVisualTestHelper.resetSessionModel()
     helper.getOrResolveModel("dummy-key")
     assertThat(requests).hasSize(2)
+  }
+
+  @Test
+  fun defaultClientAllowsSlowVisionRequests() {
+    val config = GeminiVisualTestHelper.createDefaultHttpClient().engine.config as CIOEngineConfig
+
+    assertThat(config.requestTimeout).isEqualTo(GeminiVisualTestHelper.DEFAULT_REQUEST_TIMEOUT_MILLIS)
+    assertThat(config.requestTimeout).isAtLeast(60_000L)
   }
 
   @Test
