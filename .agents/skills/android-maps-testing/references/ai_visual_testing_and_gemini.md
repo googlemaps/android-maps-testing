@@ -156,7 +156,7 @@ Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../
 
 ## 5. End-to-End Instrumented Test
 
-Reference: `// [START maps_visual_test_sample]` in [`VisualMapSampleTest.kt`](../../../../app/src/androidTest/java/com/example/androidmapsrobolectric/VisualMapSampleTest.kt#L28-L72)
+Reference: `// [START maps_visual_test_sample]` in [`VisualMapSampleTest.kt`](../../../../app/src/androidTest/java/com/google/maps/android/testing/sample/VisualMapSampleTest.kt#L28-L72)
 
 ```kotlin
 // [START maps_visual_test_sample]

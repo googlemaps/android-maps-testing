@@ -49,7 +49,7 @@ dependencies {
 
 ## 3. End-to-End Sample Test
 
-Reference: `// [START maps_visual_test_sample]` in [`VisualMapSampleTest.kt`](../../../app/src/androidTest/java/com/example/androidmapsrobolectric/VisualMapSampleTest.kt#L28-L72)
+Reference: `// [START maps_visual_test_sample]` in [`VisualMapSampleTest.kt`](../../../app/src/androidTest/java/com/google/maps/android/testing/sample/VisualMapSampleTest.kt#L28-L72)
 
 ```kotlin
 // [START maps_visual_test_sample]

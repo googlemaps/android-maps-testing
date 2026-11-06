@@ -35,7 +35,7 @@ Annotate your test class with `@EnableMapsShadows`, `@RunWith(RobolectricTestRun
 
 Instead of manually constructing an `Activity`, measuring/laying out a `MapView`, and idling `ShadowLooper`, use `withTestMap { ... }` or `createTestMap()` from `com.google.maps.android.robolectric.ktx`:
 
-Reference: `// [START maps_robolectric_demo_test]` in [`MapDemoTest.kt`](../../../../app/src/test/java/com/example/androidmapsrobolectric/MapDemoTest.kt#L36-L83)
+Reference: `// [START maps_robolectric_demo_test]` in [`MapDemoTest.kt`](../../../../app/src/test/java/com/google/maps/android/testing/sample/MapDemoTest.kt#L36-L83)
 
 ```kotlin
 // [START maps_robolectric_demo_test]
@@ -334,7 +334,7 @@ Reference: `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotl
 
 `ShadowMapView` integrates Mercator projection mathematics to render overlays directly onto an Android `Bitmap` / `Canvas` in memory:
 
-Reference: `// [START maps_robolectric_java_demo_test]` in [`MapViewDemoTest.java`](../../../../app/src/test/java/com/example/androidmapsrobolectric/MapViewDemoTest.java#L86-L152)
+Reference: `// [START maps_robolectric_java_demo_test]` in [`MapViewDemoTest.java`](../../../../app/src/test/java/com/google/maps/android/testing/sample/MapViewDemoTest.java#L86-L152)
 
 ```java
   // [START maps_robolectric_java_demo_test]
