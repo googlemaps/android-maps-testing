@@ -11,7 +11,7 @@ High-fidelity Robolectric shadows and testing utilities for the Google Maps SDK 
 - **Google Truth Domain Subjects**: Fluent subjects (`GoogleMapSubject`, `MarkerSubject`, `CameraPositionSubject`, `LatLngSubject`, `LatLngBoundsSubject`, `CircleSubject`, `PolygonSubject`, `PolylineSubject`) via unified `assertThat(...)`.
 - **Kotlin Power-Assert Support**: First-class boolean predicates, `Comparable` geodesic `Distance` (`distanceTo`, `<= 5.meters`), `in` bounds/circle operators, and `assertMap(...)` / `assertGeo(...)` entrypoints that render rich expression diagrams on failure.
 - **1-Liner Lazy Test Harness & KTX**: `createTestMap()`, `withTestMap { ... }`, `map.markers`, `map.clickMarker("Title")`, and `map.pixelColorAt(latLng)` eliminate setup and shadow extraction ceremony.
-- **Zero Boilerplate**: Drop-in configuration with `@EnableMapsShadows` or automatic classpath discovery via `robolectric.properties`.
+- **Zero Boilerplate**: Drop-in configuration with `@EnableMapsShadows`. The library does not ship a `robolectric.properties`, so the shadows only apply to the tests you annotate.
 - **Full Lifecycle & Async Dispatch**: Seamless simulation of `onCreate()`, `onStart()`, `onResume()`, `onDestroy()`, and async `getMapAsync()` callbacks.
 
 ---
