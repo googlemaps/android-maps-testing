@@ -23,7 +23,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.common.truth.Truth.assertThat
-import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.MapsRobolectricTestRunner
 import com.google.maps.android.robolectric.ktx.createTestMap
 import com.google.maps.android.robolectric.ktx.shadow
 import com.google.maps.android.robolectric.ktx.withTestMap
@@ -34,16 +34,14 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 import java.io.File
 
 // [START maps_golden_extensions_test]
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 public class GoogleMapExtensionsRobolectricTest {
 
   @get:Rule

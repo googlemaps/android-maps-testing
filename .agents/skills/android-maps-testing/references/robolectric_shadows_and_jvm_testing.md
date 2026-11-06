@@ -31,18 +31,17 @@ The library provides high-fidelity shadows covering the full Google Maps SDK sur
 
 ## 2. Test Configuration & 1-Liner KTX Harness
 
-Annotate your test class with `@EnableMapsShadows`, `@RunWith(RobolectricTestRunner::class)`, and `@GraphicsMode(GraphicsMode.Mode.NATIVE)`.
+Annotate your test class with `@RunWith(MapsRobolectricTestRunner::class)` and `@GraphicsMode(GraphicsMode.Mode.NATIVE)`. The runner registers every Maps shadow; `@EnableMapsShadows` is deprecated because it never registered any.
 
 Instead of manually constructing an `Activity`, measuring/laying out a `MapView`, and idling `ShadowLooper`, use `withTestMap { ... }` or `createTestMap()` from `com.google.maps.android.robolectric.ktx`:
 
-Reference: `// [START maps_robolectric_demo_test]` in [`MapDemoTest.kt`](../../../../app/src/test/java/com/example/androidmapsrobolectric/MapDemoTest.kt#L36-L83)
+Reference: `// [START maps_robolectric_demo_test]` in [`MapDemoTest.kt`](../../../../app/src/test/java/com/example/androidmapsrobolectric/MapDemoTest.kt#L35-L81)
 
 ```kotlin
 // [START maps_robolectric_demo_test]
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 class MapDemoTest {
 
   @Test
@@ -94,7 +93,7 @@ class MapDemoTest {
 
 `:robolectric-testing` supports both **Google Truth** domain subjects (`com.google.maps.android.robolectric.truth.assertThat`) and **Kotlin Power-Assert** (`com.google.maps.android.robolectric.powerassert.assertMap`, `assertMarker`, `assertGeo`, with `distanceTo` and `meters` included directly in `.powerassert`):
 
-Reference: `// [START maps_robolectric_truth_domain_subjects]` and `// [START maps_robolectric_power_assert]` in [`LazyAssertionsComparisonTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/LazyAssertionsComparisonTest.kt#L114-L187)
+Reference: `// [START maps_robolectric_truth_domain_subjects]` and `// [START maps_robolectric_power_assert]` in [`LazyAssertionsComparisonTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/LazyAssertionsComparisonTest.kt#L112-L185)
 
 ```kotlin
   // [START maps_robolectric_truth_domain_subjects]
@@ -179,7 +178,7 @@ Reference: `// [START maps_robolectric_truth_domain_subjects]` and `// [START ma
 
 `ShadowGoogleMap` computes accurate Web Mercator zoom levels for `CameraUpdateFactory.newLatLngBounds` (accounting for map padding and explicit width/height) and pixel-accurate shifts for `CameraUpdateFactory.scrollBy`:
 
-Reference: `// [START robolectric_camera_bounds_and_scroll]` in [`ShadowMapViewKotlinTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L248-L270)
+Reference: `// [START robolectric_camera_bounds_and_scroll]` in [`ShadowMapViewKotlinTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L246-L268)
 
 ```kotlin
     // [START robolectric_camera_bounds_and_scroll]
@@ -216,7 +215,7 @@ When `clickMarker` is invoked, `ShadowGoogleMap` follows the exact Maps SDK cont
 - Opening an `InfoWindow` on one marker automatically hides any previously open `InfoWindow` on the same map.
 - If the listener returns `true`, the event is consumed (suppressing default InfoWindow and camera move).
 
-Reference: `// [START robolectric_marker_click_behavior]` in [`ShadowMapViewKotlinTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L287-L317)
+Reference: `// [START robolectric_marker_click_behavior]` in [`ShadowMapViewKotlinTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L285-L315)
 
 ```kotlin
     // [START robolectric_marker_click_behavior]
@@ -258,7 +257,7 @@ Reference: `// [START robolectric_marker_click_behavior]` in [`ShadowMapViewKotl
 
 Use `map.simulateUserCameraMove(...)` to dispatch `OnCameraMoveStartedListener.REASON_GESTURE` (distinguishing user drags from programmatic `moveCamera`/`animateCamera` calls that fire `REASON_DEVELOPER_ANIMATION`), and assert `MapColorScheme`, `MapStyleOptions`, `setLatLngBoundsForCameraTarget`, and `contentDescription`:
 
-Reference: `// [START robolectric_user_gesture_and_styling]` in [`ShadowMapViewKotlinTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L328-L372)
+Reference: `// [START robolectric_user_gesture_and_styling]` in [`ShadowMapViewKotlinTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L326-L370)
 
 ```kotlin
     // [START robolectric_user_gesture_and_styling]
@@ -312,7 +311,7 @@ Reference: `// [START robolectric_user_gesture_and_styling]` in [`ShadowMapViewK
 
 ## 7. Extracting `MapView` from Activity or Jetpack Compose View Hierarchies
 
-Reference: `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L511-L521)
+Reference: `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L508-L518)
 
 ```kotlin
     // [START robolectric_view_hierarchy_lookup]

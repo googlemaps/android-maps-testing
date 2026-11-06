@@ -39,10 +39,9 @@ dependencies {
 
 Annotate your test class with:
 ```kotlin
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 ```
 
 ---
@@ -51,14 +50,13 @@ Annotate your test class with:
 
 ### A. 1-Liner KTX Test Harness (`withTestMap`) & Unified Google Truth (`assertThat(map)`)
 
-Reference: `// [START maps_robolectric_demo_test]` in [`MapDemoTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/MapDemoTest.kt#L36-L83)
+Reference: `// [START maps_robolectric_demo_test]` in [`MapDemoTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/MapDemoTest.kt#L35-L81)
 
 ```kotlin
 // [START maps_robolectric_demo_test]
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 class MapDemoTest {
 
   @Test
@@ -110,7 +108,7 @@ class MapDemoTest {
 
 Import `assertMap`, `assertMarker`, `assertGeo`, `distanceTo`, and `meters` directly from `com.google.maps.android.robolectric.powerassert`:
 
-Reference: `// [START maps_robolectric_power_assert]` in [`LazyAssertionsComparisonTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/LazyAssertionsComparisonTest.kt#L151-L187)
+Reference: `// [START maps_robolectric_power_assert]` in [`LazyAssertionsComparisonTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/LazyAssertionsComparisonTest.kt#L149-L185)
 
 ```kotlin
   // [START maps_robolectric_power_assert]
@@ -156,14 +154,13 @@ Reference: `// [START maps_robolectric_power_assert]` in [`LazyAssertionsCompari
 
 ### C. Testing Production Map Controllers (`createTestMap`)
 
-Reference: `// [START maps_robolectric_manager_test]` in [`StoreLocatorMapManagerTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManagerTest.kt#L37-L129)
+Reference: `// [START maps_robolectric_manager_test]` in [`StoreLocatorMapManagerTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManagerTest.kt#L36-L127)
 
 ```kotlin
 // [START maps_robolectric_manager_test]
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 class StoreLocatorMapManagerTest {
 
   private lateinit var googleMap: GoogleMap
@@ -258,7 +255,7 @@ class StoreLocatorMapManagerTest {
 
 ### D. Camera Bounds (`newLatLngBounds`), `scrollBy`, Marker Clicks, and User Gestures (`REASON_GESTURE`)
 
-- **Bounds & Scroll**: See `// [START robolectric_camera_bounds_and_scroll]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L248-L270).
-- **Marker Click & InfoWindow Semantics**: See `// [START robolectric_marker_click_behavior]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L287-L317).
-- **User Gesture (`REASON_GESTURE`) & Map Styling/Clamping**: See `// [START robolectric_user_gesture_and_styling]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L328-L372).
-- **Activity & Compose View Hierarchy Lookup**: See `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L511-L521).
+- **Bounds & Scroll**: See `// [START robolectric_camera_bounds_and_scroll]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L246-L268).
+- **Marker Click & InfoWindow Semantics**: See `// [START robolectric_marker_click_behavior]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L285-L315).
+- **User Gesture (`REASON_GESTURE`) & Map Styling/Clamping**: See `// [START robolectric_user_gesture_and_styling]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L326-L370).
+- **Activity & Compose View Hierarchy Lookup**: See `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L508-L518).

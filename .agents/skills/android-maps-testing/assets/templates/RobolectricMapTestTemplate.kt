@@ -22,7 +22,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolygonOptions
-import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.MapsRobolectricTestRunner
 import com.google.maps.android.robolectric.ktx.clickMarker
 import com.google.maps.android.robolectric.ktx.simulateUserCameraMove
 import com.google.maps.android.robolectric.ktx.withTestMap
@@ -30,17 +30,15 @@ import com.google.maps.android.robolectric.truth.assertThat
 import com.google.maps.android.robolectric.truth.meters
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
 /**
  * Standard template for headless JVM Google Maps unit testing with Robolectric shadows.
  */
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 class RobolectricMapTestTemplate {
 
   @Test

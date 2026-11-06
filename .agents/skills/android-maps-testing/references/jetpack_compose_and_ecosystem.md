@@ -8,7 +8,7 @@ This guide covers testing Google Maps within **Jetpack Compose** applications an
 
 Both `:robolectric-testing` (`com.google.maps.android.robolectric.ktx`) and `:golden-testing` (`com.google.maps.android.testing.golden`) provide view hierarchy traversal helpers to extract the hosted `MapView` from an `Activity` or Jetpack Compose `AndroidView` container:
 
-Reference: `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L511-L521)
+Reference: `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L508-L518)
 
 ```kotlin
     // [START robolectric_view_hierarchy_lookup]
@@ -151,14 +151,13 @@ public fun rememberGoldenTileProvider(
 
 `android-maps-testing` faithfully models `ShadowProjection` and `ShadowGoogleMap` so that distance-based marker clustering algorithms (like `DistanceBasedAlgorithm` and `NonHierarchicalDistanceBasedAlgorithm`) operate identically on the local JVM:
 
-Reference: `// [START maps_robolectric_clustering_test]` in [`MapsUtilsClusteringIntegrationTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/MapsUtilsClusteringIntegrationTest.kt#L45-L167)
+Reference: `// [START maps_robolectric_clustering_test]` in [`MapsUtilsClusteringIntegrationTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/MapsUtilsClusteringIntegrationTest.kt#L44-L165)
 
 ```kotlin
 // [START maps_robolectric_clustering_test]
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 class MapsUtilsClusteringIntegrationTest {
 
   private lateinit var mapView: MapView

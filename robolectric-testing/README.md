@@ -11,7 +11,7 @@ High-fidelity Robolectric shadows and testing utilities for the Google Maps SDK 
 - **Google Truth Domain Subjects**: Fluent subjects (`GoogleMapSubject`, `MarkerSubject`, `CameraPositionSubject`, `LatLngSubject`, `LatLngBoundsSubject`, `CircleSubject`, `PolygonSubject`, `PolylineSubject`) via unified `assertThat(...)`.
 - **Kotlin Power-Assert Support**: First-class boolean predicates, `Comparable` geodesic `Distance` (`distanceTo`, `<= 5.meters`), `in` bounds/circle operators, and `assertMap(...)` / `assertGeo(...)` entrypoints that render rich expression diagrams on failure.
 - **1-Liner Lazy Test Harness & KTX**: `createTestMap()`, `withTestMap { ... }`, `map.markers`, `map.clickMarker("Title")`, and `map.pixelColorAt(latLng)` eliminate setup and shadow extraction ceremony.
-- **Zero Boilerplate**: Drop-in configuration with `@EnableMapsShadows` or automatic classpath discovery via `robolectric.properties`.
+- **Zero Boilerplate**: Run the test class with `@RunWith(MapsRobolectricTestRunner::class)` and every Maps shadow is registered. `@EnableMapsShadows` is deprecated: it never registered any shadows, because Robolectric does not read `@Config` through annotations.
 - **Full Lifecycle & Async Dispatch**: Seamless simulation of `onCreate()`, `onStart()`, `onResume()`, `onDestroy()`, and async `getMapAsync()` callbacks.
 
 ---
@@ -102,6 +102,20 @@ dependencies {
 
 ## Quick Start
 
+### Registering the Maps shadows
+
+Run each test class with `MapsRobolectricTestRunner`. It registers every Maps shadow for that class, and any `@Config` on the class or method (such as `sdk`) still applies:
+
+```kotlin
+@RunWith(MapsRobolectricTestRunner::class)
+@Config(sdk = [34])
+class MyMapTest
+```
+
+- **`@EnableMapsShadows` is deprecated.** Robolectric does not read `@Config` placed on another annotation, so it never registered any shadows. Replace it with the runner.
+- **Tests that use `@RunWith(AndroidJUnit4::class)`** run on Robolectric's default runner. Switch Maps tests to `MapsRobolectricTestRunner`, or list the shadows yourself with `@Config(shadows = [...])`.
+- **Until 1.0.0 the library also ships a `robolectric.properties`** that registers the shadows for every Robolectric test. Robolectric reads only one `robolectric.properties` from the root of the classpath, so if your module has its own, the Maps shadows from that file are lost. The runner does not depend on it, and the file will be removed before 1.0.0.
+
 ### Basic Map & Marker Test with Kotlin Power-Assert
 
 ```kotlin
@@ -109,7 +123,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.MapsRobolectricTestRunner
 import com.google.maps.android.robolectric.ktx.cameraTarget
 import com.google.maps.android.robolectric.ktx.cameraZoom
 import com.google.maps.android.robolectric.ktx.withTestMap
@@ -119,10 +133,8 @@ import com.google.maps.android.robolectric.powerassert.distanceTo
 import com.google.maps.android.robolectric.powerassert.meters
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 
-@RunWith(RobolectricTestRunner::class)
-@EnableMapsShadows
+@RunWith(MapsRobolectricTestRunner::class)
 class MapScreenPowerAssertTest {
 
     @Test
@@ -161,16 +173,14 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.MapsRobolectricTestRunner
 import com.google.maps.android.robolectric.ktx.withTestMap
 import com.google.maps.android.robolectric.truth.assertThat
 import com.google.maps.android.robolectric.truth.meters
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 
-@RunWith(RobolectricTestRunner::class)
-@EnableMapsShadows
+@RunWith(MapsRobolectricTestRunner::class)
 class MapScreenTest {
 
     @Test
@@ -318,10 +328,9 @@ Pass the test `GoogleMap` from `createTestMap()` into your own production contro
 
 ```kotlin
 // [START maps_robolectric_manager_test]
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 class StoreLocatorMapManagerTest {
 
   private lateinit var googleMap: GoogleMap

@@ -20,7 +20,7 @@ import com.example.androidmapsrobolectric.model.Store
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.MapsRobolectricTestRunner
 import com.google.maps.android.robolectric.ktx.cameraTarget
 import com.google.maps.android.robolectric.ktx.cameraZoom
 import com.google.maps.android.robolectric.ktx.circles
@@ -43,7 +43,6 @@ import com.google.maps.android.robolectric.truth.meters
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 import com.google.common.truth.Truth.assertThat as truthAssertThat
@@ -58,10 +57,9 @@ import com.google.common.truth.Truth.assertThat as truthAssertThat
  * assertions eliminate boilerplate.
  */
 // [START maps_robolectric_lazy_store_locator_comparison]
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 class StoreLocatorLazyAssertComparisonTest {
 
   private lateinit var map: GoogleMap

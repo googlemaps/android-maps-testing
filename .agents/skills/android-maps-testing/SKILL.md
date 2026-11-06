@@ -181,14 +181,13 @@ dependencies {
 
 Use `withTestMap { ... }` to spin up a measured, laid-out, initialized `GoogleMap` in one line and assert state with `com.google.maps.android.robolectric.truth.assertThat`:
 
-Reference: `// [START maps_robolectric_demo_test]` in [`MapDemoTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/MapDemoTest.kt#L36-L83)
+Reference: `// [START maps_robolectric_demo_test]` in [`MapDemoTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/MapDemoTest.kt#L35-L81)
 
 ```kotlin
 // [START maps_robolectric_demo_test]
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 class MapDemoTest {
 
   @Test
@@ -240,7 +239,7 @@ class MapDemoTest {
 
 If you prefer plain boolean expressions with zero Google Truth dependency, import `assertMap`, `assertMarker`, `distanceTo`, and `meters` directly from `com.google.maps.android.robolectric.powerassert`:
 
-Reference: `// [START maps_robolectric_power_assert]` in [`LazyAssertionsComparisonTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/LazyAssertionsComparisonTest.kt#L151-L187)
+Reference: `// [START maps_robolectric_power_assert]` in [`LazyAssertionsComparisonTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/LazyAssertionsComparisonTest.kt#L149-L185)
 
 ```kotlin
   // [START maps_robolectric_power_assert]
@@ -288,14 +287,13 @@ Reference: `// [START maps_robolectric_power_assert]` in [`LazyAssertionsCompari
 
 Pass the test `GoogleMap` from `createTestMap()` directly into your production controller (`StoreLocatorMapManager`), or locate an embedded `MapView` inside an `Activity` or Jetpack Compose screen via `requireMapView()`:
 
-Reference: `// [START maps_robolectric_manager_test]` in [`StoreLocatorMapManagerTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManagerTest.kt#L37-L129)
+Reference: `// [START maps_robolectric_manager_test]` in [`StoreLocatorMapManagerTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManagerTest.kt#L36-L127)
 
 ```kotlin
 // [START maps_robolectric_manager_test]
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 class StoreLocatorMapManagerTest {
 
   private lateinit var googleMap: GoogleMap
@@ -386,7 +384,7 @@ class StoreLocatorMapManagerTest {
 // [END maps_robolectric_manager_test]
 ```
 
-Reference: `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L511-L521)
+Reference: `// [START robolectric_view_hierarchy_lookup]` in [`ShadowMapViewKotlinTest.kt`](../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L508-L518)
 
 ```kotlin
     // [START robolectric_view_hierarchy_lookup]
@@ -483,7 +481,7 @@ Reference: `// [START maps_robolectric_java_demo_test]` in [`MapViewDemoTest.jav
 
 Use `enableGoldenTesting(...)` to replace live Google tiles with deterministic synthetic tiles (`CoordinateGrid`, `SolidColorHash`, `Checkerboard`, or `Custom`) and verify renders with `captureSnapshot()`, `assertMatchesGolden(goldenFile)`, or `GoldenImageDiff.assertMatches(...)`:
 
-Reference: `// [START maps_sample_golden_map_test]` in [`SampleGoldenMapTest.kt`](../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/sample/SampleGoldenMapTest.kt#L46-L128)
+Reference: `// [START maps_sample_golden_map_test]` in [`SampleGoldenMapTest.kt`](../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/sample/SampleGoldenMapTest.kt#L45-L126)
 
 ```kotlin
 // [START maps_sample_golden_map_test]
@@ -496,10 +494,9 @@ Reference: `// [START maps_sample_golden_map_test]` in [`SampleGoldenMapTest.kt`
  * 3. The map snapshot is captured via [GoogleMap.captureSnapshot].
  * 4. The rendered snapshot is verified against a baseline using [GoldenImageDiff.assertMatches].
  */
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 public class SampleGoldenMapTest {
 
   private lateinit var googleMap: GoogleMap
