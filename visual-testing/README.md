@@ -38,12 +38,12 @@ Screenshot and visual testing of map applications has traditionally presented un
 
 ## Features
 
-- **Dynamic Flash Model Resolution**: Automatically queries the Gemini API for the latest, stable Flash model (e.g. `gemini-3.8-flash`, `gemini-2.5-flash`) and caches the resolved model for the entire testing session, avoiding hardcoded or stale model names.
+- **Pinned Model by Default**: Uses `GeminiVisualTestHelper.DEFAULT_FALLBACK_MODEL` so verdicts do not change when a new model ships. Set the model to `latest` to query the Gemini API for the newest stable Flash model instead, cached for the whole testing session.
 - **Hybrid Golden Fallback (`verifyScreenshotWithGoldenFallback`)**:
   - Runs a fast local pixel comparison first using `:golden-testing`'s `GoldenImageDiff`.
   - If pixel diff matches within tolerance, the test passes with **zero network latency and zero API quota**.
   - If pixel diff fails, it seamlessly falls back to Gemini Multimodal AI to verify semantic correctness and visual integrity.
-  - Optionally auto-updates baseline golden images when Gemini confirms the change is valid.
+  - Records a golden baseline on the first run when Gemini approves the screenshot. An existing golden that diverged is never overwritten, so a regression approved once by Gemini cannot become the new baseline.
 - **Multimodal Visual Inspection**: Send captured UI or map screenshots directly to Gemini with natural-language verification prompts (`analyzeImage` / `analyzeImageBlocking`).
 - **AI-Driven UI Automation (`performActionFromPrompt`)**: Generates and executes UiAutomator actions (click, scroll, type, wait) derived directly from the current view hierarchy and screenshot.
 - **Smart API Key Discovery**: Hierarchical resolution checks:
@@ -149,7 +149,6 @@ class VisualMapSampleTest : BaseVisualTest() {
       testName = "store_locator_initial_state",
       screenshotBitmap = screenshotBitmap,
       prompt = prompt,
-      passCondition = { it.contains("PASSED", ignoreCase = true) },
     )
   }
 }
@@ -175,7 +174,7 @@ class VisualMapSampleTest : BaseVisualTest() {
     testName: String,
     screenshotBitmap: Bitmap,
     prompt: String,
-    passCondition: (String) -> Boolean = { it.contains("PASSED", ignoreCase = true) },
+    passCondition: (String) -> Boolean = { isPassedVerdict(it) },
     goldensDirectory: File = File(context.getExternalFilesDir(null) ?: context.filesDir, "goldens"),
     tolerancePercent: Double = 0.5,
     updateGoldenOnPass: Boolean = true,
@@ -224,7 +223,13 @@ class VisualMapSampleTest : BaseVisualTest() {
       passed,
     )
 
-    if (updateGoldenOnPass) {
+    if (goldenBitmap != null) {
+      Log.w(
+        "BaseVisualTest",
+        "Gemini approved '$testName', but the screenshot differs from its golden baseline. The golden was " +
+          "not updated. If the change is intended, replace the golden with the new screenshot.",
+      )
+    } else if (updateGoldenOnPass) {
       try {
         goldensDirectory.mkdirs()
         FileOutputStream(goldenFile).use { out ->
@@ -248,16 +253,17 @@ class VisualMapSampleTest : BaseVisualTest() {
 
 ## Model Selection & Overrides
 
-By default, `:visual-testing` queries `https://generativelanguage.googleapis.com/v1beta/models` on first run to find the latest stable `flash` model and caches it across all test cases.
+By default, `:visual-testing` uses the pinned `GeminiVisualTestHelper.DEFAULT_FALLBACK_MODEL`, so test results only change when you upgrade the library or choose another model. The API key is sent in the `x-goog-api-key` header, never in the request URL.
 
-You can explicitly force a specific model if desired:
+You can select a model explicitly, or pass `latest` (`GeminiVisualTestHelper.LATEST_MODEL`) to query `https://generativelanguage.googleapis.com/v1beta/models` once per session for the newest stable Flash model:
 
 ```kotlin
 // In test code:
-visualTestHelper.preferredModel = "gemini-3.8-flash"
+val visualTestHelper = GeminiVisualTestHelper(preferredModel = "gemini-3.8-flash")
 
 // Or via system property / Gradle flag:
 // -Dgemini.model=gemini-2.5-pro
+// -Dgemini.model=latest
 ```
 
 ---

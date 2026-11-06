@@ -620,7 +620,7 @@ Reference: `// [START golden_diff_artifacts_and_record]` in [`GoldenImageDiffTes
 
 Extend `BaseVisualTest` and call `verifyScreenshotWithGoldenFallback(...)`. On clean emulators or CI, `BaseVisualTest` checks bundled test APK assets (`src/androidTest/assets/goldens/<testName>.png`) first for an instant zero-quota fast pass, and only consults Gemini Vision when no baseline exists yet or pixel diff exceeds `tolerancePercent`:
 
-Reference: `// [START maps_visual_test_sample]` in [`VisualMapSampleTest.kt`](../../../app/src/androidTest/java/com/example/androidmapsrobolectric/VisualMapSampleTest.kt#L28-L72)
+Reference: `// [START maps_visual_test_sample]` in [`VisualMapSampleTest.kt`](../../../app/src/androidTest/java/com/example/androidmapsrobolectric/VisualMapSampleTest.kt#L28-L71)
 
 ```kotlin
 // [START maps_visual_test_sample]
@@ -663,7 +663,6 @@ class VisualMapSampleTest : BaseVisualTest() {
       testName = "store_locator_initial_state",
       screenshotBitmap = screenshotBitmap,
       prompt = prompt,
-      passCondition = { it.contains("PASSED", ignoreCase = true) },
     )
   }
 }

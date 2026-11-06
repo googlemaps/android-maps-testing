@@ -39,13 +39,15 @@ Traditional screenshot testing fails on complex map apps for multiple reasons:
 
 ---
 
-## 2. Dynamic Gemini Flash Model Discovery
+## 2. Gemini Model Selection
 
-Instead of hardcoding a model string that becomes deprecated or obsolete over time, `GeminiVisualTestHelper` dynamically queries `https://generativelanguage.googleapis.com/v1beta/models` on first run to resolve the newest stable `flash` model (e.g. `gemini-2.5-flash`).
+`GeminiVisualTestHelper` uses the pinned `DEFAULT_FALLBACK_MODEL` unless a model is configured, so a new model release cannot change test verdicts on its own. Opting into `latest` queries `https://generativelanguage.googleapis.com/v1beta/models` once per session for the newest stable `flash` model and caches it in memory. The API key is sent in the `x-goog-api-key` header, never in the URL.
 
-Once resolved, the model name is cached in-memory across the entire test session. You can also override the model:
+Model resolution order:
 - Explicit parameter: `GeminiVisualTestHelper(preferredModel = "gemini-2.5-flash")`
 - System property: `-Dgemini.model="gemini-2.5-flash"`
+- Latest stable Flash model, looked up once per session: `GeminiVisualTestHelper.LATEST_MODEL` or `-Dgemini.model=latest`
+- Neither set: the pinned `GeminiVisualTestHelper.DEFAULT_FALLBACK_MODEL`, without a network call
 
 ---
 
@@ -75,7 +77,7 @@ If no key is configured and no matching golden baseline is found, tests using Ge
    ```
 3. **Fast Zero-Quota CI & Fresh Emulator Runs**: On clean CI emulators, `BaseVisualTest` automatically loads `src/androidTest/assets/goldens/<testName>.png` from the test APK assets. When the screenshot matches within `tolerancePercent`, the test passes in milliseconds with **zero Gemini API calls** (and doesn't even require `GEMINI_API_KEY` to be set).
 
-Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../../../../visual-testing/src/main/java/com/google/maps/android/testing/visual/BaseVisualTest.kt#L147-L218)
+Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../../../../visual-testing/src/main/java/com/google/maps/android/testing/visual/BaseVisualTest.kt#L160-L237)
 
 ```kotlin
   // [START maps_visual_golden_fallback]
@@ -83,7 +85,7 @@ Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../
     testName: String,
     screenshotBitmap: Bitmap,
     prompt: String,
-    passCondition: (String) -> Boolean = { it.contains("PASSED", ignoreCase = true) },
+    passCondition: (String) -> Boolean = { isPassedVerdict(it) },
     goldensDirectory: File = File(context.getExternalFilesDir(null) ?: context.filesDir, "goldens"),
     tolerancePercent: Double = 0.5,
     updateGoldenOnPass: Boolean = true,
@@ -132,7 +134,13 @@ Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../
       passed,
     )
 
-    if (updateGoldenOnPass) {
+    if (goldenBitmap != null) {
+      Log.w(
+        "BaseVisualTest",
+        "Gemini approved '$testName', but the screenshot differs from its golden baseline. The golden was " +
+          "not updated. If the change is intended, replace the golden with the new screenshot.",
+      )
+    } else if (updateGoldenOnPass) {
       try {
         goldensDirectory.mkdirs()
         FileOutputStream(goldenFile).use { out ->
@@ -156,7 +164,7 @@ Reference: `// [START maps_visual_golden_fallback]` in [`BaseVisualTest.kt`](../
 
 ## 5. End-to-End Instrumented Test
 
-Reference: `// [START maps_visual_test_sample]` in [`VisualMapSampleTest.kt`](../../../../app/src/androidTest/java/com/example/androidmapsrobolectric/VisualMapSampleTest.kt#L28-L72)
+Reference: `// [START maps_visual_test_sample]` in [`VisualMapSampleTest.kt`](../../../../app/src/androidTest/java/com/example/androidmapsrobolectric/VisualMapSampleTest.kt#L28-L71)
 
 ```kotlin
 // [START maps_visual_test_sample]
@@ -199,7 +207,6 @@ class VisualMapSampleTest : BaseVisualTest() {
       testName = "store_locator_initial_state",
       screenshotBitmap = screenshotBitmap,
       prompt = prompt,
-      passCondition = { it.contains("PASSED", ignoreCase = true) },
     )
   }
 }

@@ -17,7 +17,7 @@ This repository provides modular testing libraries tailored for different testin
 | :--- | :--- | :--- |
 | [**:robolectric-testing**](robolectric-testing) | **Robolectric Shadows & JVM Utilities**<br>High-fidelity shadows for `MapView`, `GoogleMap`, `SupportMapFragment`, markers, and shapes. Features visual canvas drawing, lifecycle simulation, 1-liner KTX test harness, **Kotlin Power-Assert** helpers, and **Google Truth** domain subjects. | [**Module README**](robolectric-testing/README.md) |
 | [**:golden-testing**](golden-testing) | **Deterministic Golden Image Testing**<br>Offline screenshot and visual regression testing using the real Maps SDK with synthetic, deterministic raster tiles (`MAP_TYPE_NONE`), LRU caching, and pixel diff assertions. | [**Module README**](golden-testing/README.md) |
-| [**:visual-testing**](visual-testing) | **AI Visual Testing & Golden Fallback**<br>Multimodal AI visual validation powered by Gemini, UiAutomator integration, dynamic Flash model resolution, and hybrid golden pixel diff with AI semantic fallback. | [**Module README**](visual-testing/README.md) |
+| [**:visual-testing**](visual-testing) | **AI Visual Testing & Golden Fallback**<br>Multimodal AI visual validation powered by Gemini, UiAutomator integration, a pinned Gemini model with opt-in latest Flash lookup, and hybrid golden pixel diff with AI semantic fallback. | [**Module README**](visual-testing/README.md) |
 | [**:app**](app) | **Sample Application**<br>Interactive demonstration app showcasing real-world usage of Google Maps SDK and testing integration. | [**App Directory**](app) |
 
 ---
@@ -41,7 +41,7 @@ JVM execution without devices?                                    fidelity asser
 - Validate polygon geometry                            v                                               v
 - Assert with Power-Assert or Truth            [:golden-testing]                               [:visual-testing]
                                            - 100% offline & zero quota                 - Natural language assertions
-                                           - Deterministic synthetic tiles             - Dynamic Flash model caching
+                                           - Deterministic synthetic tiles             - Pinned Gemini model
                                            - Strict pixel diff assertions              - Hybrid golden fallback
                                                                                        - UiAutomator AI actions
 ```
@@ -387,7 +387,6 @@ class VisualMapSampleTest : BaseVisualTest() {
       testName = "store_locator_initial_state",
       screenshotBitmap = screenshotBitmap,
       prompt = prompt,
-      passCondition = { it.contains("PASSED", ignoreCase = true) },
     )
   }
 }

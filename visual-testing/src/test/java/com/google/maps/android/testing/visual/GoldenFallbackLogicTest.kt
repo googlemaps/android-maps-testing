@@ -20,6 +20,9 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
+import org.junit.After
+import org.junit.Assert.assertThrows
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
@@ -35,6 +38,16 @@ class GoldenFallbackLogicTest {
 
   @get:Rule
   val tempFolder = TemporaryFolder()
+
+  @Before
+  fun setApiKey() {
+    System.setProperty("gemini.api.key", "test-key")
+  }
+
+  @After
+  fun clearApiKey() {
+    System.clearProperty("gemini.api.key")
+  }
 
   @Test
   fun fastPassWhenGoldenMatches() = runBlocking {
@@ -95,5 +108,70 @@ class GoldenFallbackLogicTest {
       prompt = "Verify map is green",
       goldensDirectory = emptyDeviceGoldensDir,
     )
+  }
+
+  @Test
+  fun divergedGoldenIsNotOverwrittenWhenGeminiPasses() = runBlocking {
+    val goldensDir = tempFolder.newFolder("goldens")
+    val goldenFile = File(goldensDir, "diverged.png")
+    writePng(solidBitmap(Color.BLUE), goldenFile)
+    val goldenBytes = goldenFile.readBytes()
+
+    geminiHarness(answer = "PASSED").verifyScreenshotWithGoldenFallback(
+      testName = "diverged",
+      screenshotBitmap = solidBitmap(Color.RED),
+      prompt = "Verify the map",
+      goldensDirectory = goldensDir,
+    )
+
+    assertThat(goldenFile.readBytes()).isEqualTo(goldenBytes)
+  }
+
+  @Test
+  fun missingGoldenIsRecordedWhenGeminiPasses() = runBlocking {
+    val goldensDir = tempFolder.newFolder("goldens")
+
+    geminiHarness(answer = "PASSED").verifyScreenshotWithGoldenFallback(
+      testName = "first_run",
+      screenshotBitmap = solidBitmap(Color.RED),
+      prompt = "Verify the map",
+      goldensDirectory = goldensDir,
+    )
+
+    assertThat(File(goldensDir, "first_run.png").exists()).isTrue()
+  }
+
+  @Test
+  fun negatedVerdictFailsVerification() {
+    val goldensDir = tempFolder.newFolder("goldens")
+
+    val error = assertThrows(AssertionError::class.java) {
+      runBlocking {
+        geminiHarness(answer = "NOT PASSED: the marker is missing").verifyScreenshotWithGoldenFallback(
+          testName = "negated",
+          screenshotBitmap = solidBitmap(Color.RED),
+          prompt = "Verify the map",
+          goldensDirectory = goldensDir,
+        )
+      }
+    }
+
+    assertThat(error).hasMessageThat().contains("Gemini visual verification failed")
+    assertThat(File(goldensDir, "negated.png").exists()).isFalse()
+  }
+
+  private fun geminiHarness(answer: String) = object : BaseVisualTest() {
+    override val helper = GeminiVisualTestHelper(
+      preferredModel = "test-model",
+      client = mockGeminiClient { generateContentResponse(answer) },
+    )
+  }
+
+  private fun solidBitmap(color: Int): Bitmap = Bitmap.createBitmap(64, 64, Bitmap.Config.ARGB_8888).apply {
+    eraseColor(color)
+  }
+
+  private fun writePng(bitmap: Bitmap, file: File) {
+    FileOutputStream(file).use { out -> bitmap.compress(Bitmap.CompressFormat.PNG, 100, out) }
   }
 }

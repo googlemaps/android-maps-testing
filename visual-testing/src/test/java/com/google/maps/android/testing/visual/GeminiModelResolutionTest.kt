@@ -16,12 +16,20 @@
 
 package com.google.maps.android.testing.visual
 
+import android.graphics.Bitmap
 import com.google.common.truth.Truth.assertThat
+import io.ktor.client.request.HttpRequestData
+import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [34])
 class GeminiModelResolutionTest {
 
   @Before
@@ -47,26 +55,76 @@ class GeminiModelResolutionTest {
   }
 
   @Test
-  fun fallbackDefaultUsedWhenNetworkFails() = runBlocking {
-    val helper = GeminiVisualTestHelper()
-    // Querying with dummy key against real endpoint fails, triggering default fallback
-    val model = helper.getOrResolveModel("invalid-dummy-key")
+  fun defaultModelIsPinnedWithoutQueryingServer() = runBlocking {
+    val requests = mutableListOf<HttpRequestData>()
+    val helper = GeminiVisualTestHelper(client = mockGeminiClient(requests))
+
+    val model = helper.getOrResolveModel("dummy-key")
+
+    assertThat(model).isEqualTo(GeminiVisualTestHelper.DEFAULT_FALLBACK_MODEL)
+    assertThat(requests).isEmpty()
+  }
+
+  @Test
+  fun latestModelQueriesServerForNewestStableFlash() = runBlocking {
+    System.setProperty("gemini.model", GeminiVisualTestHelper.LATEST_MODEL)
+    val helper = GeminiVisualTestHelper(client = mockGeminiClient { MODEL_LIST })
+
+    val model = helper.getOrResolveModel("dummy-key")
+
+    assertThat(model).isEqualTo("gemini-9.0-flash")
+  }
+
+  @Test
+  fun latestModelFallsBackToDefaultWhenQueryFails() = runBlocking {
+    val helper = GeminiVisualTestHelper(
+      preferredModel = GeminiVisualTestHelper.LATEST_MODEL,
+      client = mockGeminiClient(status = HttpStatusCode.InternalServerError) { "{}" },
+    )
+
+    val model = helper.getOrResolveModel("dummy-key")
+
     assertThat(model).isEqualTo(GeminiVisualTestHelper.DEFAULT_FALLBACK_MODEL)
   }
 
   @Test
-  fun sessionModelIsCachedAcrossCalls() = runBlocking {
-    val helper = GeminiVisualTestHelper()
-    val firstModel = helper.getOrResolveModel("invalid-dummy-key")
-    assertThat(firstModel).isEqualTo(GeminiVisualTestHelper.DEFAULT_FALLBACK_MODEL)
+  fun latestModelIsCachedForTheSession() = runBlocking {
+    val requests = mutableListOf<HttpRequestData>()
+    val helper = GeminiVisualTestHelper(
+      preferredModel = GeminiVisualTestHelper.LATEST_MODEL,
+      client = mockGeminiClient(requests) { MODEL_LIST },
+    )
 
-    // Even if system property is set afterwards, the session cache takes precedence
-    // unless explicitly reset
-    System.setProperty("gemini.model", "new-model")
-    // Reset cache explicitly to see change
+    helper.getOrResolveModel("dummy-key")
+    val second = helper.getOrResolveModel("dummy-key")
+
+    assertThat(second).isEqualTo("gemini-9.0-flash")
+    assertThat(requests).hasSize(1)
+
     GeminiVisualTestHelper.resetSessionModel()
-    val secondModel = helper.getOrResolveModel("invalid-dummy-key")
-    assertThat(secondModel).isEqualTo("new-model")
+    helper.getOrResolveModel("dummy-key")
+    assertThat(requests).hasSize(2)
+  }
+
+  @Test
+  fun apiKeyIsSentInHeaderNotUrl() = runBlocking {
+    val requests = mutableListOf<HttpRequestData>()
+    val helper = GeminiVisualTestHelper(
+      preferredModel = GeminiVisualTestHelper.LATEST_MODEL,
+      client = mockGeminiClient(requests) { request ->
+        if (request.url.encodedPath.endsWith("/models")) MODEL_LIST else generateContentResponse("PASSED")
+      },
+    )
+    val bitmap = Bitmap.createBitmap(8, 8, Bitmap.Config.ARGB_8888)
+
+    helper.analyzeImage(bitmap, "Verify the map", "secret-key")
+
+    assertThat(requests).hasSize(2)
+    for (request in requests) {
+      assertThat(request.headers["x-goog-api-key"]).isEqualTo("secret-key")
+      assertThat(request.url.parameters.contains("key")).isFalse()
+      assertThat(request.url.toString()).doesNotContain("secret-key")
+    }
   }
 
   @Test
@@ -96,5 +154,17 @@ class GeminiModelResolutionTest {
   @Test
   fun selectBestFlashModelReturnsNullForEmptyList() {
     assertThat(GeminiVisualTestHelper.selectBestFlashModel(emptyList())).isNull()
+  }
+
+  private companion object {
+    val MODEL_LIST = """
+      {
+        "models": [
+          { "name": "models/gemini-2.5-flash", "supportedGenerationMethods": ["generateContent"] },
+          { "name": "models/gemini-9.0-flash", "supportedGenerationMethods": ["generateContent"] },
+          { "name": "models/gemini-10.0-flash-preview", "supportedGenerationMethods": ["generateContent"] }
+        ]
+      }
+    """.trimIndent()
   }
 }
