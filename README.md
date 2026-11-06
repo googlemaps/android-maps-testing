@@ -68,10 +68,9 @@ JVM execution without devices?                                    fidelity asser
 
 Add the desired artifacts to your `gradle/libs.versions.toml`:
 
-<!-- x-release-please-start-version -->
 ```toml
 [versions]
-mapsTesting = "1.0.0-rc01"
+mapsTesting = "1.0.0-rc01" # x-release-please-version
 robolectric = "4.17"
 truth = "1.4.5"
 
@@ -82,7 +81,6 @@ maps-testing-visual = { module = "com.google.maps.android:maps-testing-visual", 
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 ```
-<!-- x-release-please-end -->
 
 Then reference them in your module's `build.gradle.kts`:
 
