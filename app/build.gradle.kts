@@ -104,6 +104,9 @@ dependencies {
   implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.activity.compose)
   implementation(libs.play.services.maps)
+  // :visual-testing uses Ktor, which needs coroutines 1.11+. The test APK is pinned to the app's
+  // runtime versions, so the app must not resolve an older coroutines than Ktor expects.
+  implementation(libs.kotlinx.coroutines.android)
 
   // Arch Components
   implementation(libs.androidx.lifecycle.runtime.compose)
