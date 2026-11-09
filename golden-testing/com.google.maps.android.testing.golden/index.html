@@ -1,0 +1,369 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>com.google.maps.android.testing.golden</title>
+<link href="../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../index.html" tabindex="1">
+                    Android Maps Testing Toolkit
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">1.0.0-rc01
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":golden-testing/release">release</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":golden-testing/release" data-filter=":golden-testing/release">
+                                <span class="checkbox--icon"></span>
+                                release
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    Android Maps Testing Toolkit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageids="golden-testing::com.google.maps.android.testing.golden////PointingToDeclaration//-1532642452">
+  <div class="breadcrumbs"><a href="../index.html">golden-testing</a><span class="delimiter">/</span><span class="current">com.google.maps.android.testing.golden</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="1184940373%2FClasslikes%2F-1532642452" anchor-label="DiffResult" id="1184940373%2FClasslikes%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-diff-result/index.html"><span>Diff</span><wbr><span><span>Result</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1184940373%2FClasslikes%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-diff-result/index.html">DiffResult</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>matches<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>diffPixelCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>totalPixelCount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>diffPercentage<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>diffBitmap<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/graphics/Bitmap.html">Bitmap</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Result of comparing an actual rendered bitmap against a golden baseline bitmap.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1130107764%2FClasslikes%2F-1532642452" anchor-label="GoldenImageDiff" id="1130107764%2FClasslikes%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-golden-image-diff/index.html"><span>Golden</span><wbr><span>Image</span><wbr><span><span>Diff</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1130107764%2FClasslikes%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-golden-image-diff/index.html">GoldenImageDiff</a></div><div class="brief "><p class="paragraph">Image comparison and assertion engine for golden image testing.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-658669521%2FClasslikes%2F-1532642452" anchor-label="GoldenTileProvider" id="-658669521%2FClasslikes%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-golden-tile-provider/index.html"><span>Golden</span><wbr><span>Tile</span><wbr><span><span>Provider</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-658669521%2FClasslikes%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="-golden-tile-provider/index.html">GoldenTileProvider</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>strategy<span class="token operator">: </span><a href="-golden-tile-strategy/index.html">GoldenTileStrategy</a><span class="token operator"> = </span>GoldenTileStrategy.CoordinateGrid()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>tileSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">256</span><span class="token punctuation">, </span></span><span class="parameter ">cacheSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">128</span></span></span><span class="token punctuation">)</span> : <span data-unresolved-link="com.google.android.gms.maps.model/TileProvider///PointingToDeclaration/">TileProvider</span></div><div class="brief "><p class="paragraph">A <span data-unresolved-link="com.google.android.gms.maps.model/TileProvider///PointingToDeclaration/">TileProvider</span> that serves deterministic synthetic raster tiles for Google Maps SDK screenshot and golden image testing.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-905398035%2FClasslikes%2F-1532642452" anchor-label="GoldenTileStrategy" id="-905398035%2FClasslikes%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-golden-tile-strategy/index.html"><span>Golden</span><wbr><span>Tile</span><wbr><span><span>Strategy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-905398035%2FClasslikes%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-golden-tile-strategy/index.html">GoldenTileStrategy</a></div><div class="brief "><p class="paragraph">Strategy contract for generating deterministic synthetic map tiles for golden image testing.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="655107097%2FFunctions%2F-1532642452" anchor-label="assertCameraTarget" id="655107097%2FFunctions%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="assert-camera-target.html"><span>assert</span><wbr><span>Camera</span><wbr><span><span>Target</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="655107097%2FFunctions%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span><span class="token punctuation">.</span><a href="assert-camera-target.html"><span class="token function">assertCameraTarget</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">expected<span class="token operator">: </span><span data-unresolved-link="com.google.android.gms.maps.model/LatLng///PointingToDeclaration/">LatLng</span><span class="token punctuation">, </span></span><span class="parameter ">tolerance<span class="token operator">: </span><a href="../../robolectric-testing/com.google.maps.android.robolectric.truth/-distance/index.html">Distance</a><span class="token operator"> = </span>10.meters</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Asserts that the camera target position is within <a href="assert-camera-target.html">tolerance</a> of <a href="assert-camera-target.html">expected</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-817907226%2FFunctions%2F-1532642452" anchor-label="assertMatchesGolden" id="-817907226%2FFunctions%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="assert-matches-golden.html"><span>assert</span><wbr><span>Matches</span><wbr><span><span>Golden</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-817907226%2FFunctions%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span><span class="token punctuation">.</span><a href="assert-matches-golden.html"><span class="token function">assertMatchesGolden</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">goldenFile<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/io/File.html">File</a><span class="token punctuation">, </span></span><span class="parameter ">maxDiffPercentage<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator"> = </span><span class="token constant">0.001</span><span class="token punctuation">, </span></span><span class="parameter ">pixelColorTolerance<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">0</span><span class="token punctuation">, </span></span><span class="parameter ">message<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">outputDir<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/io/File.html">File</a><span class="token operator">?</span><span class="token operator"> = </span>goldenFile.parentFile<span class="token punctuation">, </span></span><span class="parameter ">recordBaseline<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span>System.getProperty("maps.golden.record").toBoolean()</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Awaits map load, captures a snapshot of this <span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span>, and asserts that it matches the PNG baseline at <a href="assert-matches-golden.html">goldenFile</a> (or records the baseline when <a href="assert-matches-golden.html">recordBaseline</a> or <code class="lang-kotlin">-Dmaps.golden.record=true</code> is enabled).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-192825871%2FFunctions%2F-1532642452" anchor-label="assertMatchesGoldenBlocking" id="-192825871%2FFunctions%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="assert-matches-golden-blocking.html"><span>assert</span><wbr><span>Matches</span><wbr><span>Golden</span><wbr><span><span>Blocking</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-192825871%2FFunctions%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span><span class="token punctuation">.</span><a href="assert-matches-golden-blocking.html"><span class="token function">assertMatchesGoldenBlocking</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">goldenFile<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/io/File.html">File</a><span class="token punctuation">, </span></span><span class="parameter ">maxDiffPercentage<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator"> = </span><span class="token constant">0.001</span><span class="token punctuation">, </span></span><span class="parameter ">pixelColorTolerance<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">0</span><span class="token punctuation">, </span></span><span class="parameter ">message<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">outputDir<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/io/File.html">File</a><span class="token operator">?</span><span class="token operator"> = </span>goldenFile.parentFile<span class="token punctuation">, </span></span><span class="parameter ">recordBaseline<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span>System.getProperty("maps.golden.record").toBoolean()</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Synchronously renders this <span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span> to a <a href="https://developer.android.com/reference/kotlin/android/graphics/Bitmap.html">Bitmap</a> in Robolectric JVM tests and asserts that it matches the PNG baseline at <a href="assert-matches-golden-blocking.html">goldenFile</a> (or records the baseline when <a href="assert-matches-golden-blocking.html">recordBaseline</a> or <code class="lang-kotlin">-Dmaps.golden.record=true</code> is enabled).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="911721932%2FFunctions%2F-1532642452" anchor-label="awaitMap" id="911721932%2FFunctions%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="await-map.html"><span>await</span><wbr><span><span>Map</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="911721932%2FFunctions%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><span data-unresolved-link="com.google.android.gms.maps/MapView///PointingToDeclaration/">MapView</span><span class="token punctuation">.</span><a href="await-map.html"><span class="token function">awaitMap</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span></div><div class="brief "><p class="paragraph">Suspends until the <span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span> instance hosted by this <span data-unresolved-link="com.google.android.gms.maps/MapView///PointingToDeclaration/">MapView</span> is initialized and ready.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="361691123%2FFunctions%2F-1532642452" anchor-label="awaitMapLoaded" id="361691123%2FFunctions%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="await-map-loaded.html"><span>await</span><wbr><span>Map</span><wbr><span><span>Loaded</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="361691123%2FFunctions%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span><span class="token punctuation">.</span><a href="await-map-loaded.html"><span class="token function">awaitMapLoaded</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Suspends until the <span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span> has completely finished rendering its tiles, overlays, and animations.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1230687812%2FFunctions%2F-1532642452" anchor-label="captureSnapshot" id="-1230687812%2FFunctions%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="capture-snapshot.html"><span>capture</span><wbr><span><span>Snapshot</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1230687812%2FFunctions%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span><span class="token punctuation">.</span><a href="capture-snapshot.html"><span class="token function">captureSnapshot</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">preallocatedBitmap<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/graphics/Bitmap.html">Bitmap</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/graphics/Bitmap.html">Bitmap</a></div><div class="brief "><p class="paragraph">Captures a snapshot <a href="https://developer.android.com/reference/kotlin/android/graphics/Bitmap.html">Bitmap</a> of the <span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span> asynchronously.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="375604868%2FFunctions%2F-1532642452" anchor-label="clickMarker" id="375604868%2FFunctions%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="click-marker.html"><span>click</span><wbr><span><span>Marker</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="375604868%2FFunctions%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span><span class="token punctuation">.</span><a href="click-marker.html"><span class="token function">clickMarker</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">title<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Simulates a user tapping on the marker matching <a href="click-marker.html">title</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1116925964%2FFunctions%2F-1532642452" anchor-label="enableGoldenTesting" id="1116925964%2FFunctions%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="enable-golden-testing.html"><span>enable</span><wbr><span>Golden</span><wbr><span><span>Testing</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1116925964%2FFunctions%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span><span class="token punctuation">.</span><a href="enable-golden-testing.html"><span class="token function">enableGoldenTesting</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">strategy<span class="token operator">: </span><a href="-golden-tile-strategy/index.html">GoldenTileStrategy</a><span class="token operator"> = </span>GoldenTileStrategy.CoordinateGrid()<span class="token punctuation">, </span></span><span class="parameter ">tileSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">256</span><span class="token punctuation">, </span></span><span class="parameter ">fadeIn<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">, </span></span><span class="parameter ">zIndex<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><span class="token operator"> = </span>-1000f</span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.google.android.gms.maps.model/TileOverlay///PointingToDeclaration/">TileOverlay</span></div><div class="brief "><p class="paragraph">Enables deterministic golden screenshot testing on this <span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span> instance.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1282523137%2FFunctions%2F-1532642452" anchor-label="findMapView" id="1282523137%2FFunctions%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="find-map-view.html"><span>find</span><wbr><span>Map</span><wbr><span><span>View</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1282523137%2FFunctions%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token punctuation">.</span><a href="find-map-view.html"><span class="token function">findMapView</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.google.android.gms.maps/MapView///PointingToDeclaration/">MapView</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Traverses an Android <a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a> hierarchy recursively to locate the first hosted <span data-unresolved-link="com.google.android.gms.maps/MapView///PointingToDeclaration/">MapView</span>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1993787832%2FFunctions%2F-1532642452" anchor-label="findMarkerByTitle" id="1993787832%2FFunctions%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="find-marker-by-title.html"><span>find</span><wbr><span>Marker</span><wbr><span>By</span><wbr><span><span>Title</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1993787832%2FFunctions%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span><span class="token punctuation">.</span><a href="find-marker-by-title.html"><span class="token function">findMarkerByTitle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">title<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.google.android.gms.maps.model/Marker///PointingToDeclaration/">Marker</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Locates an active <span data-unresolved-link="com.google.android.gms.maps.model/Marker///PointingToDeclaration/">Marker</span> managed by this map whose <span data-unresolved-link="com.google.android.gms.maps.model/Marker/getTitle/#/PointingToDeclaration/">Marker.getTitle</span> matches <a href="find-marker-by-title.html">title</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2144483089%2FFunctions%2F-1532642452" anchor-label="rememberGoldenTileProvider" id="2144483089%2FFunctions%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="remember-golden-tile-provider.html"><span>remember</span><wbr><span>Golden</span><wbr><span>Tile</span><wbr><span><span>Provider</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2144483089%2FFunctions%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/Composable.html"><span class="token annotation builtin">Composable</span></a></div></div><span class="token keyword">fun </span><a href="remember-golden-tile-provider.html"><span class="token function">rememberGoldenTileProvider</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">strategy<span class="token operator">: </span><a href="-golden-tile-strategy/index.html">GoldenTileStrategy</a><span class="token operator"> = </span>remember { GoldenTileStrategy.CoordinateGrid() }<span class="token punctuation">, </span></span><span class="parameter ">tileSize<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span><span class="token constant">256</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-golden-tile-provider/index.html">GoldenTileProvider</a></div><div class="brief "><p class="paragraph">Remembers a <a href="-golden-tile-provider/index.html">GoldenTileProvider</a> instance across recompositions with the specified <a href="remember-golden-tile-provider.html">strategy</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-817886328%2FFunctions%2F-1532642452" anchor-label="shadow" id="-817886328%2FFunctions%2F-1532642452" data-filterable-set=":golden-testing/release"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":golden-testing/release" data-filterable-set=":golden-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="shadow.html"><span><span>shadow</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-817886328%2FFunctions%2F-1532642452"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":golden-testing/release"><div class="symbol monospace"><span class="token keyword">fun </span><span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span><span class="token punctuation">.</span><a href="shadow.html"><span class="token function">shadow</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../robolectric-testing/com.google.maps.android.robolectric.shadows/-shadow-google-map/index.html">ShadowGoogleMap</a></div><div class="brief "><p class="paragraph">Extracts the underlying <a href="../../robolectric-testing/com.google.maps.android.robolectric.shadows/-shadow-google-map/index.html">ShadowGoogleMap</a> instance from this <span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span> when running in a Robolectric unit testing environment.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

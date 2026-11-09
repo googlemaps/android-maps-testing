@@ -1,0 +1,884 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>ShadowMapView</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    Android Maps Testing Toolkit
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">1.0.0-rc01
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":robolectric-testing/release">release</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":robolectric-testing/release" data-filter=":robolectric-testing/release">
+                                <span class="checkbox--icon"></span>
+                                release
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    Android Maps Testing Toolkit
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="robolectric-testing::com.google.maps.android.robolectric.shadows/ShadowMapView///PointingToDeclaration//-1129092273">
+  <div class="breadcrumbs"><a href="../../index.html">robolectric-testing</a><span class="delimiter">/</span><a href="../index.html">com.google.maps.android.robolectric.shadows</a><span class="delimiter">/</span><span class="current">ShadowMapView</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Shadow</span><wbr><span>Map</span><wbr><span><span>View</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="org.robolectric.annotation/Implements///PointingToDeclaration/"><span class="token annotation builtin">Implements</span></span><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><span data-unresolved-link="com.google.android.gms.maps/MapView///PointingToDeclaration/">MapView::class</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">ShadowMapView</a> : <span data-unresolved-link="org.robolectric.shadows/ShadowViewGroup///PointingToDeclaration/">ShadowViewGroup</span></div><p class="paragraph">Robolectric shadow for <span data-unresolved-link="com.google.android.gms.maps/MapView///PointingToDeclaration/">MapView</span>. </p><p class="paragraph">Handles lifecycle events, immediately or asynchronously dispatches map callbacks via <span data-unresolved-link="com.google.android.gms.maps/MapView/getMapAsync/#com.google.android.gms.maps.OnMapReadyCallback/PointingToDeclaration/">getMapAsync</span>, and implements 2D canvas drawing operations using Mercator projection to support snapshot and pixel-level testing without an emulator.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="-365162902%2FConstructors%2F-1129092273" anchor-label="ShadowMapView" id="-365162902%2FConstructors%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-shadow-map-view.html"><span>Shadow</span><wbr><span>Map</span><wbr><span><span>View</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-365162902%2FConstructors%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-1823789428%2FProperties%2F-1129092273" anchor-label="disallowInterceptTouchEvent" id="-1823789428%2FProperties%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1823789428%2FProperties%2F-1129092273"><span>disallow</span><wbr><span>Intercept</span><wbr><span>Touch</span><wbr><span><span>Event</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1823789428%2FProperties%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#-1823789428%2FProperties%2F-1129092273">disallowInterceptTouchEvent</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1859188744%2FProperties%2F-1129092273" anchor-label="googleMap" id="1859188744%2FProperties%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="google-map.html"><span>google</span><wbr><span><span>Map</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1859188744%2FProperties%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="google-map.html">googleMap</a><span class="token operator">: </span><span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1899900850%2FProperties%2F-1129092273" anchor-label="interceptedTouchEvent" id="1899900850%2FProperties%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1899900850%2FProperties%2F-1129092273"><span>intercepted</span><wbr><span>Touch</span><wbr><span><span>Event</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1899900850%2FProperties%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#1899900850%2FProperties%2F-1129092273">interceptedTouchEvent</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/MotionEvent.html">MotionEvent</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1586572958%2FProperties%2F-1129092273" anchor-label="lastTouchEvent" id="1586572958%2FProperties%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1586572958%2FProperties%2F-1129092273"><span>last</span><wbr><span>Touch</span><wbr><span><span>Event</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1586572958%2FProperties%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#1586572958%2FProperties%2F-1129092273">lastTouchEvent</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/MotionEvent.html">MotionEvent</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="521330254%2FProperties%2F-1129092273" anchor-label="onClickListener" id="521330254%2FProperties%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#521330254%2FProperties%2F-1129092273"><span>on</span><wbr><span>Click</span><wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="521330254%2FProperties%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="index.html#521330254%2FProperties%2F-1129092273">onClickListener</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnClickListener.html">View.OnClickListener</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-492445564%2FProperties%2F-1129092273" anchor-label="onCreateContextMenuListener" id="-492445564%2FProperties%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-492445564%2FProperties%2F-1129092273"><span>on</span><wbr><span>Create</span><wbr><span>Context</span><wbr><span>Menu</span><wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-492445564%2FProperties%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="index.html#-492445564%2FProperties%2F-1129092273">onCreateContextMenuListener</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnCreateContextMenuListener.html">View.OnCreateContextMenuListener</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="410834282%2FProperties%2F-1129092273" anchor-label="onLongClickListener" id="410834282%2FProperties%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#410834282%2FProperties%2F-1129092273"><span>on</span><wbr><span>Long</span><wbr><span>Click</span><wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="410834282%2FProperties%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="index.html#410834282%2FProperties%2F-1129092273">onLongClickListener</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnLongClickListener.html">View.OnLongClickListener</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1388099881%2FProperties%2F-1129092273" anchor-label="onSystemUiVisibilityChangeListener" id="-1388099881%2FProperties%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1388099881%2FProperties%2F-1129092273"><span>on</span><wbr><span>System</span><wbr><span>Ui</span><wbr><span>Visibility</span><wbr><span>Change</span><wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1388099881%2FProperties%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="index.html#-1388099881%2FProperties%2F-1129092273">onSystemUiVisibilityChangeListener</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnSystemUiVisibilityChangeListener.html">View.OnSystemUiVisibilityChangeListener</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1944184969%2FProperties%2F-1129092273" anchor-label="onTouchListener" id="-1944184969%2FProperties%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1944184969%2FProperties%2F-1129092273"><span>on</span><wbr><span>Touch</span><wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1944184969%2FProperties%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="index.html#-1944184969%2FProperties%2F-1129092273">onTouchListener</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnTouchListener.html">View.OnTouchListener</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="173530136%2FProperties%2F-1129092273" anchor-label="scrollToCoordinates" id="173530136%2FProperties%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#173530136%2FProperties%2F-1129092273"><span>scroll</span><wbr><span>To</span><wbr><span><span>Coordinates</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="173530136%2FProperties%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="index.html#173530136%2FProperties%2F-1129092273">scrollToCoordinates</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/graphics/Point.html">Point</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="48679640%2FFunctions%2F-1129092273" anchor-label="addGlobalPerformClickListener" id="48679640%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#48679640%2FFunctions%2F-1129092273"><span>add</span><wbr><span>Global</span><wbr><span>Perform</span><wbr><span>Click</span><wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="48679640%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#48679640%2FFunctions%2F-1129092273"><span class="token function">addGlobalPerformClickListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnClickListener.html">View.OnClickListener</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-743938216%2FFunctions%2F-1129092273" anchor-label="addGlobalPerformLongClickListener" id="-743938216%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-743938216%2FFunctions%2F-1129092273"><span>add</span><wbr><span>Global</span><wbr><span>Perform</span><wbr><span>Long</span><wbr><span>Click</span><wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-743938216%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-743938216%2FFunctions%2F-1129092273"><span class="token function">addGlobalPerformLongClickListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnLongClickListener.html">View.OnLongClickListener</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-674355261%2FFunctions%2F-1129092273" anchor-label="callOnAttachedToWindow" id="-674355261%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-674355261%2FFunctions%2F-1129092273"><span>call</span><wbr><span>On</span><wbr><span>Attached</span><wbr><span>To</span><wbr><span><span>Window</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-674355261%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-674355261%2FFunctions%2F-1129092273"><span class="token function">callOnAttachedToWindow</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1231073254%2FFunctions%2F-1129092273" anchor-label="callOnDetachedFromWindow" id="1231073254%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1231073254%2FFunctions%2F-1129092273"><span>call</span><wbr><span>On</span><wbr><span>Detached</span><wbr><span>From</span><wbr><span><span>Window</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1231073254%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1231073254%2FFunctions%2F-1129092273"><span class="token function">callOnDetachedFromWindow</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-696490179%2FFunctions%2F-1129092273" anchor-label="checkedPerformClick" id="-696490179%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-696490179%2FFunctions%2F-1129092273"><span>checked</span><wbr><span>Perform</span><wbr><span><span>Click</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-696490179%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-696490179%2FFunctions%2F-1129092273"><span class="token function">checkedPerformClick</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1591973254%2FFunctions%2F-1129092273" anchor-label="checkThread" id="1591973254%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1591973254%2FFunctions%2F-1129092273"><span>check</span><wbr><span><span>Thread</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1591973254%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1591973254%2FFunctions%2F-1129092273"><span class="token function">checkThread</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">target<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="919725647%2FFunctions%2F-1129092273" anchor-label="clearAnimations" id="919725647%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#919725647%2FFunctions%2F-1129092273"><span>clear</span><wbr><span><span>Animations</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="919725647%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#919725647%2FFunctions%2F-1129092273"><span class="token function">clearAnimations</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1771936894%2FFunctions%2F-1129092273" anchor-label="clearWasInvalidated" id="1771936894%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1771936894%2FFunctions%2F-1129092273"><span>clear</span><wbr><span>Was</span><wbr><span><span>Invalidated</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1771936894%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1771936894%2FFunctions%2F-1129092273"><span class="token function">clearWasInvalidated</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1681145647%2FFunctions%2F-1129092273" anchor-label="clickOn" id="1681145647%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1681145647%2FFunctions%2F-1129092273"><span>click</span><wbr><span><span>On</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1681145647%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1681145647%2FFunctions%2F-1129092273"><span class="token function">clickOn</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-410952487%2FFunctions%2F-1129092273" anchor-label="createFakeGoogleMap" id="-410952487%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="create-fake-google-map.html"><span>create</span><wbr><span>Fake</span><wbr><span>Google</span><wbr><span><span>Map</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-410952487%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="create-fake-google-map.html"><span class="token function">createFakeGoogleMap</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span></div><div class="brief ">Factory method to construct a mock <span data-unresolved-link="com.google.android.gms.maps/GoogleMap///PointingToDeclaration/">GoogleMap</span> instance backed by dynamic proxies.</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2051090357%2FFunctions%2F-1129092273" anchor-label="didRequestLayout" id="2051090357%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#2051090357%2FFunctions%2F-1129092273"><span>did</span><wbr><span>Request</span><wbr><span><span>Layout</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2051090357%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#2051090357%2FFunctions%2F-1129092273"><span class="token function">didRequestLayout</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1676071699%2FFunctions%2F-1129092273" anchor-label="dump" id="-1676071699%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1676071699%2FFunctions%2F-1129092273"><span><span>dump</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1676071699%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1676071699%2FFunctions%2F-1129092273"><span class="token function">dump</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">out<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/io/PrintStream.html">PrintStream</a><span class="token punctuation">, </span></span><span class="parameter ">indent<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2041986369%2FFunctions%2F-1129092273" anchor-label="getAndClear" id="-2041986369%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-2041986369%2FFunctions%2F-1129092273"><span>get</span><wbr><span>And</span><wbr><span><span>Clear</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2041986369%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-2041986369%2FFunctions%2F-1129092273"><span class="token function">getAndClear</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.google.common.collect/ImmutableList///PointingToDeclaration/">ImmutableList</span><span class="token operator">&lt;</span><a href="https://developer.android.com/reference/kotlin/java/lang/RuntimeException.html">RuntimeException</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="285096998%2FFunctions%2F-1129092273" anchor-label="getAnimations" id="285096998%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#285096998%2FFunctions%2F-1129092273"><span>get</span><wbr><span><span>Animations</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="285096998%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#285096998%2FFunctions%2F-1129092273"><span class="token function">getAnimations</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.google.common.collect/ImmutableList///PointingToDeclaration/">ImmutableList</span><span class="token operator">&lt;</span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.html">Animation</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="212919347%2FFunctions%2F-1129092273" anchor-label="getOnAttachStateChangeListeners" id="212919347%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#212919347%2FFunctions%2F-1129092273"><span>get</span><wbr><span>On</span><wbr><span>Attach</span><wbr><span>State</span><wbr><span>Change</span><wbr><span><span>Listeners</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="212919347%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#212919347%2FFunctions%2F-1129092273"><span class="token function">getOnAttachStateChangeListeners</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/util/Set.html">Set</a><span class="token operator">&lt;</span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnAttachStateChangeListener.html">View.OnAttachStateChangeListener</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1357206335%2FFunctions%2F-1129092273" anchor-label="getOnLayoutChangeListeners" id="1357206335%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1357206335%2FFunctions%2F-1129092273"><span>get</span><wbr><span>On</span><wbr><span>Layout</span><wbr><span>Change</span><wbr><span><span>Listeners</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1357206335%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1357206335%2FFunctions%2F-1129092273"><span class="token function">getOnLayoutChangeListeners</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/util/Set.html">Set</a><span class="token operator">&lt;</span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnLayoutChangeListener.html">View.OnLayoutChangeListener</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-768964401%2FFunctions%2F-1129092273" anchor-label="getSourceLayoutResId" id="-768964401%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-768964401%2FFunctions%2F-1129092273"><span>get</span><wbr><span>Source</span><wbr><span>Layout</span><wbr><span>Res</span><wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-768964401%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-768964401%2FFunctions%2F-1129092273"><span class="token function">getSourceLayoutResId</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1517989685%2FFunctions%2F-1129092273" anchor-label="innerText" id="-1517989685%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1517989685%2FFunctions%2F-1129092273"><span>inner</span><wbr><span><span>Text</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1517989685%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1517989685%2FFunctions%2F-1129092273"><span class="token function">innerText</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/lang/String.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-109604851%2FFunctions%2F-1129092273" anchor-label="isOnCreateCalled" id="-109604851%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-create-called.html"><span>is</span><wbr><span>On</span><wbr><span>Create</span><wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-109604851%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="is-on-create-called.html"><span class="token function">isOnCreateCalled</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1428332253%2FFunctions%2F-1129092273" anchor-label="isOnDestroyCalled" id="1428332253%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-destroy-called.html"><span>is</span><wbr><span>On</span><wbr><span>Destroy</span><wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1428332253%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="is-on-destroy-called.html"><span class="token function">isOnDestroyCalled</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="736319554%2FFunctions%2F-1129092273" anchor-label="isOnLowMemoryCalled" id="736319554%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-low-memory-called.html"><span>is</span><wbr><span>On</span><wbr><span>Low</span><wbr><span>Memory</span><wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="736319554%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="is-on-low-memory-called.html"><span class="token function">isOnLowMemoryCalled</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1672002783%2FFunctions%2F-1129092273" anchor-label="isOnPauseCalled" id="-1672002783%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-pause-called.html"><span>is</span><wbr><span>On</span><wbr><span>Pause</span><wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1672002783%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="is-on-pause-called.html"><span class="token function">isOnPauseCalled</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="780583612%2FFunctions%2F-1129092273" anchor-label="isOnResumeCalled" id="780583612%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-resume-called.html"><span>is</span><wbr><span>On</span><wbr><span>Resume</span><wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="780583612%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="is-on-resume-called.html"><span class="token function">isOnResumeCalled</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1370216245%2FFunctions%2F-1129092273" anchor-label="isOnStartCalled" id="1370216245%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-start-called.html"><span>is</span><wbr><span>On</span><wbr><span>Start</span><wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1370216245%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="is-on-start-called.html"><span class="token function">isOnStartCalled</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1527555719%2FFunctions%2F-1129092273" anchor-label="isOnStopCalled" id="1527555719%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-stop-called.html"><span>is</span><wbr><span>On</span><wbr><span>Stop</span><wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1527555719%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="is-on-stop-called.html"><span class="token function">isOnStopCalled</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1142839107%2FFunctions%2F-1129092273" anchor-label="lastHapticFeedbackPerformed" id="-1142839107%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1142839107%2FFunctions%2F-1129092273"><span>last</span><wbr><span>Haptic</span><wbr><span>Feedback</span><wbr><span><span>Performed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1142839107%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1142839107%2FFunctions%2F-1129092273"><span class="token function">lastHapticFeedbackPerformed</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="477219246%2FFunctions%2F-1129092273" anchor-label="onLayoutWasCalled" id="477219246%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#477219246%2FFunctions%2F-1129092273"><span>on</span><wbr><span>Layout</span><wbr><span>Was</span><wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="477219246%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#477219246%2FFunctions%2F-1129092273"><span class="token function">onLayoutWasCalled</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2135022889%2FFunctions%2F-1129092273" anchor-label="removeGlobalPerformClickListener" id="-2135022889%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-2135022889%2FFunctions%2F-1129092273"><span>remove</span><wbr><span>Global</span><wbr><span>Perform</span><wbr><span>Click</span><wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2135022889%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-2135022889%2FFunctions%2F-1129092273"><span class="token function">removeGlobalPerformClickListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnClickListener.html">View.OnClickListener</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2086883415%2FFunctions%2F-1129092273" anchor-label="removeGlobalPerformLongClickListener" id="2086883415%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#2086883415%2FFunctions%2F-1129092273"><span>remove</span><wbr><span>Global</span><wbr><span>Perform</span><wbr><span>Long</span><wbr><span>Click</span><wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2086883415%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#2086883415%2FFunctions%2F-1129092273"><span class="token function">removeGlobalPerformLongClickListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnLongClickListener.html">View.OnLongClickListener</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="539104636%2FFunctions%2F-1129092273" anchor-label="reset" id="539104636%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#539104636%2FFunctions%2F-1129092273"><span><span>reset</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="539104636%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#539104636%2FFunctions%2F-1129092273"><span class="token function">reset</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2105338667%2FFunctions%2F-1129092273" anchor-label="setDidRequestLayout" id="2105338667%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#2105338667%2FFunctions%2F-1129092273"><span>set</span><wbr><span>Did</span><wbr><span>Request</span><wbr><span><span>Layout</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2105338667%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#2105338667%2FFunctions%2F-1129092273"><span class="token function">setDidRequestLayout</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">didRequestLayout<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="940952988%2FFunctions%2F-1129092273" anchor-label="setGlobalVisibleRect" id="940952988%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#940952988%2FFunctions%2F-1129092273"><span>set</span><wbr><span>Global</span><wbr><span>Visible</span><wbr><span><span>Rect</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="940952988%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#940952988%2FFunctions%2F-1129092273"><span class="token function">setGlobalVisibleRect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">rect<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/graphics/Rect.html">Rect</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1745929194%2FFunctions%2F-1129092273" anchor-label="setMyParent" id="-1745929194%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1745929194%2FFunctions%2F-1129092273"><span>set</span><wbr><span>My</span><wbr><span><span>Parent</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1745929194%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1745929194%2FFunctions%2F-1129092273"><span class="token function">setMyParent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">viewParent<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/ViewParent.html">ViewParent</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1574704167%2FFunctions%2F-1129092273" anchor-label="setUseRealDrawTraversals" id="1574704167%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1574704167%2FFunctions%2F-1129092273"><span>set</span><wbr><span>Use</span><wbr><span>Real</span><wbr><span>Draw</span><wbr><span><span>Traversals</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1574704167%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1574704167%2FFunctions%2F-1129092273"><span class="token function">setUseRealDrawTraversals</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="517543490%2FFunctions%2F-1129092273" anchor-label="setUseRealViewAnimations" id="517543490%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#517543490%2FFunctions%2F-1129092273"><span>set</span><wbr><span>Use</span><wbr><span>Real</span><wbr><span>View</span><wbr><span><span>Animations</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="517543490%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#517543490%2FFunctions%2F-1129092273"><span class="token function">setUseRealViewAnimations</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1692659620%2FFunctions%2F-1129092273" anchor-label="setViewFocus" id="-1692659620%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1692659620%2FFunctions%2F-1129092273"><span>set</span><wbr><span>View</span><wbr><span><span>Focus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1692659620%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1692659620%2FFunctions%2F-1129092273"><span class="token function">setViewFocus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">hasFocus<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-744057093%2FFunctions%2F-1129092273" anchor-label="useRealGraphics" id="-744057093%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-744057093%2FFunctions%2F-1129092273"><span>use</span><wbr><span>Real</span><wbr><span><span>Graphics</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-744057093%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-744057093%2FFunctions%2F-1129092273"><span class="token function">useRealGraphics</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-225345796%2FFunctions%2F-1129092273" anchor-label="visualize" id="-225345796%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-225345796%2FFunctions%2F-1129092273"><span><span>visualize</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-225345796%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-225345796%2FFunctions%2F-1129092273"><span class="token function">visualize</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">view<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/lang/String.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1321939823%2FFunctions%2F-1129092273" anchor-label="wasInvalidated" id="1321939823%2FFunctions%2F-1129092273" data-filterable-set=":robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robolectric-testing/release" data-filterable-set=":robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1321939823%2FFunctions%2F-1129092273"><span>was</span><wbr><span><span>Invalidated</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1321939823%2FFunctions%2F-1129092273"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1321939823%2FFunctions%2F-1129092273"><span class="token function">wasInvalidated</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"@class":"org.jetbrains.dokka.base.templating.AddToSourcesetDependencies","moduleName":"robolectric-testing","content":{":robolectric-testing/release":[]}}

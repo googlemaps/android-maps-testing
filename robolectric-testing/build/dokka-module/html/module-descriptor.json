@@ -1,0 +1,6 @@
+{
+  "name": "robolectric-testing",
+  "modulePath": "robolectric-testing",
+  "moduleOutputDirName": "module",
+  "moduleIncludesDirName": "includes"
+}

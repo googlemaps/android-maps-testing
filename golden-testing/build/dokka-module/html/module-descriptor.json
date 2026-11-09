@@ -1,0 +1,6 @@
+{
+  "name": "golden-testing",
+  "modulePath": "golden-testing",
+  "moduleOutputDirName": "module",
+  "moduleIncludesDirName": "includes"
+}

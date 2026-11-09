@@ -1,0 +1,1 @@
+sourceset_dependencies = '{":robolectric-testing/release":[],":visual-testing/release":[],":golden-testing/release":[]}'

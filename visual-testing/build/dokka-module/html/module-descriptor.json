@@ -1,0 +1,6 @@
+{
+  "name": "visual-testing",
+  "modulePath": "visual-testing",
+  "moduleOutputDirName": "module",
+  "moduleIncludesDirName": "includes"
+}
