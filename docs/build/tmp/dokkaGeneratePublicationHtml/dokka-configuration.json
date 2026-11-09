@@ -1,0 +1,61 @@
+{
+  "moduleName": "Android Maps Testing Toolkit",
+  "moduleVersion": "1.0.0-rc01",
+  "outputDir": "/home/runner/work/android-maps-testing/android-maps-testing/docs/build/dokka/html",
+  "cacheRoot": null,
+  "offlineMode": false,
+  "sourceSets": [
+  ],
+  "pluginsClasspath": [
+    "/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.dokka/templating-plugin/2.2.0/c3c13a48444b9c22e5286e88581ce0334e25352d/templating-plugin-2.2.0.jar",
+    "/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.dokka/dokka-base/2.2.0/84b0c641ea99d74ba3e251b6a0e33c5ead8d4312/dokka-base-2.2.0.jar",
+    "/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.dokka/all-modules-page-plugin/2.2.0/aab1a50ed5cea24c393542e09bfc699decae910f/all-modules-page-plugin-2.2.0.jar"
+  ],
+  "pluginsConfiguration": [
+    {
+      "fqPluginName": "org.jetbrains.dokka.base.DokkaBase",
+      "serializationFormat": "JSON",
+      "values": "{\"customAssets\":[],\"customStyleSheets\":[],\"separateInheritedMembers\":false,\"mergeImplicitExpectActualDeclarations\":false}"
+    },
+    {
+      "fqPluginName": "org.jetbrains.dokka.kotlinPlaygroundSamples.KotlinPlaygroundSamplesPlugin",
+      "serializationFormat": "JSON",
+      "values": "{}"
+    },
+    {
+      "fqPluginName": "org.jetbrains.dokka.versioning.VersioningPlugin",
+      "serializationFormat": "JSON",
+      "values": "{\"olderVersions\":[],\"olderVersionsDirName\":\"older\",\"renderVersionsNavigationOnAllPages\":true}"
+    }
+  ],
+  "modules": [
+    {
+      "name": "golden-testing",
+      "relativePathToOutputDirectory": "golden-testing",
+      "includes": [
+      ],
+      "sourceOutputDirectory": "/home/runner/work/android-maps-testing/android-maps-testing/golden-testing/build/dokka-module/html/module"
+    },
+    {
+      "name": "robolectric-testing",
+      "relativePathToOutputDirectory": "robolectric-testing",
+      "includes": [
+      ],
+      "sourceOutputDirectory": "/home/runner/work/android-maps-testing/android-maps-testing/robolectric-testing/build/dokka-module/html/module"
+    },
+    {
+      "name": "visual-testing",
+      "relativePathToOutputDirectory": "visual-testing",
+      "includes": [
+      ],
+      "sourceOutputDirectory": "/home/runner/work/android-maps-testing/android-maps-testing/visual-testing/build/dokka-module/html/module"
+    }
+  ],
+  "failOnWarning": false,
+  "delayTemplateSubstitution": false,
+  "suppressObviousFunctions": true,
+  "includes": [
+  ],
+  "suppressInheritedMembers": false,
+  "finalizeCoroutines": false
+}

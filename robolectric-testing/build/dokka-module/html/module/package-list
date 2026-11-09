@@ -1,0 +1,8 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+com.google.maps.android.robolectric.annotation
+com.google.maps.android.robolectric.ktx
+com.google.maps.android.robolectric.powerassert
+com.google.maps.android.robolectric.shadows
+com.google.maps.android.robolectric.truth
