@@ -36,7 +36,14 @@ Measured at `79b030b` (#13), recorded 2026-11-10T15:56:04Z.
 
 ### Instrumentation tests
 
-_No data recorded yet._
+Emulator tests run by `./gradlew connectedAndroidTest`, covering the modules that own androidTest sources.
+
+Measured at `79b030b` (#13), recorded 2026-11-10T15:56:09Z.
+
+| Module | Lines | Line % | | Branches | Branch % |
+| --- | ---: | ---: | --- | ---: | ---: |
+| `app` | 180/225 | 80.00% | `████████████████░░░░` | 36/97 | 37.11% |
+| **TOTAL** | 180/225 | 80.00% | `████████████████░░░░` | 36/97 | 37.11% |
 
 ## Trend (last 30 commits)
 
@@ -54,7 +61,7 @@ Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| 2026-11-10 | `79b030b` | #13 | 78.88% | 0.00 | n/a | n/a | chore(deps): bump actions/setup-java from 6.1.0 to 6.2.0 |
+| 2026-11-10 | `79b030b` | #13 | 78.88% | 0.00 | 80.00% | n/a | chore(deps): bump actions/setup-java from 6.1.0 to 6.2.0 |
 | 2026-11-04 | `b936651` | n/a | 78.88% | 0.00 | n/a | n/a | chore: align Maven coordinates and package namespaces to com.google.maps.android |
 | 2026-11-03 | `3067825` | n/a | 78.88% | 0.00 | n/a | n/a | docs(skills): add testing paradigm skills and region-tagged references in .agents/skills |
 | 2026-11-03 | `c2bd264` | n/a | 78.88% | -0.46 | n/a | n/a | feat: improve developer onboarding, KTX ergonomics, and cookbook docs |

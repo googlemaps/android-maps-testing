@@ -23,3 +23,5 @@ timestamp,commit,pr,subject,suite,module,lines_covered,lines_total,line_pct,bran
 2026-11-10T15:56:04Z,79b030b,13,chore(deps): bump actions/setup-java from 6.1.0 to 6.2.0,unit,robolectric-testing,1577,1876,84.06,333,642,51.87,8358,9968,83.85
 2026-11-10T15:56:04Z,79b030b,13,chore(deps): bump actions/setup-java from 6.1.0 to 6.2.0,unit,visual-testing,110,301,36.54,84,335,25.07,1262,3256,38.76
 2026-11-10T15:56:04Z,79b030b,13,chore(deps): bump actions/setup-java from 6.1.0 to 6.2.0,unit,TOTAL,1923,2438,78.88,475,1077,44.1,10913,14793,73.77
+2026-11-10T15:56:09Z,79b030b,13,chore(deps): bump actions/setup-java from 6.1.0 to 6.2.0,instrumentation,app,180,225,80.0,36,97,37.11,1341,1765,75.98
+2026-11-10T15:56:09Z,79b030b,13,chore(deps): bump actions/setup-java from 6.1.0 to 6.2.0,instrumentation,TOTAL,180,225,80.0,36,97,37.11,1341,1765,75.98
