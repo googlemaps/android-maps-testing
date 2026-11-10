@@ -65,7 +65,6 @@ class VisualMapSampleTest : BaseVisualTest() {
       testName = "store_locator_initial_state",
       screenshotBitmap = screenshotBitmap,
       prompt = prompt,
-      passCondition = { it.contains("PASSED", ignoreCase = true) },
     )
   }
 }

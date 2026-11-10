@@ -69,7 +69,6 @@ class VisualMapTestTemplate : BaseVisualTest() {
       testName = "map_visual_integrity_baseline",
       screenshotBitmap = screenshot,
       prompt = verificationPrompt,
-      passCondition = { it.contains("PASSED", ignoreCase = true) },
       tolerancePercent = 0.5,
       updateGoldenOnPass = true,
     )

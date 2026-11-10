@@ -43,14 +43,19 @@ import java.util.concurrent.TimeUnit
  * - High-level screenshot capture and decoding.
  * - [waitForMapRendering] to ensure map surfaces and vectors finish rendering before capture.
  * - [verifyScreenshotWithGoldenFallback]: Hybrid visual testing combining high-speed local pixel
- *   matching with Gemini AI fallback and automatic golden baseline updating.
+ *   matching with Gemini AI fallback and first-run golden baseline recording.
  */
 abstract class BaseVisualTest {
 
   protected val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
   protected val uiDevice: UiDevice = UiDevice.getInstance(instrumentation)
   protected val context: Context = instrumentation.targetContext
-  protected val helper: GeminiVisualTestHelper = GeminiVisualTestHelper()
+
+  /**
+   * Gemini client used by [verifyScreenshotWithGoldenFallback]. Override it to pin a model or to
+   * supply a custom HTTP client.
+   */
+  protected open val helper: GeminiVisualTestHelper = GeminiVisualTestHelper()
 
   /**
    * Resolves the Gemini API key from various configuration sources.
@@ -133,23 +138,31 @@ abstract class BaseVisualTest {
    * 2. If pixels match within [tolerancePercent], the test passes immediately without an API call.
    * 3. If the golden image is missing or the pixel comparison fails, falls back to Gemini Vision
    *    with [prompt] for semantic validation.
-   * 4. If Gemini approves ([passCondition] returns true), updates the golden file on disk so future
-   *    runs execute instantly offline.
+   * 4. If no golden existed and Gemini approves ([passCondition] returns true), records the
+   *    screenshot as the new golden so future runs execute instantly offline.
+   *
+   * A golden that exists but diverged is never overwritten, even when Gemini approves the new
+   * screenshot. Otherwise a regression approved by Gemini once would become the baseline and later
+   * runs would fast-pass against it. To accept an intentional visual change, replace the golden
+   * file yourself.
    *
    * @param testName Unique name of the test (used for the golden file name, e.g. "sydney_markers").
    * @param screenshotBitmap The captured bitmap to verify.
    * @param prompt The natural language specification prompt for Gemini.
-   * @param passCondition Predicate verifying the Gemini text response (defaults to checking for "PASSED").
+   * @param passCondition Predicate verifying the Gemini text response. The default passes only when
+   *   the last `PASSED` or `FAILED` verdict in the response is `PASSED` and is not negated (for
+   *   example "NOT PASSED" fails).
    * @param goldensDirectory The directory where golden files are stored.
    * @param tolerancePercent The allowed pixel mismatch percentage before falling back to Gemini (default: 0.5%).
-   * @param updateGoldenOnPass If true, updates or creates the baseline golden image upon successful Gemini validation.
+   * @param updateGoldenOnPass If true, records the screenshot as the golden baseline when no
+   *   baseline existed and Gemini approves it. Existing baselines are never overwritten.
    */
   // [START maps_visual_golden_fallback]
   suspend fun verifyScreenshotWithGoldenFallback(
     testName: String,
     screenshotBitmap: Bitmap,
     prompt: String,
-    passCondition: (String) -> Boolean = { it.contains("PASSED", ignoreCase = true) },
+    passCondition: (String) -> Boolean = { isPassedVerdict(it) },
     goldensDirectory: File = File(context.getExternalFilesDir(null) ?: context.filesDir, "goldens"),
     tolerancePercent: Double = 0.5,
     updateGoldenOnPass: Boolean = true,
@@ -198,7 +211,13 @@ abstract class BaseVisualTest {
       passed,
     )
 
-    if (updateGoldenOnPass) {
+    if (goldenBitmap != null) {
+      Log.w(
+        "BaseVisualTest",
+        "Gemini approved '$testName', but the screenshot differs from its golden baseline. The golden was " +
+          "not updated. If the change is intended, replace the golden with the new screenshot.",
+      )
+    } else if (updateGoldenOnPass) {
       try {
         goldensDirectory.mkdirs()
         FileOutputStream(goldenFile).use { out ->
@@ -221,7 +240,8 @@ abstract class BaseVisualTest {
    * Resolves a golden baseline [Bitmap] for [testName] by checking:
    * 1. Device storage override at [goldenFile] (`goldensDirectory/$testName.png`)
    * 2. Bundled instrumentation test APK assets (`src/androidTest/assets/goldens/$testName.png`)
-   * 3. Bundled target application assets (`src/main/assets/goldens/$testName.png`)
+   * 3. Bundled target application assets (`src/main/assets/goldens/$testName.png`). Prefer
+   *    `src/androidTest/assets`: files under `src/main/assets` ship inside the release APK.
    * 4. JVM classpath resources (`src/test/resources/goldens/$testName.png`)
    */
   protected open fun loadGoldenBaseline(testName: String, goldenFile: File): Bitmap? {
@@ -255,7 +275,7 @@ abstract class BaseVisualTest {
     testName: String,
     screenshotBitmap: Bitmap,
     prompt: String,
-    passCondition: (String) -> Boolean = { it.contains("PASSED", ignoreCase = true) },
+    passCondition: (String) -> Boolean = { isPassedVerdict(it) },
     goldensDirectory: File = File(context.getExternalFilesDir(null) ?: context.filesDir, "goldens"),
     tolerancePercent: Double = 0.5,
     updateGoldenOnPass: Boolean = true,

@@ -69,7 +69,7 @@ public abstract class com/google/maps/android/testing/visual/BaseVisualTest {
 	public static synthetic fun captureScreenshot$default (Lcom/google/maps/android/testing/visual/BaseVisualTest;Ljava/lang/String;ILjava/lang/Object;)Landroid/graphics/Bitmap;
 	protected final fun getContext ()Landroid/content/Context;
 	protected final fun getGeminiApiKey ()Ljava/lang/String;
-	protected final fun getHelper ()Lcom/google/maps/android/testing/visual/GeminiVisualTestHelper;
+	protected fun getHelper ()Lcom/google/maps/android/testing/visual/GeminiVisualTestHelper;
 	protected final fun getInstrumentation ()Landroid/app/Instrumentation;
 	protected final fun getUiDevice ()Landroidx/test/uiautomator/UiDevice;
 	protected fun loadGoldenBaseline (Ljava/lang/String;Ljava/io/File;)Landroid/graphics/Bitmap;
@@ -204,6 +204,7 @@ public final class com/google/maps/android/testing/visual/GeminiResponse$Compani
 public final class com/google/maps/android/testing/visual/GeminiVisualTestHelper {
 	public static final field Companion Lcom/google/maps/android/testing/visual/GeminiVisualTestHelper$Companion;
 	public static final field DEFAULT_FALLBACK_MODEL Ljava/lang/String;
+	public static final field LATEST_MODEL Ljava/lang/String;
 	public fun <init> ()V
 	public fun <init> (Ljava/lang/String;Lio/ktor/client/HttpClient;)V
 	public synthetic fun <init> (Ljava/lang/String;Lio/ktor/client/HttpClient;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
