@@ -25,14 +25,14 @@ require combining the raw execution data rather than the XML reports.
 
 JVM tests run by `./gradlew koverXmlReportDebug`, covering the three published library modules (`robolectric-testing`, `golden-testing`, `visual-testing`).
 
-Measured at `b645de8` (#6), recorded 2026-11-10T23:20:50Z.
+Measured at `511d74c` (#7), recorded 2026-11-10T23:22:42Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
 | `golden-testing` | 236/261 | 90.42% | `██████████████████░░` | 58/100 | 58.00% |
 | `robolectric-testing` | 1,577/1,876 | 84.06% | `█████████████████░░░` | 333/642 | 51.87% |
-| `visual-testing` | 110/301 | 36.54% | `███████░░░░░░░░░░░░░` | 84/335 | 25.07% |
-| **TOTAL** | 1,923/2,438 | 78.88% | `████████████████░░░░` | 475/1,077 | 44.10% |
+| `visual-testing` | 199/313 | 63.58% | `█████████████░░░░░░░` | 122/347 | 35.16% |
+| **TOTAL** | 2,012/2,450 | 82.12% | `████████████████░░░░` | 513/1,089 | 47.11% |
 
 ### Instrumentation tests
 
@@ -52,15 +52,16 @@ Measured at `79b030b` (#13), recorded 2026-11-10T15:56:09Z.
 ```mermaid
 xychart-beta
     title "Line Coverage Trend (%)"
-    x-axis ["47be0ab", "e3bd2d2", "c2bd264", "3067825", "b936651", "79b030b", "b645de8"]
+    x-axis ["47be0ab", "e3bd2d2", "c2bd264", "3067825", "b936651", "79b030b", "b645de8", "511d74c"]
     y-axis "Coverage %" 0 --> 100
-    line [79.34, 79.34, 78.88, 78.88, 78.88, 78.88, 78.88]
+    line [79.34, 79.34, 78.88, 78.88, 78.88, 78.88, 78.88, 82.12]
 ```
 
 Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| 2026-11-10 | `511d74c` | #7 | 82.12% | +3.24 | n/a | n/a | fix(visual): harden the Gemini golden fallback |
 | 2026-11-10 | `b645de8` | #6 | 78.88% | 0.00 | n/a | n/a | fix: limit release-please version updates to this library's versions |
 | 2026-11-10 | `79b030b` | #13 | 78.88% | 0.00 | 80.00% | n/a | chore(deps): bump actions/setup-java from 6.1.0 to 6.2.0 |
 | 2026-11-04 | `b936651` | n/a | 78.88% | 0.00 | n/a | n/a | chore: align Maven coordinates and package namespaces to com.google.maps.android |
