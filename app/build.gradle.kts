@@ -40,7 +40,7 @@ powerAssert {
 }
 
 android {
-    namespace = "com.example.androidmapsrobolectric"
+    namespace = "com.google.maps.android.testing.sample"
     compileSdk = 37
     val secretsFile = rootProject.file("secrets.properties")
     val props = Properties()
@@ -51,7 +51,7 @@ android {
     val geminiKey = props.getProperty("GEMINI_API_KEY")
 
     defaultConfig {
-        applicationId = "com.example.androidmapsrobolectric"
+        applicationId = "com.google.maps.android.testing.sample"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

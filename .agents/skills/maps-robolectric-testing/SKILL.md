@@ -49,7 +49,7 @@ Annotate your test class with:
 
 ### A. 1-Liner KTX Test Harness (`withTestMap`) & Unified Google Truth (`assertThat(map)`)
 
-Reference: region `maps_robolectric_demo_test` in [`MapDemoTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/MapDemoTest.kt#L36-L83)
+Reference: region `maps_robolectric_demo_test` in [`MapDemoTest.kt`](../../../app/src/test/java/com/google/maps/android/testing/sample/MapDemoTest.kt#L36-L83)
 
 ```kotlin
 // [START maps_robolectric_demo_test]
@@ -154,7 +154,7 @@ Reference: region `maps_robolectric_power_assert` in [`LazyAssertionsComparisonT
 
 ### C. Testing Production Map Controllers (`createTestMap`)
 
-Reference: region `maps_robolectric_manager_test` in [`StoreLocatorMapManagerTest.kt`](../../../app/src/test/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManagerTest.kt#L37-L129)
+Reference: region `maps_robolectric_manager_test` in [`StoreLocatorMapManagerTest.kt`](../../../app/src/test/java/com/google/maps/android/testing/sample/manager/StoreLocatorMapManagerTest.kt#L37-L129)
 
 ```kotlin
 // [START maps_robolectric_manager_test]
