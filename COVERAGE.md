@@ -25,7 +25,7 @@ require combining the raw execution data rather than the XML reports.
 
 JVM tests run by `./gradlew koverXmlReportDebug`, covering the three published library modules (`robolectric-testing`, `golden-testing`, `visual-testing`).
 
-Measured at `511d74c` (#7), recorded 2026-11-10T23:22:42Z.
+Measured at `23f9208` (#8), recorded 2026-11-10T23:23:36Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
@@ -52,15 +52,16 @@ Measured at `79b030b` (#13), recorded 2026-11-10T15:56:09Z.
 ```mermaid
 xychart-beta
     title "Line Coverage Trend (%)"
-    x-axis ["47be0ab", "e3bd2d2", "c2bd264", "3067825", "b936651", "79b030b", "b645de8", "511d74c"]
+    x-axis ["47be0ab", "e3bd2d2", "c2bd264", "3067825", "b936651", "79b030b", "b645de8", "511d74c", "23f9208"]
     y-axis "Coverage %" 0 --> 100
-    line [79.34, 79.34, 78.88, 78.88, 78.88, 78.88, 78.88, 82.12]
+    line [79.34, 79.34, 78.88, 78.88, 78.88, 78.88, 78.88, 82.12, 82.12]
 ```
 
 Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| 2026-11-10 | `23f9208` | #8 | 82.12% | 0.00 | n/a | n/a | build: stop keeping credential placeholders in gradle.properties |
 | 2026-11-10 | `511d74c` | #7 | 82.12% | +3.24 | n/a | n/a | fix(visual): harden the Gemini golden fallback |
 | 2026-11-10 | `b645de8` | #6 | 78.88% | 0.00 | n/a | n/a | fix: limit release-please version updates to this library's versions |
 | 2026-11-10 | `79b030b` | #13 | 78.88% | 0.00 | 80.00% | n/a | chore(deps): bump actions/setup-java from 6.1.0 to 6.2.0 |

@@ -27,39 +27,43 @@
   <text x="47" y="96.5" text-anchor="end" class="axis-label">75%</text>
   <line x1="55" y1="45.0" x2="765" y2="45.0" class="grid" />
   <text x="47" y="49.0" text-anchor="end" class="axis-label">100%</text>
-  <path d="M 55.0,84.3 L 156.4,84.3 L 257.9,85.1 L 359.3,85.1 L 460.7,85.1 L 562.1,85.1 L 663.6,85.1 L 765.0,79.0 L 765.0,235.0 L 55.0,235.0 Z" fill="#4285F4" fill-opacity="0.12" />
-  <path d="M 55.0,84.3 L 156.4,84.3 L 257.9,85.1 L 359.3,85.1 L 460.7,85.1 L 562.1,85.1 L 663.6,85.1 L 765.0,79.0" fill="none" stroke="#4285F4" stroke-width="2.5" stroke-linejoin="round" />
+  <path d="M 55.0,84.3 L 143.8,84.3 L 232.5,85.1 L 321.2,85.1 L 410.0,85.1 L 498.8,85.1 L 587.5,85.1 L 676.2,79.0 L 765.0,79.0 L 765.0,235.0 L 55.0,235.0 Z" fill="#4285F4" fill-opacity="0.12" />
+  <path d="M 55.0,84.3 L 143.8,84.3 L 232.5,85.1 L 321.2,85.1 L 410.0,85.1 L 498.8,85.1 L 587.5,85.1 L 676.2,79.0 L 765.0,79.0" fill="none" stroke="#4285F4" stroke-width="2.5" stroke-linejoin="round" />
   <circle cx="55.0" cy="84.3" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>47be0ab: 79.34% (unit)</title>
   </circle>
-  <circle cx="156.4" cy="84.3" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="143.8" cy="84.3" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>e3bd2d2: 79.34% (unit)</title>
   </circle>
-  <circle cx="257.9" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="232.5" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>c2bd264: 78.88% (unit)</title>
   </circle>
-  <circle cx="359.3" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="321.2" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>3067825: 78.88% (unit)</title>
   </circle>
-  <circle cx="460.7" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="410.0" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>b936651: 78.88% (unit)</title>
   </circle>
-  <circle cx="562.1" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="498.8" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>79b030b: 78.88% (unit)</title>
   </circle>
-  <circle cx="663.6" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="587.5" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>b645de8: 78.88% (unit)</title>
   </circle>
-  <circle cx="765.0" cy="79.0" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="676.2" cy="79.0" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>511d74c: 82.12% (unit)</title>
   </circle>
-  <path d="M 562.1,83.0" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="4,4" />
+  <circle cx="765.0" cy="79.0" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+    <title>23f9208: 82.12% (unit)</title>
+  </circle>
+  <path d="M 498.8,83.0" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="4,4" />
   <text x="55.0" y="265" class="commit-label">47be0ab</text>
-  <text x="156.4" y="265" class="commit-label">e3bd2d2</text>
-  <text x="257.9" y="265" class="commit-label">c2bd264</text>
-  <text x="359.3" y="265" class="commit-label">3067825</text>
-  <text x="460.7" y="265" class="commit-label">b936651</text>
-  <text x="562.1" y="265" class="commit-label">79b030b</text>
-  <text x="663.6" y="265" class="commit-label">b645de8</text>
-  <text x="765.0" y="265" class="commit-label">511d74c</text>
+  <text x="143.8" y="265" class="commit-label">e3bd2d2</text>
+  <text x="232.5" y="265" class="commit-label">c2bd264</text>
+  <text x="321.2" y="265" class="commit-label">3067825</text>
+  <text x="410.0" y="265" class="commit-label">b936651</text>
+  <text x="498.8" y="265" class="commit-label">79b030b</text>
+  <text x="587.5" y="265" class="commit-label">b645de8</text>
+  <text x="676.2" y="265" class="commit-label">511d74c</text>
+  <text x="765.0" y="265" class="commit-label">23f9208</text>
 </svg>
