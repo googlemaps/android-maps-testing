@@ -20,10 +20,9 @@ High-fidelity Robolectric shadows and testing utilities for the Google Maps SDK 
 
 ### 1. Declare Dependencies in `gradle/libs.versions.toml` (Recommended)
 
-<!-- x-release-please-start-version -->
 ```toml
 [versions]
-mapsTesting = "1.0.0-rc01"
+mapsTesting = "1.0.0-rc01" # x-release-please-version
 kotlin = "2.1.20"
 robolectric = "4.17"
 truth = "1.4.5"
@@ -36,7 +35,6 @@ truth = { module = "com.google.truth:truth", version.ref = "truth" }
 [plugins]
 kotlin-power-assert = { id = "org.jetbrains.kotlin.plugin.power-assert", version.ref = "kotlin" }
 ```
-<!-- x-release-please-end -->
 
 ### 2. Configure Your Module's `build.gradle.kts`
 
@@ -84,17 +82,15 @@ dependencies {
 <details>
 <summary><b>Without Version Catalog (Direct Coordinates)</b></summary>
 
-<!-- x-release-please-start-version -->
 ```kotlin
 dependencies {
-    testImplementation("com.google.maps.android:maps-testing-robolectric:1.0.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-robolectric:1.0.0-rc01") // x-release-please-version
     testImplementation("org.robolectric:robolectric:4.17")
 
     // Optional: include only if using Google Truth subjects instead of Kotlin Power-Assert
     testImplementation("com.google.truth:truth:1.4.5")
 }
 ```
-<!-- x-release-please-end -->
 
 </details>
 

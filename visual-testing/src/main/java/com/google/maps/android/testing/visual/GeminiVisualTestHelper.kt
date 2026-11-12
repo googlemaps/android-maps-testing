@@ -27,6 +27,7 @@ import androidx.test.uiautomator.Until
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.get
+import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
@@ -48,8 +49,10 @@ import java.io.ByteArrayOutputStream
  * Helper class to interact with Google's Gemini API for visual verification and UI actions.
  *
  * Features:
- * - Dynamically queries the Gemini API for the latest stable Flash model and caches it
- *   for the entire testing session.
+ * - Uses the pinned [DEFAULT_FALLBACK_MODEL] unless a model is configured, so results do not change
+ *   when a new model ships. Setting the model to [LATEST_MODEL] opts into querying the Gemini API
+ *   for the latest stable Flash model, cached for the entire testing session.
+ * - Sends the API key in the `x-goog-api-key` header, never in the request URL.
  * - Encodes screenshot bitmaps into base64 JPEG payloads for multimodal vision prompts.
  * - Translates natural language commands into UiAutomator interactions via UI hierarchy inspection.
  * - Uses kotlinx.serialization for type-safe request/response parsing.
@@ -63,9 +66,20 @@ class GeminiVisualTestHelper(
   companion object {
     private const val TAG = "GeminiVisualTestHelper"
     private const val BASE_URL = "https://generativelanguage.googleapis.com/v1beta"
+    private const val API_KEY_HEADER = "x-goog-api-key"
+
+    /**
+     * Model used when neither the constructor nor the `gemini.model` system property selects one.
+     */
     const val DEFAULT_FALLBACK_MODEL = "gemini-3.8-flash"
 
-    // Session-wide cached model name so discovery only happens once per test run
+    /**
+     * Model value that opts into querying `models.list` for the latest stable Flash model instead
+     * of using [DEFAULT_FALLBACK_MODEL]. Pass it as `preferredModel` or as `-Dgemini.model=latest`.
+     */
+    const val LATEST_MODEL = "latest"
+
+    // Session-wide cached model name so discovery with LATEST_MODEL only happens once per test run
     @Volatile
     private var sessionResolvedModel: String? = null
 
@@ -77,7 +91,17 @@ class GeminiVisualTestHelper(
       sessionResolvedModel = null
     }
 
-    private fun createDefaultHttpClient(): HttpClient = HttpClient(CIO)
+    /**
+     * Request timeout for the default client. CIO's own default is 15 seconds, which a Gemini vision
+     * request from an emulator can exceed.
+     */
+    internal const val DEFAULT_REQUEST_TIMEOUT_MILLIS = 60_000L
+
+    internal fun createDefaultHttpClient(): HttpClient = HttpClient(CIO) {
+      engine {
+        requestTimeout = DEFAULT_REQUEST_TIMEOUT_MILLIS
+      }
+    }
 
     private val VERSION_REGEX = Regex("""gemini-(\d+(?:\.\d+)*)""", RegexOption.IGNORE_CASE)
 
@@ -117,18 +141,19 @@ class GeminiVisualTestHelper(
    * Resolution order:
    * 1. Constructor [preferredModel], if explicitly provided.
    * 2. System property `gemini.model`, if specified.
-   * 3. Session-cached model from a previous server resolution.
-   * 4. Dynamic query to `models.list` selecting the newest stable Flash model.
-   * 5. Fallback default: [DEFAULT_FALLBACK_MODEL].
+   * 3. Otherwise the pinned [DEFAULT_FALLBACK_MODEL], without any network call.
+   *
+   * When the configured model is [LATEST_MODEL], the newest stable Flash model is looked up with
+   * `models.list` once per session and cached, falling back to [DEFAULT_FALLBACK_MODEL] if the
+   * lookup fails.
    */
   suspend fun getOrResolveModel(apiKey: String): String {
-    if (!preferredModel.isNullOrBlank()) {
-      return preferredModel
-    }
+    val configuredModel = preferredModel?.takeIf { it.isNotBlank() }
+      ?: System.getProperty("gemini.model")?.takeIf { it.isNotBlank() }
+      ?: return DEFAULT_FALLBACK_MODEL
 
-    val systemPropModel = System.getProperty("gemini.model")
-    if (!systemPropModel.isNullOrBlank()) {
-      return systemPropModel
+    if (!configuredModel.equals(LATEST_MODEL, ignoreCase = true)) {
+      return configuredModel
     }
 
     sessionResolvedModel?.let { return it }
@@ -145,7 +170,9 @@ class GeminiVisualTestHelper(
    */
   suspend fun queryLatestStableFlashModel(apiKey: String): String? {
     return try {
-      val response: HttpResponse = client.get("$BASE_URL/models?key=$apiKey")
+      val response: HttpResponse = client.get("$BASE_URL/models") {
+        header(API_KEY_HEADER, apiKey)
+      }
       if (response.status != HttpStatusCode.OK) {
         Log.w(TAG, "Failed to query models list (${response.status}): ${response.bodyAsText()}")
         return null
@@ -204,7 +231,7 @@ class GeminiVisualTestHelper(
       ),
     )
 
-    val response = executeWithRetry("$BASE_URL/models/$model:generateContent?key=$apiKey", request)
+    val response = executeWithRetry("$BASE_URL/models/$model:generateContent", apiKey, request)
     val geminiResponse: GeminiResponse = json.decodeFromString(response.bodyAsText())
 
     // Extract usage metrics
@@ -285,7 +312,7 @@ class GeminiVisualTestHelper(
       ),
     )
 
-    val response = executeWithRetry("$BASE_URL/models/$model:generateContent?key=$apiKey", request)
+    val response = executeWithRetry("$BASE_URL/models/$model:generateContent", apiKey, request)
     val geminiResponse: GeminiResponse = json.decodeFromString(response.bodyAsText())
 
     val rawText = geminiResponse.candidates.firstOrNull()?.content?.parts?.firstOrNull()?.text
@@ -344,6 +371,7 @@ class GeminiVisualTestHelper(
 
   private suspend fun executeWithRetry(
     url: String,
+    apiKey: String,
     request: GeminiRequest,
     maxRetries: Int = 3,
   ): HttpResponse {
@@ -353,6 +381,7 @@ class GeminiVisualTestHelper(
     while (attempts < maxRetries) {
       attempts++
       val response: HttpResponse = client.post(url) {
+        header(API_KEY_HEADER, apiKey)
         contentType(ContentType.Application.Json)
         setBody(json.encodeToString(request))
       }

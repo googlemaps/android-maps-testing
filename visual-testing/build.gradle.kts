@@ -77,6 +77,7 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.truth)
+    testImplementation(libs.ktor.client.mock)
     testImplementation(libs.robolectric)
     testImplementation(libs.robolectric.shadows.framework)
     testImplementation(libs.androidx.test.core)
