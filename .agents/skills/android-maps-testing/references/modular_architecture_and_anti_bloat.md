@@ -231,14 +231,13 @@ class StoreLocatorMapManager(
 
 ## 5. Testing the Controller on JVM with `createTestMap` & Domain Assertions
 
-Reference: region `maps_robolectric_manager_test` in [`StoreLocatorMapManagerTest.kt`](../../../../app/src/test/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManagerTest.kt#L37-L129)
+Reference: region `maps_robolectric_manager_test` in [`StoreLocatorMapManagerTest.kt`](../../../../app/src/test/java/com/example/androidmapsrobolectric/manager/StoreLocatorMapManagerTest.kt#L36-L127)
 
 ```kotlin
 // [START maps_robolectric_manager_test]
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 class StoreLocatorMapManagerTest {
 
   private lateinit var googleMap: GoogleMap
