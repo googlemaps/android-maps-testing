@@ -9,7 +9,7 @@ description: >-
   verifyScreenshotWithGoldenFallback, or drive UI interactions via natural-language prompts
   (executeNaturalLanguageAction).
 license: Apache-2.0
-compatibility: Requires compileSdk 34+, Java 11+ bytecode target, an Android emulator or device, and com.google.maps.android:maps-testing-visual:1.0.0-rc01+. # x-release-please-version
+compatibility: Requires compileSdk 34+, Java 11+ bytecode target, an Android emulator or device, and com.google.maps.android:maps-testing-visual:1.1.0-rc01 # x-release-please-version
 metadata:
   version: "1.3"
   author: Google Maps Platform DevRel
@@ -28,7 +28,7 @@ For the full multi-tier toolkit overview, see [`../android-maps-testing/SKILL.md
 <!-- x-release-please-start-version -->
 ```kotlin
 dependencies {
-    androidTestImplementation("com.google.maps.android:maps-testing-visual:1.0.0-rc01")
+    androidTestImplementation("com.google.maps.android:maps-testing-visual:1.1.0-rc01")
 }
 ```
 <!-- x-release-please-end -->

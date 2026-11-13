@@ -60,7 +60,7 @@ val apiCheck = tasks.register("apiCheck") {
 allprojects {
   group = "com.google.maps.android"
   // {x-release-please-start-version}
-  version = "1.0.0-rc01"
+  version = "1.1.0-rc01"
   // {x-release-please-end}
 }
 

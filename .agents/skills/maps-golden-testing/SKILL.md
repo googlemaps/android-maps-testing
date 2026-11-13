@@ -9,7 +9,7 @@ description: >-
   assertMatchesGolden() / assertMatchesGoldenBlocking(), baseline recording (-Dmaps.golden.record=true),
   and automatic _actual.png and _diff.png failure diagnostic artifacts.
 license: Apache-2.0
-compatibility: Requires compileSdk 34+, Java 11+ bytecode target, and com.google.maps.android:maps-testing-golden:1.0.0-rc01+. # x-release-please-version
+compatibility: Requires compileSdk 34+, Java 11+ bytecode target, and com.google.maps.android:maps-testing-golden:1.1.0-rc01 # x-release-please-version
 metadata:
   version: "1.3"
   author: Google Maps Platform DevRel
@@ -28,9 +28,9 @@ For the full multi-tier toolkit overview, see [`../android-maps-testing/SKILL.md
 <!-- x-release-please-start-version -->
 ```kotlin
 dependencies {
-    testImplementation("com.google.maps.android:maps-testing-golden:1.0.0-rc01")
-    testImplementation("com.google.maps.android:maps-testing-robolectric:1.0.0-rc01")
-    androidTestImplementation("com.google.maps.android:maps-testing-golden:1.0.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-golden:1.1.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-robolectric:1.1.0-rc01")
+    androidTestImplementation("com.google.maps.android:maps-testing-golden:1.1.0-rc01")
 }
 ```
 <!-- x-release-please-end -->

@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.1.0-rc01](https://github.com/googlemaps/android-maps-testing/compare/v1.0.0-rc01...v1.1.0-rc01) (2026-11-13)
+
+
+### Features
+
+* **visual:** pin the default Gemini model and make latest Flash discovery opt-in ([511d74c](https://github.com/googlemaps/android-maps-testing/commit/511d74c31eff71fd0ca3f473d8652db94baad859))
+
+
+### Bug Fixes
+
+* align sample app coroutines with Ktor so visual tests run on device ([511d74c](https://github.com/googlemaps/android-maps-testing/commit/511d74c31eff71fd0ca3f473d8652db94baad859))
+* limit release-please version updates to this library's versions ([#6](https://github.com/googlemaps/android-maps-testing/issues/6)) ([b645de8](https://github.com/googlemaps/android-maps-testing/commit/b645de898647bea77e13a22ead12204296fae379))
+* **visual:** give Gemini requests a 60s timeout ([511d74c](https://github.com/googlemaps/android-maps-testing/commit/511d74c31eff71fd0ca3f473d8652db94baad859))
+* **visual:** never overwrite a diverged golden after a Gemini pass ([511d74c](https://github.com/googlemaps/android-maps-testing/commit/511d74c31eff71fd0ca3f473d8652db94baad859))
+* **visual:** reject negated verdicts in the default pass condition ([511d74c](https://github.com/googlemaps/android-maps-testing/commit/511d74c31eff71fd0ca3f473d8652db94baad859))
+* **visual:** send the Gemini API key in a header instead of the URL ([511d74c](https://github.com/googlemaps/android-maps-testing/commit/511d74c31eff71fd0ca3f473d8652db94baad859))
+
 ## 1.0.0-rc01 (2026-10-30)
 
 ### Features

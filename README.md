@@ -70,7 +70,7 @@ Add the desired artifacts to your `gradle/libs.versions.toml`:
 
 ```toml
 [versions]
-mapsTesting = "1.0.0-rc01" # x-release-please-version
+mapsTesting = "1.1.0-rc01" # x-release-please-version
 robolectric = "4.17"
 truth = "1.4.5"
 
@@ -128,14 +128,14 @@ dependencies {
 ```kotlin
 dependencies {
     // 1. Robolectric Shadows
-    testImplementation("com.google.maps.android:maps-testing-robolectric:1.0.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-robolectric:1.1.0-rc01")
     testImplementation("org.robolectric:robolectric:4.17")
 
     // 2. Golden Image Testing
-    testImplementation("com.google.maps.android:maps-testing-golden:1.0.0-rc01")
+    testImplementation("com.google.maps.android:maps-testing-golden:1.1.0-rc01")
 
     // 3. AI Visual Testing
-    androidTestImplementation("com.google.maps.android:maps-testing-visual:1.0.0-rc01")
+    androidTestImplementation("com.google.maps.android:maps-testing-visual:1.1.0-rc01")
 }
 ```
 <!-- x-release-please-end -->
