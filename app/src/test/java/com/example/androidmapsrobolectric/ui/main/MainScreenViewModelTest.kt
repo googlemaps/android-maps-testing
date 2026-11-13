@@ -16,14 +16,22 @@
 
 package com.example.androidmapsrobolectric.ui.main
 
+import android.view.View.MeasureSpec
+import androidx.test.core.app.ApplicationProvider
 import com.example.androidmapsrobolectric.data.DataRepository
+import com.example.androidmapsrobolectric.data.DefaultDataRepository
+import com.example.androidmapsrobolectric.manager.StoreLocatorMapManager
 import com.example.androidmapsrobolectric.model.Store
+import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.common.truth.Truth.assertThat
+import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.ktx.getMapBlocking
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -33,6 +41,10 @@ import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
+import com.google.maps.android.robolectric.truth.assertThat as assertThatMap
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class MainScreenViewModelTest {
@@ -88,4 +100,34 @@ class MainScreenViewModelTest {
 
 private class FakeStoreRepository(private val stores: List<Store>) : DataRepository {
   override val data: Flow<List<Store>> = flow { emit(stores) }
+}
+
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [34])
+@EnableMapsShadows
+class MainScreenMapRenderTest {
+
+  @Test
+  fun renderStoresOnMap_displaysMarkersAndFitsAllStoresInViewport() = runTest {
+    val stores = DefaultDataRepository().data.first()
+    val mapView = MapView(ApplicationProvider.getApplicationContext()).apply {
+      onCreate(null)
+      onResume()
+      measure(
+        MeasureSpec.makeMeasureSpec(320, MeasureSpec.EXACTLY),
+        MeasureSpec.makeMeasureSpec(640, MeasureSpec.EXACTLY),
+      )
+      layout(0, 0, 320, 640)
+    }
+    val googleMap = mapView.getMapBlocking()
+    val mapManager = StoreLocatorMapManager()
+    mapManager.attachMap(googleMap)
+
+    renderStoresOnMap(mapView, googleMap, mapManager, stores)
+
+    assertThatMap(googleMap).hasMarkerCount(stores.size)
+    for (store in stores) {
+      assertThatMap(googleMap).showsOnScreen(store.location)
+    }
+  }
 }
