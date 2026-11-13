@@ -13,7 +13,7 @@ description: >-
   Critical User Journeys (CUJs), Modern Android Development (MAD) modularity (< 200-300 lines per file,
   never storing GoogleMap in ViewModels), and the Zero-Mock Reality Gap gate.
 license: Apache-2.0
-compatibility: Requires an Android project with compileSdk 34+ and Java 11+ bytecode target. Uses maps-testing-robolectric, maps-testing-golden, and maps-testing-visual 1.0.0-rc01+. # x-release-please-version
+compatibility: Requires an Android project with compileSdk 34+ and Java 11+ bytecode target. Uses maps-testing-robolectric, maps-testing-golden, and maps-testing-visual 1.1.0-rc01 # x-release-please-version
 metadata:
   version: "1.3"
   author: Google Maps Platform DevRel
@@ -143,7 +143,7 @@ JVM execution without devices?                                    fidelity asser
 
 ```toml
 [versions]
-mapsTesting = "1.0.0-rc01" # x-release-please-version
+mapsTesting = "1.1.0-rc01" # x-release-please-version
 robolectric = "4.17"
 truth = "1.4.5"
 
