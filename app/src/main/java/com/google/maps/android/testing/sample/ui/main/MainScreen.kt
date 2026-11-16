@@ -42,6 +42,8 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavKey
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.maps.android.testing.sample.data.DefaultDataRepository
 import com.google.maps.android.testing.sample.manager.StoreLocatorMapManager
@@ -105,13 +107,12 @@ internal fun MainScreen(
         mapView.apply {
           getMapAsync { googleMap ->
             mapManager.attachMap(googleMap)
-            mapManager.displayStores(stores)
           }
         }
       },
-      update = {
-        mapView.getMapAsync { googleMap ->
-          mapManager.displayStores(stores)
+      update = { view ->
+        view.getMapAsync { googleMap ->
+          renderStoresOnMap(view, googleMap, mapManager, stores)
         }
       },
       modifier = Modifier
@@ -120,6 +121,29 @@ internal fun MainScreen(
     )
   }
 }
+
+internal fun renderStoresOnMap(
+  mapView: MapView,
+  googleMap: GoogleMap,
+  mapManager: StoreLocatorMapManager,
+  stores: List<Store>,
+) {
+  mapManager.displayStores(stores)
+  if (stores.isNotEmpty()) {
+    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stores.first().location, INITIAL_STORE_ZOOM))
+    if (mapView.width > 0 && mapView.height > 0) {
+      mapManager.fitAllStores()
+    } else {
+      mapView.post {
+        if (mapView.width > 0 && mapView.height > 0) {
+          mapManager.fitAllStores()
+        }
+      }
+    }
+  }
+}
+
+private const val INITIAL_STORE_ZOOM = 9f
 
 @Composable
 fun rememberMapViewWithLifecycle(): MapView {
