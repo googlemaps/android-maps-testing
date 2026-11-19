@@ -38,12 +38,12 @@ Measured at `704b93a` (#23), recorded 2026-11-19T17:38:31Z.
 
 Emulator tests run by `./gradlew connectedAndroidTest`, covering the modules that own androidTest sources.
 
-Measured at `d4af6e9` (#12), recorded 2026-11-19T17:36:56Z.
+Measured at `704b93a` (#23), recorded 2026-11-19T17:38:36Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
-| `app` | 194/230 | 84.35% | `█████████████████░░░` | 41/95 | 43.16% |
-| **TOTAL** | 194/230 | 84.35% | `█████████████████░░░` | 41/95 | 43.16% |
+| `app` | 180/225 | 80.00% | `████████████████░░░░` | 36/97 | 37.11% |
+| **TOTAL** | 180/225 | 80.00% | `████████████████░░░░` | 36/97 | 37.11% |
 
 ## Trend (last 30 commits)
 
@@ -61,7 +61,7 @@ Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| 2026-11-19 | `704b93a` | #23 | 82.28% | 0.00 | n/a | n/a | chore(deps): bump peter-evans/create-pull-request |
+| 2026-11-19 | `704b93a` | #23 | 82.28% | 0.00 | 80.00% | -4.35 | chore(deps): bump peter-evans/create-pull-request |
 | 2026-11-19 | `d4af6e9` | #12 | 82.28% | +0.16 | 84.35% | 0.00 | feat(robolectric): add MapsRobolectricTestRunner and deprecate @EnableMapsShadows |
 | 2026-11-19 | `5e4209c` | #9 | 82.12% | 0.00 | 84.35% | 0.00 | chore: rename root project and sample app away from the prototype names |
 | 2026-11-19 | `b02f546` | #22 | 82.12% | 0.00 | 84.35% | n/a | fix(app): fit store locator camera onto displayed stores |
