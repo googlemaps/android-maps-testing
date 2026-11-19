@@ -45,6 +45,8 @@ dependencies {
    ```
 3. **Fast Zero-Quota CI & Fresh Emulator Runs**: On clean CI emulators, `BaseVisualTest` automatically loads `src/androidTest/assets/goldens/<testName>.png` from the bundled test APK assets. When the screenshot matches within `tolerancePercent`, the test passes in milliseconds with **zero Gemini API calls** (and doesn't require `GEMINI_API_KEY` to be configured).
 
+> **Existing diverged baselines are never overwritten**: If a golden already exists and diverges beyond `tolerancePercent`, Gemini Vision can still approve the run semantically, but `BaseVisualTest` logs a warning and leaves the existing golden intact so a regression cannot silently replace the baseline.
+
 ---
 
 ## 3. End-to-End Sample Test
@@ -184,3 +186,13 @@ Reference: region `maps_visual_golden_fallback` in [`BaseVisualTest.kt`](../../.
   }
   // [END maps_visual_golden_fallback]
 ```
+
+---
+
+## 5. CI Emulator Setup & Troubleshooting
+
+When running `:visual-testing` instrumented tests on CI emulators (such as GitHub Actions `google_apis` images):
+
+1. **Prevent `NoClassDefFoundError: org/apache/http/ProtocolVersion` on older Play Services emulators**: Even with a recent `play-services-maps`, the map renderer inside older Google Play Services (or the legacy renderer) loads `org.apache.http` classes via the app's class loader. Add `<uses-library android:name="org.apache.http.legacy" android:required="false" />` inside `<application>` in `AndroidManifest.xml` (see `app/src/main/AndroidManifest.xml`).
+2. **Avoid workstation SHA-1 locks on CI `MAPS_API_KEY`**: Ephemeral CI runners generate a fresh debug keystore on every run, so a key restricted to a developer's local SHA-1 fails to authorize map tiles. Use a CI key restricted by API targets (`Maps SDK for Android`).
+3. **Defer `newLatLngBounds(...)` until `MapView` layout**: Calling `CameraUpdateFactory.newLatLngBounds(...)` before a `MapView` has non-zero dimensions (common inside Jetpack Compose `AndroidView`) can leave the camera uncentered before capture. Defer initial bounds fitting with `mapView.doOnLayout { ... }` (see `renderStoresOnMap` in `app/src/main/java/com/google/maps/android/testing/sample/ui/main/MainScreen.kt`).

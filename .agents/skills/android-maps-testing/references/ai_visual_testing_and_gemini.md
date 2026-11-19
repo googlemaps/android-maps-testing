@@ -33,8 +33,8 @@ Traditional screenshot testing fails on complex map apps for multiple reasons:
                                            /             \
                                          YES              NO
                                           |                |
-                                     Auto-Update         FAIL
-                                   Golden Baseline
+                                    Record Baseline      FAIL
+                                   (First Run Only)
 ```
 
 ---
@@ -44,8 +44,8 @@ Traditional screenshot testing fails on complex map apps for multiple reasons:
 `GeminiVisualTestHelper` uses the pinned `DEFAULT_FALLBACK_MODEL` unless a model is configured, so a new model release cannot change test verdicts on its own. Opting into `latest` queries `https://generativelanguage.googleapis.com/v1beta/models` once per session for the newest stable `flash` model and caches it in memory. The API key is sent in the `x-goog-api-key` header, never in the URL.
 
 Model resolution order:
-- Explicit parameter: `GeminiVisualTestHelper(preferredModel = "gemini-2.5-flash")`
-- System property: `-Dgemini.model="gemini-2.5-flash"`
+- Explicit parameter: `GeminiVisualTestHelper(preferredModel = "gemini-3.8-flash")`
+- System property: `-Dgemini.model="gemini-3.8-flash"`
 - Latest stable Flash model, looked up once per session: `GeminiVisualTestHelper.LATEST_MODEL` or `-Dgemini.model=latest`
 - Neither set: the pinned `GeminiVisualTestHelper.DEFAULT_FALLBACK_MODEL`, without a network call
 
@@ -76,6 +76,8 @@ If no key is configured and no matching golden baseline is found, tests using Ge
      app/src/androidTest/assets/goldens/store_locator_initial_state.png
    ```
 3. **Fast Zero-Quota CI & Fresh Emulator Runs**: On clean CI emulators, `BaseVisualTest` automatically loads `src/androidTest/assets/goldens/<testName>.png` from the test APK assets. When the screenshot matches within `tolerancePercent`, the test passes in milliseconds with **zero Gemini API calls** (and doesn't even require `GEMINI_API_KEY` to be set).
+
+> **Diverged baselines are never overwritten**: If a committed or on-device golden exists and diverges beyond `tolerancePercent`, Gemini Vision can still approve the run semantically, but `BaseVisualTest` logs a warning and leaves the existing golden intact so an unintended regression cannot silently become the new baseline.
 
 Reference: region `maps_visual_golden_fallback` in [`BaseVisualTest.kt`](../../../../visual-testing/src/main/java/com/google/maps/android/testing/visual/BaseVisualTest.kt#L160-L237)
 
@@ -212,3 +214,13 @@ class VisualMapSampleTest : BaseVisualTest() {
 }
 // [END maps_visual_test_sample]
 ```
+
+---
+
+## 6. CI Emulator Setup & Troubleshooting
+
+When running `:visual-testing` instrumented tests on CI emulators (such as GitHub Actions `google_apis` images):
+
+1. **Prevent `NoClassDefFoundError: org/apache/http/ProtocolVersion` on older Play Services emulators**: Even with a recent `play-services-maps`, the map renderer inside older Google Play Services (or the legacy renderer) loads `org.apache.http` classes via the app's class loader. Add `<uses-library android:name="org.apache.http.legacy" android:required="false" />` inside `<application>` in `AndroidManifest.xml` (see `app/src/main/AndroidManifest.xml`).
+2. **Avoid workstation SHA-1 locks on CI `MAPS_API_KEY`**: Ephemeral CI runners generate a fresh debug keystore on each run, so a key restricted to a developer's local SHA-1 fails to authorize map tiles. Use a CI key restricted by API targets (`Maps SDK for Android`).
+3. **Defer `newLatLngBounds(...)` until `MapView` layout**: Calling `CameraUpdateFactory.newLatLngBounds(...)` before a `MapView` has non-zero dimensions (common inside Jetpack Compose `AndroidView`) can leave the camera uncentered before capture. Defer initial bounds fitting with `mapView.doOnLayout { ... }` (see `renderStoresOnMap` in `app/src/main/java/com/google/maps/android/testing/sample/ui/main/MainScreen.kt`).
