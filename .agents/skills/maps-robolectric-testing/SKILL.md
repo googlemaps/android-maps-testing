@@ -2,7 +2,7 @@
 name: maps-robolectric-testing
 description: >-
   Headless JVM unit testing skill for Google Maps SDK on Android using :robolectric-testing
-  (com.google.maps.android:maps-testing-robolectric). Use when writing or updating fast host-side
+  (com.google.maps.android:maps-testing-robolectric, MapsRobolectricTestRunner). Use when writing or updating fast host-side
   JVM unit tests for GoogleMap, MapView, SupportMapFragment, camera movements (newLatLngZoom,
   newLatLngBounds, scrollBy), marker clicks and single-active InfoWindow semantics, user pan
   gesture simulation (simulateUserCameraMove / REASON_GESTURE), camera target clamping,
@@ -41,6 +41,10 @@ Annotate your test class with:
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
 ```
+
+- **`@EnableMapsShadows` is deprecated.** Robolectric does not read `@Config` placed on another annotation, so it never registered any shadows. Replace it with `MapsRobolectricTestRunner`.
+- **Tests using `@RunWith(AndroidJUnit4::class)`** run on Robolectric's default runner rather than `MapsRobolectricTestRunner`. Switch Maps tests to `MapsRobolectricTestRunner`, or register shadows explicitly with `@Config(shadows = [...])`.
+- **Transitional `robolectric.properties`**: Until `1.0.0`, the library also ships a `robolectric.properties` file that registers shadows globally, which can be shadowed by a module's own `robolectric.properties` and will be removed before `1.0.0`. `MapsRobolectricTestRunner` does not depend on it.
 
 ---
 
