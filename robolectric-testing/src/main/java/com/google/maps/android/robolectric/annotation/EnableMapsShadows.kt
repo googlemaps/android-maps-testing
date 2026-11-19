@@ -16,6 +16,7 @@
 
 package com.google.maps.android.robolectric.annotation
 
+import com.google.maps.android.robolectric.MapsRobolectricTestRunner
 import com.google.maps.android.robolectric.shadows.ShadowBitmapDescriptor
 import com.google.maps.android.robolectric.shadows.ShadowBitmapDescriptorFactory
 import com.google.maps.android.robolectric.shadows.ShadowCameraUpdate
@@ -35,17 +36,22 @@ import com.google.maps.android.robolectric.shadows.ShadowUiSettings
 import org.robolectric.annotation.Config
 
 /**
- * Convenience annotation to configure Robolectric tests with all Google Maps SDK shadows.
+ * Intended to register all Google Maps SDK shadows, but Robolectric does not read `@Config` placed
+ * on another annotation, so this annotation registers no shadows. Tests that use it only got the
+ * shadows from the `robolectric.properties` this library ships, which will be removed before 1.0.0.
  *
- * Example:
+ * Use [MapsRobolectricTestRunner] instead:
  * ```kotlin
- * @RunWith(RobolectricTestRunner::class)
- * @EnableMapsShadows
+ * @RunWith(MapsRobolectricTestRunner::class)
  * class MyMapTest {
- *     // All Maps shadows are automatically registered
+ *     // All Maps shadows are registered
  * }
  * ```
  */
+@Deprecated(
+  "Registers no shadows: Robolectric does not read @Config through annotations. " +
+    "Use @RunWith(MapsRobolectricTestRunner::class) instead.",
+)
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION)
 @Config(

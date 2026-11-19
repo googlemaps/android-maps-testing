@@ -23,7 +23,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
-import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.MapsRobolectricTestRunner
 import com.google.maps.android.robolectric.ktx.getMapBlocking
 import com.google.maps.android.robolectric.truth.assertThat
 import com.google.maps.android.testing.sample.data.DefaultDataRepository
@@ -33,12 +33,10 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @Config(sdk = [34])
-@EnableMapsShadows
 class MainScreenMapRenderTest {
 
   @Test

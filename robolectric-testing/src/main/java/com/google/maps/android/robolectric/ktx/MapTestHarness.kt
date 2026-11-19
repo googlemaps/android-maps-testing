@@ -89,7 +89,7 @@ fun MapView.getMapBlocking(): GoogleMap {
   getMapAsync { mapRef.set(it) }
   ShadowLooper.idleMainLooper()
   return checkNotNull(mapRef.get()) {
-    "Failed to obtain GoogleMap from MapView. Did you annotate the test with @EnableMapsShadows?"
+    "Failed to obtain GoogleMap from MapView. Does the test run with @RunWith(MapsRobolectricTestRunner::class)?"
   }.also { map ->
     if (width > 0 && height > 0) {
       map.shadow.setViewportSize(width, height)
@@ -106,7 +106,7 @@ fun SupportMapFragment.getMapBlocking(): GoogleMap {
   getMapAsync { mapRef.set(it) }
   ShadowLooper.idleMainLooper()
   return checkNotNull(mapRef.get()) {
-    "Failed to obtain GoogleMap from SupportMapFragment. Did you annotate the test with @EnableMapsShadows?"
+    "Failed to obtain GoogleMap from SupportMapFragment. Does the test run with @RunWith(MapsRobolectricTestRunner::class)?"
   }
 }
 

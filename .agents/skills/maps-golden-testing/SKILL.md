@@ -43,7 +43,7 @@ dependencies {
 
 `googleMap.awaitMapLoaded()` and `googleMap.captureSnapshot()` automatically idle `ShadowLooper.idleMainLooper()` when running under Robolectric, so you can call them directly inside `runTest` with zero `async` or `testScheduler` boilerplate:
 
-Reference: region `maps_sample_golden_map_test` in [`SampleGoldenMapTest.kt`](../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/sample/SampleGoldenMapTest.kt#L46-L128)
+Reference: region `maps_sample_golden_map_test` in [`SampleGoldenMapTest.kt`](../../../golden-testing/src/test/java/com/google/maps/android/testing/golden/sample/SampleGoldenMapTest.kt#L45-L126)
 
 ```kotlin
 // [START maps_sample_golden_map_test]
@@ -56,10 +56,9 @@ Reference: region `maps_sample_golden_map_test` in [`SampleGoldenMapTest.kt`](..
  * 3. The map snapshot is captured via [GoogleMap.captureSnapshot].
  * 4. The rendered snapshot is verified against a baseline using [GoldenImageDiff.assertMatches].
  */
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 public class SampleGoldenMapTest {
 
   private lateinit var googleMap: GoogleMap

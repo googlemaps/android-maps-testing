@@ -20,7 +20,7 @@ import android.graphics.Color
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.MapsRobolectricTestRunner
 import com.google.maps.android.robolectric.ktx.withTestMap
 import com.google.maps.android.testing.golden.GoldenImageDiff
 import com.google.maps.android.testing.golden.GoldenTileStrategy
@@ -30,7 +30,6 @@ import com.google.maps.android.testing.golden.enableGoldenTesting
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 import java.io.File
@@ -38,10 +37,9 @@ import java.io.File
 /**
  * Standard template for deterministic, offline golden image screenshot testing.
  */
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 class GoldenMapTestTemplate {
 
   @Test

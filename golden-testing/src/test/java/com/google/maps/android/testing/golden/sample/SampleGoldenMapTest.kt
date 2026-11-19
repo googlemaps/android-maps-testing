@@ -28,7 +28,7 @@ import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.PolygonOptions
 import com.google.common.truth.Truth.assertThat
-import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.MapsRobolectricTestRunner
 import com.google.maps.android.robolectric.ktx.createTestMap
 import com.google.maps.android.testing.golden.GoldenImageDiff
 import com.google.maps.android.testing.golden.GoldenTileStrategy
@@ -39,7 +39,6 @@ import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 
@@ -53,10 +52,9 @@ import org.robolectric.annotation.GraphicsMode
  * 3. The map snapshot is captured via [GoogleMap.captureSnapshot].
  * 4. The rendered snapshot is verified against a baseline using [GoldenImageDiff.assertMatches].
  */
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 public class SampleGoldenMapTest {
 
   private lateinit var googleMap: GoogleMap

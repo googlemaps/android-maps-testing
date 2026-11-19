@@ -1,3 +1,12 @@
+public class com/google/maps/android/robolectric/MapsRobolectricTestRunner : org/robolectric/RobolectricTestRunner {
+	public static final field Companion Lcom/google/maps/android/robolectric/MapsRobolectricTestRunner$Companion;
+	public static final field MAPS_SHADOWS Ljava/util/List;
+	public fun <init> (Ljava/lang/Class;)V
+}
+
+public final class com/google/maps/android/robolectric/MapsRobolectricTestRunner$Companion {
+}
+
 public abstract interface annotation class com/google/maps/android/robolectric/annotation/EnableMapsShadows : java/lang/annotation/Annotation {
 }
 

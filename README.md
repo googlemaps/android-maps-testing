@@ -151,10 +151,9 @@ Execute deterministic unit tests verifying map state, marker clicks, camera coor
 
 ```kotlin
 // [START maps_robolectric_demo_test]
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 class MapDemoTest {
 
   @Test
@@ -266,10 +265,9 @@ Render maps with synthetic tiles and assert pixel-perfect fidelity across repeat
  * 3. The map snapshot is captured via [GoogleMap.captureSnapshot].
  * 4. The rendered snapshot is verified against a baseline using [GoldenImageDiff.assertMatches].
  */
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 public class SampleGoldenMapTest {
 
   private lateinit var googleMap: GoogleMap

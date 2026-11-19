@@ -31,7 +31,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolygonOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.gms.maps.model.TileOverlayOptions
-import com.google.maps.android.robolectric.annotation.EnableMapsShadows
+import com.google.maps.android.robolectric.MapsRobolectricTestRunner
 import com.google.maps.android.robolectric.ktx.activeInfoWindowMarker
 import com.google.maps.android.robolectric.ktx.cameraBearing
 import com.google.maps.android.robolectric.ktx.cameraTarget
@@ -91,7 +91,6 @@ import com.google.maps.android.robolectric.truth.miles
 import org.junit.Assert.assertThrows
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 import com.google.common.truth.Truth.assertThat as truthAssertThat
@@ -101,10 +100,9 @@ import com.google.common.truth.Truth.assertThat as truthAssertThat
  * expressions for the same Google Maps testing scenarios.
  */
 // [START maps_robolectric_parallel_truth_vs_power_assert]
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MapsRobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
 @Config(sdk = [34])
-@EnableMapsShadows
 class LazyAssertionsComparisonTest {
 
   private val boulder = LatLng(40.0150, -105.2705)
