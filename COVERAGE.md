@@ -38,7 +38,7 @@ Measured at `5f76072` (#24), recorded 2026-11-19T17:43:03Z.
 
 Emulator tests run by `./gradlew connectedAndroidTest`, covering the modules that own androidTest sources.
 
-Measured at `704b93a` (#23), recorded 2026-11-19T17:38:36Z.
+Measured at `5f76072` (#24), recorded 2026-11-19T17:43:06Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
@@ -61,7 +61,7 @@ Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| 2026-11-19 | `5f76072` | #24 | 82.28% | 0.00 | n/a | n/a | chore(deps): bump the gradle-minor-and-patch group across 1 directory with 10 updates |
+| 2026-11-19 | `5f76072` | #24 | 82.28% | 0.00 | 80.00% | 0.00 | chore(deps): bump the gradle-minor-and-patch group across 1 directory with 10 updates |
 | 2026-11-19 | `704b93a` | #23 | 82.28% | 0.00 | 80.00% | -4.35 | chore(deps): bump peter-evans/create-pull-request |
 | 2026-11-19 | `d4af6e9` | #12 | 82.28% | +0.16 | 84.35% | 0.00 | feat(robolectric): add MapsRobolectricTestRunner and deprecate @EnableMapsShadows |
 | 2026-11-19 | `5e4209c` | #9 | 82.12% | 0.00 | 84.35% | 0.00 | chore: rename root project and sample app away from the prototype names |
