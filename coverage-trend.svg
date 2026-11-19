@@ -80,7 +80,7 @@
   <circle cx="765.0" cy="78.7" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>66f64ff: 82.28% (unit)</title>
   </circle>
-  <path d="M 276.9,83.0 L 543.1,74.7 L 587.5,74.7 L 631.9,74.7 L 676.2,83.0 L 720.6,83.0" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="4,4" />
+  <path d="M 276.9,83.0 L 543.1,74.7 L 587.5,74.7 L 631.9,74.7 L 676.2,83.0 L 720.6,83.0 L 765.0,74.7" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="4,4" />
   <circle cx="720.6" cy="83.0" r="4" fill="#34A853" stroke="#ffffff" stroke-width="1.5">
     <title>79b030b: 80.00% (instrumentation)</title>
   </circle>

@@ -38,12 +38,12 @@ Measured at `66f64ff` (#25), recorded 2026-11-19T18:12:56Z.
 
 Emulator tests run by `./gradlew connectedAndroidTest`, covering the modules that own androidTest sources.
 
-Measured at `5f76072` (#24), recorded 2026-11-19T17:43:06Z.
+Measured at `66f64ff` (#25), recorded 2026-11-19T18:13:01Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
-| `app` | 180/225 | 80.00% | `████████████████░░░░` | 36/97 | 37.11% |
-| **TOTAL** | 180/225 | 80.00% | `████████████████░░░░` | 36/97 | 37.11% |
+| `app` | 194/230 | 84.35% | `█████████████████░░░` | 41/95 | 43.16% |
+| **TOTAL** | 194/230 | 84.35% | `█████████████████░░░` | 41/95 | 43.16% |
 
 ## Trend (last 30 commits)
 
@@ -61,7 +61,7 @@ Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| 2026-11-19 | `66f64ff` | #25 | 82.28% | 0.00 | n/a | n/a | chore: prepare 1.0.0-rc02 release |
+| 2026-11-19 | `66f64ff` | #25 | 82.28% | 0.00 | 84.35% | +4.35 | chore: prepare 1.0.0-rc02 release |
 | 2026-11-19 | `5f76072` | #24 | 82.28% | 0.00 | 80.00% | 0.00 | chore(deps): bump the gradle-minor-and-patch group across 1 directory with 10 updates |
 | 2026-11-19 | `704b93a` | #23 | 82.28% | 0.00 | 80.00% | -4.35 | chore(deps): bump peter-evans/create-pull-request |
 | 2026-11-19 | `d4af6e9` | #12 | 82.28% | +0.16 | 84.35% | 0.00 | feat(robolectric): add MapsRobolectricTestRunner and deprecate @EnableMapsShadows |
