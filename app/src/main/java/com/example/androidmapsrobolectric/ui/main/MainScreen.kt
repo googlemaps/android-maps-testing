@@ -36,6 +36,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.view.doOnLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -105,19 +106,31 @@ internal fun MainScreen(
         mapView.apply {
           getMapAsync { googleMap ->
             mapManager.attachMap(googleMap)
-            mapManager.displayStores(stores)
           }
         }
       },
-      update = {
-        mapView.getMapAsync { googleMap ->
-          mapManager.displayStores(stores)
+      update = { view ->
+        view.getMapAsync {
+          renderStoresOnMap(view, mapManager, stores)
         }
       },
       modifier = Modifier
         .fillMaxSize()
         .testTag("google_map"),
     )
+  }
+}
+
+internal fun renderStoresOnMap(
+  mapView: MapView,
+  mapManager: StoreLocatorMapManager,
+  stores: List<Store>,
+) {
+  mapManager.displayStores(stores)
+  if (stores.isNotEmpty()) {
+    mapView.doOnLayout {
+      mapManager.fitAllStores()
+    }
   }
 }
 
