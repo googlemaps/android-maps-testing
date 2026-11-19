@@ -38,12 +38,12 @@ Measured at `b02f546` (#22), recorded 2026-11-19T14:53:13Z.
 
 Emulator tests run by `./gradlew connectedAndroidTest`, covering the modules that own androidTest sources.
 
-Measured at `79b030b` (#13), recorded 2026-11-10T15:56:09Z.
+Measured at `b02f546` (#22), recorded 2026-11-19T14:53:17Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
-| `app` | 180/225 | 80.00% | `████████████████░░░░` | 36/97 | 37.11% |
-| **TOTAL** | 180/225 | 80.00% | `████████████████░░░░` | 36/97 | 37.11% |
+| `app` | 194/230 | 84.35% | `█████████████████░░░` | 41/95 | 43.16% |
+| **TOTAL** | 194/230 | 84.35% | `█████████████████░░░` | 41/95 | 43.16% |
 
 ## Trend (last 30 commits)
 
@@ -61,7 +61,7 @@ Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| 2026-11-19 | `b02f546` | #22 | 82.12% | 0.00 | n/a | n/a | fix(app): fit store locator camera onto displayed stores |
+| 2026-11-19 | `b02f546` | #22 | 82.12% | 0.00 | 84.35% | n/a | fix(app): fit store locator camera onto displayed stores |
 | 2026-11-13 | `5bedf9a` | #21 | 82.12% | 0.00 | n/a | n/a | chore(deps): bump Gradle wrapper to 9.9.1 |
 | 2026-11-10 | `e6a975a` | #10 | 82.12% | 0.00 | n/a | n/a | chore: group dependabot minor and patch updates |
 | 2026-11-10 | `23f9208` | #8 | 82.12% | 0.00 | n/a | n/a | build: stop keeping credential placeholders in gradle.properties |
