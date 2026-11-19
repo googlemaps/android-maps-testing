@@ -29,6 +29,9 @@ Things that are fine on the author's machine but wrong in a public repo:
   secrets           Google API keys
   agent traces      AI co-author trailers, links to agent chat sessions
   local files       agent settings meant to stay local, merge leftovers
+  unauthorized JDK  bumping JavaVersion/JvmTarget past 17, adding jvmToolchain,
+                    foojay-resolver, org.gradle.java.home, gradle-daemon-jvm.properties,
+                    or bumping CI java-version past 21 without core SDK requirement
 
 A line that legitimately needs one of these can opt out by containing
 "agent-leftovers: ignore".
@@ -76,9 +79,19 @@ CONTENT_PATTERNS = [
     ),
 ]
 
+DIFF_ONLY_PATTERNS = [
+    ("unauthorized JavaVersion bump (>17)", re.compile(r"\bJavaVersion\.VERSION_(?:1[89]|[2-9]\d)\b")),
+    ("unauthorized JvmTarget bump (>17)", re.compile(r"\bJvmTarget\.JVM_(?:1[89]|[2-9]\d)\b")),
+    ("unauthorized jvmToolchain configuration", re.compile(r"\bjvmToolchain\s*\(")),
+    ("unauthorized Foojay toolchain resolver", re.compile(r"foojay-resolver")),
+    ("local org.gradle.java.home override", re.compile(r"\borg\.gradle\.java\.home\b")),
+    ("unauthorized CI java-version bump (>21)", re.compile(r"java-version:\s*['\"]?(?:2[2-9]|[3-9]\d)\b")),
+]
+
 FILE_PATTERNS = [
     ("local agent settings", re.compile(r"(^|/)\.claude/settings\.local\.json$")),
     ("local agent memory", re.compile(r"(^|/)CLAUDE\.local\.md$")),
+    ("Gradle daemon JVM properties", re.compile(r"(^|/)gradle-daemon-jvm\.properties$")),
     ("merge leftover", re.compile(r"\.(orig|rej)$")),
 ]
 
@@ -89,12 +102,13 @@ def git(*args):
     ).stdout
 
 
-def scan_text(text):
+def scan_text(text, include_diff_only=False):
     """Yield the description of every pattern found in text, line by line."""
+    patterns = CONTENT_PATTERNS + (DIFF_ONLY_PATTERNS if include_diff_only else [])
     for line in text.splitlines():
         if IGNORE_MARKER in line:
             continue
-        for name, pattern in CONTENT_PATTERNS:
+        for name, pattern in patterns:
             match = pattern.search(line)
             if match:
                 yield f"{name}: {match.group(0)}"
@@ -135,7 +149,7 @@ def main():
     for path, line_no, text in added_lines(base, head):
         if path in SKIPPED_FILES:
             continue
-        for finding in scan_text(text):
+        for finding in scan_text(text, include_diff_only=True):
             annotate(finding, path, line_no)
             findings += 1
 
