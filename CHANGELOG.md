@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.0.0-rc02](https://github.com/googlemaps/android-maps-testing/compare/v1.0.0-rc01...v1.0.0-rc02) (2026-11-19)
+
+
+### Features
+
+* **robolectric:** add MapsRobolectricTestRunner and deprecate @EnableMapsShadows ([#12](https://github.com/googlemaps/android-maps-testing/issues/12)) ([d4af6e9](https://github.com/googlemaps/android-maps-testing/commit/d4af6e94d87858d0cb9cecccdeacd2f0d441ee38))
+* **visual:** pin the default Gemini model and make latest Flash discovery opt-in ([511d74c](https://github.com/googlemaps/android-maps-testing/commit/511d74c31eff71fd0ca3f473d8652db94baad859))
+
+
+### Bug Fixes
+
+* align sample app coroutines with Ktor so visual tests run on device ([511d74c](https://github.com/googlemaps/android-maps-testing/commit/511d74c31eff71fd0ca3f473d8652db94baad859))
+* **app:** fit store locator camera onto displayed stores ([#22](https://github.com/googlemaps/android-maps-testing/issues/22)) ([b02f546](https://github.com/googlemaps/android-maps-testing/commit/b02f5465c9d834deef6f4ff883c93b3b21921f59))
+* limit release-please version updates to this library's versions ([#6](https://github.com/googlemaps/android-maps-testing/issues/6)) ([b645de8](https://github.com/googlemaps/android-maps-testing/commit/b645de898647bea77e13a22ead12204296fae379))
+* **visual:** give Gemini requests a 60s timeout ([511d74c](https://github.com/googlemaps/android-maps-testing/commit/511d74c31eff71fd0ca3f473d8652db94baad859))
+* **visual:** never overwrite a diverged golden after a Gemini pass ([511d74c](https://github.com/googlemaps/android-maps-testing/commit/511d74c31eff71fd0ca3f473d8652db94baad859))
+* **visual:** reject negated verdicts in the default pass condition ([511d74c](https://github.com/googlemaps/android-maps-testing/commit/511d74c31eff71fd0ca3f473d8652db94baad859))
+* **visual:** send the Gemini API key in a header instead of the URL ([511d74c](https://github.com/googlemaps/android-maps-testing/commit/511d74c31eff71fd0ca3f473d8652db94baad859))
+
+
+### Miscellaneous Chores
+
+* prepare 1.0.0-rc02 release ([#25](https://github.com/googlemaps/android-maps-testing/issues/25)) ([66f64ff](https://github.com/googlemaps/android-maps-testing/commit/66f64ffd1151305300934b2350eba13d73adf756))
+
 ## 1.0.0-rc01 (2026-10-30)
 
 ### Features
