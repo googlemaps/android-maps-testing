@@ -27,51 +27,55 @@
   <text x="47" y="96.5" text-anchor="end" class="axis-label">75%</text>
   <line x1="55" y1="45.0" x2="765" y2="45.0" class="grid" />
   <text x="47" y="49.0" text-anchor="end" class="axis-label">100%</text>
-  <path d="M 55.0,84.3 L 126.0,84.3 L 197.0,85.1 L 268.0,85.1 L 339.0,85.1 L 410.0,85.1 L 481.0,85.1 L 552.0,79.0 L 623.0,79.0 L 694.0,79.0 L 765.0,79.0 L 765.0,235.0 L 55.0,235.0 Z" fill="#4285F4" fill-opacity="0.12" />
-  <path d="M 55.0,84.3 L 126.0,84.3 L 197.0,85.1 L 268.0,85.1 L 339.0,85.1 L 410.0,85.1 L 481.0,85.1 L 552.0,79.0 L 623.0,79.0 L 694.0,79.0 L 765.0,79.0" fill="none" stroke="#4285F4" stroke-width="2.5" stroke-linejoin="round" />
+  <path d="M 55.0,84.3 L 119.5,84.3 L 184.1,85.1 L 248.6,85.1 L 313.2,85.1 L 377.7,85.1 L 442.3,85.1 L 506.8,79.0 L 571.4,79.0 L 635.9,79.0 L 700.5,79.0 L 765.0,79.0 L 765.0,235.0 L 55.0,235.0 Z" fill="#4285F4" fill-opacity="0.12" />
+  <path d="M 55.0,84.3 L 119.5,84.3 L 184.1,85.1 L 248.6,85.1 L 313.2,85.1 L 377.7,85.1 L 442.3,85.1 L 506.8,79.0 L 571.4,79.0 L 635.9,79.0 L 700.5,79.0 L 765.0,79.0" fill="none" stroke="#4285F4" stroke-width="2.5" stroke-linejoin="round" />
   <circle cx="55.0" cy="84.3" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>47be0ab: 79.34% (unit)</title>
   </circle>
-  <circle cx="126.0" cy="84.3" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="119.5" cy="84.3" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>e3bd2d2: 79.34% (unit)</title>
   </circle>
-  <circle cx="197.0" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="184.1" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>c2bd264: 78.88% (unit)</title>
   </circle>
-  <circle cx="268.0" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="248.6" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>3067825: 78.88% (unit)</title>
   </circle>
-  <circle cx="339.0" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="313.2" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>b936651: 78.88% (unit)</title>
   </circle>
-  <circle cx="410.0" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="377.7" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>79b030b: 78.88% (unit)</title>
   </circle>
-  <circle cx="481.0" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="442.3" cy="85.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>b645de8: 78.88% (unit)</title>
   </circle>
-  <circle cx="552.0" cy="79.0" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="506.8" cy="79.0" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>511d74c: 82.12% (unit)</title>
   </circle>
-  <circle cx="623.0" cy="79.0" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="571.4" cy="79.0" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>23f9208: 82.12% (unit)</title>
   </circle>
-  <circle cx="694.0" cy="79.0" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="635.9" cy="79.0" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>e6a975a: 82.12% (unit)</title>
   </circle>
-  <circle cx="765.0" cy="79.0" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+  <circle cx="700.5" cy="79.0" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>5bedf9a: 82.12% (unit)</title>
   </circle>
-  <path d="M 410.0,83.0" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="4,4" />
+  <circle cx="765.0" cy="79.0" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
+    <title>b02f546: 82.12% (unit)</title>
+  </circle>
+  <path d="M 377.7,83.0" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="4,4" />
   <text x="55.0" y="265" class="commit-label">47be0ab</text>
-  <text x="126.0" y="265" class="commit-label">e3bd2d2</text>
-  <text x="197.0" y="265" class="commit-label">c2bd264</text>
-  <text x="268.0" y="265" class="commit-label">3067825</text>
-  <text x="339.0" y="265" class="commit-label">b936651</text>
-  <text x="410.0" y="265" class="commit-label">79b030b</text>
-  <text x="481.0" y="265" class="commit-label">b645de8</text>
-  <text x="552.0" y="265" class="commit-label">511d74c</text>
-  <text x="623.0" y="265" class="commit-label">23f9208</text>
-  <text x="694.0" y="265" class="commit-label">e6a975a</text>
-  <text x="765.0" y="265" class="commit-label">5bedf9a</text>
+  <text x="119.5" y="265" class="commit-label">e3bd2d2</text>
+  <text x="184.1" y="265" class="commit-label">c2bd264</text>
+  <text x="248.6" y="265" class="commit-label">3067825</text>
+  <text x="313.2" y="265" class="commit-label">b936651</text>
+  <text x="377.7" y="265" class="commit-label">79b030b</text>
+  <text x="442.3" y="265" class="commit-label">b645de8</text>
+  <text x="506.8" y="265" class="commit-label">511d74c</text>
+  <text x="571.4" y="265" class="commit-label">23f9208</text>
+  <text x="635.9" y="265" class="commit-label">e6a975a</text>
+  <text x="700.5" y="265" class="commit-label">5bedf9a</text>
+  <text x="765.0" y="265" class="commit-label">b02f546</text>
 </svg>
