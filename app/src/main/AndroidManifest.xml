@@ -27,7 +27,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:windowSoftInputMode="adjustResize"
-        android:theme="@style/Theme.AndroidMapsRobolectric">
+        android:theme="@style/Theme.MapsTestingSample">
         <!--
             Keep this even though the app uses a recent play-services-maps. The map renderer runs
             inside Google Play services, and on devices with older Play services (and with the

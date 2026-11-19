@@ -15,5 +15,5 @@
 -->
 
 <resources>
-    <string name="app_name">AndroidMapsRobolectric</string>
+    <string name="app_name">Maps Testing Sample</string>
 </resources>
