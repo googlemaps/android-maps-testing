@@ -38,7 +38,7 @@ Measured at `5e4209c` (#9), recorded 2026-11-19T16:18:03Z.
 
 Emulator tests run by `./gradlew connectedAndroidTest`, covering the modules that own androidTest sources.
 
-Measured at `b02f546` (#22), recorded 2026-11-19T14:53:17Z.
+Measured at `5e4209c` (#9), recorded 2026-11-19T16:18:08Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
@@ -61,7 +61,7 @@ Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| 2026-11-19 | `5e4209c` | #9 | 82.12% | 0.00 | n/a | n/a | chore: rename root project and sample app away from the prototype names |
+| 2026-11-19 | `5e4209c` | #9 | 82.12% | 0.00 | 84.35% | 0.00 | chore: rename root project and sample app away from the prototype names |
 | 2026-11-19 | `b02f546` | #22 | 82.12% | 0.00 | 84.35% | n/a | fix(app): fit store locator camera onto displayed stores |
 | 2026-11-13 | `5bedf9a` | #21 | 82.12% | 0.00 | n/a | n/a | chore(deps): bump Gradle wrapper to 9.9.1 |
 | 2026-11-10 | `e6a975a` | #10 | 82.12% | 0.00 | n/a | n/a | chore: group dependabot minor and patch updates |

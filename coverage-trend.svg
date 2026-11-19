@@ -68,7 +68,7 @@
   <circle cx="765.0" cy="79.0" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>5e4209c: 82.12% (unit)</title>
   </circle>
-  <path d="M 350.8,83.0 L 705.8,74.7" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="4,4" />
+  <path d="M 350.8,83.0 L 705.8,74.7 L 765.0,74.7" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="4,4" />
   <text x="55.0" y="265" class="commit-label">47be0ab</text>
   <text x="114.2" y="265" class="commit-label">e3bd2d2</text>
   <text x="173.3" y="265" class="commit-label">c2bd264</text>
