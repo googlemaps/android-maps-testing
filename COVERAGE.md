@@ -25,7 +25,7 @@ require combining the raw execution data rather than the XML reports.
 
 JVM tests run by `./gradlew koverXmlReportDebug`, covering the three published library modules (`robolectric-testing`, `golden-testing`, `visual-testing`).
 
-Measured at `704b93a` (#23), recorded 2026-11-19T17:38:31Z.
+Measured at `5f76072` (#24), recorded 2026-11-19T17:43:03Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
@@ -52,15 +52,16 @@ Measured at `704b93a` (#23), recorded 2026-11-19T17:38:36Z.
 ```mermaid
 xychart-beta
     title "Line Coverage Trend (%)"
-    x-axis ["47be0ab", "e3bd2d2", "c2bd264", "3067825", "b936651", "79b030b", "b645de8", "511d74c", "23f9208", "e6a975a", "5bedf9a", "b02f546", "5e4209c", "d4af6e9", "704b93a"]
+    x-axis ["47be0ab", "e3bd2d2", "c2bd264", "3067825", "b936651", "79b030b", "b645de8", "511d74c", "23f9208", "e6a975a", "5bedf9a", "b02f546", "5e4209c", "d4af6e9", "704b93a", "5f76072"]
     y-axis "Coverage %" 0 --> 100
-    line [79.34, 79.34, 78.88, 78.88, 78.88, 78.88, 78.88, 82.12, 82.12, 82.12, 82.12, 82.12, 82.12, 82.28, 82.28]
+    line [79.34, 79.34, 78.88, 78.88, 78.88, 78.88, 78.88, 82.12, 82.12, 82.12, 82.12, 82.12, 82.12, 82.28, 82.28, 82.28]
 ```
 
 Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| 2026-11-19 | `5f76072` | #24 | 82.28% | 0.00 | n/a | n/a | chore(deps): bump the gradle-minor-and-patch group across 1 directory with 10 updates |
 | 2026-11-19 | `704b93a` | #23 | 82.28% | 0.00 | 80.00% | -4.35 | chore(deps): bump peter-evans/create-pull-request |
 | 2026-11-19 | `d4af6e9` | #12 | 82.28% | +0.16 | 84.35% | 0.00 | feat(robolectric): add MapsRobolectricTestRunner and deprecate @EnableMapsShadows |
 | 2026-11-19 | `5e4209c` | #9 | 82.12% | 0.00 | 84.35% | 0.00 | chore: rename root project and sample app away from the prototype names |
