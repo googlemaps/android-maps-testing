@@ -4,6 +4,7 @@ $dokka.linkExtension:html
 module:golden-testing
 com.google.maps.android.testing.golden
 module:robolectric-testing
+com.google.maps.android.robolectric
 com.google.maps.android.robolectric.annotation
 com.google.maps.android.robolectric.ktx
 com.google.maps.android.robolectric.powerassert
