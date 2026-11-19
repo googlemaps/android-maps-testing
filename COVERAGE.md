@@ -38,7 +38,7 @@ Measured at `d4af6e9` (#12), recorded 2026-11-19T17:36:52Z.
 
 Emulator tests run by `./gradlew connectedAndroidTest`, covering the modules that own androidTest sources.
 
-Measured at `5e4209c` (#9), recorded 2026-11-19T16:18:08Z.
+Measured at `d4af6e9` (#12), recorded 2026-11-19T17:36:56Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
@@ -61,7 +61,7 @@ Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| 2026-11-19 | `d4af6e9` | #12 | 82.28% | +0.16 | n/a | n/a | feat(robolectric): add MapsRobolectricTestRunner and deprecate @EnableMapsShadows |
+| 2026-11-19 | `d4af6e9` | #12 | 82.28% | +0.16 | 84.35% | 0.00 | feat(robolectric): add MapsRobolectricTestRunner and deprecate @EnableMapsShadows |
 | 2026-11-19 | `5e4209c` | #9 | 82.12% | 0.00 | 84.35% | 0.00 | chore: rename root project and sample app away from the prototype names |
 | 2026-11-19 | `b02f546` | #22 | 82.12% | 0.00 | 84.35% | n/a | fix(app): fit store locator camera onto displayed stores |
 | 2026-11-13 | `5bedf9a` | #21 | 82.12% | 0.00 | n/a | n/a | chore(deps): bump Gradle wrapper to 9.9.1 |
