@@ -75,3 +75,7 @@ timestamp,commit,pr,subject,suite,module,lines_covered,lines_total,line_pct,bran
 2026-11-19T17:43:03Z,5f76072,24,chore(deps): bump the gradle-minor-and-patch group across 1 directory with 10 updates,unit,TOTAL,2034,2472,82.28,513,1089,47.11,11708,14973,78.19
 2026-11-19T17:43:06Z,5f76072,24,chore(deps): bump the gradle-minor-and-patch group across 1 directory with 10 updates,instrumentation,app,180,225,80.0,36,97,37.11,1341,1765,75.98
 2026-11-19T17:43:06Z,5f76072,24,chore(deps): bump the gradle-minor-and-patch group across 1 directory with 10 updates,instrumentation,TOTAL,180,225,80.0,36,97,37.11,1341,1765,75.98
+2026-11-19T18:12:56Z,66f64ff,25,chore: prepare 1.0.0-rc02 release,unit,golden-testing,236,261,90.42,58,100,58.0,1293,1569,82.41
+2026-11-19T18:12:56Z,66f64ff,25,chore: prepare 1.0.0-rc02 release,unit,robolectric-testing,1599,1898,84.25,333,642,51.87,8462,10072,84.02
+2026-11-19T18:12:56Z,66f64ff,25,chore: prepare 1.0.0-rc02 release,unit,visual-testing,199,313,63.58,122,347,35.16,1953,3332,58.61
+2026-11-19T18:12:56Z,66f64ff,25,chore: prepare 1.0.0-rc02 release,unit,TOTAL,2034,2472,82.28,513,1089,47.11,11708,14973,78.19
