@@ -10,7 +10,7 @@ description: >-
   (findMapView / requireMapView), android-maps-utils marker clustering, or domain assertions
   using either Google Truth (assertThat(map)) or Kotlin Power-Assert (assertMap / assertMarker / assertGeo).
 license: Apache-2.0
-compatibility: Requires compileSdk 34+, Java 11+ bytecode target, Robolectric 4.14+, and com.google.maps.android:maps-testing-robolectric:1.0.0-rc01+. # x-release-please-version
+compatibility: Requires compileSdk 34+, Java 11+ bytecode target, Robolectric 4.14+, and com.google.maps.android:maps-testing-robolectric:1.0.0-rc01 or newer. # x-release-please-version
 metadata:
   version: "1.3"
   author: Google Maps Platform DevRel
