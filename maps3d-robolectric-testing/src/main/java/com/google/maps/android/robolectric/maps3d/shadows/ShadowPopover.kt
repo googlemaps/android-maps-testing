@@ -55,43 +55,43 @@ open class ShadowPopover {
   }
 
   @Implementation
-  fun getContent(): View? = contentView
+  protected fun getContent(): View? = contentView
 
   @Implementation
-  fun getPositionAnchor(): Anchorable? = positionAnchorValue
+  protected fun getPositionAnchor(): Anchorable? = positionAnchorValue
 
   @Implementation
-  fun getAltitudeMode(): Int = altitudeModeValue
+  protected fun getAltitudeMode(): Int = altitudeModeValue
 
   @Implementation
-  fun getAutoCloseEnabled(): Boolean = autoCloseEnabledValue
+  protected fun getAutoCloseEnabled(): Boolean = autoCloseEnabledValue
 
   @Implementation
-  fun getAutoPanEnabled(): Boolean = autoPanEnabledValue
+  protected fun getAutoPanEnabled(): Boolean = autoPanEnabledValue
 
   @Implementation
-  fun getAnchorOffset(): Point? = anchorOffsetValue
+  protected fun getAnchorOffset(): Point? = anchorOffsetValue
 
   @Implementation
-  fun isVisible(): Boolean = visibleValue
+  protected fun isVisible(): Boolean = visibleValue
 
   @Implementation
-  fun show() {
+  protected fun show() {
     visibleValue = true
   }
 
   @Implementation
-  fun hide() {
+  protected fun hide() {
     visibleValue = false
   }
 
   @Implementation
-  fun toggle() {
+  protected fun toggle() {
     visibleValue = !visibleValue
   }
 
   @Implementation
-  fun remove() {
+  protected fun remove() {
     if (!isRemoved) {
       isRemoved = true
       visibleValue = false

@@ -56,50 +56,50 @@ open class ShadowModel {
   }
 
   @Implementation
-  fun getId(): String = idValue
+  protected fun getId(): String = idValue
 
   @Implementation
-  fun getUrl(): String = urlValue
+  protected fun getUrl(): String = urlValue
 
   @Implementation
-  fun setUrl(url: String) {
+  protected fun setUrl(url: String) {
     urlValue = url
   }
 
   @Implementation
-  fun getAltitudeMode(): Int = altitudeModeValue
+  protected fun getAltitudeMode(): Int = altitudeModeValue
 
   @Implementation
-  fun setAltitudeMode(altitudeMode: Int) {
+  protected fun setAltitudeMode(altitudeMode: Int) {
     altitudeModeValue = altitudeMode
   }
 
   @Implementation
-  fun getScale(): Vector3D? = scaleValue
+  protected fun getScale(): Vector3D? = scaleValue
 
   @Implementation
-  fun setScale(scale: Vector3D?) {
+  protected fun setScale(scale: Vector3D?) {
     scaleValue = scale
   }
 
   @Implementation
-  fun getOrientation(): Orientation? = orientationValue
+  protected fun getOrientation(): Orientation? = orientationValue
 
   @Implementation
-  fun setOrientation(orientation: Orientation?) {
+  protected fun setOrientation(orientation: Orientation?) {
     orientationValue = orientation
   }
 
   @Implementation
-  fun getPosition(): LatLngAltitude = positionValue
+  protected fun getPosition(): LatLngAltitude = positionValue
 
   @Implementation
-  fun setPosition(position: LatLngAltitude) {
+  protected fun setPosition(position: LatLngAltitude) {
     positionValue = position
   }
 
   @Implementation
-  fun remove() {
+  protected fun remove() {
     if (!isRemoved) {
       isRemoved = true
       onRemove?.invoke()
@@ -107,7 +107,7 @@ open class ShadowModel {
   }
 
   @Implementation
-  fun setClickListener(listener: OnModelClickListener?) {
+  protected fun setClickListener(listener: OnModelClickListener?) {
     clickListener = listener
   }
 

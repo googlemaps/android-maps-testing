@@ -54,25 +54,25 @@ public final class com/google/maps/android/robolectric/maps3d/ktx/Maps3DShadows 
 public class com/google/maps/android/robolectric/maps3d/shadows/ShadowGoogleMap3D {
 	public fun <init> ()V
 	protected final fun __constructor__ (Lcom/google/android/gms/maps3d/IMap3DViewDelegate;Landroid/view/ViewGroup;)V
-	public final fun addMarker (Lcom/google/android/gms/maps3d/model/MarkerOptions;)Lcom/google/android/gms/maps3d/model/Marker;
-	public final fun addModel (Lcom/google/android/gms/maps3d/model/ModelOptions;)Lcom/google/android/gms/maps3d/model/Model;
-	public final fun addPolygon (Lcom/google/android/gms/maps3d/model/PolygonOptions;)Lcom/google/android/gms/maps3d/model/Polygon;
-	public final fun addPolyline (Lcom/google/android/gms/maps3d/model/PolylineOptions;)Lcom/google/android/gms/maps3d/model/Polyline;
-	public final fun addPopover (Lcom/google/android/gms/maps3d/model/PopoverOptions;)Lcom/google/android/gms/maps3d/Popover;
+	protected final fun addMarker (Lcom/google/android/gms/maps3d/model/MarkerOptions;)Lcom/google/android/gms/maps3d/model/Marker;
+	protected final fun addModel (Lcom/google/android/gms/maps3d/model/ModelOptions;)Lcom/google/android/gms/maps3d/model/Model;
+	protected final fun addPolygon (Lcom/google/android/gms/maps3d/model/PolygonOptions;)Lcom/google/android/gms/maps3d/model/Polygon;
+	protected final fun addPolyline (Lcom/google/android/gms/maps3d/model/PolylineOptions;)Lcom/google/android/gms/maps3d/model/Polyline;
+	protected final fun addPopover (Lcom/google/android/gms/maps3d/model/PopoverOptions;)Lcom/google/android/gms/maps3d/Popover;
 	public final fun findMarkerById (Ljava/lang/String;)Lcom/google/android/gms/maps3d/model/Marker;
 	public final fun findModelById (Ljava/lang/String;)Lcom/google/android/gms/maps3d/model/Model;
 	public final fun findPolygonById (Ljava/lang/String;)Lcom/google/android/gms/maps3d/model/Polygon;
 	public final fun findPolylineById (Ljava/lang/String;)Lcom/google/android/gms/maps3d/model/Polyline;
-	public final fun flyCameraAround (Lcom/google/android/gms/maps3d/model/FlyAroundOptions;)V
-	public final fun flyCameraTo (Lcom/google/android/gms/maps3d/model/FlyToOptions;)V
-	public final fun getCamera ()Lcom/google/android/gms/maps3d/model/Camera;
+	protected final fun flyCameraAround (Lcom/google/android/gms/maps3d/model/FlyAroundOptions;)V
+	protected final fun flyCameraTo (Lcom/google/android/gms/maps3d/model/FlyToOptions;)V
+	protected final fun getCamera ()Lcom/google/android/gms/maps3d/model/Camera;
 	public final fun getCameraHistory ()Ljava/util/List;
-	public final fun getCameraRestriction ()Lcom/google/android/gms/maps3d/model/CameraRestriction;
+	protected final fun getCameraRestriction ()Lcom/google/android/gms/maps3d/model/CameraRestriction;
 	public final fun getLastFlyAroundOptions ()Lcom/google/android/gms/maps3d/model/FlyAroundOptions;
 	public final fun getLastFlyToOptions ()Lcom/google/android/gms/maps3d/model/FlyToOptions;
 	public final fun getLocale ()Lcom/google/android/gms/maps3d/model/LocaleOptions;
 	public final fun getMap3DView ()Lcom/google/android/gms/maps3d/Map3DView;
-	public final fun getMapMode ()I
+	protected final fun getMapMode ()I
 	public final fun getMarkers ()Ljava/util/List;
 	public final fun getModels ()Ljava/util/List;
 	public final fun getPolygons ()Ljava/util/List;
@@ -80,19 +80,19 @@ public class com/google/maps/android/robolectric/maps3d/shadows/ShadowGoogleMap3
 	public final fun getPopovers ()Ljava/util/List;
 	public final fun getStopCameraAnimationCallCount ()I
 	protected final fun getUiControlSettings ()Lcom/google/android/gms/maps3d/UiControlSettings;
-	public final fun setCamera (Lcom/google/android/gms/maps3d/model/Camera;)V
-	public final fun setCameraAnimationEndListener (Lcom/google/android/gms/maps3d/OnCameraAnimationEndListener;)V
-	public final fun setCameraChangedListener (Lcom/google/android/gms/maps3d/OnCameraChangedListener;)V
-	public final fun setCameraRestriction (Lcom/google/android/gms/maps3d/model/CameraRestriction;)V
-	public final fun setLocale (Lcom/google/android/gms/maps3d/model/LocaleOptions;)V
-	public final fun setMap3DClickListener (Lcom/google/android/gms/maps3d/OnMap3DClickListener;)V
-	public final fun setMapMode (I)V
-	public final fun setOnMapReadyListener (Lcom/google/android/gms/maps3d/OnMapReadyListener;)V
-	public final fun setOnMapSteadyListener (Lcom/google/android/gms/maps3d/OnMapSteadyListener;)V
+	protected final fun setCamera (Lcom/google/android/gms/maps3d/model/Camera;)V
+	protected final fun setCameraAnimationEndListener (Lcom/google/android/gms/maps3d/OnCameraAnimationEndListener;)V
+	protected final fun setCameraChangedListener (Lcom/google/android/gms/maps3d/OnCameraChangedListener;)V
+	protected final fun setCameraRestriction (Lcom/google/android/gms/maps3d/model/CameraRestriction;)V
+	protected final fun setLocale (Lcom/google/android/gms/maps3d/model/LocaleOptions;)V
+	protected final fun setMap3DClickListener (Lcom/google/android/gms/maps3d/OnMap3DClickListener;)V
+	protected final fun setMapMode (I)V
+	protected final fun setOnMapReadyListener (Lcom/google/android/gms/maps3d/OnMapReadyListener;)V
+	protected final fun setOnMapSteadyListener (Lcom/google/android/gms/maps3d/OnMapSteadyListener;)V
 	public final fun simulateMapClick (Lcom/google/android/gms/maps3d/model/LatLngAltitude;)Z
 	public final fun simulateMapClick (Lcom/google/android/gms/maps3d/model/LatLngAltitude;Ljava/lang/String;)Z
 	public static synthetic fun simulateMapClick$default (Lcom/google/maps/android/robolectric/maps3d/shadows/ShadowGoogleMap3D;Lcom/google/android/gms/maps3d/model/LatLngAltitude;Ljava/lang/String;ILjava/lang/Object;)Z
-	public final fun stopCameraAnimation ()V
+	protected final fun stopCameraAnimation ()V
 	public final fun triggerMapReady ()V
 	public final fun triggerMapReady (D)V
 	public static synthetic fun triggerMapReady$default (Lcom/google/maps/android/robolectric/maps3d/shadows/ShadowGoogleMap3D;DILjava/lang/Object;)V
@@ -140,138 +140,138 @@ public class com/google/maps/android/robolectric/maps3d/shadows/ShadowMap3DView 
 
 public class com/google/maps/android/robolectric/maps3d/shadows/ShadowMarker {
 	public fun <init> ()V
-	public final fun getAltitudeMode ()I
-	public final fun getCollisionBehavior ()I
-	public final fun getCollisionPriority ()I
-	public final fun getDrawsWhenOccluded ()Z
-	public final fun getId ()Ljava/lang/String;
-	public final fun getLabel ()Ljava/lang/String;
-	public final fun getPosition ()Lcom/google/android/gms/maps3d/model/LatLngAltitude;
-	public final fun getSizePreserved ()Z
-	public final fun getStyle ()Lcom/google/android/gms/maps3d/model/MarkerStyle;
-	public final fun getUrl ()Ljava/lang/String;
-	public final fun getZIndex ()I
-	public final fun isExtruded ()Z
+	protected final fun getAltitudeMode ()I
+	protected final fun getCollisionBehavior ()I
+	protected final fun getCollisionPriority ()I
+	protected final fun getDrawsWhenOccluded ()Z
+	protected final fun getId ()Ljava/lang/String;
+	protected final fun getLabel ()Ljava/lang/String;
+	protected final fun getPosition ()Lcom/google/android/gms/maps3d/model/LatLngAltitude;
+	protected final fun getSizePreserved ()Z
+	protected final fun getStyle ()Lcom/google/android/gms/maps3d/model/MarkerStyle;
+	protected final fun getUrl ()Ljava/lang/String;
+	protected final fun getZIndex ()I
+	protected final fun isExtruded ()Z
 	public final fun isRemoved ()Z
-	public final fun remove ()V
-	public final fun setAltitudeMode (I)V
-	public final fun setClickListener (Lcom/google/android/gms/maps3d/OnMarkerClickListener;)V
-	public final fun setCollisionBehavior (I)V
-	public final fun setCollisionPriority (I)V
-	public final fun setDrawsWhenOccluded (Z)V
-	public final fun setExtruded (Z)V
-	public final fun setLabel (Ljava/lang/String;)V
-	public final fun setPosition (Lcom/google/android/gms/maps3d/model/LatLngAltitude;)V
-	public final fun setSizePreserved (Z)V
-	public final fun setStyleImageView (Lcom/google/android/gms/maps3d/model/ImageView;)V
-	public final fun setStylePinConfiguration (Lcom/google/android/gms/maps3d/model/PinConfiguration;)V
-	public final fun setUrl (Ljava/lang/String;)V
-	public final fun setZIndex (I)V
+	protected final fun remove ()V
+	protected final fun setAltitudeMode (I)V
+	protected final fun setClickListener (Lcom/google/android/gms/maps3d/OnMarkerClickListener;)V
+	protected final fun setCollisionBehavior (I)V
+	protected final fun setCollisionPriority (I)V
+	protected final fun setDrawsWhenOccluded (Z)V
+	protected final fun setExtruded (Z)V
+	protected final fun setLabel (Ljava/lang/String;)V
+	protected final fun setPosition (Lcom/google/android/gms/maps3d/model/LatLngAltitude;)V
+	protected final fun setSizePreserved (Z)V
+	protected final fun setStyleImageView (Lcom/google/android/gms/maps3d/model/ImageView;)V
+	protected final fun setStylePinConfiguration (Lcom/google/android/gms/maps3d/model/PinConfiguration;)V
+	protected final fun setUrl (Ljava/lang/String;)V
+	protected final fun setZIndex (I)V
 	public final fun simulateClick ()V
 }
 
 public class com/google/maps/android/robolectric/maps3d/shadows/ShadowModel {
 	public fun <init> ()V
-	public final fun getAltitudeMode ()I
-	public final fun getId ()Ljava/lang/String;
-	public final fun getOrientation ()Lcom/google/android/gms/maps3d/model/Orientation;
-	public final fun getPosition ()Lcom/google/android/gms/maps3d/model/LatLngAltitude;
-	public final fun getScale ()Lcom/google/android/gms/maps3d/model/Vector3D;
-	public final fun getUrl ()Ljava/lang/String;
+	protected final fun getAltitudeMode ()I
+	protected final fun getId ()Ljava/lang/String;
+	protected final fun getOrientation ()Lcom/google/android/gms/maps3d/model/Orientation;
+	protected final fun getPosition ()Lcom/google/android/gms/maps3d/model/LatLngAltitude;
+	protected final fun getScale ()Lcom/google/android/gms/maps3d/model/Vector3D;
+	protected final fun getUrl ()Ljava/lang/String;
 	public final fun isRemoved ()Z
-	public final fun remove ()V
-	public final fun setAltitudeMode (I)V
-	public final fun setClickListener (Lcom/google/android/gms/maps3d/OnModelClickListener;)V
-	public final fun setOrientation (Lcom/google/android/gms/maps3d/model/Orientation;)V
-	public final fun setPosition (Lcom/google/android/gms/maps3d/model/LatLngAltitude;)V
-	public final fun setScale (Lcom/google/android/gms/maps3d/model/Vector3D;)V
-	public final fun setUrl (Ljava/lang/String;)V
+	protected final fun remove ()V
+	protected final fun setAltitudeMode (I)V
+	protected final fun setClickListener (Lcom/google/android/gms/maps3d/OnModelClickListener;)V
+	protected final fun setOrientation (Lcom/google/android/gms/maps3d/model/Orientation;)V
+	protected final fun setPosition (Lcom/google/android/gms/maps3d/model/LatLngAltitude;)V
+	protected final fun setScale (Lcom/google/android/gms/maps3d/model/Vector3D;)V
+	protected final fun setUrl (Ljava/lang/String;)V
 	public final fun simulateClick ()V
 }
 
 public class com/google/maps/android/robolectric/maps3d/shadows/ShadowPolygon {
 	public fun <init> ()V
-	public final fun getAltitudeMode ()I
-	public final fun getDrawsOccludedSegments ()Z
-	public final fun getExtruded ()Z
-	public final fun getFillColor ()I
-	public final fun getGeodesic ()Z
-	public final fun getId ()Ljava/lang/String;
-	public final fun getInnerCoordinates ()Ljava/util/List;
-	public final fun getInnerPaths ()Ljava/util/List;
-	public final fun getOuterCoordinates ()Ljava/util/List;
-	public final fun getPath ()Ljava/util/List;
-	public final fun getStrokeColor ()I
-	public final fun getStrokeWidth ()D
-	public final fun getZIndex ()I
+	protected final fun getAltitudeMode ()I
+	protected final fun getDrawsOccludedSegments ()Z
+	protected final fun getExtruded ()Z
+	protected final fun getFillColor ()I
+	protected final fun getGeodesic ()Z
+	protected final fun getId ()Ljava/lang/String;
+	protected final fun getInnerCoordinates ()Ljava/util/List;
+	protected final fun getInnerPaths ()Ljava/util/List;
+	protected final fun getOuterCoordinates ()Ljava/util/List;
+	protected final fun getPath ()Ljava/util/List;
+	protected final fun getStrokeColor ()I
+	protected final fun getStrokeWidth ()D
+	protected final fun getZIndex ()I
 	public final fun isRemoved ()Z
-	public final fun remove ()V
-	public final fun setAltitudeMode (I)V
-	public final fun setClickListener (Lcom/google/android/gms/maps3d/OnPolygonClickListener;)V
-	public final fun setDrawsOccludedSegments (Z)V
-	public final fun setExtruded (Z)V
-	public final fun setFillColor (I)V
-	public final fun setGeodesic (Z)V
-	public final fun setInnerCoordinates (Ljava/util/List;)V
-	public final fun setInnerPaths (Ljava/util/List;)V
-	public final fun setOuterCoordinates (Ljava/util/List;)V
-	public final fun setPath (Ljava/util/List;)V
-	public final fun setStrokeColor (I)V
-	public final fun setStrokeWidth (D)V
-	public final fun setZIndex (I)V
+	protected final fun remove ()V
+	protected final fun setAltitudeMode (I)V
+	protected final fun setClickListener (Lcom/google/android/gms/maps3d/OnPolygonClickListener;)V
+	protected final fun setDrawsOccludedSegments (Z)V
+	protected final fun setExtruded (Z)V
+	protected final fun setFillColor (I)V
+	protected final fun setGeodesic (Z)V
+	protected final fun setInnerCoordinates (Ljava/util/List;)V
+	protected final fun setInnerPaths (Ljava/util/List;)V
+	protected final fun setOuterCoordinates (Ljava/util/List;)V
+	protected final fun setPath (Ljava/util/List;)V
+	protected final fun setStrokeColor (I)V
+	protected final fun setStrokeWidth (D)V
+	protected final fun setZIndex (I)V
 	public final fun simulateClick ()V
 }
 
 public class com/google/maps/android/robolectric/maps3d/shadows/ShadowPolyline {
 	public fun <init> ()V
-	public final fun getAltitudeMode ()I
-	public final fun getCoordinates ()Ljava/util/List;
-	public final fun getDrawsOccludedSegments ()Z
-	public final fun getGeodesic ()Z
-	public final fun getId ()Ljava/lang/String;
-	public final fun getOuterColor ()I
-	public final fun getOuterWidth ()D
-	public final fun getPath ()Ljava/util/List;
-	public final fun getStrokeColor ()I
-	public final fun getStrokeWidth ()D
-	public final fun getZIndex ()I
+	protected final fun getAltitudeMode ()I
+	protected final fun getCoordinates ()Ljava/util/List;
+	protected final fun getDrawsOccludedSegments ()Z
+	protected final fun getGeodesic ()Z
+	protected final fun getId ()Ljava/lang/String;
+	protected final fun getOuterColor ()I
+	protected final fun getOuterWidth ()D
+	protected final fun getPath ()Ljava/util/List;
+	protected final fun getStrokeColor ()I
+	protected final fun getStrokeWidth ()D
+	protected final fun getZIndex ()I
 	public final fun isRemoved ()Z
-	public final fun remove ()V
-	public final fun setAltitudeMode (I)V
-	public final fun setClickListener (Lcom/google/android/gms/maps3d/OnPolylineClickListener;)V
-	public final fun setCoordinates (Ljava/util/List;)V
-	public final fun setDrawsOccludedSegments (Z)V
-	public final fun setGeodesic (Z)V
-	public final fun setOuterColor (I)V
-	public final fun setOuterWidth (D)V
-	public final fun setPath (Ljava/util/List;)V
-	public final fun setStrokeColor (I)V
-	public final fun setStrokeWidth (D)V
-	public final fun setZIndex (I)V
+	protected final fun remove ()V
+	protected final fun setAltitudeMode (I)V
+	protected final fun setClickListener (Lcom/google/android/gms/maps3d/OnPolylineClickListener;)V
+	protected final fun setCoordinates (Ljava/util/List;)V
+	protected final fun setDrawsOccludedSegments (Z)V
+	protected final fun setGeodesic (Z)V
+	protected final fun setOuterColor (I)V
+	protected final fun setOuterWidth (D)V
+	protected final fun setPath (Ljava/util/List;)V
+	protected final fun setStrokeColor (I)V
+	protected final fun setStrokeWidth (D)V
+	protected final fun setZIndex (I)V
 	public final fun simulateClick ()V
 }
 
 public class com/google/maps/android/robolectric/maps3d/shadows/ShadowPopover {
 	public fun <init> ()V
-	public final fun getAltitudeMode ()I
-	public final fun getAnchorOffset ()Landroid/graphics/Point;
-	public final fun getAutoCloseEnabled ()Z
-	public final fun getAutoPanEnabled ()Z
-	public final fun getContent ()Landroid/view/View;
-	public final fun getPositionAnchor ()Lcom/google/android/gms/maps3d/model/Anchorable;
-	public final fun hide ()V
+	protected final fun getAltitudeMode ()I
+	protected final fun getAnchorOffset ()Landroid/graphics/Point;
+	protected final fun getAutoCloseEnabled ()Z
+	protected final fun getAutoPanEnabled ()Z
+	protected final fun getContent ()Landroid/view/View;
+	protected final fun getPositionAnchor ()Lcom/google/android/gms/maps3d/model/Anchorable;
+	protected final fun hide ()V
 	public final fun isRemoved ()Z
-	public final fun isVisible ()Z
-	public final fun remove ()V
-	public final fun show ()V
-	public final fun toggle ()V
+	protected final fun isVisible ()Z
+	protected final fun remove ()V
+	protected final fun show ()V
+	protected final fun toggle ()V
 }
 
 public class com/google/maps/android/robolectric/maps3d/shadows/ShadowUiControlSettings {
 	public fun <init> ()V
 	public final fun getControlsAt (I)Ljava/util/List;
 	public final fun getPlacements ()Ljava/util/Map;
-	public final fun setUiControlsPlacement (Ljava/util/List;I)V
+	protected final fun setUiControlsPlacement (Ljava/util/List;I)V
 }
 
 public final class com/google/maps/android/robolectric/maps3d/truth/GoogleMap3DSubject : com/google/common/truth/Subject {

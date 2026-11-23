@@ -69,103 +69,103 @@ open class ShadowMarker {
   }
 
   @Implementation
-  fun getId(): String = idValue
+  protected fun getId(): String = idValue
 
   @Implementation
-  fun getUrl(): String? = urlValue
+  protected fun getUrl(): String? = urlValue
 
   @Implementation
-  fun setUrl(url: String?) {
+  protected fun setUrl(url: String?) {
     urlValue = url
   }
 
   @Implementation
-  fun getAltitudeMode(): Int = altitudeModeValue
+  protected fun getAltitudeMode(): Int = altitudeModeValue
 
   @Implementation
-  fun setAltitudeMode(altitudeMode: Int) {
+  protected fun setAltitudeMode(altitudeMode: Int) {
     altitudeModeValue = altitudeMode
   }
 
   @Implementation
-  fun getCollisionBehavior(): Int = collisionBehaviorValue
+  protected fun getCollisionBehavior(): Int = collisionBehaviorValue
 
   @Implementation
-  fun setCollisionBehavior(collisionBehavior: Int) {
+  protected fun setCollisionBehavior(collisionBehavior: Int) {
     collisionBehaviorValue = collisionBehavior
   }
 
   @Implementation
-  fun getCollisionPriority(): Int = collisionPriorityValue
+  protected fun getCollisionPriority(): Int = collisionPriorityValue
 
   @Implementation
-  fun setCollisionPriority(collisionPriority: Int) {
+  protected fun setCollisionPriority(collisionPriority: Int) {
     collisionPriorityValue = collisionPriority
   }
 
   @Implementation
-  fun isExtruded(): Boolean = extrudedValue
+  protected fun isExtruded(): Boolean = extrudedValue
 
   @Implementation
-  fun setExtruded(extruded: Boolean) {
+  protected fun setExtruded(extruded: Boolean) {
     extrudedValue = extruded
   }
 
   @Implementation
-  fun getDrawsWhenOccluded(): Boolean = drawsWhenOccludedValue
+  protected fun getDrawsWhenOccluded(): Boolean = drawsWhenOccludedValue
 
   @Implementation
-  fun setDrawsWhenOccluded(drawsWhenOccluded: Boolean) {
+  protected fun setDrawsWhenOccluded(drawsWhenOccluded: Boolean) {
     drawsWhenOccludedValue = drawsWhenOccluded
   }
 
   @Implementation
-  fun getSizePreserved(): Boolean = sizePreservedValue
+  protected fun getSizePreserved(): Boolean = sizePreservedValue
 
   @Implementation
-  fun setSizePreserved(sizePreserved: Boolean) {
+  protected fun setSizePreserved(sizePreserved: Boolean) {
     sizePreservedValue = sizePreserved
   }
 
   @Implementation
-  fun getZIndex(): Int = zIndexValue
+  protected fun getZIndex(): Int = zIndexValue
 
   @Implementation
-  fun setZIndex(zIndex: Int) {
+  protected fun setZIndex(zIndex: Int) {
     zIndexValue = zIndex
   }
 
   @Implementation
-  fun getLabel(): String? = labelValue
+  protected fun getLabel(): String? = labelValue
 
   @Implementation
-  fun setLabel(label: String?) {
+  protected fun setLabel(label: String?) {
     labelValue = label
   }
 
   @Implementation
-  fun getPosition(): LatLngAltitude = positionValue
+  protected fun getPosition(): LatLngAltitude = positionValue
 
   @Implementation
-  fun setPosition(position: LatLngAltitude) {
+  protected fun setPosition(position: LatLngAltitude) {
     positionValue = position
   }
 
   @Implementation
-  fun getStyle(): MarkerStyle? = styleValue
+  protected fun getStyle(): MarkerStyle? = styleValue
 
   @Implementation
-  fun setStyleImageView(imageView: ImageView) {
+  protected fun setStyleImageView(imageView: ImageView) {
     styleValue = MarkerStyle(imageView, null)
   }
 
   @Implementation
-  fun setStylePinConfiguration(pinConfiguration: PinConfiguration) {
+  protected fun setStylePinConfiguration(pinConfiguration: PinConfiguration) {
     styleValue = MarkerStyle(null, pinConfiguration)
   }
 
   @Implementation
-  fun remove() {
+  protected fun remove() {
     if (!isRemoved) {
       isRemoved = true
       onRemove?.invoke()
@@ -173,7 +173,7 @@ open class ShadowMarker {
   }
 
   @Implementation
-  fun setClickListener(listener: OnMarkerClickListener?) {
+  protected fun setClickListener(listener: OnMarkerClickListener?) {
     clickListener = listener
   }
 

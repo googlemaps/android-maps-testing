@@ -231,7 +231,12 @@ open class ShadowMap3DView : ShadowViewGroup() {
     val created = Shadow.newInstanceOf(GoogleMap3D::class.java)
     val shadowMap = Shadow.extract<ShadowGoogleMap3D>(created)
     shadowMap.attachMap3DView(realMap3DView)
-    initialMapMode?.let { shadowMap.setMapMode(it) }
+    val config = initConfig
+    if (config != null) {
+      shadowMap.applyInitConfig(config)
+    } else {
+      initialMapMode?.let { shadowMap.applyInitialMapMode(it) }
+    }
     googleMap3DInstance = created
     return created
   }

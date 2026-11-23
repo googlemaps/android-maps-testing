@@ -60,7 +60,7 @@ val apiCheck = tasks.register("apiCheck") {
 allprojects {
   group = "com.google.maps.android"
   // {x-release-please-start-version}
-  version = "1.0.0-rc01"
+  version = "1.0.0-rc02"
   // {x-release-please-end}
 }
 
@@ -124,7 +124,7 @@ subprojects {
             "Robolectric shadows, Kotlin Power-Assert helpers, and Google Truth testing utilities for Google Maps SDK on Android.",
           )
           "maps3d-robolectric-testing" -> listOf(
-            "maps3d-testing-robolectric",
+            "maps-testing-robolectric-maps3d",
             "Android Maps 3D Robolectric Shadows",
             "Robolectric shadows, KTX test harness, and Google Truth testing utilities for Google Maps 3D SDK on Android.",
           )
@@ -143,7 +143,7 @@ subprojects {
         coordinates(
           groupId = "com.google.maps.android",
           artifactId = moduleArtifactId,
-          version = findProperty("publishVersion")?.toString() ?: rootProject.version.toString(),
+          version = rootProject.version.toString(),
         )
 
         pom {

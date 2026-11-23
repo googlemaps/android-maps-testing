@@ -65,106 +65,106 @@ open class ShadowPolygon {
   }
 
   @Implementation
-  fun getId(): String = idValue
+  protected fun getId(): String = idValue
 
   @Implementation
-  fun getOuterCoordinates(): List<LatLngAltitude> = pathValue
+  protected fun getOuterCoordinates(): List<LatLngAltitude> = pathValue
 
   @Implementation
-  fun setOuterCoordinates(coordinates: List<LatLngAltitude>) {
+  protected fun setOuterCoordinates(coordinates: List<LatLngAltitude>) {
     pathValue = coordinates.toList()
   }
 
   @Implementation
-  fun getPath(): List<LatLngAltitude> = pathValue
+  protected fun getPath(): List<LatLngAltitude> = pathValue
 
   @Implementation
-  fun setPath(path: List<LatLngAltitude>) {
+  protected fun setPath(path: List<LatLngAltitude>) {
     pathValue = path.toList()
   }
 
   @Implementation
-  fun getInnerCoordinates(): List<Hole> = innerPathsValue
+  protected fun getInnerCoordinates(): List<Hole> = innerPathsValue
 
   @Implementation
-  fun setInnerCoordinates(holes: List<Hole>) {
+  protected fun setInnerCoordinates(holes: List<Hole>) {
     innerPathsValue = holes.toList()
   }
 
   @Implementation
-  fun getInnerPaths(): List<Hole> = innerPathsValue
+  protected fun getInnerPaths(): List<Hole> = innerPathsValue
 
   @Implementation
-  fun setInnerPaths(holes: List<Hole>) {
+  protected fun setInnerPaths(holes: List<Hole>) {
     innerPathsValue = holes.toList()
   }
 
   @Implementation
-  fun getAltitudeMode(): Int = altitudeModeValue
+  protected fun getAltitudeMode(): Int = altitudeModeValue
 
   @Implementation
-  fun setAltitudeMode(altitudeMode: Int) {
+  protected fun setAltitudeMode(altitudeMode: Int) {
     altitudeModeValue = altitudeMode
   }
 
   @Implementation
-  fun getFillColor(): Int = fillColorValue
+  protected fun getFillColor(): Int = fillColorValue
 
   @Implementation
-  fun setFillColor(fillColor: Int) {
+  protected fun setFillColor(fillColor: Int) {
     fillColorValue = fillColor
   }
 
   @Implementation
-  fun getStrokeColor(): Int = strokeColorValue
+  protected fun getStrokeColor(): Int = strokeColorValue
 
   @Implementation
-  fun setStrokeColor(strokeColor: Int) {
+  protected fun setStrokeColor(strokeColor: Int) {
     strokeColorValue = strokeColor
   }
 
   @Implementation
-  fun getStrokeWidth(): Double = strokeWidthValue
+  protected fun getStrokeWidth(): Double = strokeWidthValue
 
   @Implementation
-  fun setStrokeWidth(strokeWidth: Double) {
+  protected fun setStrokeWidth(strokeWidth: Double) {
     strokeWidthValue = strokeWidth
   }
 
   @Implementation
-  fun getGeodesic(): Boolean = geodesicValue
+  protected fun getGeodesic(): Boolean = geodesicValue
 
   @Implementation
-  fun setGeodesic(geodesic: Boolean) {
+  protected fun setGeodesic(geodesic: Boolean) {
     geodesicValue = geodesic
   }
 
   @Implementation
-  fun getExtruded(): Boolean = extrudedValue
+  protected fun getExtruded(): Boolean = extrudedValue
 
   @Implementation
-  fun setExtruded(extruded: Boolean) {
+  protected fun setExtruded(extruded: Boolean) {
     extrudedValue = extruded
   }
 
   @Implementation
-  fun getDrawsOccludedSegments(): Boolean = drawsOccludedSegmentsValue
+  protected fun getDrawsOccludedSegments(): Boolean = drawsOccludedSegmentsValue
 
   @Implementation
-  fun setDrawsOccludedSegments(drawsOccludedSegments: Boolean) {
+  protected fun setDrawsOccludedSegments(drawsOccludedSegments: Boolean) {
     drawsOccludedSegmentsValue = drawsOccludedSegments
   }
 
   @Implementation
-  fun getZIndex(): Int = zIndexValue
+  protected fun getZIndex(): Int = zIndexValue
 
   @Implementation
-  fun setZIndex(zIndex: Int) {
+  protected fun setZIndex(zIndex: Int) {
     zIndexValue = zIndex
   }
 
   @Implementation
-  fun remove() {
+  protected fun remove() {
     if (!isRemoved) {
       isRemoved = true
       onRemove?.invoke()
@@ -172,7 +172,7 @@ open class ShadowPolygon {
   }
 
   @Implementation
-  fun setClickListener(listener: OnPolygonClickListener?) {
+  protected fun setClickListener(listener: OnPolygonClickListener?) {
     clickListener = listener
   }
 

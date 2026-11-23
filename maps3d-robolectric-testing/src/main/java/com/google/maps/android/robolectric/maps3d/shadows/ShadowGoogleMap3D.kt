@@ -19,6 +19,7 @@ package com.google.maps.android.robolectric.maps3d.shadows
 import android.view.ViewGroup
 import com.google.android.gms.maps3d.GoogleMap3D
 import com.google.android.gms.maps3d.IMap3DViewDelegate
+import com.google.android.gms.maps3d.Map3DInitConfig
 import com.google.android.gms.maps3d.Map3DView
 import com.google.android.gms.maps3d.OnCameraAnimationEndListener
 import com.google.android.gms.maps3d.OnCameraChangedListener
@@ -132,6 +133,33 @@ open class ShadowGoogleMap3D {
     map3DViewInstance = view
   }
 
+  internal fun applyInitialMapMode(@Map3DMode mapMode: Int) {
+    currentMapMode = mapMode
+  }
+
+  internal fun applyInitConfig(config: Map3DInitConfig) {
+    currentMapMode = config.mapMode
+    currentCamera = Camera(
+      LatLngAltitude(config.centerLat, config.centerLng, config.centerAlt),
+      config.heading,
+      config.tilt,
+      config.roll,
+      config.range,
+    )
+    currentCameraRestriction = CameraRestriction(
+      config.minAltitude,
+      config.maxAltitude,
+      config.minHeading,
+      config.maxHeading,
+      config.minTilt,
+      config.maxTilt,
+      config.bounds,
+    )
+    if (config.language != null || config.region != null) {
+      currentLocale = LocaleOptions(config.language, config.region)
+    }
+  }
+
   @Implementation
   protected fun __constructor__(delegate: IMap3DViewDelegate, parent: ViewGroup) {
     // No-op in headless JVM tests.
@@ -147,26 +175,26 @@ open class ShadowGoogleMap3D {
   }
 
   @Implementation
-  fun setMapMode(@Map3DMode mapMode: Int) {
+  protected fun setMapMode(@Map3DMode mapMode: Int) {
     currentMapMode = mapMode
   }
 
   @Implementation
   @Map3DMode
-  fun getMapMode(): Int = currentMapMode
+  protected fun getMapMode(): Int = currentMapMode
 
   @Implementation
-  fun setCamera(camera: Camera) {
+  protected fun setCamera(camera: Camera) {
     currentCamera = camera
     cameraUpdateHistory.add(camera)
     cameraChangedListener?.onCameraChanged(camera)
   }
 
   @Implementation
-  fun getCamera(): Camera = currentCamera
+  protected fun getCamera(): Camera = currentCamera
 
   @Implementation
-  fun flyCameraTo(options: FlyToOptions) {
+  protected fun flyCameraTo(options: FlyToOptions) {
     lastFlyToOptions = options
     currentCamera = options.endCamera
     cameraUpdateHistory.add(options.endCamera)
@@ -175,7 +203,7 @@ open class ShadowGoogleMap3D {
   }
 
   @Implementation
-  fun flyCameraAround(options: FlyAroundOptions) {
+  protected fun flyCameraAround(options: FlyAroundOptions) {
     lastFlyAroundOptions = options
     currentCamera = options.center
     cameraUpdateHistory.add(options.center)
@@ -184,26 +212,26 @@ open class ShadowGoogleMap3D {
   }
 
   @Implementation
-  fun stopCameraAnimation() {
+  protected fun stopCameraAnimation() {
     stopCameraAnimationCallCount++
     cameraAnimationEndListener?.onCameraAnimationEnd()
   }
 
   @Implementation
-  fun setCameraRestriction(cameraRestriction: CameraRestriction?) {
+  protected fun setCameraRestriction(cameraRestriction: CameraRestriction?) {
     currentCameraRestriction = cameraRestriction
   }
 
   @Implementation
-  fun getCameraRestriction(): CameraRestriction? = currentCameraRestriction
+  protected fun getCameraRestriction(): CameraRestriction? = currentCameraRestriction
 
   @Implementation
-  fun setLocale(localeOptions: LocaleOptions) {
+  protected fun setLocale(localeOptions: LocaleOptions) {
     currentLocale = localeOptions
   }
 
   @Implementation
-  fun addMarker(options: MarkerOptions): Marker {
+  protected fun addMarker(options: MarkerOptions): Marker {
     val resolvedId = resolveId("marker", options.id)
     val marker = Shadow.newInstanceOf(Marker::class.java)
     val shadowMarker = Shadow.extract<ShadowMarker>(marker)
@@ -217,7 +245,7 @@ open class ShadowGoogleMap3D {
   }
 
   @Implementation
-  fun addPolyline(options: PolylineOptions): Polyline {
+  protected fun addPolyline(options: PolylineOptions): Polyline {
     val resolvedId = resolveId("polyline", options.id)
     val polyline = Shadow.newInstanceOf(Polyline::class.java)
     val shadowPolyline = Shadow.extract<ShadowPolyline>(polyline)
@@ -231,7 +259,7 @@ open class ShadowGoogleMap3D {
   }
 
   @Implementation
-  fun addPolygon(options: PolygonOptions): Polygon {
+  protected fun addPolygon(options: PolygonOptions): Polygon {
     val resolvedId = resolveId("polygon", options.id)
     val polygon = Shadow.newInstanceOf(Polygon::class.java)
     val shadowPolygon = Shadow.extract<ShadowPolygon>(polygon)
@@ -245,7 +273,7 @@ open class ShadowGoogleMap3D {
   }
 
   @Implementation
-  fun addModel(options: ModelOptions): Model {
+  protected fun addModel(options: ModelOptions): Model {
     val resolvedId = resolveId("model", options.id)
     val model = Shadow.newInstanceOf(Model::class.java)
     val shadowModel = Shadow.extract<ShadowModel>(model)
@@ -259,7 +287,7 @@ open class ShadowGoogleMap3D {
   }
 
   @Implementation
-  fun addPopover(options: PopoverOptions): Popover {
+  protected fun addPopover(options: PopoverOptions): Popover {
     val popover = Shadow.newInstanceOf(Popover::class.java)
     val shadowPopover = Shadow.extract<ShadowPopover>(popover)
     shadowPopover.configure(options) {
@@ -270,27 +298,27 @@ open class ShadowGoogleMap3D {
   }
 
   @Implementation
-  fun setOnMapReadyListener(listener: OnMapReadyListener?) {
+  protected fun setOnMapReadyListener(listener: OnMapReadyListener?) {
     mapReadyListener = listener
   }
 
   @Implementation
-  fun setOnMapSteadyListener(listener: OnMapSteadyListener?) {
+  protected fun setOnMapSteadyListener(listener: OnMapSteadyListener?) {
     mapSteadyListener = listener
   }
 
   @Implementation
-  fun setCameraChangedListener(listener: OnCameraChangedListener?) {
+  protected fun setCameraChangedListener(listener: OnCameraChangedListener?) {
     cameraChangedListener = listener
   }
 
   @Implementation
-  fun setCameraAnimationEndListener(listener: OnCameraAnimationEndListener?) {
+  protected fun setCameraAnimationEndListener(listener: OnCameraAnimationEndListener?) {
     cameraAnimationEndListener = listener
   }
 
   @Implementation
-  fun setMap3DClickListener(listener: OnMap3DClickListener?) {
+  protected fun setMap3DClickListener(listener: OnMap3DClickListener?) {
     map3DClickListener = listener
   }
 

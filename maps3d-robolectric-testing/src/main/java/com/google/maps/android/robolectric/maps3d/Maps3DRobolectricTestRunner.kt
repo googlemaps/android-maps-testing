@@ -46,7 +46,7 @@ import org.robolectric.util.inject.Injector
  * }
  * ```
  */
-// [START maps3d_robolectric_test_runner]
+// [START maps_3d_robolectric_test_runner]
 open class Maps3DRobolectricTestRunner(testClass: Class<*>) : RobolectricTestRunner(testClass, INJECTOR) {
 
   /** Holds the Maps 3D shadows registered by [Maps3DRobolectricTestRunner]. */
@@ -97,4 +97,4 @@ internal object Maps3DGlobalConfigProvider : GlobalConfigProvider {
     .setShadows(*Maps3DRobolectricTestRunner.MAPS3D_SHADOWS.toTypedArray())
     .build()
 }
-// [END maps3d_robolectric_test_runner]
+// [END maps_3d_robolectric_test_runner]

@@ -22,12 +22,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import com.google.android.gms.maps3d.GoogleMap3D
+import com.google.android.gms.maps3d.Map3DInitConfig
+import com.google.android.gms.maps3d.Map3DView
 import com.google.android.gms.maps3d.OnMap3DViewReadyCallback
 import com.google.android.gms.maps3d.model.AltitudeMode
 import com.google.android.gms.maps3d.model.Camera
 import com.google.android.gms.maps3d.model.FlyAroundOptions
 import com.google.android.gms.maps3d.model.FlyToOptions
 import com.google.android.gms.maps3d.model.LatLngAltitude
+import com.google.android.gms.maps3d.model.LatLngBounds
 import com.google.android.gms.maps3d.model.Map3DMode
 import com.google.android.gms.maps3d.model.MarkerOptions
 import com.google.android.gms.maps3d.model.ModelOptions
@@ -115,6 +118,46 @@ class Maps3DShadowsTest {
     val expected = IllegalStateException("offline")
     mapView.shadow.triggerError(expected)
     assertThat(captured).isSameInstanceAs(expected)
+  }
+
+  @Test
+  fun map3DView_initConfigConstructor_appliesInitialMapModeCameraRestrictionAndLocale() {
+    val activity = Robolectric.buildActivity(Activity::class.java).create().get()
+    val bounds = LatLngBounds(37.0, -123.0, 38.0, -122.0)
+    val config = Map3DInitConfig.create(
+      centerLat = 37.7749,
+      centerLng = -122.4194,
+      centerAlt = 120.0,
+      heading = 45.0,
+      tilt = 60.0,
+      roll = 0.0,
+      range = 500.0,
+      minAltitude = 10.0,
+      maxAltitude = 2_000.0,
+      minHeading = 0.0,
+      maxHeading = 360.0,
+      minTilt = 0.0,
+      maxTilt = 80.0,
+      bounds = bounds,
+      mapMode = Map3DMode.SATELLITE,
+      language = "es",
+      region = "ES",
+    )
+
+    val mapView = Map3DView(activity, config)
+    val map = mapView.getMap3DBlocking()
+
+    assertThat(mapView.shadow.initConfig).isSameInstanceAs(config)
+    assertThat(map).hasMapMode(Map3DMode.SATELLITE)
+    assertThat(map).hasCameraCenterNear(37.7749, -122.4194)
+    assertThat(map).hasCameraAltitudeWithin(120.0)
+    assertThat(map.getCamera()?.heading).isEqualTo(45.0)
+    assertThat(map.getCamera()?.tilt).isEqualTo(60.0)
+    assertThat(map.getCamera()?.range).isEqualTo(500.0)
+    assertThat(map.getCameraRestriction()?.bounds).isEqualTo(bounds)
+    assertThat(map.getCameraRestriction()?.maxTilt).isEqualTo(80.0)
+    assertThat(map.shadow.locale?.language).isEqualTo("es")
+    assertThat(map.shadow.locale?.region).isEqualTo("ES")
   }
 
   @Test

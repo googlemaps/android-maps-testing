@@ -34,7 +34,7 @@ open class ShadowUiControlSettings {
     get() = controlPlacements.toMap()
 
   @Implementation
-  fun setUiControlsPlacement(controls: List<Map3DControl>, placement: Int) {
+  protected fun setUiControlsPlacement(controls: List<Map3DControl>, placement: Int) {
     controlPlacements[placement] = controls.toList()
   }
 

@@ -62,90 +62,90 @@ open class ShadowPolyline {
   }
 
   @Implementation
-  fun getId(): String = idValue
+  protected fun getId(): String = idValue
 
   @Implementation
-  fun getCoordinates(): List<LatLngAltitude> = pathValue
+  protected fun getCoordinates(): List<LatLngAltitude> = pathValue
 
   @Implementation
-  fun setCoordinates(coordinates: List<LatLngAltitude>) {
+  protected fun setCoordinates(coordinates: List<LatLngAltitude>) {
     pathValue = coordinates.toList()
   }
 
   @Implementation
-  fun getPath(): List<LatLngAltitude> = pathValue
+  protected fun getPath(): List<LatLngAltitude> = pathValue
 
   @Implementation
-  fun setPath(path: List<LatLngAltitude>) {
+  protected fun setPath(path: List<LatLngAltitude>) {
     pathValue = path.toList()
   }
 
   @Implementation
-  fun getAltitudeMode(): Int = altitudeModeValue
+  protected fun getAltitudeMode(): Int = altitudeModeValue
 
   @Implementation
-  fun setAltitudeMode(altitudeMode: Int) {
+  protected fun setAltitudeMode(altitudeMode: Int) {
     altitudeModeValue = altitudeMode
   }
 
   @Implementation
-  fun getStrokeColor(): Int = strokeColorValue
+  protected fun getStrokeColor(): Int = strokeColorValue
 
   @Implementation
-  fun setStrokeColor(strokeColor: Int) {
+  protected fun setStrokeColor(strokeColor: Int) {
     strokeColorValue = strokeColor
   }
 
   @Implementation
-  fun getStrokeWidth(): Double = strokeWidthValue
+  protected fun getStrokeWidth(): Double = strokeWidthValue
 
   @Implementation
-  fun setStrokeWidth(strokeWidth: Double) {
+  protected fun setStrokeWidth(strokeWidth: Double) {
     strokeWidthValue = strokeWidth
   }
 
   @Implementation
-  fun getOuterColor(): Int = outerColorValue
+  protected fun getOuterColor(): Int = outerColorValue
 
   @Implementation
-  fun setOuterColor(outerColor: Int) {
+  protected fun setOuterColor(outerColor: Int) {
     outerColorValue = outerColor
   }
 
   @Implementation
-  fun getOuterWidth(): Double = outerWidthValue
+  protected fun getOuterWidth(): Double = outerWidthValue
 
   @Implementation
-  fun setOuterWidth(outerWidth: Double) {
+  protected fun setOuterWidth(outerWidth: Double) {
     outerWidthValue = outerWidth
   }
 
   @Implementation
-  fun getGeodesic(): Boolean = geodesicValue
+  protected fun getGeodesic(): Boolean = geodesicValue
 
   @Implementation
-  fun setGeodesic(geodesic: Boolean) {
+  protected fun setGeodesic(geodesic: Boolean) {
     geodesicValue = geodesic
   }
 
   @Implementation
-  fun getDrawsOccludedSegments(): Boolean = drawsOccludedSegmentsValue
+  protected fun getDrawsOccludedSegments(): Boolean = drawsOccludedSegmentsValue
 
   @Implementation
-  fun setDrawsOccludedSegments(drawsOccludedSegments: Boolean) {
+  protected fun setDrawsOccludedSegments(drawsOccludedSegments: Boolean) {
     drawsOccludedSegmentsValue = drawsOccludedSegments
   }
 
   @Implementation
-  fun getZIndex(): Int = zIndexValue
+  protected fun getZIndex(): Int = zIndexValue
 
   @Implementation
-  fun setZIndex(zIndex: Int) {
+  protected fun setZIndex(zIndex: Int) {
     zIndexValue = zIndex
   }
 
   @Implementation
-  fun remove() {
+  protected fun remove() {
     if (!isRemoved) {
       isRemoved = true
       onRemove?.invoke()
@@ -153,7 +153,7 @@ open class ShadowPolyline {
   }
 
   @Implementation
-  fun setClickListener(listener: OnPolylineClickListener?) {
+  protected fun setClickListener(listener: OnPolylineClickListener?) {
     clickListener = listener
   }
 
