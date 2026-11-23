@@ -25,7 +25,7 @@ require combining the raw execution data rather than the XML reports.
 
 JVM tests run by `./gradlew koverXmlReportDebug`, covering the three published library modules (`robolectric-testing`, `golden-testing`, `visual-testing`).
 
-Measured at `b6ff914` (#31), recorded 2026-11-23T19:10:33Z.
+Measured at `a00fd27` (#32), recorded 2026-11-23T19:13:47Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
@@ -52,15 +52,16 @@ Measured at `b6ff914` (#31), recorded 2026-11-23T19:10:40Z.
 ```mermaid
 xychart-beta
     title "Line Coverage Trend (%)"
-    x-axis ["47be0ab", "e3bd2d2", "c2bd264", "3067825", "b936651", "79b030b", "b645de8", "511d74c", "23f9208", "e6a975a", "5bedf9a", "b02f546", "5e4209c", "d4af6e9", "704b93a", "5f76072", "66f64ff", "b6ff914"]
+    x-axis ["47be0ab", "e3bd2d2", "c2bd264", "3067825", "b936651", "79b030b", "b645de8", "511d74c", "23f9208", "e6a975a", "5bedf9a", "b02f546", "5e4209c", "d4af6e9", "704b93a", "5f76072", "66f64ff", "b6ff914", "a00fd27"]
     y-axis "Coverage %" 0 --> 100
-    line [79.34, 79.34, 78.88, 78.88, 78.88, 78.88, 78.88, 82.12, 82.12, 82.12, 82.12, 82.12, 82.12, 82.28, 82.28, 82.28, 82.28, 82.28]
+    line [79.34, 79.34, 78.88, 78.88, 78.88, 78.88, 78.88, 82.12, 82.12, 82.12, 82.12, 82.12, 82.12, 82.28, 82.28, 82.28, 82.28, 82.28, 82.28]
 ```
 
 Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| 2026-11-23 | `a00fd27` | #32 | 82.28% | 0.00 | n/a | n/a | chore(deps): bump the gradle-minor-and-patch group with 5 updates |
 | 2026-11-23 | `b6ff914` | #31 | 82.28% | 0.00 | 84.35% | 0.00 | chore(deps): bump the github-actions-minor-and-patch group with 2 updates |
 | 2026-11-19 | `66f64ff` | #25 | 82.28% | 0.00 | 84.35% | +4.35 | chore: prepare 1.0.0-rc02 release |
 | 2026-11-19 | `5f76072` | #24 | 82.28% | 0.00 | 80.00% | 0.00 | chore(deps): bump the gradle-minor-and-patch group across 1 directory with 10 updates |
