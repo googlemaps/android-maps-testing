@@ -38,7 +38,7 @@ Measured at `b6ff914` (#31), recorded 2026-11-23T19:10:33Z.
 
 Emulator tests run by `./gradlew connectedAndroidTest`, covering the modules that own androidTest sources.
 
-Measured at `66f64ff` (#25), recorded 2026-11-19T18:13:01Z.
+Measured at `b6ff914` (#31), recorded 2026-11-23T19:10:40Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
@@ -61,7 +61,7 @@ Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| 2026-11-23 | `b6ff914` | #31 | 82.28% | 0.00 | n/a | n/a | chore(deps): bump the github-actions-minor-and-patch group with 2 updates |
+| 2026-11-23 | `b6ff914` | #31 | 82.28% | 0.00 | 84.35% | 0.00 | chore(deps): bump the github-actions-minor-and-patch group with 2 updates |
 | 2026-11-19 | `66f64ff` | #25 | 82.28% | 0.00 | 84.35% | +4.35 | chore: prepare 1.0.0-rc02 release |
 | 2026-11-19 | `5f76072` | #24 | 82.28% | 0.00 | 80.00% | 0.00 | chore(deps): bump the gradle-minor-and-patch group across 1 directory with 10 updates |
 | 2026-11-19 | `704b93a` | #23 | 82.28% | 0.00 | 80.00% | -4.35 | chore(deps): bump peter-evans/create-pull-request |
