@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.maps.android.robolectric.ktx
+package com.google.maps.android.robolectric
 
 import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory

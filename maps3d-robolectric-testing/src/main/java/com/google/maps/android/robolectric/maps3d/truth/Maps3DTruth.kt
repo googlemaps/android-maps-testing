@@ -21,7 +21,7 @@ import com.google.android.gms.maps3d.model.Map3DMode
 import com.google.common.truth.FailureMetadata
 import com.google.common.truth.Subject
 import com.google.common.truth.Truth
-import com.google.maps.android.robolectric.maps3d.ktx.shadow
+import com.google.maps.android.robolectric.maps3d.shadow
 import kotlin.math.abs
 
 /**

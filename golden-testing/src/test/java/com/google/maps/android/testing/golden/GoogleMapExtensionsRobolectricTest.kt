@@ -24,10 +24,10 @@ import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.common.truth.Truth.assertThat
 import com.google.maps.android.robolectric.MapsRobolectricTestRunner
-import com.google.maps.android.robolectric.ktx.createTestMap
-import com.google.maps.android.robolectric.ktx.shadow
-import com.google.maps.android.robolectric.ktx.withTestMap
+import com.google.maps.android.robolectric.createTestMap
+import com.google.maps.android.robolectric.shadow
 import com.google.maps.android.robolectric.shadows.ShadowGoogleMap
+import com.google.maps.android.robolectric.withTestMap
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule

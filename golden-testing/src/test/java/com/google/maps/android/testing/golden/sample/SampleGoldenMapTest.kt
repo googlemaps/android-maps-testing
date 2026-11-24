@@ -29,7 +29,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.PolygonOptions
 import com.google.common.truth.Truth.assertThat
 import com.google.maps.android.robolectric.MapsRobolectricTestRunner
-import com.google.maps.android.robolectric.ktx.createTestMap
+import com.google.maps.android.robolectric.createTestMap
 import com.google.maps.android.testing.golden.GoldenImageDiff
 import com.google.maps.android.testing.golden.GoldenTileStrategy
 import com.google.maps.android.testing.golden.captureSnapshot

@@ -16,7 +16,7 @@
 
 @file:JvmName("Map3DTestHarness")
 
-package com.google.maps.android.robolectric.maps3d.ktx
+package com.google.maps.android.robolectric.maps3d
 
 import android.app.Activity
 import android.os.Bundle

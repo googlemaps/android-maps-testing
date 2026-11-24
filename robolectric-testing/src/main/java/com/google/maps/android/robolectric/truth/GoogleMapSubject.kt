@@ -25,21 +25,21 @@ import com.google.common.truth.Fact
 import com.google.common.truth.FailureMetadata
 import com.google.common.truth.Subject
 import com.google.common.truth.Truth.assertAbout
-import com.google.maps.android.robolectric.ktx.activeInfoWindowMarker
-import com.google.maps.android.robolectric.ktx.cameraTargetBounds
-import com.google.maps.android.robolectric.ktx.circles
-import com.google.maps.android.robolectric.ktx.contentDescription
-import com.google.maps.android.robolectric.ktx.findMarker
-import com.google.maps.android.robolectric.ktx.groundOverlays
-import com.google.maps.android.robolectric.ktx.hexColor
-import com.google.maps.android.robolectric.ktx.mapStyle
-import com.google.maps.android.robolectric.ktx.markers
-import com.google.maps.android.robolectric.ktx.pixelColorAt
-import com.google.maps.android.robolectric.ktx.polygons
-import com.google.maps.android.robolectric.ktx.polylines
-import com.google.maps.android.robolectric.ktx.shadow
-import com.google.maps.android.robolectric.ktx.tileOverlays
-import com.google.maps.android.robolectric.ktx.visibleBounds
+import com.google.maps.android.robolectric.activeInfoWindowMarker
+import com.google.maps.android.robolectric.cameraTargetBounds
+import com.google.maps.android.robolectric.circles
+import com.google.maps.android.robolectric.contentDescription
+import com.google.maps.android.robolectric.findMarker
+import com.google.maps.android.robolectric.groundOverlays
+import com.google.maps.android.robolectric.hexColor
+import com.google.maps.android.robolectric.mapStyle
+import com.google.maps.android.robolectric.markers
+import com.google.maps.android.robolectric.pixelColorAt
+import com.google.maps.android.robolectric.polygons
+import com.google.maps.android.robolectric.polylines
+import com.google.maps.android.robolectric.shadow
+import com.google.maps.android.robolectric.tileOverlays
+import com.google.maps.android.robolectric.visibleBounds
 
 // [START maps_robolectric_google_map_subject]
 /**

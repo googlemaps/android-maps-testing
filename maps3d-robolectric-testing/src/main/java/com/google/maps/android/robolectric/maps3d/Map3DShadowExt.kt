@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.maps.android.robolectric.maps3d.ktx
+package com.google.maps.android.robolectric.maps3d
 
 import com.google.android.gms.maps3d.GoogleMap3D
 import com.google.android.gms.maps3d.Map3DView

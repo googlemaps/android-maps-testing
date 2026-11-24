@@ -20,7 +20,7 @@ import android.graphics.Bitmap
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.TileOverlay
 import com.google.android.gms.maps.model.TileOverlayOptions
-import com.google.maps.android.robolectric.ktx.renderToBitmap
+import com.google.maps.android.robolectric.renderToBitmap
 import kotlinx.coroutines.suspendCancellableCoroutine
 import org.robolectric.shadows.ShadowLooper
 import java.io.File

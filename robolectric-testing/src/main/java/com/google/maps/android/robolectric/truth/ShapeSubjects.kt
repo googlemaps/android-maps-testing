@@ -24,7 +24,7 @@ import com.google.common.truth.Fact
 import com.google.common.truth.FailureMetadata
 import com.google.common.truth.Subject
 import com.google.common.truth.Truth.assertAbout
-import com.google.maps.android.robolectric.ktx.hexColor
+import com.google.maps.android.robolectric.hexColor
 
 // [START maps_robolectric_shape_subjects]
 /**

@@ -20,9 +20,9 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.robolectric.MapsRobolectricTestRunner
-import com.google.maps.android.robolectric.ktx.clickMarker
-import com.google.maps.android.robolectric.ktx.createTestMap
-import com.google.maps.android.robolectric.ktx.markers
+import com.google.maps.android.robolectric.clickMarker
+import com.google.maps.android.robolectric.createTestMap
+import com.google.maps.android.robolectric.markers
 import com.google.maps.android.robolectric.truth.assertThat
 import com.google.maps.android.robolectric.truth.meters
 import com.google.maps.android.testing.sample.model.Store

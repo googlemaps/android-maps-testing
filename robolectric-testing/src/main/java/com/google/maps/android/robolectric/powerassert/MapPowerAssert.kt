@@ -24,13 +24,13 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.Polygon
 import com.google.android.gms.maps.model.Polyline
-import com.google.maps.android.robolectric.ktx.activeInfoWindowMarker
-import com.google.maps.android.robolectric.ktx.cameraTarget
-import com.google.maps.android.robolectric.ktx.cameraZoom
-import com.google.maps.android.robolectric.ktx.findMarker
-import com.google.maps.android.robolectric.ktx.pixelColorAt
-import com.google.maps.android.robolectric.ktx.shadow
-import com.google.maps.android.robolectric.ktx.visibleBounds
+import com.google.maps.android.robolectric.activeInfoWindowMarker
+import com.google.maps.android.robolectric.cameraTarget
+import com.google.maps.android.robolectric.cameraZoom
+import com.google.maps.android.robolectric.findMarker
+import com.google.maps.android.robolectric.pixelColorAt
+import com.google.maps.android.robolectric.shadow
+import com.google.maps.android.robolectric.visibleBounds
 import kotlin.math.abs
 import com.google.maps.android.robolectric.truth.Distance as TruthDistance
 import com.google.maps.android.robolectric.truth.distanceTo as truthDistanceTo

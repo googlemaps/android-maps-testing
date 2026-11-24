@@ -23,9 +23,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolygonOptions
 import com.google.maps.android.robolectric.MapsRobolectricTestRunner
-import com.google.maps.android.robolectric.ktx.clickMarker
-import com.google.maps.android.robolectric.ktx.simulateUserCameraMove
-import com.google.maps.android.robolectric.ktx.withTestMap
+import com.google.maps.android.robolectric.clickMarker
+import com.google.maps.android.robolectric.simulateUserCameraMove
+import com.google.maps.android.robolectric.withTestMap
 import com.google.maps.android.robolectric.truth.assertThat
 import com.google.maps.android.robolectric.truth.meters
 import org.junit.Test
