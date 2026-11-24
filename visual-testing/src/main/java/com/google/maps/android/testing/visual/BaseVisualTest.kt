@@ -20,6 +20,7 @@ import android.app.Instrumentation
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.SystemClock
 import android.util.Log
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
@@ -119,16 +120,60 @@ abstract class BaseVisualTest {
 
   /**
    * Waits for MapView rendering to settle before taking a screenshot.
+   *
+   * Uses the full [timeoutSeconds] budget to wait for the map view to appear in the UI hierarchy
+   * and then polls screenshots of the map region until map tiles/overlays have rendered and
+   * stabilized across consecutive frames.
    */
   protected fun waitForMapRendering(timeoutSeconds: Long = 30) {
-    // First check for accessibility presence
-    uiDevice.wait(Until.hasObject(By.descContains("Google Map")), 3000)
+    if (timeoutSeconds <= 0L) return
 
-    // Allow OpenGL / Vulkan tile drawing and vector overlay shaders to settle
+    val totalTimeoutMillis = TimeUnit.SECONDS.toMillis(timeoutSeconds)
+    val startMillis = SystemClock.elapsedRealtime()
+    val deadlineMillis = startMillis + totalTimeoutMillis
+
+    // Wait for the Google Map accessibility node to appear within the full timeout budget
+    uiDevice.wait(Until.hasObject(By.descContains("Google Map")), totalTimeoutMillis)
+
+    val remainingMillis = (deadlineMillis - SystemClock.elapsedRealtime()).coerceAtLeast(0L)
+    if (remainingMillis == 0L) {
+      Log.w("BaseVisualTest", "Timed out after ${timeoutSeconds}s waiting for Google Map view to appear.")
+      return
+    }
+
+    val probeFile = File(context.cacheDir, "_map_readiness_probe.png")
     try {
-      TimeUnit.SECONDS.sleep(timeoutSeconds.coerceAtMost(5))
-    } catch (e: InterruptedException) {
-      Thread.currentThread().interrupt()
+      val settled = MapRenderingReadiness.waitUntilSettled(
+        timeoutMillis = remainingMillis,
+        nowMillis = { SystemClock.elapsedRealtime() },
+        sleepMillis = { millis ->
+          try {
+            Thread.sleep(millis)
+          } catch (_: InterruptedException) {
+            Thread.currentThread().interrupt()
+          }
+        },
+        boundsProvider = { uiDevice.findObject(By.descContains("Google Map"))?.visibleBounds },
+        captureFrame = {
+          probeFile.parentFile?.mkdirs()
+          if (uiDevice.takeScreenshot(probeFile)) {
+            BitmapFactory.decodeFile(probeFile.absolutePath)
+          } else {
+            null
+          }
+        },
+      )
+      val elapsedMillis = SystemClock.elapsedRealtime() - startMillis
+      if (settled) {
+        Log.i("BaseVisualTest", "Map rendering settled in ${elapsedMillis}ms.")
+      } else {
+        Log.w(
+          "BaseVisualTest",
+          "Map rendering did not settle within ${timeoutSeconds}s (${elapsedMillis}ms elapsed); proceeding with capture.",
+        )
+      }
+    } finally {
+      probeFile.delete()
     }
   }
 
