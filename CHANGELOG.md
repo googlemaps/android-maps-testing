@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.0.0-rc03](https://github.com/googlemaps/android-maps-testing/compare/v1.0.0-rc02...v1.0.0-rc03) (2026-11-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* Kotlin extensions and test harness helpers previously under com.google.maps.android.robolectric.ktx and com.google.maps.android.robolectric.maps3d.ktx now live directly in com.google.maps.android.robolectric and com.google.maps.android.robolectric.maps3d.
+
+### Features
+
+* **maps3d:** add maps3d-robolectric-testing module ([#30](https://github.com/googlemaps/android-maps-testing/issues/30)) ([0a2b8d4](https://github.com/googlemaps/android-maps-testing/commit/0a2b8d4b0b52a3f31a876db135f3a8f771cd7f3f))
+
+
+### Miscellaneous Chores
+
+* prepare 1.0.0-rc03 release ([#35](https://github.com/googlemaps/android-maps-testing/issues/35)) ([716aad6](https://github.com/googlemaps/android-maps-testing/commit/716aad6f96ad44c38227deaf5fbbaf9e99c40a3c))
+
+
+### Code Refactoring
+
+* move robolectric Kotlin extensions out of .ktx subpackages ([#36](https://github.com/googlemaps/android-maps-testing/issues/36)) ([f1135fc](https://github.com/googlemaps/android-maps-testing/commit/f1135fc9404d2b0e09e70deb5fba2346ea1c2c82))
+
 ## [1.0.0-rc02](https://github.com/googlemaps/android-maps-testing/compare/v1.0.0-rc01...v1.0.0-rc02) (2026-11-19)
 
 
