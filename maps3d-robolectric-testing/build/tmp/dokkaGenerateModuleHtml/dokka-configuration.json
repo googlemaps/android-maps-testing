@@ -1,0 +1,225 @@
+{
+  "moduleName": "maps3d-robolectric-testing",
+  "moduleVersion": "1.0.0-rc03",
+  "outputDir": "/home/runner/work/android-maps-testing/android-maps-testing/maps3d-robolectric-testing/build/dokka-module/html/module",
+  "cacheRoot": null,
+  "offlineMode": false,
+  "sourceSets": [
+    {
+      "displayName": "release",
+      "sourceSetID": {
+        "scopeId": ":maps3d-robolectric-testing",
+        "sourceSetName": "release"
+      },
+      "classpath": [
+        "/usr/local/lib/android/sdk/platforms/android-37.0/android.jar",
+        "/usr/local/lib/android/sdk/build-tools/36.0.0/core-lambda-stubs.jar",
+        "/home/runner/work/android-maps-testing/android-maps-testing/maps3d-robolectric-testing/build/intermediates/compile_r_class_jar/release/generateReleaseRFile/R.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/e8f144b1b5215f37ac577a67c0d42c31/transformed/play-services-maps3d-16.0.1-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/ba3d91c32ecad1b8321ce0d296fae691/transformed/play-services-base-18.5.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/84cac2104ea36cd96acc358655172fef/transformed/play-services-tasks-18.2.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/b47e77a73315e32df5ccfe30557de0a3/transformed/play-services-basement-18.9.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/e634cf489b2ecfc9eed3cdd5ef4c731f/transformed/material-1.12.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/4876cb57abfc4cf53593ef18b9dff516/transformed/constraintlayout-2.0.1-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/acdd8152895fb0b1e2e650d6a672a8fc/transformed/appcompat-1.6.1-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/8610a58f39a9b3926692ab00aaf14c36/transformed/viewpager2-1.0.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/8df03c3097c11a3e97a597dfbc4428ca/transformed/fragment-1.3.6-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/601af63f51cebc9b5a041bcf1816a80a/transformed/activity-1.8.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/7ce68b61227d069594b31c021700ba67/transformed/coordinatorlayout-1.1.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/631eb6d0de0d3d4ab4faa8081b0572d2/transformed/drawerlayout-1.1.1-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/20005edfb3bd920f4ee4d20c1fa28723/transformed/dynamicanimation-1.0.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/a90c3b4ce7a9aef0c8a4447f039dc093/transformed/transition-1.5.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/dd9e75ed9529609c06ccc2680252d395/transformed/appcompat-resources-1.6.1-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/a3d914185bdb85b3b62a8b637dfc92b1/transformed/vectordrawable-animated-1.1.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/9c3306725cfc0f8a0cb7256cbce8e75a/transformed/vectordrawable-1.1.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/682b7b8b5cd6b95f42c229dcfc364f1c/transformed/recyclerview-1.1.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/5a385193cd32b97d7f62940c7432f1fd/transformed/viewpager-1.0.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/90c36d0e94a0700f3093edb89b4251b4/transformed/customview-1.1.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/d934188f1b74d52025a251f783655ad9/transformed/legacy-support-core-utils-1.0.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/14c27483f9f56c0567637b91055fc399/transformed/loader-1.0.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/b8faebfd3c2648ff30898beffffdaf00/transformed/lifecycle-livedata-2.6.2-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/c0331e548a5b26a28ab2f5b35fab1c71/transformed/lifecycle-livedata-core-2.6.2-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/cdf113c2726eacceb0aa68dea540c9c8/transformed/lifecycle-viewmodel-2.6.2-api.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.6.2/10f354fdb64868baecd67128560c5a0d6312c495/lifecycle-common-2.6.2.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/a028b5c350a52ffc0f56db589cf22c9a/transformed/lifecycle-runtime-2.6.2-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/b577dfeeaadc5b8c08462d2d5da2da01/transformed/lifecycle-viewmodel-savedstate-2.6.2-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/bfacbb6b0e819abecd825f9df93c0fbb/transformed/core-ktx-1.2.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/5b18f4aee9027c98426009318e68b366/transformed/core-1.16.0-api.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.10.2/4a9f78ef49483748e2c129f3d124b8fa249dafbf/kotlinx-coroutines-core-jvm-1.10.2.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.10.2/c8705d275d81f19e8afaf3ff9b5bf7a4b6b6c19b/kotlinx-coroutines-android-1.10.2.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/9ce960447e65c52677c8a5ed98d02136/transformed/annotation-experimental-1.4.1-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/5284a8b5fb13ce14c6bef87c1f39fc9d/transformed/core-viewtree-1.0.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/9bad57f40137bd2e36686ea6b4d5df82/transformed/versionedparcelable-1.1.1-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/e022878633abd06c597f5678aee8eb9a/transformed/cardview-1.0.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/d507deb3040c51832fcf15f190c4c4a0/transformed/core-runtime-2.1.0-api.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.2.0/5e1b8b81dfd5f52c56a8d53b18ca759c19a301f3/core-common-2.2.0.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.1.0/1f27220b47669781457de0d600849a5de0e89909/collection-1.1.0.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/0b07245f9d75130aaa37a2b6f031256b/transformed/savedstate-1.2.1-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/aae3bbaf379fabc60052f64420da8476/transformed/cursoradapter-1.0.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/481d580353e8c8188b5a12f920298c26/transformed/documentfile-1.0.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/a647bd36dfbc4c27664aa21b68409ab8/transformed/localbroadcastmanager-1.0.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/179a9e930a80fdec16d25b56dfa85c63/transformed/print-1.0.0-api.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/3b38f5488d9d5bd61c122bedc93d4ecb/transformed/interpolator-1.0.0-api.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation-jvm/1.8.1/b8a16fe526014b7941c1debaccaf9c5153692dbb/annotation-jvm-1.8.1.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.21/c343e135bd1e7dd94b7ed76b4159068d888d09db/kotlin-stdlib-2.4.21.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.robolectric/robolectric/4.18/80de0c42d8b6009c6e0ac3be3c572f65706ea929/robolectric-4.18.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.robolectric/shadows-framework/4.18/59526cab2194250217d661bfac0b71e9561fbe58/shadows-framework-4.18.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/com.google.truth/truth/1.4.5/176753805c1c7d8ec439dd61c48bd688cdc48436/truth-1.4.5.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.robolectric/junit/4.18/66ce437b976f1cb5cd607118a02373529bc80fc/junit-4.18.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.robolectric/resources/4.18/399feeb84901513a07ba5a7c97c2cabc7c58692e/resources-4.18.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.robolectric/sandbox/4.18/98bde5ea0964c7d483e0346a9857f2f692fd65b7/sandbox-4.18.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.robolectric/utils-reflector/4.18/f91dc2674aad0847e655e4d4856f7f5e1960fa6e/utils-reflector-4.18.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.robolectric/plugins-maven-dependency-resolver/4.18/22d96df93f1ce3ce48983fb4acfa54f159dfc266/plugins-maven-dependency-resolver-4.18.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.robolectric/nativeruntime/4.18/f062b34631df930797eb25e1c69547246ea85f6d/nativeruntime-4.18.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.robolectric/shadowapi/4.18/9286c5deb7e1032be293c1502c63bd6b6fa66eb6/shadowapi-4.18.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.robolectric/utils/4.18/578ddad75cd792d631bec0bbef76bf11851dcdba/utils-4.18.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.robolectric/pluginapi/4.18/5e58d90330f4d18f8c4c534541470d63b176f33a/pluginapi-4.18.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.robolectric/annotations/4.18/4dd89c385fe98cf05936e8748a75d0cc07fef852/annotations-4.18.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/javax.annotation/javax.annotation-api/1.3.2/934c04d3cfef185a8008e7bf34331b79730a9d43/javax.annotation-api-1.3.2.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk18on/1.86/830c8467bed8e4c1148262386b09fc42aedcf262/bcprov-jdk18on-1.86.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/e785d34bbc0edf572e096d695d4e71a7/transformed/monitor-1.8.0-api.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/com.almworks.sqlite4java/sqlite4java/1.0.392/d6234e08ff4e1607ff5321da2579571f05ff778d/sqlite4java-1.0.392.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/com.ibm.icu/icu4j/79.1/e9625cd26b59e7929978f649d0e7152a99a3de35/icu4j-79.1.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/com.google.auto.value/auto-value-annotations/1.11.1/3493561c5809b92f9e5f54f48ecfe9682ba6cbbe/auto-value-annotations-1.11.1.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/33.7.2-jre/e601df8fa35293ad4fa7c6ec4522152d304eb41/guava-33.7.2-android.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.jspecify/jspecify/1.0.1/3d60fd98eb8ade73004f4195c37b6317e02cf3d7/jspecify-1.0.1.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/junit/junit/4.13.2/8ac9e16d933b6fb43bc7f576336b8f4d7eb5ba12/junit-4.13.2.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.50.0/74ba43e49ab1184d41634af2ef0047e82c4064b0/error_prone_annotations-2.50.0.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/9.11.1/3707c04c3f7197c3d1d8dbc728b791a58809a59e/asm-commons-9.11.1.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/9.11.1/ad2b01f445d65aa84cb65900d1c848d121843986/asm-tree-9.11.1.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/9.11.1/edb29aa0c2da2918ce338fb7b218c21ea138dde2/asm-9.11.1.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/androidx.resourceinspection/resourceinspection-annotation/1.0.1/8c21f8ff5d96d5d52c948707f7e4d6ca6773feef/resourceinspection-annotation-1.0.1.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/androidx.constraintlayout/constraintlayout-solver/2.0.1/30988fe2d77f3fe3bf7551bb8a8b795fad7e7226/constraintlayout-solver-2.0.1.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/com.google.guava/failureaccess/1.0.3/aeaffd00d57023a2c947393ed251f0354f0985fc/failureaccess-1.0.3.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/b421526c5f297295adef1c886e5246c39d4ac629/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+        "/home/runner/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/3.1/a892ca9507839bbdb900d64310ac98256cab992f/j2objc-annotations-3.1.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/d7139b637b814da3afc1692f2d62c16a/transformed/play-services-maps3d-16.0.1/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/ab65ad7355032484c0e6a0d0f8ef48ef/transformed/play-services-base-18.5.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/7bff1cd48376e8e23093425ced38e0c3/transformed/play-services-tasks-18.2.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/f1431d41a9ae6b8c26cf711fc64f5ab2/transformed/play-services-basement-18.9.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/1e56aa0ed36d3801a40b5d9768f161e0/transformed/material-1.12.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/d7eaed991fd0853d0695dd7eecd3e6cd/transformed/constraintlayout-2.0.1/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/3b3348b73168d590eea23d82578c8d49/transformed/appcompat-1.6.1/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/771464b311e631224c4b65baff9b3ec4/transformed/viewpager2-1.0.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/216982c81c12f999c62b13669f8f933d/transformed/fragment-1.3.6/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/579fca3270dd52a8b53873b6b2d86e61/transformed/activity-1.8.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/3deb6a250029e66695125c5db51f1a92/transformed/coordinatorlayout-1.1.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/b51902164eb2302fed4fed6302c6ac9b/transformed/drawerlayout-1.1.1/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/6ef1dbfcf890283fc514057478e874b2/transformed/dynamicanimation-1.0.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/f6dabc016165f9e676c9f67224df9a3d/transformed/transition-1.5.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/443dea66699e01541d31545281f7795f/transformed/appcompat-resources-1.6.1/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/15e5cb226a5592f8b99aaacd8df27235/transformed/vectordrawable-animated-1.1.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/bf3bf177c1d5d767aea193dbccc2ea62/transformed/vectordrawable-1.1.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/c46feefbf24bc90b47f4784c4a3b9459/transformed/recyclerview-1.1.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/5561f289191f9287ff0e8afeb630e4ee/transformed/viewpager-1.0.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/a56ac8a27166487ad26e1a99265c2fc8/transformed/customview-1.1.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/85fbf7d55073afa55be04c54b9e1ac08/transformed/legacy-support-core-utils-1.0.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/ee5e57fb1457e1fa7c9629050fd0c78c/transformed/loader-1.0.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/f0c73201e9c51c8066a3748b96c9e9a3/transformed/lifecycle-livedata-2.6.2/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/c93c07eb18353661327551a52fb5d9f8/transformed/lifecycle-livedata-core-2.6.2/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/5a9277fb37cce2c883935de390d845a9/transformed/lifecycle-viewmodel-2.6.2/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/632e94a2f0ce1c70f02590f59bdaa728/transformed/lifecycle-runtime-2.6.2/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/d1fb3872043a588f0d84a7b437156c82/transformed/lifecycle-viewmodel-savedstate-2.6.2/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/7d85bd1124f0fd9dbd911fe5140efad2/transformed/core-ktx-1.2.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/949af98896cbb05df2738e9e39e548d3/transformed/core-1.16.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/74f7f882a3dc7ed737a28b286157a42e/transformed/annotation-experimental-1.4.1/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/b62d622135b9ad6d74973247bd6f36f0/transformed/core-viewtree-1.0.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/aad0652cbd44d4cd04cc14e13084cc40/transformed/versionedparcelable-1.1.1/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/0e949d7728300f7d94a7bba03add5a4c/transformed/cardview-1.0.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/b2bab72a4fe385e0e7324f646ed314b2/transformed/core-runtime-2.1.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/c57dc789fce7e099be4753da28d696d1/transformed/savedstate-1.2.1/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/f428a972ef9947e6e71d1d9e09e34cc7/transformed/cursoradapter-1.0.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/79ea21326c06a4066c27eb21b0f0f434/transformed/documentfile-1.0.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/128eafc4ecc1b356fce13a719b1197e0/transformed/localbroadcastmanager-1.0.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/58362f2bb8a0dde210e13f9db34c2e10/transformed/print-1.0.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/018f28639365a52d3f3527033a1c6d8d/transformed/interpolator-1.0.0/jars/classes.jar",
+        "/home/runner/.gradle/caches/9.9.1/transforms/63c5d62c518410b764fc8a509e4d2df8/transformed/monitor-1.8.0/jars/classes.jar"
+      ],
+      "sourceRoots": [
+        "/home/runner/work/android-maps-testing/android-maps-testing/maps3d-robolectric-testing/src/main/java",
+        "/home/runner/work/android-maps-testing/android-maps-testing/maps3d-robolectric-testing/src/main/kotlin",
+        "/home/runner/work/android-maps-testing/android-maps-testing/maps3d-robolectric-testing/src/release/java",
+        "/home/runner/work/android-maps-testing/android-maps-testing/maps3d-robolectric-testing/src/release/kotlin"
+      ],
+      "dependentSourceSets": [
+      ],
+      "samples": [
+      ],
+      "includes": [
+      ],
+      "includeNonPublic": false,
+      "reportUndocumented": false,
+      "skipEmptyPackages": true,
+      "skipDeprecated": false,
+      "jdkVersion": 11,
+      "sourceLinks": [
+      ],
+      "perPackageOptions": [
+      ],
+      "externalDocumentationLinks": [
+        {
+          "url": "https://developer.android.com/reference/kotlin/",
+          "packageListUrl": "https://developer.android.com/reference/kotlin/package-list"
+        },
+        {
+          "url": "https://developer.android.com/reference/kotlin/",
+          "packageListUrl": "https://developer.android.com/reference/kotlin/androidx/package-list"
+        },
+        {
+          "url": "https://docs.oracle.com/en/java/javase/11/docs/api/",
+          "packageListUrl": "https://docs.oracle.com/en/java/javase/11/docs/api/element-list"
+        },
+        {
+          "url": "https://kotlinlang.org/api/core/",
+          "packageListUrl": "https://kotlinlang.org/api/core/package-list"
+        }
+      ],
+      "languageVersion": null,
+      "apiVersion": null,
+      "noStdlibLink": false,
+      "noJdkLink": false,
+      "suppressedFiles": [
+        "/home/runner/work/android-maps-testing/android-maps-testing/maps3d-robolectric-testing/build/generated"
+      ],
+      "analysisPlatform": "jvm",
+      "documentedVisibilities": [
+        "PUBLIC"
+      ],
+      "suppressAnnotatedWith": [
+      ]
+    }
+  ],
+  "pluginsClasspath": [
+    "/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.dokka/templating-plugin/2.3.0/fa4ffde035a545e21fdd50a11d15b8fab5c2c46b/templating-plugin-2.3.0.jar",
+    "/home/runner/.gradle/caches/modules-2/files-2.1/org.jetbrains.dokka/dokka-base/2.3.0/8942bdf58be55dd3238d57208d026d4cd6bb55dc/dokka-base-2.3.0.jar"
+  ],
+  "pluginsConfiguration": [
+    {
+      "fqPluginName": "org.jetbrains.dokka.base.DokkaBase",
+      "serializationFormat": "JSON",
+      "values": "{\"customAssets\":[],\"customStyleSheets\":[],\"separateInheritedMembers\":false,\"mergeImplicitExpectActualDeclarations\":false}"
+    },
+    {
+      "fqPluginName": "org.jetbrains.dokka.kotlinPlaygroundSamples.KotlinPlaygroundSamplesPlugin",
+      "serializationFormat": "JSON",
+      "values": "{}"
+    },
+    {
+      "fqPluginName": "org.jetbrains.dokka.versioning.VersioningPlugin",
+      "serializationFormat": "JSON",
+      "values": "{\"olderVersions\":[],\"olderVersionsDirName\":\"older\",\"renderVersionsNavigationOnAllPages\":true}"
+    }
+  ],
+  "modules": [
+  ],
+  "failOnWarning": false,
+  "delayTemplateSubstitution": true,
+  "suppressObviousFunctions": true,
+  "includes": [
+  ],
+  "suppressInheritedMembers": false,
+  "finalizeCoroutines": true
+}

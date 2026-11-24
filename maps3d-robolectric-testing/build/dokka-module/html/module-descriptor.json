@@ -1,0 +1,6 @@
+{
+  "name": "maps3d-robolectric-testing",
+  "modulePath": "maps3d-robolectric-testing",
+  "moduleOutputDirName": "module",
+  "moduleIncludesDirName": "includes"
+}

@@ -1,1 +1,1 @@
-sourceset_dependencies = '{":robolectric-testing/release":[],":visual-testing/release":[],":golden-testing/release":[]}'
+sourceset_dependencies = '{":robolectric-testing/release":[],":maps3d-robolectric-testing/release":[],":visual-testing/release":[],":golden-testing/release":[]}'

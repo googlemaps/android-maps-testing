@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>ShadowGoogleMap3D</title>
+<!--[+]cmd:{"@class":"org.jetbrains.dokka.base.templating.PathToRootSubstitutionCommand","pattern":"###","default":"../../"}-->    <link href="###images/logo-icon.svg" rel="icon" type="image/svg">
+<!--[-]cmd--><!--[+]cmd:{"@class":"org.jetbrains.dokka.base.templating.PathToRootSubstitutionCommand","pattern":"###","default":"../../"}-->        <script>var pathToRoot = "###";</script><!--[-]cmd-->
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<!--[+]cmd:{"@class":"org.jetbrains.dokka.base.templating.PathToRootSubstitutionCommand","pattern":"###","default":"../../"}--><script type="text/javascript" src="###scripts/sourceset_dependencies.js" async="async"></script>
+<link href="###styles/style.css" rel="Stylesheet">
+<link href="###styles/main.css" rel="Stylesheet">
+<link href="###styles/prism.css" rel="Stylesheet">
+<link href="###styles/logo-styles.css" rel="Stylesheet">
+<link href="###ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="###scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="###scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="###scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="###scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="###scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="###ui-kit/ui-kit.min.js" defer="defer"></script>
+<!--[-]cmd--></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<!--[+]cmd:{"@class":"org.jetbrains.dokka.base.templating.PathToRootSubstitutionCommand","pattern":"###","default":"../../"}-->            <a class="library-name--link" href="###index.html" tabindex="1">
+<!--[+]cmd:{"@class":"org.jetbrains.dokka.base.templating.ProjectNameSubstitutionCommand","pattern":"###","default":"maps3d-robolectric-testing"}-->                    ###
+<!--[-]cmd-->            </a>
+<!--[-]cmd-->        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;com.google.maps.android.robolectric.maps3d.shadows/-shadow-google-map3-d/index.html&quot;}"></dokka-template-command>        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":maps3d-robolectric-testing/release">release</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":maps3d-robolectric-testing/release"
+                                       data-filter=":maps3d-robolectric-testing/release"/>
+                                <span class="checkbox--icon"></span>
+                                release
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+<!--[+]cmd:{"@class":"org.jetbrains.dokka.base.templating.ProjectNameSubstitutionCommand","pattern":"###","default":"maps3d-robolectric-testing"}-->                                    ###
+<!--[-]cmd-->                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="maps3d-robolectric-testing::com.google.maps.android.robolectric.maps3d.shadows/ShadowGoogleMap3D///PointingToDeclaration//1714800898">
+  <div class="breadcrumbs"><a href="../../index.html">maps3d-robolectric-testing</a><span class="delimiter">/</span><a href="../index.html">com.google.maps.android.robolectric.maps3d.shadows</a><span class="delimiter">/</span><span class="current">ShadowGoogleMap3D</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Shadow</span><wbr></wbr><span>Google</span><wbr></wbr><span><span>Map3D</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;org.robolectric.annotation&quot;,&quot;classNames&quot;:&quot;Implements&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}"><span class="token annotation builtin">Implements</span></dokka-template-command><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;GoogleMap3D&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">GoogleMap3D::class</dokka-template-command></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">ShadowGoogleMap3D</a></div><p class="paragraph">Robolectric shadow for <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;GoogleMap3D&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">GoogleMap3D</dokka-template-command>.</p><p class="paragraph">Tracks camera state, map mode, locale, UI control placements, listeners, and ID-keyed 3D overlays (<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Marker&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Marker</dokka-template-command>, <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Polyline&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Polyline</dokka-template-command>, <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Polygon&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Polygon</dokka-template-command>, <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Model&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Model</dokka-template-command>, <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Popover&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Popover</dokka-template-command>) with Maps 3D upsert semantics: adding an overlay with an existing <code class="lang-kotlin">id</code> replaces the previous entry in place.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="1969675074%2FConstructors%2F1714800898" anchor-label="ShadowGoogleMap3D" id="1969675074%2FConstructors%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-shadow-google-map3-d.html"><span>Shadow</span><wbr></wbr><span>Google</span><wbr></wbr><span><span>Map3D</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1969675074%2FConstructors%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="286144295%2FProperties%2F1714800898" anchor-label="cameraHistory" id="286144295%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="camera-history.html"><span>camera</span><wbr></wbr><span><span>History</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="286144295%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="camera-history.html">cameraHistory</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Camera&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Camera</dokka-template-command><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Immutable snapshot of every <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Camera&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Camera</dokka-template-command> applied via <code class="lang-kotlin">setCamera</code>, <code class="lang-kotlin">flyCameraTo</code>, or <code class="lang-kotlin">flyCameraAround</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-992132912%2FProperties%2F1714800898" anchor-label="lastFlyAroundOptions" id="-992132912%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="last-fly-around-options.html"><span>last</span><wbr></wbr><span>Fly</span><wbr></wbr><span>Around</span><wbr></wbr><span><span>Options</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-992132912%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="last-fly-around-options.html">lastFlyAroundOptions</a><span class="token operator">: </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;FlyAroundOptions&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">FlyAroundOptions</dokka-template-command><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Most recent <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;FlyAroundOptions&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">FlyAroundOptions</dokka-template-command> passed to <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.maps.android.robolectric.maps3d.shadows&quot;,&quot;classNames&quot;:&quot;ShadowGoogleMap3D&quot;,&quot;callable&quot;:{&quot;name&quot;:&quot;flyCameraAround&quot;,&quot;receiver&quot;:null,&quot;params&quot;:[{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.TypeConstructor&quot;,&quot;fullyQualifiedName&quot;:&quot;com.google.android.gms.maps3d.model.FlyAroundOptions&quot;,&quot;params&quot;:[]}],&quot;contextParameters&quot;:[],&quot;isProperty&quot;:false,&quot;isCompanion&quot;:false},&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">flyCameraAround</dokka-template-command>, if any.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2111376514%2FProperties%2F1714800898" anchor-label="lastFlyToOptions" id="-2111376514%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="last-fly-to-options.html"><span>last</span><wbr></wbr><span>Fly</span><wbr></wbr><span>To</span><wbr></wbr><span><span>Options</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2111376514%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="last-fly-to-options.html">lastFlyToOptions</a><span class="token operator">: </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;FlyToOptions&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">FlyToOptions</dokka-template-command><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Most recent <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;FlyToOptions&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">FlyToOptions</dokka-template-command> passed to <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.maps.android.robolectric.maps3d.shadows&quot;,&quot;classNames&quot;:&quot;ShadowGoogleMap3D&quot;,&quot;callable&quot;:{&quot;name&quot;:&quot;flyCameraTo&quot;,&quot;receiver&quot;:null,&quot;params&quot;:[{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.TypeConstructor&quot;,&quot;fullyQualifiedName&quot;:&quot;com.google.android.gms.maps3d.model.FlyToOptions&quot;,&quot;params&quot;:[]}],&quot;contextParameters&quot;:[],&quot;isProperty&quot;:false,&quot;isCompanion&quot;:false},&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">flyCameraTo</dokka-template-command>, if any.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1534342794%2FProperties%2F1714800898" anchor-label="locale" id="1534342794%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="locale.html"><span><span>locale</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1534342794%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="locale.html">locale</a><span class="token operator">: </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;LocaleOptions&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">LocaleOptions</dokka-template-command><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Most recent <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;LocaleOptions&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">LocaleOptions</dokka-template-command> passed to <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.maps.android.robolectric.maps3d.shadows&quot;,&quot;classNames&quot;:&quot;ShadowGoogleMap3D&quot;,&quot;callable&quot;:{&quot;name&quot;:&quot;setLocale&quot;,&quot;receiver&quot;:null,&quot;params&quot;:[{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.TypeConstructor&quot;,&quot;fullyQualifiedName&quot;:&quot;com.google.android.gms.maps3d.model.LocaleOptions&quot;,&quot;params&quot;:[]}],&quot;contextParameters&quot;:[],&quot;isProperty&quot;:false,&quot;isCompanion&quot;:false},&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">setLocale</dokka-template-command>, if any.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="830329252%2FProperties%2F1714800898" anchor-label="map3DView" id="830329252%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="map3-d-view.html"><span><span>map3DView</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="830329252%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="map3-d-view.html">map3DView</a><span class="token operator">: </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DView&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DView</dokka-template-command><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The hosting <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DView&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DView</dokka-template-command> attached to this map, if created via <a href="../-shadow-map3-d-view/index.html">ShadowMap3DView</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-830034083%2FProperties%2F1714800898" anchor-label="markers" id="-830034083%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="markers.html"><span><span>markers</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-830034083%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="markers.html">markers</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Marker&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Marker</dokka-template-command><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Immutable snapshot of all active (non-removed) <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Marker&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Marker</dokka-template-command> overlays.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1993575546%2FProperties%2F1714800898" anchor-label="models" id="1993575546%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="models.html"><span><span>models</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1993575546%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="models.html">models</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Model&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Model</dokka-template-command><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Immutable snapshot of all active (non-removed) <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Model&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Model</dokka-template-command> overlays.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="963192203%2FProperties%2F1714800898" anchor-label="polygons" id="963192203%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="polygons.html"><span><span>polygons</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="963192203%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="polygons.html">polygons</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Polygon&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Polygon</dokka-template-command><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Immutable snapshot of all active (non-removed) <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Polygon&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Polygon</dokka-template-command> overlays.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="975685411%2FProperties%2F1714800898" anchor-label="polylines" id="975685411%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="polylines.html"><span><span>polylines</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="975685411%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="polylines.html">polylines</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Polyline&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Polyline</dokka-template-command><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Immutable snapshot of all active (non-removed) <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Polyline&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Polyline</dokka-template-command> overlays.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1863708470%2FProperties%2F1714800898" anchor-label="popovers" id="1863708470%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="popovers.html"><span><span>popovers</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1863708470%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="popovers.html">popovers</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Popover&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Popover</dokka-template-command><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Immutable snapshot of all active (non-removed) <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Popover&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Popover</dokka-template-command> overlays.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2130343280%2FProperties%2F1714800898" anchor-label="stopCameraAnimationCallCount" id="-2130343280%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="stop-camera-animation-call-count.html"><span>stop</span><wbr></wbr><span>Camera</span><wbr></wbr><span>Animation</span><wbr></wbr><span>Call</span><wbr></wbr><span><span>Count</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2130343280%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="stop-camera-animation-call-count.html">stopCameraAnimationCallCount</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Number of times <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.maps.android.robolectric.maps3d.shadows&quot;,&quot;classNames&quot;:&quot;ShadowGoogleMap3D&quot;,&quot;callable&quot;:{&quot;name&quot;:&quot;stopCameraAnimation&quot;,&quot;receiver&quot;:null,&quot;params&quot;:[],&quot;contextParameters&quot;:[],&quot;isProperty&quot;:false,&quot;isCompanion&quot;:false},&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">stopCameraAnimation</dokka-template-command> has been called.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1440235749%2FFunctions%2F1714800898" anchor-label="findMarkerById" id="1440235749%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="find-marker-by-id.html"><span>find</span><wbr></wbr><span>Marker</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1440235749%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="find-marker-by-id.html"><span class="token function">findMarkerById</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Marker&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Marker</dokka-template-command><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns the active <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Marker&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Marker</dokka-template-command> with the given <a href="find-marker-by-id.html">id</a>, or <code class="lang-kotlin">null</code> if none exists.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1204832720%2FFunctions%2F1714800898" anchor-label="findModelById" id="-1204832720%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="find-model-by-id.html"><span>find</span><wbr></wbr><span>Model</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1204832720%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="find-model-by-id.html"><span class="token function">findModelById</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Model&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Model</dokka-template-command><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns the active <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Model&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Model</dokka-template-command> with the given <a href="find-model-by-id.html">id</a>, or <code class="lang-kotlin">null</code> if none exists.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1290585985%2FFunctions%2F1714800898" anchor-label="findPolygonById" id="1290585985%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="find-polygon-by-id.html"><span>find</span><wbr></wbr><span>Polygon</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1290585985%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="find-polygon-by-id.html"><span class="token function">findPolygonById</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Polygon&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Polygon</dokka-template-command><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns the active <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Polygon&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Polygon</dokka-template-command> with the given <a href="find-polygon-by-id.html">id</a>, or <code class="lang-kotlin">null</code> if none exists.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1328375189%2FFunctions%2F1714800898" anchor-label="findPolylineById" id="-1328375189%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="find-polyline-by-id.html"><span>find</span><wbr></wbr><span>Polyline</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1328375189%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="find-polyline-by-id.html"><span class="token function">findPolylineById</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">id<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Polyline&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Polyline</dokka-template-command><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns the active <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;Polyline&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Polyline</dokka-template-command> with the given <a href="find-polyline-by-id.html">id</a>, or <code class="lang-kotlin">null</code> if none exists.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="639103829%2FFunctions%2F1714800898" anchor-label="simulateMapClick" id="639103829%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="simulate-map-click.html"><span>simulate</span><wbr></wbr><span>Map</span><wbr></wbr><span><span>Click</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="639103829%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">fun </span><a href="simulate-map-click.html"><span class="token function">simulateMapClick</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">location<span class="token operator">: </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d.model&quot;,&quot;classNames&quot;:&quot;LatLngAltitude&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">LatLngAltitude</dokka-template-command><span class="token punctuation">, </span></span><span class="parameter ">placeId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Simulates a user tap on the 3D map at <a href="simulate-map-click.html">location</a> (optionally targeting <a href="simulate-map-click.html">placeId</a>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-911102579%2FFunctions%2F1714800898" anchor-label="triggerMapReady" id="-911102579%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="trigger-map-ready.html"><span>trigger</span><wbr></wbr><span>Map</span><wbr></wbr><span><span>Ready</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-911102579%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">fun </span><a href="trigger-map-ready.html"><span class="token function">triggerMapReady</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sceneReadiness<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator"> = </span><span class="token constant">1.0</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Invokes the registered <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;OnMapReadyListener&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">OnMapReadyListener</dokka-template-command> with <a href="trigger-map-ready.html">sceneReadiness</a> (defaults to <code class="lang-kotlin">1.0</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="687689907%2FFunctions%2F1714800898" anchor-label="triggerMapSteady" id="687689907%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="trigger-map-steady.html"><span>trigger</span><wbr></wbr><span>Map</span><wbr></wbr><span><span>Steady</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="687689907%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">fun </span><a href="trigger-map-steady.html"><span class="token function">triggerMapSteady</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">isSteady<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Invokes the registered <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;OnMapSteadyListener&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">OnMapSteadyListener</dokka-template-command> with <a href="trigger-map-steady.html">isSteady</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
