@@ -80,7 +80,16 @@ jobs:
           arch: x86_64
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          script: ./gradlew connectedAndroidTest --stacktrace
+          script: |
+            set +e
+            ./gradlew connectedAndroidTest --stacktrace
+            status=$?
+            if [ $status -ne 0 ]; then
+              adb logcat -d > emulator-logcat.txt || true
+              echo "=== Filtered logcat (BaseVisualTest / Maps SDK) ==="
+              grep -iE "BaseVisualTest|Google Maps Android API|MapsInitializer|Authorization|API_KEY|VisualMapSampleTest|StoreLocator|GoogleApi|MapsDynamite" emulator-logcat.txt | tail -n 120 || true
+            fi
+            exit $status
 
       # Stage coverage reports flat, named after their module, for coverage-history.yml post-merge reuse
       - name: Stage coverage reports
@@ -110,3 +119,4 @@ jobs:
           path: |
             */build/reports/androidTests/
             */build/reports/coverage/
+            emulator-logcat.txt
