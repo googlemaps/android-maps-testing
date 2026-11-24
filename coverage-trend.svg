@@ -98,9 +98,12 @@
   <circle cx="765.0" cy="82.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>e4d508c: 80.47% (unit)</title>
   </circle>
-  <path d="M 216.4,83.0 L 410.0,74.7 L 442.3,74.7 L 474.5,74.7 L 506.8,83.0 L 539.1,83.0 L 571.4,74.7 L 603.6,74.7 L 635.9,74.7 L 668.2,74.7 L 700.5,74.7" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="4,4" />
+  <path d="M 216.4,83.0 L 410.0,74.7 L 442.3,74.7 L 474.5,74.7 L 506.8,83.0 L 539.1,83.0 L 571.4,74.7 L 603.6,74.7 L 635.9,74.7 L 668.2,74.7 L 700.5,74.7 L 765.0,74.7" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="4,4" />
   <circle cx="539.1" cy="83.0" r="4" fill="#34A853" stroke="#ffffff" stroke-width="1.5">
     <title>79b030b: 80.00% (instrumentation)</title>
+  </circle>
+  <circle cx="765.0" cy="74.7" r="4" fill="#34A853" stroke="#ffffff" stroke-width="1.5">
+    <title>b02f546: 84.35% (instrumentation)</title>
   </circle>
   <text x="55.0" y="265" class="commit-label">47be0ab</text>
   <text x="87.3" y="265" class="commit-label">e3bd2d2</text>
