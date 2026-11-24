@@ -3,10 +3,13 @@ $dokka.linkExtension:html
 
 module:golden-testing
 com.google.maps.android.testing.golden
+module:maps3d-robolectric-testing
+com.google.maps.android.robolectric.maps3d
+com.google.maps.android.robolectric.maps3d.shadows
+com.google.maps.android.robolectric.maps3d.truth
 module:robolectric-testing
 com.google.maps.android.robolectric
 com.google.maps.android.robolectric.annotation
-com.google.maps.android.robolectric.ktx
 com.google.maps.android.robolectric.powerassert
 com.google.maps.android.robolectric.shadows
 com.google.maps.android.robolectric.truth

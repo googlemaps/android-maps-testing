@@ -1,0 +1,1 @@
+{"@class":"org.jetbrains.dokka.base.templating.AddToSourcesetDependencies","moduleName":"maps3d-robolectric-testing","content":{":maps3d-robolectric-testing/release":[]}}

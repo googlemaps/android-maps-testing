@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>ShadowMap3DView</title>
+<!--[+]cmd:{"@class":"org.jetbrains.dokka.base.templating.PathToRootSubstitutionCommand","pattern":"###","default":"../../"}-->    <link href="###images/logo-icon.svg" rel="icon" type="image/svg">
+<!--[-]cmd--><!--[+]cmd:{"@class":"org.jetbrains.dokka.base.templating.PathToRootSubstitutionCommand","pattern":"###","default":"../../"}-->        <script>var pathToRoot = "###";</script><!--[-]cmd-->
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<!--[+]cmd:{"@class":"org.jetbrains.dokka.base.templating.PathToRootSubstitutionCommand","pattern":"###","default":"../../"}--><script type="text/javascript" src="###scripts/sourceset_dependencies.js" async="async"></script>
+<link href="###styles/style.css" rel="Stylesheet">
+<link href="###styles/main.css" rel="Stylesheet">
+<link href="###styles/prism.css" rel="Stylesheet">
+<link href="###styles/logo-styles.css" rel="Stylesheet">
+<link href="###ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="###scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="###scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="###scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="###scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="###scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="###ui-kit/ui-kit.min.js" defer="defer"></script>
+<!--[-]cmd--></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<!--[+]cmd:{"@class":"org.jetbrains.dokka.base.templating.PathToRootSubstitutionCommand","pattern":"###","default":"../../"}-->            <a class="library-name--link" href="###index.html" tabindex="1">
+<!--[+]cmd:{"@class":"org.jetbrains.dokka.base.templating.ProjectNameSubstitutionCommand","pattern":"###","default":"maps3d-robolectric-testing"}-->                    ###
+<!--[-]cmd-->            </a>
+<!--[-]cmd-->        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;com.google.maps.android.robolectric.maps3d.shadows/-shadow-map3-d-view/index.html&quot;}"></dokka-template-command>        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":maps3d-robolectric-testing/release">release</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":maps3d-robolectric-testing/release"
+                                       data-filter=":maps3d-robolectric-testing/release"/>
+                                <span class="checkbox--icon"></span>
+                                release
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+<!--[+]cmd:{"@class":"org.jetbrains.dokka.base.templating.ProjectNameSubstitutionCommand","pattern":"###","default":"maps3d-robolectric-testing"}-->                                    ###
+<!--[-]cmd-->                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="maps3d-robolectric-testing::com.google.maps.android.robolectric.maps3d.shadows/ShadowMap3DView///PointingToDeclaration//1714800898">
+  <div class="breadcrumbs"><a href="../../index.html">maps3d-robolectric-testing</a><span class="delimiter">/</span><a href="../index.html">com.google.maps.android.robolectric.maps3d.shadows</a><span class="delimiter">/</span><span class="current">ShadowMap3DView</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Shadow</span><wbr></wbr><span><span>Map3DView</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;org.robolectric.annotation&quot;,&quot;classNames&quot;:&quot;Implements&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}"><span class="token annotation builtin">Implements</span></dokka-template-command><span class="token punctuation">(</span><span>value<span class="token operator"> = </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DView&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DView::class</dokka-template-command></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">ShadowMap3DView</a> : <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;org.robolectric.shadows&quot;,&quot;classNames&quot;:&quot;ShadowViewGroup&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">ShadowViewGroup</dokka-template-command></div><p class="paragraph">Robolectric shadow for <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DView&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DView</dokka-template-command>.</p><p class="paragraph">Intercepts all <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DView&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DView</dokka-template-command> constructors and lifecycle callbacks so Activities and Compose <code class="lang-kotlin">AndroidView</code> hosts can inflate and drive a 3D map cleanly on the JVM without Google Play services. Delivers a shadowed <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;GoogleMap3D&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">GoogleMap3D</dokka-template-command> instance via <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.maps.android.robolectric.maps3d.shadows&quot;,&quot;classNames&quot;:&quot;ShadowMap3DView&quot;,&quot;callable&quot;:{&quot;name&quot;:&quot;getMap3DViewAsync&quot;,&quot;receiver&quot;:null,&quot;params&quot;:[{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.TypeConstructor&quot;,&quot;fullyQualifiedName&quot;:&quot;com.google.android.gms.maps3d.OnMap3DViewReadyCallback&quot;,&quot;params&quot;:[]}],&quot;contextParameters&quot;:[],&quot;isProperty&quot;:false,&quot;isCompanion&quot;:false},&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">getMap3DViewAsync</dokka-template-command> and exposes helpers to trigger scene readiness, steady state, and error callbacks deterministically.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="-190851450%2FConstructors%2F1714800898" anchor-label="ShadowMap3DView" id="-190851450%2FConstructors%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-shadow-map3-d-view.html"><span>Shadow</span><wbr></wbr><span><span>Map3DView</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-190851450%2FConstructors%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="1459264960%2FProperties%2F1714800898" anchor-label="animations" id="1459264960%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1459264960%2FProperties%2F1714800898"><span><span>animations</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1459264960%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#1459264960%2FProperties%2F1714800898">animations</a><span class="token operator">: </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.common.collect&quot;,&quot;classNames&quot;:&quot;ImmutableList&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">ImmutableList</dokka-template-command><span class="token operator">&lt;</span><a href="https://developer.android.com/reference/kotlin/android/view/animation/Animation.html">Animation</a><span class="token operator">&gt;</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1823789428%2FProperties%2F1714800898" anchor-label="disallowInterceptTouchEvent" id="-1823789428%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1823789428%2FProperties%2F1714800898"><span>disallow</span><wbr></wbr><span>Intercept</span><wbr></wbr><span>Touch</span><wbr></wbr><span><span>Event</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1823789428%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#-1823789428%2FProperties%2F1714800898">disallowInterceptTouchEvent</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1228098588%2FProperties%2F1714800898" anchor-label="googleMap3D" id="-1228098588%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="google-map3-d.html"><span>google</span><wbr></wbr><span><span>Map3D</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1228098588%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">val </span><a href="google-map3-d.html">googleMap3D</a><span class="token operator">: </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;GoogleMap3D&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">GoogleMap3D</dokka-template-command><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns the shadowed <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;GoogleMap3D&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">GoogleMap3D</dokka-template-command> created for this view, or <code class="lang-kotlin">null</code> if not yet requested.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-261867408%2FProperties%2F1714800898" anchor-label="initConfig" id="-261867408%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="init-config.html"><span>init</span><wbr></wbr><span><span>Config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-261867408%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="init-config.html">initConfig</a><span class="token operator">: </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DInitConfig&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DInitConfig</dokka-template-command><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DInitConfig&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DInitConfig</dokka-template-command> passed to the programmatic constructor, if any.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-222512825%2FProperties%2F1714800898" anchor-label="initialMapMode" id="-222512825%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="initial-map-mode.html"><span>initial</span><wbr></wbr><span>Map</span><wbr></wbr><span><span>Mode</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-222512825%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="initial-map-mode.html">initialMapMode</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">The initial map mode passed to the <code class="lang-kotlin">(Context, Int)</code> constructor, if any.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1899900850%2FProperties%2F1714800898" anchor-label="interceptedTouchEvent" id="1899900850%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1899900850%2FProperties%2F1714800898"><span>intercepted</span><wbr></wbr><span>Touch</span><wbr></wbr><span><span>Event</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1899900850%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#1899900850%2FProperties%2F1714800898">interceptedTouchEvent</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/MotionEvent.html">MotionEvent</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-340835264%2FProperties%2F1714800898" anchor-label="isOnCreateCalled" id="-340835264%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-create-called.html"><span>is</span><wbr></wbr><span>On</span><wbr></wbr><span>Create</span><wbr></wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-340835264%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="is-on-create-called.html">isOnCreateCalled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DView&quot;,&quot;callable&quot;:{&quot;name&quot;:&quot;onCreate&quot;,&quot;receiver&quot;:null,&quot;params&quot;:[{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.Nullable&quot;,&quot;wrapped&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.TypeConstructor&quot;,&quot;fullyQualifiedName&quot;:&quot;android.os.Bundle&quot;,&quot;params&quot;:[]}}],&quot;contextParameters&quot;:[],&quot;isProperty&quot;:false,&quot;isCompanion&quot;:false},&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DView.onCreate</dokka-template-command> has been invoked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1444843254%2FProperties%2F1714800898" anchor-label="isOnDestroyCalled" id="-1444843254%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-destroy-called.html"><span>is</span><wbr></wbr><span>On</span><wbr></wbr><span>Destroy</span><wbr></wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1444843254%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="is-on-destroy-called.html">isOnDestroyCalled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DView&quot;,&quot;callable&quot;:{&quot;name&quot;:&quot;onDestroy&quot;,&quot;receiver&quot;:null,&quot;params&quot;:[],&quot;contextParameters&quot;:[],&quot;isProperty&quot;:false,&quot;isCompanion&quot;:false},&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DView.onDestroy</dokka-template-command> has been invoked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1278628655%2FProperties%2F1714800898" anchor-label="isOnLowMemoryCalled" id="1278628655%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-low-memory-called.html"><span>is</span><wbr></wbr><span>On</span><wbr></wbr><span>Low</span><wbr></wbr><span>Memory</span><wbr></wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1278628655%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="is-on-low-memory-called.html">isOnLowMemoryCalled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DView&quot;,&quot;callable&quot;:{&quot;name&quot;:&quot;onLowMemory&quot;,&quot;receiver&quot;:null,&quot;params&quot;:[],&quot;contextParameters&quot;:[],&quot;isProperty&quot;:false,&quot;isCompanion&quot;:false},&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DView.onLowMemory</dokka-template-command> has been invoked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1091484814%2FProperties%2F1714800898" anchor-label="isOnPauseCalled" id="1091484814%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-pause-called.html"><span>is</span><wbr></wbr><span>On</span><wbr></wbr><span>Pause</span><wbr></wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1091484814%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="is-on-pause-called.html">isOnPauseCalled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DView&quot;,&quot;callable&quot;:{&quot;name&quot;:&quot;onPause&quot;,&quot;receiver&quot;:null,&quot;params&quot;:[],&quot;contextParameters&quot;:[],&quot;isProperty&quot;:false,&quot;isCompanion&quot;:false},&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DView.onPause</dokka-template-command> has been invoked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="549353199%2FProperties%2F1714800898" anchor-label="isOnResumeCalled" id="549353199%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-resume-called.html"><span>is</span><wbr></wbr><span>On</span><wbr></wbr><span>Resume</span><wbr></wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="549353199%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="is-on-resume-called.html">isOnResumeCalled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DView&quot;,&quot;callable&quot;:{&quot;name&quot;:&quot;onResume&quot;,&quot;receiver&quot;:null,&quot;params&quot;:[],&quot;contextParameters&quot;:[],&quot;isProperty&quot;:false,&quot;isCompanion&quot;:false},&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DView.onResume</dokka-template-command> has been invoked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="834344165%2FProperties%2F1714800898" anchor-label="isOnSaveInstanceStateCalled" id="834344165%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-save-instance-state-called.html"><span>is</span><wbr></wbr><span>On</span><wbr></wbr><span>Save</span><wbr></wbr><span>Instance</span><wbr></wbr><span>State</span><wbr></wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="834344165%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="is-on-save-instance-state-called.html">isOnSaveInstanceStateCalled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DView&quot;,&quot;callable&quot;:{&quot;name&quot;:&quot;onSaveInstanceState&quot;,&quot;receiver&quot;:null,&quot;params&quot;:[{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.TypeConstructor&quot;,&quot;fullyQualifiedName&quot;:&quot;android.os.Bundle&quot;,&quot;params&quot;:[]}],&quot;contextParameters&quot;:[],&quot;isProperty&quot;:false,&quot;isCompanion&quot;:false},&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DView.onSaveInstanceState</dokka-template-command> has been invoked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-161263454%2FProperties%2F1714800898" anchor-label="isOnStartCalled" id="-161263454%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-start-called.html"><span>is</span><wbr></wbr><span>On</span><wbr></wbr><span>Start</span><wbr></wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-161263454%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="is-on-start-called.html">isOnStartCalled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DView&quot;,&quot;callable&quot;:{&quot;name&quot;:&quot;onStart&quot;,&quot;receiver&quot;:null,&quot;params&quot;:[],&quot;contextParameters&quot;:[],&quot;isProperty&quot;:false,&quot;isCompanion&quot;:false},&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DView.onStart</dokka-template-command> has been invoked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-738604166%2FProperties%2F1714800898" anchor-label="isOnStopCalled" id="-738604166%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-on-stop-called.html"><span>is</span><wbr></wbr><span>On</span><wbr></wbr><span>Stop</span><wbr></wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-738604166%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="is-on-stop-called.html">isOnStopCalled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;Map3DView&quot;,&quot;callable&quot;:{&quot;name&quot;:&quot;onStop&quot;,&quot;receiver&quot;:null,&quot;params&quot;:[],&quot;contextParameters&quot;:[],&quot;isProperty&quot;:false,&quot;isCompanion&quot;:false},&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">Map3DView.onStop</dokka-template-command> has been invoked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1586572958%2FProperties%2F1714800898" anchor-label="lastTouchEvent" id="1586572958%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1586572958%2FProperties%2F1714800898"><span>last</span><wbr></wbr><span>Touch</span><wbr></wbr><span><span>Event</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1586572958%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#1586572958%2FProperties%2F1714800898">lastTouchEvent</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/MotionEvent.html">MotionEvent</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1825189043%2FProperties%2F1714800898" anchor-label="onAttachStateChangeListeners" id="-1825189043%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1825189043%2FProperties%2F1714800898"><span>on</span><wbr></wbr><span>Attach</span><wbr></wbr><span>State</span><wbr></wbr><span>Change</span><wbr></wbr><span><span>Listeners</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1825189043%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#-1825189043%2FProperties%2F1714800898">onAttachStateChangeListeners</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnAttachStateChangeListener.html">View.OnAttachStateChangeListener</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="521330254%2FProperties%2F1714800898" anchor-label="onClickListener" id="521330254%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#521330254%2FProperties%2F1714800898"><span>on</span><wbr></wbr><span>Click</span><wbr></wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="521330254%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="index.html#521330254%2FProperties%2F1714800898">onClickListener</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnClickListener.html">View.OnClickListener</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-492445564%2FProperties%2F1714800898" anchor-label="onCreateContextMenuListener" id="-492445564%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-492445564%2FProperties%2F1714800898"><span>on</span><wbr></wbr><span>Create</span><wbr></wbr><span>Context</span><wbr></wbr><span>Menu</span><wbr></wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-492445564%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="index.html#-492445564%2FProperties%2F1714800898">onCreateContextMenuListener</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnCreateContextMenuListener.html">View.OnCreateContextMenuListener</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1925587995%2FProperties%2F1714800898" anchor-label="onLayoutChangeListeners" id="-1925587995%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1925587995%2FProperties%2F1714800898"><span>on</span><wbr></wbr><span>Layout</span><wbr></wbr><span>Change</span><wbr></wbr><span><span>Listeners</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1925587995%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#-1925587995%2FProperties%2F1714800898">onLayoutChangeListeners</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnLayoutChangeListener.html">View.OnLayoutChangeListener</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="410834282%2FProperties%2F1714800898" anchor-label="onLongClickListener" id="410834282%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#410834282%2FProperties%2F1714800898"><span>on</span><wbr></wbr><span>Long</span><wbr></wbr><span>Click</span><wbr></wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="410834282%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;org.robolectric.annotation&quot;,&quot;classNames&quot;:&quot;Implementation&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}"><span class="token annotation builtin">Implementation</span></dokka-template-command><span class="token punctuation">(</span><span>minSdk<span class="token operator"> = </span><span class="breakable-word"><span class="token constant">30</span></span></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword">open </span><span class="token keyword">var </span><a href="index.html#410834282%2FProperties%2F1714800898">onLongClickListener</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnLongClickListener.html">View.OnLongClickListener</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1388099881%2FProperties%2F1714800898" anchor-label="onSystemUiVisibilityChangeListener" id="-1388099881%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1388099881%2FProperties%2F1714800898"><span>on</span><wbr></wbr><span>System</span><wbr></wbr><span>Ui</span><wbr></wbr><span>Visibility</span><wbr></wbr><span>Change</span><wbr></wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1388099881%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="index.html#-1388099881%2FProperties%2F1714800898">onSystemUiVisibilityChangeListener</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnSystemUiVisibilityChangeListener.html">View.OnSystemUiVisibilityChangeListener</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1944184969%2FProperties%2F1714800898" anchor-label="onTouchListener" id="-1944184969%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1944184969%2FProperties%2F1714800898"><span>on</span><wbr></wbr><span>Touch</span><wbr></wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1944184969%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">var </span><a href="index.html#-1944184969%2FProperties%2F1714800898">onTouchListener</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnTouchListener.html">View.OnTouchListener</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="173530136%2FProperties%2F1714800898" anchor-label="scrollToCoordinates" id="173530136%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#173530136%2FProperties%2F1714800898"><span>scroll</span><wbr></wbr><span>To</span><wbr></wbr><span><span>Coordinates</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="173530136%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">var </span><a href="index.html#173530136%2FProperties%2F1714800898">scrollToCoordinates</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/graphics/Point.html">Point</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-400292363%2FProperties%2F1714800898" anchor-label="sourceLayoutResId" id="-400292363%2FProperties%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-400292363%2FProperties%2F1714800898"><span>source</span><wbr></wbr><span>Layout</span><wbr></wbr><span>Res</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-400292363%2FProperties%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;org.robolectric.annotation&quot;,&quot;classNames&quot;:&quot;Implementation&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}"><span class="token annotation builtin">Implementation</span></dokka-template-command><span class="token punctuation">(</span><span>minSdk<span class="token operator"> = </span><span class="breakable-word"><span class="token constant">29</span></span></span><wbr></wbr><span class="token punctuation">)</span></div></div><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#-400292363%2FProperties%2F1714800898">sourceLayoutResId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-674355261%2FFunctions%2F1714800898" anchor-label="callOnAttachedToWindow" id="-674355261%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-674355261%2FFunctions%2F1714800898"><span>call</span><wbr></wbr><span>On</span><wbr></wbr><span>Attached</span><wbr></wbr><span>To</span><wbr></wbr><span><span>Window</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-674355261%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-674355261%2FFunctions%2F1714800898"><span class="token function">callOnAttachedToWindow</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1231073254%2FFunctions%2F1714800898" anchor-label="callOnDetachedFromWindow" id="1231073254%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1231073254%2FFunctions%2F1714800898"><span>call</span><wbr></wbr><span>On</span><wbr></wbr><span>Detached</span><wbr></wbr><span>From</span><wbr></wbr><span><span>Window</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1231073254%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1231073254%2FFunctions%2F1714800898"><span class="token function">callOnDetachedFromWindow</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-696490179%2FFunctions%2F1714800898" anchor-label="checkedPerformClick" id="-696490179%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-696490179%2FFunctions%2F1714800898"><span>checked</span><wbr></wbr><span>Perform</span><wbr></wbr><span><span>Click</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-696490179%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-696490179%2FFunctions%2F1714800898"><span class="token function">checkedPerformClick</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="919725647%2FFunctions%2F1714800898" anchor-label="clearAnimations" id="919725647%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#919725647%2FFunctions%2F1714800898"><span>clear</span><wbr></wbr><span><span>Animations</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="919725647%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#919725647%2FFunctions%2F1714800898"><span class="token function">clearAnimations</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1771936894%2FFunctions%2F1714800898" anchor-label="clearWasInvalidated" id="1771936894%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1771936894%2FFunctions%2F1714800898"><span>clear</span><wbr></wbr><span>Was</span><wbr></wbr><span><span>Invalidated</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1771936894%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1771936894%2FFunctions%2F1714800898"><span class="token function">clearWasInvalidated</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2051090357%2FFunctions%2F1714800898" anchor-label="didRequestLayout" id="2051090357%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#2051090357%2FFunctions%2F1714800898"><span>did</span><wbr></wbr><span>Request</span><wbr></wbr><span><span>Layout</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2051090357%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#2051090357%2FFunctions%2F1714800898"><span class="token function">didRequestLayout</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-96375563%2FFunctions%2F1714800898" anchor-label="dump" id="-96375563%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1092108709%2FFunctions%2F1714800898"><span><span>dump</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-96375563%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1092108709%2FFunctions%2F1714800898"><span class="token function">dump</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1956274276%2FFunctions%2F1714800898"><span class="token function">dump</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">out<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/io/PrintStream.html">PrintStream</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">indent<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1517989685%2FFunctions%2F1714800898" anchor-label="innerText" id="-1517989685%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1517989685%2FFunctions%2F1714800898"><span>inner</span><wbr></wbr><span><span>Text</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1517989685%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1517989685%2FFunctions%2F1714800898"><span class="token function">innerText</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1142839107%2FFunctions%2F1714800898" anchor-label="lastHapticFeedbackPerformed" id="-1142839107%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1142839107%2FFunctions%2F1714800898"><span>last</span><wbr></wbr><span>Haptic</span><wbr></wbr><span>Feedback</span><wbr></wbr><span><span>Performed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1142839107%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1142839107%2FFunctions%2F1714800898"><span class="token function">lastHapticFeedbackPerformed</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="477219246%2FFunctions%2F1714800898" anchor-label="onLayoutWasCalled" id="477219246%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#477219246%2FFunctions%2F1714800898"><span>on</span><wbr></wbr><span>Layout</span><wbr></wbr><span>Was</span><wbr></wbr><span><span>Called</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="477219246%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#477219246%2FFunctions%2F1714800898"><span class="token function">onLayoutWasCalled</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="802583316%2FFunctions%2F1714800898" anchor-label="setDidRequestLayout" id="802583316%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#802583316%2FFunctions%2F1714800898"><span>set</span><wbr></wbr><span>Did</span><wbr></wbr><span>Request</span><wbr></wbr><span><span>Layout</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="802583316%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#802583316%2FFunctions%2F1714800898"><span class="token function">setDidRequestLayout</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">didRequestLayout<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="940952988%2FFunctions%2F1714800898" anchor-label="setGlobalVisibleRect" id="940952988%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#940952988%2FFunctions%2F1714800898"><span>set</span><wbr></wbr><span>Global</span><wbr></wbr><span>Visible</span><wbr></wbr><span><span>Rect</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="940952988%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#940952988%2FFunctions%2F1714800898"><span class="token function">setGlobalVisibleRect</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">rect<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/graphics/Rect.html">Rect</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1745929194%2FFunctions%2F1714800898" anchor-label="setMyParent" id="-1745929194%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1745929194%2FFunctions%2F1714800898"><span>set</span><wbr></wbr><span>My</span><wbr></wbr><span><span>Parent</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1745929194%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1745929194%2FFunctions%2F1714800898"><span class="token function">setMyParent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">viewParent<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/ViewParent.html">ViewParent</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1091746621%2FFunctions%2F1714800898" anchor-label="setViewFocus" id="-1091746621%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1091746621%2FFunctions%2F1714800898"><span>set</span><wbr></wbr><span>View</span><wbr></wbr><span><span>Focus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1091746621%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1091746621%2FFunctions%2F1714800898"><span class="token function">setViewFocus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">hasFocus<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1790803851%2FFunctions%2F1714800898" anchor-label="triggerError" id="-1790803851%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="trigger-error.html"><span>trigger</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1790803851%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">fun </span><a href="trigger-error.html"><span class="token function">triggerError</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">error<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-exception/index.html">Exception</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Dispatches <a href="trigger-error.html">error</a> to the most recently registered <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;OnMap3DViewReadyCallback&quot;,&quot;callable&quot;:{&quot;name&quot;:&quot;onError&quot;,&quot;receiver&quot;:null,&quot;params&quot;:[{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.TypeConstructor&quot;,&quot;fullyQualifiedName&quot;:&quot;java.lang.Exception&quot;,&quot;params&quot;:[]}],&quot;contextParameters&quot;:[],&quot;isProperty&quot;:false,&quot;isCompanion&quot;:false},&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">OnMap3DViewReadyCallback.onError</dokka-template-command>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="248104587%2FFunctions%2F1714800898" anchor-label="triggerMapReady" id="248104587%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="trigger-map-ready.html"><span>trigger</span><wbr></wbr><span>Map</span><wbr></wbr><span><span>Ready</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="248104587%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">fun </span><a href="trigger-map-ready.html"><span class="token function">triggerMapReady</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sceneReadiness<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator"> = </span><span class="token constant">1.0</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;GoogleMap3D&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">GoogleMap3D</dokka-template-command></div><div class="brief "><p class="paragraph">Ensures a shadowed <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;GoogleMap3D&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">GoogleMap3D</dokka-template-command> exists and triggers its registered <code class="lang-kotlin">OnMapReadyListener</code> with <a href="trigger-map-ready.html">sceneReadiness</a> (defaults to <code class="lang-kotlin">1.0</code>).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2005720527%2FFunctions%2F1714800898" anchor-label="triggerMapSteady" id="-2005720527%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="trigger-map-steady.html"><span>trigger</span><wbr></wbr><span>Map</span><wbr></wbr><span><span>Steady</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2005720527%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">fun </span><a href="trigger-map-steady.html"><span class="token function">triggerMapSteady</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">isSteady<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Triggers the registered <code class="lang-kotlin">OnMapSteadyListener</code> on the underlying <dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ResolveLinkCommand&quot;,&quot;dri&quot;:{&quot;packageName&quot;:&quot;com.google.android.gms.maps3d&quot;,&quot;classNames&quot;:&quot;GoogleMap3D&quot;,&quot;callable&quot;:null,&quot;target&quot;:{&quot;@class&quot;:&quot;org.jetbrains.dokka.links.PointingToDeclaration&quot;},&quot;extra&quot;:null}}">GoogleMap3D</dokka-template-command>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1321939823%2FFunctions%2F1714800898" anchor-label="wasInvalidated" id="1321939823%2FFunctions%2F1714800898" data-filterable-set=":maps3d-robolectric-testing/release"></a>
+          <div class="table-row table-row_content" data-filterable-current=":maps3d-robolectric-testing/release" data-filterable-set=":maps3d-robolectric-testing/release">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1321939823%2FFunctions%2F1714800898"><span>was</span><wbr></wbr><span><span>Invalidated</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1321939823%2FFunctions%2F1714800898"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":maps3d-robolectric-testing/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1321939823%2FFunctions%2F1714800898"><span class="token function">wasInvalidated</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
