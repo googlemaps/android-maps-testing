@@ -25,7 +25,7 @@ require combining the raw execution data rather than the XML reports.
 
 JVM tests run by `./gradlew koverXmlReportDebug`, covering the three published library modules (`robolectric-testing`, `golden-testing`, `visual-testing`).
 
-Measured at `0a2b8d4` (#30), recorded 2026-11-24T05:21:55Z.
+Measured at `c9c3a59` (#28), recorded 2026-11-24T05:39:57Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
@@ -53,15 +53,16 @@ Measured at `0a2b8d4` (#30), recorded 2026-11-24T05:22:00Z.
 ```mermaid
 xychart-beta
     title "Line Coverage Trend (%)"
-    x-axis ["47be0ab", "e3bd2d2", "c2bd264", "3067825", "b936651", "79b030b", "b645de8", "511d74c", "23f9208", "e6a975a", "5bedf9a", "b02f546", "5e4209c", "d4af6e9", "704b93a", "5f76072", "66f64ff", "b6ff914", "a00fd27", "0a2b8d4"]
+    x-axis ["47be0ab", "e3bd2d2", "c2bd264", "3067825", "b936651", "79b030b", "b645de8", "511d74c", "23f9208", "e6a975a", "5bedf9a", "b02f546", "5e4209c", "d4af6e9", "704b93a", "5f76072", "66f64ff", "b6ff914", "a00fd27", "0a2b8d4", "c9c3a59"]
     y-axis "Coverage %" 0 --> 100
-    line [79.34, 79.34, 78.88, 78.88, 78.88, 78.88, 78.88, 82.12, 82.12, 82.12, 82.12, 82.12, 82.12, 82.28, 82.28, 82.28, 82.28, 82.28, 82.28, 80.47]
+    line [79.34, 79.34, 78.88, 78.88, 78.88, 78.88, 78.88, 82.12, 82.12, 82.12, 82.12, 82.12, 82.12, 82.28, 82.28, 82.28, 82.28, 82.28, 82.28, 80.47, 80.47]
 ```
 
 Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| 2026-11-24 | `c9c3a59` | #28 | 80.47% | 0.00 | n/a | n/a | ci: queue agent-leftovers runs instead of cancelling in-progress runs |
 | 2026-11-24 | `0a2b8d4` | #30 | 80.47% | -1.81 | 84.35% | 0.00 | feat(maps3d): add maps3d-robolectric-testing module |
 | 2026-11-23 | `a00fd27` | #32 | 82.28% | 0.00 | 84.35% | 0.00 | chore(deps): bump the gradle-minor-and-patch group with 5 updates |
 | 2026-11-23 | `b6ff914` | #31 | 82.28% | 0.00 | 84.35% | 0.00 | chore(deps): bump the github-actions-minor-and-patch group with 2 updates |
