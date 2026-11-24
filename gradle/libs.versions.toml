@@ -14,6 +14,7 @@ kotlin = "2.4.21"
 nav3Core = "1.0.1"
 lifecycleViewmodelNav3 = "2.10.0"
 playServicesMaps = "20.1.0"
+playServicesMaps3d = "16.0.1"
 robolectric = "4.18"
 truth = "1.4.5"
 kotlinxSerialization = "1.13.0"
@@ -50,6 +51,7 @@ androidx-navigation3-runtime = { module = "androidx.navigation3:navigation3-runt
 androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "nav3Core" }
 androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "lifecycleViewmodelNav3" }
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
+play-services-maps3d = { module = "com.google.android.gms:play-services-maps3d", version.ref = "playServicesMaps3d" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 robolectric-shadows-framework = { module = "org.robolectric:shadows-framework", version.ref = "robolectric" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }

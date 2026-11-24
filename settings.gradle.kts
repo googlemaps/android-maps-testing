@@ -63,6 +63,7 @@ dependencyResolutionManagement {
 rootProject.name = "android-maps-testing"
 include(":app")
 include(":robolectric-testing")
+include(":maps3d-robolectric-testing")
 include(":golden-testing")
 include(":visual-testing")
 include(":docs")

@@ -21,6 +21,7 @@ plugins {
 
 dependencies {
     dokka(project(":robolectric-testing"))
+    dokka(project(":maps3d-robolectric-testing"))
     dokka(project(":golden-testing"))
     dokka(project(":visual-testing"))
 }

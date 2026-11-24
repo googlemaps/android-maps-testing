@@ -93,7 +93,7 @@ subprojects {
     }
   }
 
-  if (name in listOf("robolectric-testing", "golden-testing", "visual-testing")) {
+  if (name in listOf("robolectric-testing", "maps3d-robolectric-testing", "golden-testing", "visual-testing")) {
     val projectName = name
     val apiFile = layout.projectDirectory.file("api/$projectName.api")
     val buildApiFile = layout.buildDirectory.file("api/$projectName.api")
@@ -122,6 +122,11 @@ subprojects {
             "maps-testing-robolectric",
             "Android Maps Robolectric Shadows",
             "Robolectric shadows, Kotlin Power-Assert helpers, and Google Truth testing utilities for Google Maps SDK on Android.",
+          )
+          "maps3d-robolectric-testing" -> listOf(
+            "maps-testing-robolectric-maps3d",
+            "Android Maps 3D Robolectric Shadows",
+            "Robolectric shadows, KTX test harness, and Google Truth testing utilities for Google Maps 3D SDK on Android.",
           )
           "golden-testing" -> listOf(
             "maps-testing-golden",
@@ -186,6 +191,7 @@ subprojects {
           val rClasses = listOf(
             "com.google.maps.android.robolectric.R",
             "com.google.maps.android.robolectric.shadows.R",
+            "com.google.maps.android.robolectric.maps3d.R",
             "com.google.maps.android.testing.golden.R",
             "com.google.maps.android.testing.visual.R",
           )
