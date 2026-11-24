@@ -16,6 +16,7 @@ This repository provides modular testing libraries tailored for different testin
 | Module | Description | Guide & Documentation |
 | :--- | :--- | :--- |
 | [**:robolectric-testing**](robolectric-testing) | **Robolectric Shadows & JVM Utilities**<br>High-fidelity shadows for `MapView`, `GoogleMap`, `SupportMapFragment`, markers, and shapes. Features visual canvas drawing, lifecycle simulation, 1-liner KTX test harness, **Kotlin Power-Assert** helpers, and **Google Truth** domain subjects. | [**Module README**](robolectric-testing/README.md) |
+| [**:maps3d-robolectric-testing**](maps3d-robolectric-testing) | **Maps 3D Robolectric Shadows & JVM Utilities**<br>Headless JVM shadows for `Map3DView`, `GoogleMap3D`, `Marker`, `Polyline`, `Polygon`, `Model`, `Popover`, and `UiControlSettings`, with `Maps3DRobolectricTestRunner`, KTX harness (`withTestMap3D`), and `Maps3DTruth` domain assertions. | [**Module Directory**](maps3d-robolectric-testing) |
 | [**:golden-testing**](golden-testing) | **Deterministic Golden Image Testing**<br>Offline screenshot and visual regression testing using the real Maps SDK with synthetic, deterministic raster tiles (`MAP_TYPE_NONE`), LRU caching, and pixel diff assertions. | [**Module README**](golden-testing/README.md) |
 | [**:visual-testing**](visual-testing) | **AI Visual Testing & Golden Fallback**<br>Multimodal AI visual validation powered by Gemini, UiAutomator integration, a pinned Gemini model with opt-in latest Flash lookup, and hybrid golden pixel diff with AI semantic fallback. | [**Module README**](visual-testing/README.md) |
 | [**:app**](app) | **Sample Application**<br>Interactive demonstration app showcasing real-world usage of Google Maps SDK and testing integration. | [**App Directory**](app) |
@@ -76,6 +77,7 @@ truth = "1.4.5"
 
 [libraries]
 maps-testing-robolectric = { module = "com.google.maps.android:maps-testing-robolectric", version.ref = "mapsTesting" }
+maps-testing-robolectric-maps3d = { module = "com.google.maps.android:maps-testing-robolectric-maps3d", version.ref = "mapsTesting" }
 maps-testing-golden = { module = "com.google.maps.android:maps-testing-golden", version.ref = "mapsTesting" }
 maps-testing-visual = { module = "com.google.maps.android:maps-testing-visual", version.ref = "mapsTesting" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
@@ -127,8 +129,9 @@ dependencies {
 <!-- x-release-please-start-version -->
 ```kotlin
 dependencies {
-    // 1. Robolectric Shadows
+    // 1. Robolectric Shadows (2D Maps SDK & 3D Maps SDK)
     testImplementation("com.google.maps.android:maps-testing-robolectric:1.0.0-rc02")
+    testImplementation("com.google.maps.android:maps-testing-robolectric-maps3d:1.0.0-rc02")
     testImplementation("org.robolectric:robolectric:4.17")
 
     // 2. Golden Image Testing
