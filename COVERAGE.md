@@ -39,7 +39,7 @@ Measured at `09e97c7` (#27), recorded 2026-11-24T21:01:16Z.
 
 Emulator tests run by `./gradlew connectedAndroidTest`, covering the modules that own androidTest sources.
 
-Measured at `e4d508c` (#33), recorded 2026-11-24T20:55:02Z.
+Measured at `09e97c7` (#27), recorded 2026-11-24T21:01:20Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
@@ -62,7 +62,7 @@ Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| 2026-11-24 | `09e97c7` | #27 | 80.47% | 0.00 | n/a | n/a | chore(ci): guard against unauthorized JDK and toolchain changes in agent-leftovers |
+| 2026-11-24 | `09e97c7` | #27 | 80.47% | 0.00 | 84.35% | 0.00 | chore(ci): guard against unauthorized JDK and toolchain changes in agent-leftovers |
 | 2026-11-24 | `e4d508c` | #33 | 80.47% | 0.00 | 84.35% | n/a | chore: add maintainer as code owner of .github |
 | 2026-11-24 | `6ec74f6` | #26 | 80.47% | 0.00 | n/a | n/a | docs: refresh documentation and skills for recent SDK and runner updates |
 | 2026-11-24 | `c9c3a59` | #28 | 80.47% | 0.00 | 84.35% | 0.00 | ci: queue agent-leftovers runs instead of cancelling in-progress runs |
