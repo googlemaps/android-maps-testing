@@ -104,7 +104,7 @@
   <circle cx="765.0" cy="82.1" r="4" fill="#4285F4" stroke="#ffffff" stroke-width="1.5">
     <title>716aad6: 80.47% (unit)</title>
   </circle>
-  <path d="M 202.9,83.0 L 380.4,74.7 L 410.0,74.7 L 439.6,74.7 L 469.2,83.0 L 498.8,83.0 L 528.3,74.7 L 557.9,74.7 L 587.5,74.7 L 617.1,74.7 L 646.7,74.7 L 705.8,74.7 L 735.4,74.7" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="4,4" />
+  <path d="M 202.9,83.0 L 380.4,74.7 L 410.0,74.7 L 439.6,74.7 L 469.2,83.0 L 498.8,83.0 L 528.3,74.7 L 557.9,74.7 L 587.5,74.7 L 617.1,74.7 L 646.7,74.7 L 705.8,74.7 L 735.4,74.7 L 765.0,74.7" fill="none" stroke="#34A853" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="4,4" />
   <circle cx="498.8" cy="83.0" r="4" fill="#34A853" stroke="#ffffff" stroke-width="1.5">
     <title>79b030b: 80.00% (instrumentation)</title>
   </circle>
@@ -113,6 +113,9 @@
   </circle>
   <circle cx="735.4" cy="74.7" r="4" fill="#34A853" stroke="#ffffff" stroke-width="1.5">
     <title>5e4209c: 84.35% (instrumentation)</title>
+  </circle>
+  <circle cx="765.0" cy="74.7" r="4" fill="#34A853" stroke="#ffffff" stroke-width="1.5">
+    <title>d4af6e9: 84.35% (instrumentation)</title>
   </circle>
   <text x="55.0" y="265" class="commit-label">47be0ab</text>
   <text x="84.6" y="265" class="commit-label">e3bd2d2</text>
