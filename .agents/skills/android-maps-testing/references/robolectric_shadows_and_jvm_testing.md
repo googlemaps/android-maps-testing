@@ -33,7 +33,7 @@ The library provides high-fidelity shadows covering the full Google Maps SDK sur
 
 Annotate your test class with `@RunWith(MapsRobolectricTestRunner::class)` and `@GraphicsMode(GraphicsMode.Mode.NATIVE)`. The runner registers every Maps shadow; `@EnableMapsShadows` is deprecated because it never registered any.
 
-Instead of manually constructing an `Activity`, measuring/laying out a `MapView`, and idling `ShadowLooper`, use `withTestMap { ... }` or `createTestMap()` from `com.google.maps.android.robolectric.ktx`:
+Instead of manually constructing an `Activity`, measuring/laying out a `MapView`, and idling `ShadowLooper`, use `withTestMap { ... }` or `createTestMap()` from `com.google.maps.android.robolectric`:
 
 Reference: region `maps_robolectric_demo_test` in [`MapDemoTest.kt`](../../../../app/src/test/java/com/google/maps/android/testing/sample/MapDemoTest.kt#L35-L81)
 

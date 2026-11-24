@@ -120,9 +120,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.robolectric.MapsRobolectricTestRunner
-import com.google.maps.android.robolectric.ktx.cameraTarget
-import com.google.maps.android.robolectric.ktx.cameraZoom
-import com.google.maps.android.robolectric.ktx.withTestMap
+import com.google.maps.android.robolectric.cameraTarget
+import com.google.maps.android.robolectric.cameraZoom
+import com.google.maps.android.robolectric.withTestMap
 import com.google.maps.android.robolectric.powerassert.assertMap
 import com.google.maps.android.robolectric.powerassert.assertMarker
 import com.google.maps.android.robolectric.powerassert.distanceTo
@@ -170,7 +170,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.robolectric.MapsRobolectricTestRunner
-import com.google.maps.android.robolectric.ktx.withTestMap
+import com.google.maps.android.robolectric.withTestMap
 import com.google.maps.android.robolectric.truth.assertThat
 import com.google.maps.android.robolectric.truth.meters
 import org.junit.Test
@@ -511,9 +511,9 @@ assertThat(map.cameraPosition.target).isEqualTo(coitTower)
 You can also simulate map clicks, info window clicks, and complete marker drag gestures via KTX extensions:
 
 ```kotlin
-import com.google.maps.android.robolectric.ktx.clickMap
-import com.google.maps.android.robolectric.ktx.clickInfoWindow
-import com.google.maps.android.robolectric.ktx.dragTo
+import com.google.maps.android.robolectric.clickMap
+import com.google.maps.android.robolectric.clickInfoWindow
+import com.google.maps.android.robolectric.dragTo
 
 // Simulate map click
 googleMap.clickMap(LatLng(37.7749, -122.4194))

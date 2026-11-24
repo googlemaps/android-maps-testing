@@ -6,7 +6,7 @@ This guide covers testing Google Maps within **Jetpack Compose** applications an
 
 ## 1. Jetpack Compose & Activity View Hierarchy Lookup (`findMapView` / `requireMapView`)
 
-Both `:robolectric-testing` (`com.google.maps.android.robolectric.ktx`) and `:golden-testing` (`com.google.maps.android.testing.golden`) provide view hierarchy traversal helpers to extract the hosted `MapView` from an `Activity` or Jetpack Compose `AndroidView` container:
+Both `:robolectric-testing` (`com.google.maps.android.robolectric`) and `:golden-testing` (`com.google.maps.android.testing.golden`) provide view hierarchy traversal helpers to extract the hosted `MapView` from an `Activity` or Jetpack Compose `AndroidView` container:
 
 Reference: region `robolectric_view_hierarchy_lookup` in [`ShadowMapViewKotlinTest.kt`](../../../../robolectric-testing/src/test/java/com/google/maps/android/robolectric/shadows/ShadowMapViewKotlinTest.kt#L508-L518)
 

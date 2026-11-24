@@ -24,7 +24,7 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.maps.android.robolectric.MapsRobolectricTestRunner
-import com.google.maps.android.robolectric.ktx.getMapBlocking
+import com.google.maps.android.robolectric.getMapBlocking
 import com.google.maps.android.robolectric.truth.assertThat
 import com.google.maps.android.testing.sample.data.DefaultDataRepository
 import com.google.maps.android.testing.sample.manager.StoreLocatorMapManager

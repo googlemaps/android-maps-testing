@@ -1,13 +1,4 @@
-public class com/google/maps/android/robolectric/maps3d/Maps3DRobolectricTestRunner : org/robolectric/RobolectricTestRunner {
-	public static final field Companion Lcom/google/maps/android/robolectric/maps3d/Maps3DRobolectricTestRunner$Companion;
-	public static final field MAPS3D_SHADOWS Ljava/util/List;
-	public fun <init> (Ljava/lang/Class;)V
-}
-
-public final class com/google/maps/android/robolectric/maps3d/Maps3DRobolectricTestRunner$Companion {
-}
-
-public final class com/google/maps/android/robolectric/maps3d/ktx/Map3DShadowExtKt {
+public final class com/google/maps/android/robolectric/maps3d/Map3DShadowExtKt {
 	public static final fun getShadow (Lcom/google/android/gms/maps3d/GoogleMap3D;)Lcom/google/maps/android/robolectric/maps3d/shadows/ShadowGoogleMap3D;
 	public static final fun getShadow (Lcom/google/android/gms/maps3d/Map3DView;)Lcom/google/maps/android/robolectric/maps3d/shadows/ShadowMap3DView;
 	public static final fun getShadow (Lcom/google/android/gms/maps3d/Popover;)Lcom/google/maps/android/robolectric/maps3d/shadows/ShadowPopover;
@@ -18,7 +9,7 @@ public final class com/google/maps/android/robolectric/maps3d/ktx/Map3DShadowExt
 	public static final fun getShadow (Lcom/google/android/gms/maps3d/model/Polyline;)Lcom/google/maps/android/robolectric/maps3d/shadows/ShadowPolyline;
 }
 
-public final class com/google/maps/android/robolectric/maps3d/ktx/Map3DTestHarness {
+public final class com/google/maps/android/robolectric/maps3d/Map3DTestHarness {
 	public static final fun createTestMap3D ()Lcom/google/android/gms/maps3d/GoogleMap3D;
 	public static final fun createTestMap3D (I)Lcom/google/android/gms/maps3d/GoogleMap3D;
 	public static final fun createTestMap3D (II)Lcom/google/android/gms/maps3d/GoogleMap3D;
@@ -39,8 +30,17 @@ public final class com/google/maps/android/robolectric/maps3d/ktx/Map3DTestHarne
 	public static synthetic fun withTestMap3D$default (IIILkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
-public final class com/google/maps/android/robolectric/maps3d/ktx/Maps3DShadows {
-	public static final field INSTANCE Lcom/google/maps/android/robolectric/maps3d/ktx/Maps3DShadows;
+public class com/google/maps/android/robolectric/maps3d/Maps3DRobolectricTestRunner : org/robolectric/RobolectricTestRunner {
+	public static final field Companion Lcom/google/maps/android/robolectric/maps3d/Maps3DRobolectricTestRunner$Companion;
+	public static final field MAPS3D_SHADOWS Ljava/util/List;
+	public fun <init> (Ljava/lang/Class;)V
+}
+
+public final class com/google/maps/android/robolectric/maps3d/Maps3DRobolectricTestRunner$Companion {
+}
+
+public final class com/google/maps/android/robolectric/maps3d/Maps3DShadows {
+	public static final field INSTANCE Lcom/google/maps/android/robolectric/maps3d/Maps3DShadows;
 	public static final fun shadowOf (Lcom/google/android/gms/maps3d/GoogleMap3D;)Lcom/google/maps/android/robolectric/maps3d/shadows/ShadowGoogleMap3D;
 	public static final fun shadowOf (Lcom/google/android/gms/maps3d/Map3DView;)Lcom/google/maps/android/robolectric/maps3d/shadows/ShadowMap3DView;
 	public static final fun shadowOf (Lcom/google/android/gms/maps3d/Popover;)Lcom/google/maps/android/robolectric/maps3d/shadows/ShadowPopover;

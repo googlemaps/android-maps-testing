@@ -21,7 +21,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.maps.android.robolectric.ktx.markerWithTitle
+import com.google.maps.android.robolectric.markerWithTitle
 import com.google.maps.android.robolectric.shadows.ShadowGoogleMap
 import com.google.maps.android.robolectric.truth.Distance
 import com.google.maps.android.robolectric.truth.LatLngSubject
@@ -30,8 +30,8 @@ import com.google.maps.android.robolectric.truth.meters
 import kotlinx.coroutines.suspendCancellableCoroutine
 import org.robolectric.shadows.ShadowLooper
 import kotlin.coroutines.resume
-import com.google.maps.android.robolectric.ktx.findMapView as ktxFindMapView
-import com.google.maps.android.robolectric.ktx.shadow as shadowProperty
+import com.google.maps.android.robolectric.findMapView as ktxFindMapView
+import com.google.maps.android.robolectric.shadow as shadowProperty
 
 // [START maps_compose_test_extensions]
 /**

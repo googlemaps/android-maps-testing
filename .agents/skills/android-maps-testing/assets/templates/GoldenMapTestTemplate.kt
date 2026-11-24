@@ -21,7 +21,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.robolectric.MapsRobolectricTestRunner
-import com.google.maps.android.robolectric.ktx.withTestMap
+import com.google.maps.android.robolectric.withTestMap
 import com.google.maps.android.testing.golden.GoldenImageDiff
 import com.google.maps.android.testing.golden.GoldenTileStrategy
 import com.google.maps.android.testing.golden.assertMatchesGoldenBlocking

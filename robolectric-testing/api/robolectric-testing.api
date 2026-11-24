@@ -1,16 +1,4 @@
-public class com/google/maps/android/robolectric/MapsRobolectricTestRunner : org/robolectric/RobolectricTestRunner {
-	public static final field Companion Lcom/google/maps/android/robolectric/MapsRobolectricTestRunner$Companion;
-	public static final field MAPS_SHADOWS Ljava/util/List;
-	public fun <init> (Ljava/lang/Class;)V
-}
-
-public final class com/google/maps/android/robolectric/MapsRobolectricTestRunner$Companion {
-}
-
-public abstract interface annotation class com/google/maps/android/robolectric/annotation/EnableMapsShadows : java/lang/annotation/Annotation {
-}
-
-public final class com/google/maps/android/robolectric/ktx/GoogleMapShadowExtKt {
+public final class com/google/maps/android/robolectric/GoogleMapShadowExtKt {
 	public static final fun click (Lcom/google/android/gms/maps/model/Circle;)Lcom/google/android/gms/maps/model/Circle;
 	public static final fun click (Lcom/google/android/gms/maps/model/GroundOverlay;)Lcom/google/android/gms/maps/model/GroundOverlay;
 	public static final fun click (Lcom/google/android/gms/maps/model/Marker;)Lcom/google/android/gms/maps/model/Marker;
@@ -60,7 +48,7 @@ public final class com/google/maps/android/robolectric/ktx/GoogleMapShadowExtKt 
 	public static synthetic fun simulateUserCameraMove$default (Lcom/google/android/gms/maps/GoogleMap;Lcom/google/android/gms/maps/model/LatLng;FILjava/lang/Object;)V
 }
 
-public final class com/google/maps/android/robolectric/ktx/MapTestHarnessKt {
+public final class com/google/maps/android/robolectric/MapTestHarnessKt {
 	public static final fun createTestMap (II)Lcom/google/android/gms/maps/GoogleMap;
 	public static synthetic fun createTestMap$default (IIILjava/lang/Object;)Lcom/google/android/gms/maps/GoogleMap;
 	public static final fun createTestMapView (IILandroid/app/Activity;)Lcom/google/android/gms/maps/MapView;
@@ -79,6 +67,18 @@ public final class com/google/maps/android/robolectric/ktx/MapTestHarnessKt {
 	public static final fun requireMapView (Landroid/view/View;)Lcom/google/android/gms/maps/MapView;
 	public static final fun withTestMap (IILkotlin/jvm/functions/Function1;)V
 	public static synthetic fun withTestMap$default (IILkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+}
+
+public class com/google/maps/android/robolectric/MapsRobolectricTestRunner : org/robolectric/RobolectricTestRunner {
+	public static final field Companion Lcom/google/maps/android/robolectric/MapsRobolectricTestRunner$Companion;
+	public static final field MAPS_SHADOWS Ljava/util/List;
+	public fun <init> (Ljava/lang/Class;)V
+}
+
+public final class com/google/maps/android/robolectric/MapsRobolectricTestRunner$Companion {
+}
+
+public abstract interface annotation class com/google/maps/android/robolectric/annotation/EnableMapsShadows : java/lang/annotation/Annotation {
 }
 
 public final class com/google/maps/android/robolectric/powerassert/MapPowerAssertKt {

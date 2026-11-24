@@ -41,12 +41,6 @@ import com.google.android.gms.maps3d.model.PopoverOptions
 import com.google.android.gms.maps3d.model.Vector3D
 import com.google.android.gms.maps3d.model.ZoomControl
 import com.google.common.truth.Truth.assertThat
-import com.google.maps.android.robolectric.maps3d.ktx.createTestMap3DView
-import com.google.maps.android.robolectric.maps3d.ktx.findMap3DView
-import com.google.maps.android.robolectric.maps3d.ktx.getMap3DBlocking
-import com.google.maps.android.robolectric.maps3d.ktx.requireMap3DView
-import com.google.maps.android.robolectric.maps3d.ktx.shadow
-import com.google.maps.android.robolectric.maps3d.ktx.withTestMap3D
 import com.google.maps.android.robolectric.maps3d.truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.maps.android.robolectric.ktx
+package com.google.maps.android.robolectric
 
 import android.app.Activity
 import android.graphics.Bitmap
