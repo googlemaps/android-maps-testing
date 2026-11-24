@@ -81,7 +81,14 @@ CONTENT_PATTERNS = [
 
 DIFF_ONLY_PATTERNS = [
     ("unauthorized JavaVersion bump (>17)", re.compile(r"\bJavaVersion\.VERSION_(?:1[89]|[2-9]\d)\b")),
-    ("unauthorized JvmTarget bump (>17)", re.compile(r"\bJvmTarget\.JVM_(?:1[89]|[2-9]\d)\b")),
+    (
+        "unauthorized JvmTarget bump (>17)",
+        re.compile(
+            r"\bJvmTarget\.JVM_(?:1[89]|[2-9]\d)\b"
+            r"|\bjvmTarget\s*(?:=\s*|\s+)['\"](?:1[89]|[2-9]\d)['\"]"
+            r"|\bJvmTarget\.fromTarget\s*\(\s*['\"](?:1[89]|[2-9]\d)['\"]\s*\)"
+        ),
+    ),
     ("unauthorized jvmToolchain configuration", re.compile(r"\bjvmToolchain\s*\(")),
     ("unauthorized Foojay toolchain resolver", re.compile(r"foojay-resolver")),
     ("local org.gradle.java.home override", re.compile(r"\borg\.gradle\.java\.home\b")),
