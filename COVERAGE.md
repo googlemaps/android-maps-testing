@@ -25,7 +25,7 @@ require combining the raw execution data rather than the XML reports.
 
 JVM tests run by `./gradlew koverXmlReportDebug`, covering the three published library modules (`robolectric-testing`, `golden-testing`, `visual-testing`).
 
-Measured at `09e97c7` (#27), recorded 2026-11-24T21:01:16Z.
+Measured at `716aad6` (#35), recorded 2026-11-24T23:24:13Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
@@ -53,15 +53,16 @@ Measured at `09e97c7` (#27), recorded 2026-11-24T21:01:20Z.
 ```mermaid
 xychart-beta
     title "Line Coverage Trend (%)"
-    x-axis ["47be0ab", "e3bd2d2", "c2bd264", "3067825", "b936651", "79b030b", "b645de8", "511d74c", "23f9208", "e6a975a", "5bedf9a", "b02f546", "5e4209c", "d4af6e9", "704b93a", "5f76072", "66f64ff", "b6ff914", "a00fd27", "0a2b8d4", "c9c3a59", "6ec74f6", "e4d508c", "09e97c7"]
+    x-axis ["47be0ab", "e3bd2d2", "c2bd264", "3067825", "b936651", "79b030b", "b645de8", "511d74c", "23f9208", "e6a975a", "5bedf9a", "b02f546", "5e4209c", "d4af6e9", "704b93a", "5f76072", "66f64ff", "b6ff914", "a00fd27", "0a2b8d4", "c9c3a59", "6ec74f6", "e4d508c", "09e97c7", "716aad6"]
     y-axis "Coverage %" 0 --> 100
-    line [79.34, 79.34, 78.88, 78.88, 78.88, 78.88, 78.88, 82.12, 82.12, 82.12, 82.12, 82.12, 82.12, 82.28, 82.28, 82.28, 82.28, 82.28, 82.28, 80.47, 80.47, 80.47, 80.47, 80.47]
+    line [79.34, 79.34, 78.88, 78.88, 78.88, 78.88, 78.88, 82.12, 82.12, 82.12, 82.12, 82.12, 82.12, 82.28, 82.28, 82.28, 82.28, 82.28, 82.28, 80.47, 80.47, 80.47, 80.47, 80.47, 80.47]
 ```
 
 Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| 2026-11-24 | `716aad6` | #35 | 80.47% | 0.00 | n/a | n/a | chore: prepare 1.0.0-rc03 release |
 | 2026-11-24 | `09e97c7` | #27 | 80.47% | 0.00 | 84.35% | 0.00 | chore(ci): guard against unauthorized JDK and toolchain changes in agent-leftovers |
 | 2026-11-24 | `e4d508c` | #33 | 80.47% | 0.00 | 84.35% | n/a | chore: add maintainer as code owner of .github |
 | 2026-11-24 | `6ec74f6` | #26 | 80.47% | 0.00 | n/a | n/a | docs: refresh documentation and skills for recent SDK and runner updates |
