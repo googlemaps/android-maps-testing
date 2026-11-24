@@ -39,7 +39,7 @@ Measured at `0a2b8d4` (#30), recorded 2026-11-24T05:21:55Z.
 
 Emulator tests run by `./gradlew connectedAndroidTest`, covering the modules that own androidTest sources.
 
-Measured at `a00fd27` (#32), recorded 2026-11-23T19:13:51Z.
+Measured at `0a2b8d4` (#30), recorded 2026-11-24T05:22:00Z.
 
 | Module | Lines | Line % | | Branches | Branch % |
 | --- | ---: | ---: | --- | ---: | ---: |
@@ -62,7 +62,7 @@ Total line coverage per suite, newest first.
 
 | Date | Commit | PR | Unit % | Change | Instr. % | Change | Subject |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| 2026-11-24 | `0a2b8d4` | #30 | 80.47% | -1.81 | n/a | n/a | feat(maps3d): add maps3d-robolectric-testing module |
+| 2026-11-24 | `0a2b8d4` | #30 | 80.47% | -1.81 | 84.35% | 0.00 | feat(maps3d): add maps3d-robolectric-testing module |
 | 2026-11-23 | `a00fd27` | #32 | 82.28% | 0.00 | 84.35% | 0.00 | chore(deps): bump the gradle-minor-and-patch group with 5 updates |
 | 2026-11-23 | `b6ff914` | #31 | 82.28% | 0.00 | 84.35% | 0.00 | chore(deps): bump the github-actions-minor-and-patch group with 2 updates |
 | 2026-11-19 | `66f64ff` | #25 | 82.28% | 0.00 | 84.35% | +4.35 | chore: prepare 1.0.0-rc02 release |
