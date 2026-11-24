@@ -25,7 +25,10 @@ permissions:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+  # Queue instead of cancelling: bots like release-please emit `synchronize`
+  # and `edited` back-to-back on the same commit, and cancelling leaves a
+  # stale cancelled check on the PR for a ~4-second job.
+  cancel-in-progress: false
 
 jobs:
   check:
