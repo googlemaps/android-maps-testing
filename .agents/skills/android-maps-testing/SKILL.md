@@ -3,7 +3,7 @@ name: android-maps-testing
 description: >-
   Expert engineering guide for testing Google Maps SDK on Android using the unified Android Maps Testing
   Toolkit (android-maps-testing). Covers all supported testing paradigms: (1) Headless JVM unit testing
-  via Robolectric shadows (:robolectric-testing) with 1-liner KTX test harness (withTestMap / createTestMap),
+  via Robolectric shadows (:robolectric-testing) with MapsRobolectricTestRunner, 1-liner KTX test harness (withTestMap / createTestMap),
   Google Truth domain subjects (assertThat(map)), Kotlin Power-Assert helpers (assertMap / assertMarker / assertGeo),
   Java shadows, and View/Compose hierarchy lookup (findMapView / requireMapView); (2) Deterministic offline
   golden screenshot regression testing (:golden-testing) with synthetic tile strategies, 1-liner
@@ -675,7 +675,7 @@ For specialized architecture, advanced shadow behaviors, and paradigm deep-dives
 3. [**Overview & Decision Matrix**](references/overview_and_decision_matrix.md): In-depth comparison of execution speed, offline capabilities, quota impact, and module selection.
 4. [**Robolectric Shadows & JVM Testing**](references/robolectric_shadows_and_jvm_testing.md): Complete shadow reference, `withTestMap` / `createTestMap`, Google Truth vs. Kotlin Power-Assert, `newLatLngBounds` & `scrollBy`, default `clickMarker` & single-active `InfoWindow`, `simulateUserCameraMove` (`REASON_GESTURE`), styling/bounds clamping, and `requireMapView()`.
 5. [**Golden Image Testing**](references/golden_image_testing.md): Synthetic tile generation, strategy selection, `awaitMapLoaded()`, `captureSnapshot()`, 1-liner `assertMatchesGolden()`, `-Dmaps.golden.record=true`, and `_actual.png`/`_diff.png` failure artifacts.
-6. [**AI Visual Testing & Gemini Vision**](references/ai_visual_testing_and_gemini.md): Dynamic model resolution, 3-step hybrid golden lifecycle (`src/androidTest/assets/goldens/`), prompt design, and UiAutomator AI actions.
+6. [**AI Visual Testing & Gemini Vision**](references/ai_visual_testing_and_gemini.md): Pinned model default & opt-in `latest` discovery, 3-step hybrid golden lifecycle (`src/androidTest/assets/goldens/`), CI emulator setup, prompt design, and UiAutomator AI actions.
 7. [**Jetpack Compose & Ecosystem Bridges**](references/jetpack_compose_and_ecosystem.md): Declarative Compose map testing (`rememberGoldenTileProvider()`, `findMapView()`), `android-maps-utils` marker clustering algorithm testing, and KTX extensions.
 
 ---

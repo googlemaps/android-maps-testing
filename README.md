@@ -57,7 +57,7 @@ JVM execution without devices?                                    fidelity asser
 | **Deterministic Golden Snapshots** | ✅ Yes (2D Canvas + `TileOverlay` Rendering) | ✅ Yes (Mercator Grid / Solid / Pattern) | ✅ Yes (via `:golden-testing`) |
 | **Visual Diff Engine** | ❌ N/A | ✅ Yes (Pixel comparison, baseline recording & `_diff.png` artifacts) | ✅ Yes (Hybrid pixel diff + AI fallback) |
 | **Multimodal AI Evaluation** | ❌ N/A | ❌ N/A | ✅ Yes (Gemini Flash multimodal) |
-| **Dynamic Model Discovery** | ❌ N/A | ❌ N/A | ✅ Yes (Latest stable Flash cached) |
+| **Gemini Model Selection** | ❌ N/A | ❌ N/A | ✅ Pinned default (`gemini-3.8-flash`), opt-in `latest` discovery |
 | **Jetpack Compose Integration** | ✅ Yes | ✅ Yes (`rememberGoldenTileProvider()`) | ✅ Yes |
 
 ---
@@ -147,7 +147,7 @@ dependencies {
 ## Cookbook & Recipes
 
 ### 1. Fast JVM Unit Testing with Robolectric Shadows
-Execute deterministic unit tests verifying map state, marker clicks, camera coordinates, and pixel drawing without an emulator using the 1-liner `withTestMap { ... }` harness:
+Execute deterministic unit tests verifying map state, marker clicks, camera coordinates, and pixel drawing without an emulator using `@RunWith(MapsRobolectricTestRunner::class)` (replacing deprecated `@EnableMapsShadows`) and the 1-liner `withTestMap { ... }` harness:
 
 ```kotlin
 // [START maps_robolectric_demo_test]
@@ -398,9 +398,9 @@ This repository ships with ready-to-use AI coding agent skills in [`.agents/skil
 | Skill | Testing Paradigm | Path |
 | :--- | :--- | :--- |
 | **`android-maps-testing`** | **Unified Toolkit & Decision Matrix** — Master guide covering all 3 testing tiers, TDD/CUJ workflows, anti-bloat architecture, references, and starter templates. | [`.agents/skills/android-maps-testing/SKILL.md`](.agents/skills/android-maps-testing/SKILL.md) |
-| **`maps-robolectric-testing`** | **Paradigm 1: Headless JVM Unit Testing (`:robolectric-testing`)** — `withTestMap` / `createTestMap`, Google Truth (`assertThat(map)`), Kotlin Power-Assert (`assertMap`), Java shadows, `newLatLngBounds`, `simulateUserCameraMove`, and `requireMapView()`. | [`.agents/skills/maps-robolectric-testing/SKILL.md`](.agents/skills/maps-robolectric-testing/SKILL.md) |
+| **`maps-robolectric-testing`** | **Paradigm 1: Headless JVM Unit Testing (`:robolectric-testing`)** — `MapsRobolectricTestRunner`, `withTestMap` / `createTestMap`, Google Truth (`assertThat(map)`), Kotlin Power-Assert (`assertMap`), Java shadows, `newLatLngBounds`, `simulateUserCameraMove`, and `requireMapView()`. | [`.agents/skills/maps-robolectric-testing/SKILL.md`](.agents/skills/maps-robolectric-testing/SKILL.md) |
 | **`maps-golden-testing`** | **Paradigm 2: Deterministic Offline Golden Testing (`:golden-testing`)** — Synthetic tile strategies (`CoordinateGrid`, `SolidColorHash`, `Checkerboard`), `rememberGoldenTileProvider()`, 1-liner `assertMatchesGolden()`, `-Dmaps.golden.record=true`, and `_diff.png` artifacts. | [`.agents/skills/maps-golden-testing/SKILL.md`](.agents/skills/maps-golden-testing/SKILL.md) |
-| **`maps-visual-testing`** | **Paradigm 3: Multimodal AI Visual Testing (`:visual-testing`)** — `BaseVisualTest`, Gemini Flash dynamic model resolution, committed `src/androidTest/assets/goldens/` fast path, and hybrid golden fallback. | [`.agents/skills/maps-visual-testing/SKILL.md`](.agents/skills/maps-visual-testing/SKILL.md) |
+| **`maps-visual-testing`** | **Paradigm 3: Multimodal AI Visual Testing (`:visual-testing`)** — `BaseVisualTest`, pinned Gemini Flash default (with opt-in `latest` discovery), committed `src/androidTest/assets/goldens/` fast path, and hybrid golden fallback. | [`.agents/skills/maps-visual-testing/SKILL.md`](.agents/skills/maps-visual-testing/SKILL.md) |
 
 ---
 

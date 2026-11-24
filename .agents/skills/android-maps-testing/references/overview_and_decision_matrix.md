@@ -64,5 +64,5 @@ Fast, Headless JVM Unit Tests                                   Screenshot & Vis
 ### Choose `:visual-testing` when:
 1. You want to assert complex UI requirements using natural language (e.g. *"Verify that the delivery driver pin is visible and the route polyline is highlighted in blue without overlapping the action sheet"*).
 2. You face flaky golden test diffs caused by vendor-specific GPU antialiasing or platform font rendering differences across emulator models.
-3. You want the **Hybrid Golden Fallback pattern**: fast zero-quota local pixel diffs against committed `src/androidTest/assets/goldens/<testName>.png` baselines, with automatic Gemini AI validation and baseline updates when visual differences occur.
+3. You want the **Hybrid Golden Fallback pattern**: fast zero-quota local pixel diffs against committed `src/androidTest/assets/goldens/<testName>.png` baselines, with first-run baseline recording and automatic Gemini AI validation when visual differences occur (existing diverged baselines are never overwritten).
 4. You want AI-driven UI interaction testing via UiAutomator actions generated from natural language prompts.

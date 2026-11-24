@@ -30,7 +30,7 @@ Screenshot and visual testing of map applications has traditionally presented un
                    |    verifyScreenshotWithGoldenFallback |
                    |  1. Try fast pixel diff (< tolerance) |
                    |  2. If pixel diff fails, ask Gemini   |
-                   |  3. If Gemini approves, update golden |
+                   |  3. Record golden (first run only)    |
                    +---------------------------------------+
 ```
 
@@ -262,9 +262,24 @@ You can select a model explicitly, or pass `latest` (`GeminiVisualTestHelper.LAT
 val visualTestHelper = GeminiVisualTestHelper(preferredModel = "gemini-3.8-flash")
 
 // Or via system property / Gradle flag:
-// -Dgemini.model=gemini-2.5-pro
+// -Dgemini.model=gemini-3.8-flash
 // -Dgemini.model=latest
 ```
+
+---
+
+## CI Emulator Setup & Troubleshooting
+
+When running `:visual-testing` instrumented tests on CI emulators (such as GitHub Actions `google_apis` images), keep three common pitfalls in mind:
+
+1. **Missing `org.apache.http.legacy` on older Play Services emulators**: Even with a recent `play-services-maps`, the map renderer runs inside Google Play Services and can crash with `NoClassDefFoundError: org/apache/http/ProtocolVersion` on API 28+ devices running older Play Services or the legacy renderer. Declare the optional library inside `<application>` in your app's `AndroidManifest.xml` (see `app/src/main/AndroidManifest.xml`):
+   ```xml
+   <uses-library
+       android:name="org.apache.http.legacy"
+       android:required="false" />
+   ```
+2. **Map tile authorization on ephemeral debug keystores**: CI runners generate a new debug signing key on each run, so a `MAPS_API_KEY` restricted to a local workstation's SHA-1 fingerprint will fail to load map tiles. Configure a CI Maps API key restricted by API targets (`Maps SDK for Android`) rather than a workstation SHA-1.
+3. **Defer camera bounds fitting until `MapView` layout**: Calling `CameraUpdateFactory.newLatLngBounds(...)` before a `MapView` has non-zero dimensions (especially inside Jetpack Compose `AndroidView`) can leave the camera uncentered when the screenshot is captured. Wrap initial bounds fitting in `mapView.doOnLayout { ... }` so markers are framed reliably before capture (see `renderStoresOnMap` in `app/src/main/java/com/google/maps/android/testing/sample/ui/main/MainScreen.kt`).
 
 ---
 

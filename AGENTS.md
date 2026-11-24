@@ -58,10 +58,11 @@ the wait window, only unit coverage is recorded for that commit.
 
 Running `:app` on a device or running live Gemini Vision checks in
 `:visual-testing` requires API keys in `secrets.properties` at the repo root
-(`MAPS_API_KEY=...` and optionally `GEMINI_API_KEY=...`). Without
-`GEMINI_API_KEY`, `:app:connectedDebugAndroidTest` automatically uses the
-offline test APK golden baselines under `app/src/androidTest/assets/goldens/`.
-Never hardcode or commit API keys.
+(`MAPS_API_KEY=...` and optionally `GEMINI_API_KEY=...`). When a test provides
+a committed golden under `src/androidTest/assets/goldens/`, `BaseVisualTest`
+checks it locally without calling Gemini; in `:app`, no baseline PNG is
+committed, so `VisualMapSampleTest` skips gracefully via `Assume.assumeTrue`
+when `GEMINI_API_KEY` is unset. Never hardcode or commit API keys.
 
 ## Agent setup
 
