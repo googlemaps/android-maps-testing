@@ -80,16 +80,12 @@ jobs:
           arch: x86_64
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          # android-emulator-runner runs every script line as a separate `sh -c`, so multi-line
+          # shell constructs (if/fi, variables carried across lines) do not work here. Keep the
+          # logcat diagnostics on a single line, preserving the Gradle exit status. The filtered
+          # logcat is always printed; the full logcat is only saved for upload on failure.
           script: |
-            set +e
-            ./gradlew connectedAndroidTest --stacktrace
-            status=$?
-            if [ $status -ne 0 ]; then
-              adb logcat -d > emulator-logcat.txt || true
-              echo "=== Filtered logcat (BaseVisualTest / Maps SDK) ==="
-              grep -iE "BaseVisualTest|Google Maps Android API|MapsInitializer|Authorization|API_KEY|VisualMapSampleTest|StoreLocator|GoogleApi|MapsDynamite" emulator-logcat.txt | tail -n 120 || true
-            fi
-            exit $status
+            ./gradlew connectedAndroidTest --stacktrace; status=$?; echo "=== Filtered logcat (BaseVisualTest / Maps SDK) ==="; adb logcat -d | grep -iE "BaseVisualTest|Google Maps Android API|MapsInitializer|Authorization|API_KEY|VisualMapSampleTest|StoreLocator|GoogleApi|MapsDynamite" | tail -n 120; [ $status -eq 0 ] || adb logcat -d > emulator-logcat.txt; exit $status
 
       # Stage coverage reports flat, named after their module, for coverage-history.yml post-merge reuse
       - name: Stage coverage reports
