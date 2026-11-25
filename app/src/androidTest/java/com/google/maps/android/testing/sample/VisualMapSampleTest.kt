@@ -41,9 +41,9 @@ class VisualMapSampleTest : BaseVisualTest() {
     }
     context.startActivity(intent)
 
-    // 2. Wait for application window to settle
+    // 2. Wait for application window and map tiles to finish rendering
     uiDevice.wait(Until.hasObject(By.pkg(context.packageName).depth(0)), 10000)
-    waitForMapRendering(timeoutSeconds = 5)
+    waitForMapRendering()
 
     // 3. Capture screenshot of current map state
     val screenshotBitmap = captureScreenshot("store_locator_screenshot.png")
