@@ -83,9 +83,11 @@ jobs:
           # android-emulator-runner runs every script line as a separate `sh -c`, so multi-line
           # shell constructs (if/fi, variables carried across lines) do not work here. Keep the
           # logcat diagnostics on a single line, preserving the Gradle exit status. The filtered
-          # logcat is always printed; the full logcat is only saved for upload on failure.
+          # logcat is always printed; the full logcat is only saved for upload on failure. Google API
+          # keys are redacted first: the Maps SDK logs the key on authorization failures, and secret
+          # masking does not apply to uploaded artifacts.
           script: |
-            ./gradlew connectedAndroidTest --stacktrace; status=$?; echo "=== Filtered logcat (BaseVisualTest / Maps SDK) ==="; adb logcat -d | grep -iE "BaseVisualTest|Google Maps Android API|MapsInitializer|Authorization|API_KEY|VisualMapSampleTest|StoreLocator|GoogleApi|MapsDynamite" | tail -n 120; [ $status -eq 0 ] || adb logcat -d > emulator-logcat.txt; exit $status
+            ./gradlew connectedAndroidTest --stacktrace; status=$?; echo "=== Filtered logcat (BaseVisualTest / Maps SDK) ==="; adb logcat -d | sed -E 's/AIza[0-9A-Za-z_-]{35}/[REDACTED]/g' | grep -iE "BaseVisualTest|Google Maps Android API|MapsInitializer|Authorization|API_KEY|VisualMapSampleTest|StoreLocator|GoogleApi|MapsDynamite" | tail -n 120; [ $status -eq 0 ] || adb logcat -d | sed -E 's/AIza[0-9A-Za-z_-]{35}/[REDACTED]/g' > emulator-logcat.txt; exit $status
 
       # Stage coverage reports flat, named after their module, for coverage-history.yml post-merge reuse
       - name: Stage coverage reports
